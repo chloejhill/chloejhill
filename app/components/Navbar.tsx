@@ -22,7 +22,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-4">
           <LogoIcon />
           <span className="font-sans font-bold text-lg tracking-tight text-black">
-            Chloe Hill
+            Chloe J. Hill
           </span>
         </Link>
         {/* Desktop Navigation */}
