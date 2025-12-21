@@ -51,7 +51,12 @@ export default function Navbar() {
           >
             articles
           </Link>
-          <Link href="#" className="hover:text-black transition-colors">
+          <Link
+            href="/contact"
+            className={`hover:text-black transition-colors ${
+              isActive('/contact') ? 'font-semibold' : ''
+            }`}
+          >
             get in touch
           </Link>
         </div>

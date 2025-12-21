@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../page.module.css';
 import Navbar from '../../components/Navbar';
-import { LinkedInIcon, FacebookIcon, InstagramIcon } from '../../icons';
+import Footer from '../../components/Footer';
 
 // This would normally come from a database or API
 const articles = [
@@ -372,51 +372,7 @@ export default function ArticleDetail() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#EFEBE7', width: '100%' }}>
-        <div className={styles.footer}>
-          <h3 className={styles.footerTitle}>Chloe Hill</h3>
-          <div className={styles.footerLinks}>
-            <Link href="/about" className={styles.footerLink}>
-              About
-            </Link>
-            <a href="#" className={styles.footerLink}>
-              Projects
-            </a>
-            <a href="#" className={styles.footerLink}>
-              Latest Insights
-            </a>
-            <a href="#" className={styles.footerLink}>
-              Get in Touch
-            </a>
-          </div>
-          <div className={styles.footerBottom}>
-            <p className={styles.footerBottomText}>© Chloe Hill 2025</p>
-            <a href="#" className={styles.footerBottomLink}>
-              Privacy Policy
-            </a>
-            <a
-              href="https://www.moderndaystrategy.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.footerBottomLinkUnderline}
-            >
-              Website by Modern Day Strategy
-            </a>
-          </div>
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <a href="#" className="inline-block">
-              <LinkedInIcon />
-            </a>
-            <a href="#" className="inline-block">
-              <FacebookIcon />
-            </a>
-            <a href="#" className="inline-block">
-              <InstagramIcon />
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
