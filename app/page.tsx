@@ -4,413 +4,356 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import {
-  ServiceIcon,
-  OrganizationIcon,
-  QuoteIcon,
-  TestimonialIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon
-} from './icons';
-import {
-  SensemakingIcon,
-  SystemsIcon,
-  StrategicIcon,
-  DeepAdaptationIcon,
-  RegenerativeLeadershipIcon,
-  NarrativeTransformationIcon
-} from './serviceIcons';
 
-// const heroImage =
-//   'https://www.figma.com/api/mcp/asset/2e91af2f-fdd2-4bef-9f33-14a693c09484';
-const heroImage = '/images/hero.png';
 const profileImage = '/images/profile.png';
-const newsletterImage = '/images/footer.png';
-const testimonialAvatar =
-  'https://www.figma.com/api/mcp/asset/68e9d432-71ae-4e72-85f3-3c299beb96b3';
-const serviceIcon =
-  'https://www.figma.com/api/mcp/asset/c70a16bf-cf98-401d-8039-d8483340c995';
-const quoteIcon =
-  'https://www.figma.com/api/mcp/asset/d5ff8cb6-15b5-43ee-9a81-0a8d234c63ec';
+const approachImage = '/images/home/approach.png';
+const compassImage = '/images/home/compass.png';
+const thinkingImage = '/images/home/thinking.png';
+const dashImage = '/images/home/dash.png';
 
-const services = [
-  {
-    title: 'Sensemaking',
-    description:
-      'Illuminating where you are by connecting patterns, perspectives, and signals in complexity to uncover meaning and guide wiser action.',
-    icon: SensemakingIcon
-  },
-  {
-    title: 'Systems & Future Foresight',
-    description:
-      "Understanding how change unfolds across interconnected systems — using horizon scanning, trend mapping, and scenario design to anticipate and prepare for what's next.",
-    icon: SystemsIcon
-  },
-  {
-    title: 'Strategic Resilience',
-    description:
-      'Building adaptive strategies and resilient structures that bend, not break, under pressure — enabling organisations to respond with clarity and evolve through change.',
-    icon: StrategicIcon
-  },
-  {
-    title: 'Deep Adaptation',
-    description:
-      'Guiding organisations to face disruption with honesty and courage — letting go of what no longer serves and redesigning for renewal and regeneration.',
-    icon: DeepAdaptationIcon
-  },
-  {
-    title: 'Regenerative Leadership',
-    description:
-      'Aligning inner development and organisational design with the principles of living systems — building cultures that regenerate people, purpose, and planet.',
-    icon: RegenerativeLeadershipIcon
-  },
-  {
-    title: 'Narrative transformation',
-    description:
-      'Rewriting the stories that shape our actions, cultures, and futures — facing collapse with honesty and imagination to seed the narratives of a new system.',
-    icon: NarrativeTransformationIcon
-  }
-];
+function AttentionSystemsIcon() {
+  return (
+    <svg
+      width="63"
+      height="56"
+      viewBox="0 0 63 56"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M30.6741 0.00515443C35.5496 -0.214113 36.9243 6.62745 32.035 8.08325C24.4102 10.3529 23.5416 0.326676 30.6741 0.00515443Z"
+        fill="#D6DCDB"
+      />
+      <path
+        d="M62.041 33.88C61.8608 34.0413 59.8262 35.0269 59.4699 35.0754C56.9019 35.4275 53.2145 34.9437 50.4525 35.0396C43.8113 35.2705 37.0245 36.0136 30.3643 36.1475C20.511 36.3457 10.4753 34.9416 0.966673 32.5444L0 30.921C1.49692 29.3186 3.30587 30.4497 4.83864 30.4097C9.58345 30.2832 13.4575 30.6311 18.1191 30.7576C27.77 31.0179 37.8152 29.4926 47.5778 29.2912C49.6693 29.248 59.5795 28.9834 60.6991 29.4926C62.0336 30.0987 63.3355 32.7173 62.041 33.8811V33.88Z"
+        fill="#D6DCDB"
+      />
+      <path
+        d="M56.2744 7.87395C58.3164 8.90072 57.7355 11.2157 56.4104 12.6135C46.8723 22.6724 18.1652 25.2245 7.36836 17.0811C6.2151 16.2114 2.50548 12.5408 4.02348 11.2199C5.60368 9.8442 7.71729 12.4775 9.44613 13.207C19.1729 17.3119 39.0367 17.4532 48.249 11.9947C50.3352 10.7582 53.7718 6.61528 56.2755 7.87395H56.2744Z"
+        fill="#D6DCDB"
+      />
+      <path
+        d="M25.7237 41.5455C34.27 41.3294 44.3029 42.7508 52.1838 46.7897C53.6767 47.7109 57.0445 49.512 56.5191 51.4301C55.1421 53.6768 46.1199 51.1516 42.7279 50.676C35.1006 49.4708 26.6385 49.1366 19.3281 50.9077C15.6908 51.7465 11.5714 53.8294 8.29726 54.9344C5.37899 55.9614 2.7534 55.8734 3.81459 52.8336C4.42098 50.8431 7.67613 47.3789 10.6607 45.7059C15.1929 42.9891 20.4156 41.8474 25.5626 41.5533L25.7237 41.5455Z"
+        fill="#D6DCDB"
+      />
+    </svg>
+  );
+}
 
-const testimonials = [
-  {
-    name: 'Annelies Seawell',
-    role: 'Sustainability Analyst, IKEA',
-    text: 'Chloe is a creative strategist with deep sustainability expertise and a gift for translating complex systems into compelling stories. A true partner in systems and behaviour change, she inspires better decisions and bold action for a more sustainable future.'
-  },
-  {
-    name: 'Bruce Tonn',
-    role: 'President, Three3',
-    text: 'Chloe brings remarkable depth and originality to futures work — blending intellectual rigor with insight into the human and spiritual dimensions of transformation.'
-  },
-  {
-    name: 'Anita de Horde',
-    role: 'Executive Director, Finance for Biodiversity Foundation',
-    text: 'Chloe transforms complexity into clarity, crafting strategies that inspire action and advance a nature-positive, sustainable future.'
-  }
-];
+function AttentionFuturesIcon() {
+  return (
+    <svg
+      width="64"
+      height="48"
+      viewBox="0 0 64 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M12.6879 10.3604C9.70545 8.45808 14.822 1.53666 17.968 5.45941C20.8172 9.01166 15.1882 11.9551 12.6879 10.3604Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M59.2031 19.42C57.0808 17.223 58.2606 12.7597 62.0609 14.6533C65.7583 16.4961 62.1617 22.4815 59.2031 19.42Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M1.65996 12.8374C5.28154 11.6436 7.44713 16.8999 3.65979 17.9767C-0.281373 19.098 -1.18379 13.7745 1.65996 12.8374Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M28.3748 13.7201C42.5751 11.7918 53.2384 18.4098 59.6192 30.7804C53.1203 48.4539 26.3089 52.4774 13.3056 39.8284C10.8259 37.4169 5.41248 29.2562 7.03423 25.8946C7.74923 24.4126 16.2523 18.1888 18.1427 17.1933C20.7991 15.7958 25.4411 14.1188 28.3737 13.7201H28.3748ZM26.0738 19.0338C23.6591 19.439 10.6916 25.7223 10.3471 27.7081C18.4027 45.0609 42.2285 46.1616 53.5439 31.4293C47.1403 21.0608 38.2884 16.9853 26.0738 19.0328V19.0338Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M34.4023 0.0046315C38.7898 -0.192535 40.027 5.96405 35.6265 7.27488C28.7647 9.31805 27.9836 0.293882 34.4023 0.0046315Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M52.7273 6.85898C56.4821 10.5932 49.0342 14.0155 47.1632 11.2866C44.326 7.14931 49.929 4.0759 52.7273 6.85898Z"
+        fill="#DAC9BE"
+      />
+      <path
+        d="M29.8841 25.8281C33.6151 25.1163 36.9355 28.5754 34.6962 32.236C30.0671 39.8042 21.4536 27.4358 29.8841 25.8281Z"
+        fill="#DAC9BE"
+      />
+    </svg>
+  );
+}
+
+function AttentionInnerIcon() {
+  return (
+    <svg
+      width="63"
+      height="63"
+      viewBox="0 0 63 63"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g clipPath="url(#clip0_1054_945)">
+        <path
+          d="M26.758 20.4877C49.1157 17.4396 61.1613 32.8011 62.4223 53.6656C62.7552 59.1708 58.6896 62.116 56.9424 58.2825C55.6162 55.3719 55.5259 47.1378 54.015 42.627C46.1799 19.2246 13.4073 22.4386 7.91787 46.4164C6.78912 51.3451 8.70327 63.418 1.15482 59.1834C-2.32383 42.795 9.89187 22.7872 26.758 20.4877Z"
+          fill="#EFEBE7"
+        />
+        <path
+          d="M30.4034 31.3786C42.6695 29.0487 52.0177 41.6581 46.0558 52.5834C43.2995 57.6097 37.1161 61.1787 31.6267 61.5472C26.6654 62.0166 22.3657 58.5841 20.7172 54.0261C17.4097 45.7006 20.3402 33.1899 30.2848 31.4007L30.4034 31.3776V31.3786ZM28.2026 40.6984C24.4237 44.0385 26.2108 51.0997 30.374 53.4328C35.6366 56.2122 42.3997 49.5982 40.1495 44.1844C38.5157 39.6421 32.0656 37.3941 28.2845 40.627L28.2026 40.6984Z"
+          fill="#EFEBE7"
+        />
+        <path
+          d="M30.0922 1.86648C41.4353 -1.46412 40.4851 14.5946 29.9536 12.6573C25.2905 11.7995 25.9793 3.07503 30.0922 1.86648Z"
+          fill="#EFEBE7"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_1054_945">
+          <rect width="63" height="63" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <section
-        className="relative w-full h-[709px] overflow-hidden"
-        style={{
-          background: 'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)'
-        }}
-      >
-        <Navbar />
+      <section className={styles.hero}>
+        <Navbar variant="light" />
 
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] h-full items-start gap-0 relative">
-            <div className="relative z-10 pt-32 lg:pt-96">
-              <h1
-                className="font-sans font-bold text-[50px] leading-[60px] text-black whitespace-pre-wrap mb-6 max-w-[750px]"
-                style={{
-                  fontFeatureSettings: "'liga' off, 'clig' off"
-                }}
-              >
-                Uncertainty transcended. Transformation unlocked.
-              </h1>
-
-              <p className="font-sans font-medium text-[15px] lg:text-[22px] leading-normal text-black w-full max-w-[600px]">
-                Guiding impact-driven leaders and organisations from stuck to
-                thriving.
-              </p>
-            </div>
-
-            <div className="relative h-full hidden lg:block">
-              {/* CHANGED: 
-            1. Removed 'pb-16' (This eliminates the gap at the bottom).
-            2. Increased width to 'w-[160%]' (Scales image up so it reaches higher).
-            3. Adjusted right to '-right-40' (Balances the increased width).
-            4. Kept 'items-end' so it stays anchored to the bottom.
-        */}
-              <div className="absolute -right-40 top-0 bottom-0 w-[160%] max-w-none flex items-end">
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[400px] pointer-events-none z-10"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)',
-                    maskImage:
-                      'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%)'
-                  }}
-                />
-                <div
-                  className="absolute left-0 top-0 right-0 h-[100px] pointer-events-none z-10"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)',
-                    maskImage:
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.1) 80%, transparent 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.1) 80%, transparent 100%)'
-                  }}
-                />
-                <Image
-                  src={heroImage}
-                  alt="Hero"
-                  width={1204}
-                  height={723}
-                  className="object-contain w-full h-full relative z-0"
-                  priority
-                  unoptimized
-                />
-              </div>
-            </div>
+        <div className={styles.heroInner}>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              Researcher. Writer. Advisor. Emerging Futurist.
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Thinking about uncertainty, transformation, and how we meet what’s
+              coming.
+            </p>
           </div>
-        </div>
-      </section>
-
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="mb-32">
-          <h2
-            className="font-sans font-bold text-[36px] leading-normal mb-6 text-black max-w-[800px]"
-            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
-          >
-            The ground is shifting beneath us
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-32 items-start">
-            <div>
-              <p className="font-sans text-lg text-black leading-relaxed max-w-[568px]">
-                It can feel as if civilisation's collapse is speeding toward us
-                — faster than our systems, leaders, or imaginations can keep up.
-                Climate disruption, technological acceleration, social
-                fragmentation, and economic fragility are not separate crises,
-                but interconnected forces shaping a single, turbulent reality.
-                The ground beneath us — our assumptions, institutions, and even
-                our sense of progress — is shifting. What once felt solid now
-                feels uncertain. So how do we prepare for what's coming?
-              </p>
-            </div>
-            <div>
-              <p className="font-sans text-lg text-black leading-relaxed max-w-[554px]">
-                Perhaps by learning to see differently — to recognise that the
-                turbulence around us is not just an ending, but a turning. When
-                we look beneath the noise, coherence begins to emerge from
-                complexity, and possibility reveals itself in the cracks.
-                Uncertainty doesn't have to mean chaos; it can be a catalyst for
-                transformation. My work begins here — helping people and
-                organisations find steadier footing in shifting terrain,
-                strengthen their adaptive capacity, and move toward futures that
-                are not only resilient, but regenerative.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="w-full py-16" style={{ backgroundColor: '#EFEBE7' }}>
-        <div className="w-full max-w-[1448px] mx-auto pl-6 md:pl-12 lg:pl-24 pr-0 flex flex-col md:flex-row gap-16 lg:gap-32 items-start">
-          <div className="relative w-full md:w-[400px] h-[520px] shrink-0 grayscale">
+          <div className={styles.heroProfile}>
             <Image
               src={profileImage}
               alt="Chloe Hill"
               fill
-              className="object-cover"
-              unoptimized
+              className={styles.heroProfileImg}
+              priority
             />
           </div>
-          <div className="flex-1 max-w-[674px]">
-            <h2 className="font-sans font-bold text-4xl lg:text-5xl leading-tight mb-8 text-black whitespace-pre-wrap">
-              Learn from the chaos.{'\n'}Thrive in the change.
-            </h2>
-            <div className="space-y-6 text-lg text-black leading-[2.5]">
-              <p>
-                Hi, I'm Chloe — a sustainability transformations strategist
-                working at the intersection of systems change, futures thinking,
-                and conscious leadership. Over the past two decades, I've helped
-                leaders and mission-driven organisations — from global
-                institutions to emerging innovators — make sense of complexity
-                and turn insight into action. My work blends strategic
-                communications, deep sustainability expertise, foresight, and
-                inner transformation practices to help teams anticipate what's
-                next, adapt with clarity, and transform how they lead and create
-                impact. I've supported organisations shaping the global
-                sustainability movement to craft impact narratives, design
-                resilient strategies, and embed regenerative principles —
-                building adaptive cultures and futures grounded in purpose and
-                possibility
-              </p>
-            </div>
-
-            <div className="flex flex-row items-center align-center gap-8 mt-8">
-              <a href="#" className="text-lg text-black">
-                Ready to face the chaos with more clarity?
-              </a>
-              <button className="px-9 py-4 text-black rounded-[40px] bg-[#FFF] text-lg hover:bg-black hover:text-white transition-colors cursor-pointer">
-                Book A Discovery Call
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 text-center">
-        <h2 className="font-sans font-bold text-4xl lg:text-[40px] leading-normal text-black mb-12 whitespace-pre-wrap">
-          Build the capacity to see clearly, adapt wisely,{'\n'}and lead
-          regeneratively.
-        </h2>
-        <p className="font-sans text-xl leading-relaxed text-black mb-16 max-w-[902px] mx-auto">
-          I do this through six interconnected disciplines that help leaders
-          navigate complexity and create meaningful, lasting change.
+      <section className={`${styles.section} ${styles.sectionHeroPad}`}>
+        <div className={styles.sectionHeading}>
+          <span className={styles.sectionHeadingHighlight} />
+          <h2 className={styles.sectionTitle}>We’re in a bit of pickle</h2>
+        </div>
+        <p className={styles.bodyLong}>
+          It can feel as if civilisation’s collapse is speeding toward us —
+          faster than our systems, leaders, or imaginations can keep up. Climate
+          disruption, technological acceleration, social fragmentation, and
+          economic fragility are not separate crises, but interconnected forces
+          shaping a single, turbulent reality. The ground beneath us — our
+          assumptions, institutions, and even our sense of progress — is
+          shifting. What once felt solid now feels uncertain. So how do we
+          prepare for what’s coming? Perhaps by learning to see differently — to
+          recognise that the turbulence around us is not just an ending, but a
+          turning. When we look beneath the noise, coherence begins to emerge
+          from complexity, and possibility reveals itself in the cracks.
+          Uncertainty doesn’t have to mean chaos; it can be a catalyst for
+          transformation. My work begins here — helping people and organisations
+          find steadier footing in shifting terrain, strengthen their adaptive
+          capacity, and move toward futures that are not only resilient, but
+          regenerative.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mb-10">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div
-                key={index}
-                className="p-6 flex flex-col items-center text-center gap-4 h-[340px]"
-              >
-                <div className="shrink-0">
-                  {IconComponent && <IconComponent />}
-                </div>
-                <h3 className="font-sans font-semibold text-xl text-black capitalize tracking-wide min-w-full">
-                  {service.title}
-                </h3>
-                <p className="font-sans text-base leading-relaxed text-black min-w-full">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-        <a
-          href="#"
-          className="inline-block text-lg border-b"
-          style={{ color: '#4F0E0E', borderColor: '#4F0E0E' }}
-        >
-          Learn More About My Services
-        </a>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 text-center">
-        <h2 className="font-sans font-bold text-4xl leading-normal text-black mb-12">
-          Organisations I have Supported
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <div
-              key={i}
-              className="bg-[#D5D5D5] h-[90px] rounded flex items-center justify-center"
-            >
-              <div className="relative">
-                <OrganizationIcon />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="flex flex-col gap-8 mb-12">
-          <h2 className="font-sans font-bold text-4xl leading-normal text-black max-w-[400px]">
-            Nice things people say
-          </h2>
-          <div className="flex gap-4 self-end">
-            <button className="hover:opacity-75 transition-opacity">
-              <ArrowLeftIcon />
-            </button>
-            <button className="hover:opacity-75 transition-opacity">
-              <ArrowRightIcon />
-            </button>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="flex flex-col gap-6">
-              <div className="relative w-[102px] h-[112px]">
-                <div className="absolute inset-0">
-                  <TestimonialIcon />
-                </div>
-              </div>
-              <div>
-                <p className="font-sans font-bold text-xl text-black mb-1">
-                  {testimonial.name}
-                </p>
-                <p className="font-sans text-sm text-gray-600 mb-4">
-                  {testimonial.role}
-                </p>
-                <p className="font-sans text-base leading-relaxed text-black">
-                  {testimonial.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="bg-[#343433] p-16">
-          <div className="flex flex-col gap-12">
-            <div style={{ filter: 'brightness(0) invert(1)' }}>
-              <QuoteIcon />
-            </div>
-            <div>
-              <p
-                className="font-sans text-4xl lg:text-5xl leading-tight mb-12"
-                style={{ color: 'white' }}
-              >
-                Do not lose heart, we were made for these times.
-              </p>
-              <p
-                className="font-sans text-3xl lg:text-4xl text-right"
-                style={{ color: 'white' }}
-              >
-                — Clarissa Pinkola Estes
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full  py-16 lg:py-24">
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex flex-col justify-center max-w-[600px]">
-            <h2
-              className="font-sans font-bold text-3xl lg:text-4xl mb-6"
-              style={{ color: '#C8B9AF' }}
-            >
-              Join me where change takes shape
-            </h2>
-            <p className="font-sans text-lg text-black mb-10 leading-relaxed">
-              Subscribe to my monthly newsletter, The Turning Point —
-              reflections, tools, and updates from my work and the world around
-              it, sent with intention, not noise.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="flex-1 px-8 py-4 text-black placeholder:text-black/60 focus:outline-none"
-                style={{
-                  borderRadius: '100px',
-                  border: '1px solid rgba(79, 14, 14, 0.40)',
-                  background: 'rgba(255, 255, 255, 0.60)'
-                }}
-              />
-              <button
-                className="px-10 py-4 bg-transparent text-black font-sans font-medium hover:bg-black hover:text-white transition-colors"
-                style={{
-                  borderRadius: '40px',
-                  border: '1.333px solid #4F0E0E'
-                }}
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-          <div className="relative w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] shrink-0 rounded-full overflow-hidden">
+      <section className={styles.section}>
+        <div className={styles.approachGrid}>
+          <div className={styles.approachCard}>
             <Image
-              src={newsletterImage}
-              alt="Newsletter"
+              src={approachImage}
+              alt=""
               fill
-              className="object-cover grayscale"
-              unoptimized
+              className={styles.approachImg}
+              priority
             />
+          </div>
+          <div className={styles.approachText}>
+            <h2 className={styles.approachTitle}>
+              How I’m approaching this moment of change
+            </h2>
+            <p className={styles.bodyLong}>
+              Hi, I’m Chloe — a sustainability transformations strategist
+              working at the intersection of systems change, futures thinking,
+              and conscious leadership.
+              <br />
+              <br />
+              Over the past two decades, I’ve helped leaders and mission-driven
+              organisations — from global institutions to emerging innovators —
+              make sense of complexity and turn insight into action. My work
+              blends strategic communications, deep sustainability expertise,
+              foresight, and inner transformation practices to help teams
+              anticipate what’s next, adapt with clarity, and transform how they
+              lead and create impact. I’ve supported organisations shaping the
+              global sustainability movement to craft impact narratives, design
+              resilient strategies, and embed regenerative principles — building
+              adaptive cultures and futures grounded in purpose and possibility.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.compassSection} aria-hidden="true">
+        <div className={styles.compassWrap}>
+          <Image
+            src={compassImage}
+            alt=""
+            fill
+            className={styles.compassImg}
+            priority
+          />
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeadingCentered}>
+          <span className={styles.sectionHeadingHighlightCentered} />
+          <h2 className={styles.sectionTitleCentered}>
+            Where I am placing my attention
+          </h2>
+        </div>
+        <p className={styles.centerIntro}>
+          My work is guided by sustained attention to a small number of
+          interrelated areas. These are not services or stages, but enduring
+          lines of inquiry that shape how I research, write, and engage with
+          complexity in practice.
+        </p>
+
+        <div className={styles.attentionGrid}>
+          <div className={styles.attentionCardMuted}>
+            <div className={styles.attentionIconCircle} aria-hidden="true">
+              <AttentionSystemsIcon />
+            </div>
+            <h3 className={styles.attentionTitle}>
+              Systems Change &amp; Transformation
+            </h3>
+          </div>
+          <div className={styles.attentionCardWarm}>
+            <div className={styles.attentionIconCircle} aria-hidden="true">
+              <AttentionFuturesIcon />
+            </div>
+            <h3 className={styles.attentionTitle}>Futures Inquiry</h3>
+          </div>
+          <div className={styles.attentionCardBase}>
+            <div className={styles.attentionIconCircle} aria-hidden="true">
+              <AttentionInnerIcon />
+            </div>
+            <h3 className={styles.attentionTitle}>The Inner Dimension</h3>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeadingCentered}>
+          <span className={styles.sectionHeadingHighlightCentered} />
+          <h2 className={styles.sectionTitleCentered}>
+            Why this thinking matters
+          </h2>
+        </div>
+        <div className={styles.whyText}>
+          <p>
+            How we meet uncertainty shapes more than outcomes — it shapes
+            cultures, values, and the futures we make possible.
+          </p>
+          <p>
+            In moments of disruption, it is easy to default to speed, certainty,
+            or control. Yet the challenges we face today ask for something
+            different: deeper understanding, ethical discernment, and the
+            capacity to hold complexity without fragmenting.
+          </p>
+          <p>
+            This work is ultimately about learning how to stay present to what
+            is unfolding — and to respond in ways that are not only effective,
+            but meaningful, responsible, and regenerative over the long term.
+          </p>
+          <p>
+            This work remains an ongoing inquiry into how we meet uncertainty —
+            and what becomes possible when we do so with care, clarity, and
+            responsibility.
+          </p>
+        </div>
+      </section>
+
+      <section className={styles.exploreSection}>
+        <div className={styles.exploreInner}>
+          <div className={styles.exploreGrid}>
+            <div className={styles.exploreMedia} aria-hidden="true">
+              <Image
+                src={thinkingImage}
+                alt=""
+                fill
+                className={styles.exploreImg}
+                priority
+              />
+            </div>
+            <div className={styles.exploreContent}>
+              <h2 className={styles.exploreTitle}>
+                If this way of seeing resonates, you can explore further:
+              </h2>
+              <div className={styles.exploreLinks}>
+                <a href="/thinking" className={styles.exploreLink}>
+                  <span className={styles.exploreDash} aria-hidden="true">
+                    <Image
+                      src={dashImage}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
+                  </span>
+                  <span className={styles.exploreLinkLabel}>
+                    <span className={styles.exploreLinkUnderline}>
+                      Thinking
+                    </span>{' '}
+                    — research and inquiry
+                  </span>
+                </a>
+                <a href="/practice" className={styles.exploreLink}>
+                  <span className={styles.exploreDash} aria-hidden="true">
+                    <Image
+                      src={dashImage}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
+                  </span>
+                  <span className={styles.exploreLinkLabel}>
+                    <span className={styles.exploreLinkUnderline}>
+                      Practice
+                    </span>{' '}
+                    — where this thinking meets reality
+                  </span>
+                </a>
+                <a href="/about" className={styles.exploreLink}>
+                  <span className={styles.exploreDash} aria-hidden="true">
+                    <Image
+                      src={dashImage}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
+                  </span>
+                  <span className={styles.exploreLinkLabel}>
+                    <span className={styles.exploreLinkUnderline}>About</span> —
+                    journey, philosophy, and stance
+                  </span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
