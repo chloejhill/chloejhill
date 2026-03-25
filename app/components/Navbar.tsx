@@ -5,9 +5,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LogoIcon } from '../icons';
 
-export default function Navbar() {
+type NavbarVariant = 'dark' | 'light';
+
+export default function Navbar({
+  variant = 'dark'
+}: {
+  variant?: NavbarVariant;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isLight = variant === 'light';
+  const desktopLinkClassName = isLight
+    ? 'transition-colors text-white! hover:opacity-80'
+    : 'transition-colors text-black hover:opacity-80';
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -17,47 +27,65 @@ export default function Navbar() {
   };
 
   return (
-    <div className="absolute top-0 left-0 right-0 z-20">
+    <div className="absolute top-0 left-0 right-0 z-50">
       <nav className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-[26px] flex items-center justify-between">
         <Link href="/" className="flex items-center gap-4">
-          <LogoIcon />
-          <span className="font-sans font-bold text-lg tracking-tight text-black">
+          <span className={isLight ? 'invert' : undefined}>
+            <LogoIcon />
+          </span>
+          <span
+            className={`font-sans font-bold text-lg tracking-tight ${
+              isLight ? 'text-white!' : 'text-black'
+            }`}
+          >
             Chloe J. Hill
           </span>
         </Link>
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-[45px] text-[17px] text-black">
+        <div
+          className={`hidden md:flex items-center gap-[45px] text-[17px] ${
+            isLight ? 'text-white!' : 'text-black'
+          }`}
+        >
           <Link
             href="/about"
-            className={`hover:text-black transition-colors ${
+            className={`${desktopLinkClassName} ${
               isActive('/about') ? 'font-semibold' : ''
             }`}
           >
-            about
+            About
           </Link>
           <Link
-            href="/services"
-            className={`hover:text-black transition-colors ${
-              isActive('/services') ? 'font-semibold' : ''
+            href="/thinking"
+            className={`${desktopLinkClassName} ${
+              isActive('/thinking') ? 'font-semibold' : ''
             }`}
           >
-            services
+            Thinking
+          </Link>
+          <Link
+            href="/practice"
+            className={`${desktopLinkClassName} ${
+              isActive('/practice') ? 'font-semibold' : ''
+            }`}
+          >
+            Practice
           </Link>
           <Link
             href="/articles"
-            className={`hover:text-black transition-colors ${
+            className={`${desktopLinkClassName} ${
               isActive('/articles') ? 'font-semibold' : ''
             }`}
           >
-            articles
+            Insights
           </Link>
           <Link
             href="/contact"
-            className={`hover:text-black transition-colors ${
+            className={`${desktopLinkClassName} ${
               isActive('/contact') ? 'font-semibold' : ''
             }`}
           >
-            get in touch
+            Get in touch
           </Link>
         </div>
         {/* Mobile Hamburger Button */}
@@ -67,17 +95,21 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-black transition-all duration-300 ${
+            className={`block w-6 h-0.5 ${
+              isLight ? 'bg-white' : 'bg-black'
+            } transition-all duration-300 ${
               isMenuOpen ? 'rotate-45 translate-y-2' : ''
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-black transition-all duration-300 ${
-              isMenuOpen ? 'opacity-0' : ''
-            }`}
+            className={`block w-6 h-0.5 ${
+              isLight ? 'bg-white' : 'bg-black'
+            } transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
           />
           <span
-            className={`block w-6 h-0.5 bg-black transition-all duration-300 ${
+            className={`block w-6 h-0.5 ${
+              isLight ? 'bg-white' : 'bg-black'
+            } transition-all duration-300 ${
               isMenuOpen ? '-rotate-45 -translate-y-2' : ''
             }`}
           />
@@ -93,10 +125,15 @@ export default function Navbar() {
           overflow: 'hidden'
         }}
       >
-        <div className="flex flex-col px-4 py-6 gap-4 text-[17px] text-black">
+        <div
+          className={`flex flex-col px-4 py-6 gap-4 text-[17px] ${
+            isLight ? 'text-white' : 'text-black'
+          }`}
+          style={{ backgroundColor: isLight ? '#343433' : undefined }}
+        >
           <Link
             href="/about"
-            className={`hover:text-black transition-colors py-2 ${
+            className={`hover:opacity-80 transition-colors py-2 ${
               isActive('/about') ? 'font-semibold' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
@@ -105,7 +142,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/services"
-            className={`hover:text-black transition-colors py-2 ${
+            className={`hover:opacity-80 transition-colors py-2 ${
               isActive('/services') ? 'font-semibold' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
@@ -114,7 +151,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/articles"
-            className={`hover:text-black transition-colors py-2 ${
+            className={`hover:opacity-80 transition-colors py-2 ${
               isActive('/articles') ? 'font-semibold' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
@@ -123,7 +160,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/contact"
-            className="hover:text-black transition-colors py-2"
+            className="hover:opacity-80 transition-colors py-2"
             onClick={() => setIsMenuOpen(false)}
           >
             get in touch

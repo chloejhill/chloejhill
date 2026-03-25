@@ -35,7 +35,7 @@ h2 {
 
 * {
   font-family: var(--font-lora), serif;
-  color: #343433;
+  color: inherit;
   font-feature-settings: 'liga' off, 'clig' off;
   font-style: normal;
   font-weight: 400;
