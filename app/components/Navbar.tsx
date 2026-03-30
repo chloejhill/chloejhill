@@ -28,7 +28,7 @@ export default function Navbar({
 
   return (
     <div className="absolute top-0 left-0 right-0 z-50">
-      <nav className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-[26px] flex items-center justify-between">
+      <nav className="relative z-[70] w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-[26px] flex items-center justify-between">
         <Link href="/" className="flex items-center gap-4">
           <span className={isLight ? 'invert' : undefined}>
             <LogoIcon />
@@ -90,25 +90,25 @@ export default function Navbar({
         </div>
         {/* Mobile Hamburger Button */}
         <button
-          className="md:hidden flex flex-col gap-1.5 z-30"
+          className="md:hidden flex flex-col gap-1.5 z-[80]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
           <span
             className={`block w-6 h-0.5 ${
-              isLight ? 'bg-white' : 'bg-black'
+              isLight || isMenuOpen ? 'bg-white' : 'bg-black'
             } transition-all duration-300 ${
               isMenuOpen ? 'rotate-45 translate-y-2' : ''
             }`}
           />
           <span
             className={`block w-6 h-0.5 ${
-              isLight ? 'bg-white' : 'bg-black'
+              isLight || isMenuOpen ? 'bg-white' : 'bg-black'
             } transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
           />
           <span
             className={`block w-6 h-0.5 ${
-              isLight ? 'bg-white' : 'bg-black'
+              isLight || isMenuOpen ? 'bg-white' : 'bg-black'
             } transition-all duration-300 ${
               isMenuOpen ? '-rotate-45 -translate-y-2' : ''
             }`}
@@ -117,50 +117,61 @@ export default function Navbar({
       </nav>
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-0 z-[60] transition-all duration-300 ${
           isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         style={{
-          maxHeight: isMenuOpen ? '400px' : '0',
-          overflow: 'hidden'
+          backgroundColor: '#343433'
         }}
       >
         <div
-          className={`flex flex-col px-4 py-6 gap-4 text-[17px] ${
-            isLight ? 'text-white' : 'text-black'
-          }`}
-          style={{ backgroundColor: isLight ? '#343433' : undefined }}
+          className="flex flex-col px-4 pt-[96px] pb-6 gap-4 text-[17px] text-white! min-h-screen overflow-y-auto"
+          style={{ color: '#FFFFFF' }}
         >
           <Link
             href="/about"
-            className={`hover:opacity-80 transition-colors py-2 ${
+            className={`text-white! hover:opacity-80 transition-colors py-2 ${
               isActive('/about') ? 'font-semibold' : ''
             }`}
+            style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
           >
             about
           </Link>
           <Link
-            href="/services"
-            className={`hover:opacity-80 transition-colors py-2 ${
-              isActive('/services') ? 'font-semibold' : ''
+            href="/thinking"
+            className={`text-white! hover:opacity-80 transition-colors py-2 ${
+              isActive('/thinking') ? 'font-semibold' : ''
             }`}
+            style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
           >
-            services
+            thinking
+          </Link>
+          <Link
+            href="/practice"
+            className={`text-white! hover:opacity-80 transition-colors py-2 ${
+              isActive('/practice') ? 'font-semibold' : ''
+            }`}
+            style={{ color: '#FFFFFF' }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            practice
           </Link>
           <Link
             href="/articles"
-            className={`hover:opacity-80 transition-colors py-2 ${
+            className={`text-white! hover:opacity-80 transition-colors py-2 ${
               isActive('/articles') ? 'font-semibold' : ''
             }`}
+            style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
           >
-            articles
+            insights
           </Link>
           <Link
             href="/contact"
-            className="hover:opacity-80 transition-colors py-2"
+            className="text-white! hover:opacity-80 transition-colors py-2"
+            style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
           >
             get in touch

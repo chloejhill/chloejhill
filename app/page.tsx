@@ -235,25 +235,75 @@ export default function Home() {
         </p>
 
         <div className={styles.attentionGrid}>
-          <div className={styles.attentionCardMuted}>
-            <div className={styles.attentionIconCircle} aria-hidden="true">
-              <AttentionSystemsIcon />
+          <div
+            className={`${styles.attentionFlipCard} ${styles.attentionCardMuted}`}
+            tabIndex={0}
+          >
+            <div className={styles.attentionCardInner}>
+              <div className={styles.attentionCardFace}>
+                <div className={styles.attentionIconCircle} aria-hidden="true">
+                  <AttentionSystemsIcon />
+                </div>
+                <h3 className={styles.attentionTitle}>
+                  Systems Change &amp; Transformation
+                </h3>
+              </div>
+              <div
+                className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+              >
+                <h3 className={styles.attentionTitle}>
+                  Systems Change &amp; Transformation
+                </h3>
+                <p className={styles.attentionBackText}>
+                  How complex, economic, and ecological systems can move from
+                  extractive patterns into conditions that support life.
+                </p>
+              </div>
             </div>
-            <h3 className={styles.attentionTitle}>
-              Systems Change &amp; Transformation
-            </h3>
           </div>
-          <div className={styles.attentionCardWarm}>
-            <div className={styles.attentionIconCircle} aria-hidden="true">
-              <AttentionFuturesIcon />
+          <div
+            className={`${styles.attentionFlipCard} ${styles.attentionCardWarm}`}
+            tabIndex={0}
+          >
+            <div className={styles.attentionCardInner}>
+              <div className={styles.attentionCardFace}>
+                <div className={styles.attentionIconCircle} aria-hidden="true">
+                  <AttentionFuturesIcon />
+                </div>
+                <h3 className={styles.attentionTitle}>Futures Inquiry</h3>
+              </div>
+              <div
+                className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+              >
+                <h3 className={styles.attentionTitle}>Futures Inquiry</h3>
+                <p className={styles.attentionBackText}>
+                  Researching diverse future possibilities and helping leaders
+                  orient with foresight, imagination, and decisive action.
+                </p>
+              </div>
             </div>
-            <h3 className={styles.attentionTitle}>Futures Inquiry</h3>
           </div>
-          <div className={styles.attentionCardBase}>
-            <div className={styles.attentionIconCircle} aria-hidden="true">
-              <AttentionInnerIcon />
+          <div
+            className={`${styles.attentionFlipCard} ${styles.attentionCardBase}`}
+            tabIndex={0}
+          >
+            <div className={styles.attentionCardInner}>
+              <div className={styles.attentionCardFace}>
+                <div className={styles.attentionIconCircle} aria-hidden="true">
+                  <AttentionInnerIcon />
+                </div>
+                <h3 className={styles.attentionTitle}>The Inner Dimension</h3>
+              </div>
+              <div
+                className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+              >
+                <h3 className={styles.attentionTitle}>The Inner Dimension</h3>
+                <p className={styles.attentionBackText}>
+                  An inquiry into the inner capacities required to meet
+                  complexity with courage, coherence, and purpose.
+                </p>
+              </div>
             </div>
-            <h3 className={styles.attentionTitle}>The Inner Dimension</h3>
           </div>
         </div>
       </section>

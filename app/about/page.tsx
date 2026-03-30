@@ -28,14 +28,20 @@ export default function About() {
         <Navbar />
 
         {/* ---------------- MAIN CONTENT ---------------- */}
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-[86px] relative z-10 pt-24 lg:pt-[159px] pb-32 lg:pb-20">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-[86px] relative z-10 pt-20 md:pt-24 lg:pt-[159px] pb-16 md:pb-24 lg:pb-20">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-8 md:gap-12">
             {/* LEFT: Text */}
-            <div className="max-w-[725px] mt-10 lg:mt-[140px]">
-              <p className="font-serif font-normal text-[19px] text-[#1F1F1F] mb-6">
+            <div className="max-w-[725px] mt-6 md:mt-10 lg:mt-[140px]">
+              <p
+                className="font-normal text-[16px] md:text-[18.828px] leading-normal text-[#1F1F1F] mb-4 md:mb-6"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 Hi! I&apos;m Chloe Hill
               </p>
-              <h1 className="font-serif font-normal text-[32px] md:text-[35px] leading-[45px] text-[#1F1F1F]">
+              <h1
+                className="font-normal text-[28px] md:text-[35px] leading-[1.35] md:leading-[45.188px] text-[#1F1F1F]"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 Researcher, writer, and practitioner shaped by work in
                 uncertainty, systems change, and transformational practice
               </h1>
@@ -77,15 +83,6 @@ export default function About() {
 
               {/* Mobile composition */}
               <div className="lg:hidden w-full max-w-[520px]">
-                <div className="relative w-full h-[260px] mb-6 overflow-hidden rounded-lg">
-                  <Image
-                    src={aboutHero2Image}
-                    alt="Ocean"
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                </div>
                 <div className="relative w-full h-[360px]">
                   <div className="absolute right-0 top-0 w-[300px] h-[360px]">
                     <Image
@@ -114,7 +111,7 @@ export default function About() {
 
       <section className="w-full">
         {/* Where I'm coming from */}
-        <div className="w-full max-w-[1448px] mx-auto px-12 md:px-16 lg:px-32 py-16">
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-12 md:py-16">
           <div className="flex justify-center mb-12">
             <div className="relative inline-block">
               <div
@@ -122,14 +119,20 @@ export default function About() {
                 style={{ backgroundColor: '#EFEBE7' }}
                 aria-hidden="true"
               />
-              <h2 className="relative font-serif font-normal text-[32px] md:text-[36px] leading-none text-black text-center">
+              <h2
+                className="relative font-normal text-[30px] md:text-[36.151px] leading-none text-black text-center"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 Where I&apos;m coming from
               </h2>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            <div className="font-serif font-normal text-[16px] leading-[35px] text-black space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-24">
+            <div
+              className="font-normal text-[16px] leading-[30px] md:leading-[35px] text-black space-y-4 md:space-y-6"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               <p>
                 A deep connection to the natural world has always guided my work
                 — a thread of curiosity, purpose, and care running through
@@ -146,7 +149,10 @@ export default function About() {
                 interdependence, and resilience in both nature and society.
               </p>
             </div>
-            <div className="font-serif font-normal text-[16px] leading-[35px] text-black space-y-6">
+            <div
+              className="font-normal text-[16px] leading-[30px] md:leading-[35px] text-black space-y-4 md:space-y-6"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               <p>
                 Building on these foundations, I&apos;ve collaborated with
                 global institutions, governments, NGOs, and mission-driven
@@ -168,40 +174,64 @@ export default function About() {
 
         {/* Timeline strip */}
         <div className="w-full" style={{ backgroundColor: '#EFEBE7' }}>
-          <div className="w-full max-w-[1448px] mx-auto px-12 md:px-16 lg:px-32 py-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+          <div className="w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-10 md:py-14">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
               <div>
-                <p className="font-serif font-normal text-[26px] md:text-[30px] leading-tight text-black/80 mb-4">
+                <p
+                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   2003-2007
                 </p>
-                <p className="font-serif font-normal text-[16px] leading-[28.6px] text-black/80 max-w-[226px]">
+                <p
+                  className="font-normal text-[16px] leading-[28.619px] text-black/80 max-w-none md:max-w-[226px]"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
                 </p>
               </div>
               <div>
-                <p className="font-serif font-semibold text-[30px] md:text-[36px] leading-tight text-black mb-4">
+                <p
+                  className="font-semibold text-[36px] leading-normal text-black mb-4"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   2008-2014
                 </p>
-                <p className="font-serif font-normal text-[20px] leading-[28.6px] text-black max-w-[226px]">
+                <p
+                  className="font-normal text-[20px] leading-[28.619px] text-black max-w-none md:max-w-[226px]"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
                 </p>
               </div>
               <div>
-                <p className="font-serif font-normal text-[26px] md:text-[30px] leading-tight text-black/80 mb-4">
+                <p
+                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   2015-2020
                 </p>
-                <p className="font-serif font-normal text-[16px] leading-[28.6px] text-black/80 max-w-[226px]">
+                <p
+                  className="font-normal text-[16px] leading-[28.619px] text-black/80 max-w-none md:max-w-[226px]"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
                 </p>
               </div>
               <div>
-                <p className="font-serif font-normal text-[26px] md:text-[30px] leading-tight text-black/80 mb-4">
+                <p
+                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   2021-present
                 </p>
-                <p className="font-serif font-normal text-[16px] leading-[28.6px] text-black/80 max-w-[226px]">
+                <p
+                  className="font-normal text-[16px] leading-[28.619px] text-black/80 max-w-none md:max-w-[226px]"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
                 </p>
@@ -266,7 +296,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="relative w-full h-[460px] lg:h-[700px]">
+      <section className="relative w-full h-[280px] md:h-[460px] lg:h-[700px]">
         <Image
           src={aboutOceanImage}
           alt="Footsteps"
@@ -276,13 +306,19 @@ export default function About() {
         />
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-12 md:px-16 lg:px-32 py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-[143px]">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-12 md:py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-[143px]">
           <div>
-            <h2 className="font-sans font-bold text-[36px] leading-normal mb-6 text-black">
+            <h2
+              className="font-normal text-[30px] md:text-[36.151px] leading-normal mb-4 md:mb-6 text-black"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               How I work
             </h2>
-            <div className="font-sans text-lg leading-[35px] text-black space-y-6">
+            <div
+              className="font-normal text-[16px] leading-[30px] md:leading-[35px] text-black space-y-4 md:space-y-6"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               <p>
                 My work focuses on supporting clarity and coherence in
                 conditions of uncertainty. It draws on systems thinking, futures
@@ -309,10 +345,16 @@ export default function About() {
             </div>
           </div>
           <div>
-            <h2 className="font-sans font-bold text-[36px] leading-normal mb-6 text-black">
+            <h2
+              className="font-normal text-[30px] md:text-[36.151px] leading-normal mb-4 md:mb-6 text-black"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               What Guides My Work
             </h2>
-            <div className="font-sans text-lg leading-[35px] text-black space-y-6">
+            <div
+              className="font-normal text-[16px] leading-[30px] md:leading-[35px] text-black space-y-4 md:space-y-6"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               <p>
                 A few consistent orientations shape how I engage with complexity
                 and change.
@@ -339,14 +381,14 @@ export default function About() {
         </div>
       </section>
 
-      <section className="relative w-full py-16 lg:py-24 overflow-hidden">
+      <section className="relative w-full py-12 md:py-16 lg:py-24 overflow-hidden">
         <div
           className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1354px] max-w-[1354px] bg-[#114D6F]"
           aria-hidden="true"
         />
-        <div className="w-full max-w-[1448px] mx-auto pl-10 pr-4 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
-          <div className="relative grid grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
-            <div className="relative w-full max-w-[340px] h-[510px]">
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
+          <div className="relative grid grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)] gap-8 md:gap-12 lg:gap-16 items-start">
+            <div className="relative w-full max-w-[280px] md:max-w-[340px] h-[420px] md:h-[510px] mx-auto lg:mx-0">
               <Image
                 src={philosophyImage}
                 alt="Chloe"
@@ -357,12 +399,15 @@ export default function About() {
             </div>
 
             <div className="relative text-white" style={{ color: '#FFFFFF' }}>
-              <h2 className="font-sans font-bold text-[36px] lg:text-[40px] leading-tight text-white mb-6">
+              <h2
+                className="font-normal text-[30px] md:text-[40px] leading-normal text-white mb-4 md:mb-6"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 My Philosophy &amp; Stance
               </h2>
               <div
-                className="font-sans text-[16px] leading-[35px] space-y-6 max-w-[721px] whitespace-pre-wrap text-white"
-                style={{ color: '#FFFFFF' }}
+                className="font-normal text-[16px] leading-[30px] md:leading-[35px] space-y-4 md:space-y-6 max-w-[721px] whitespace-pre-wrap text-white"
+                style={{ color: '#FFFFFF', fontFamily: 'var(--font-lora), serif' }}
               >
                 <p>My work is grounded in curiosity, care, and integrity.</p>
                 <p>
@@ -394,25 +439,31 @@ export default function About() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 lg:py-24">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16 lg:py-24">
         <div className="text-center">
           <div className="relative inline-block mb-6">
             <div
               className="absolute left-0 right-0 h-[19px] bottom-[6px] bg-[#D6DCDB]"
               aria-hidden="true"
             />
-            <h2 className="relative font-sans font-bold text-[36px] lg:text-[40px] leading-tight text-black">
+            <h2
+              className="relative font-normal text-[30px] md:text-[40px] leading-normal text-black"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               Affiliations &amp; Communities
             </h2>
           </div>
-          <p className="font-sans text-[16px] leading-[35px] text-black max-w-[560px] mx-auto mb-10">
+          <p
+            className="font-normal text-[16px] leading-[35px] text-black max-w-[560px] mx-auto mb-10"
+            style={{ fontFamily: 'var(--font-lora), serif' }}
+          >
             I’m part of a small number of professional and practitioner
             communities that support reflective practice, ethical futures work,
             and inner–outer transformation, including:
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[535px_283px] gap-6 justify-center items-stretch max-w-[860px] mx-auto">
-            <div className="bg-[#D6DCDB] rounded-[40px] h-[143px] flex items-center justify-center px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[535px_283px] gap-4 md:gap-6 justify-center items-stretch max-w-[860px] mx-auto">
+            <div className="bg-[#D6DCDB] rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8">
               <div className="relative w-full max-w-[481px] h-[90px]">
                 <Image
                   src={affiliationSacredChangemakersImage}
@@ -423,7 +474,7 @@ export default function About() {
                 />
               </div>
             </div>
-            <div className="bg-[#D6DCDB] rounded-[40px] h-[143px] flex items-center justify-center px-8">
+            <div className="bg-[#D6DCDB] rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8">
               <div className="relative w-full max-w-[219px] h-[94px]">
                 <Image
                   src={affiliationApfImage}
@@ -438,22 +489,22 @@ export default function About() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="bg-[#343433] p-10 md:p-16 text-white">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16">
+        <div className="bg-[#343433] p-6 md:p-10 lg:p-16 text-white">
           <div className="flex flex-col gap-12">
             <div style={{ filter: 'brightness(0) invert(1)' }}>
               <QuoteIcon />
             </div>
             <div>
               <p
-                className="font-sans text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-white"
-                style={{ color: '#FFFFFF' }}
+                className="font-normal text-[34px] md:text-[40px] lg:text-[48px] leading-[1.4] md:leading-[1.7] mb-6 md:mb-8 text-white"
+                style={{ color: '#FFFFFF', fontFamily: 'var(--font-lora), serif' }}
               >
                 Do not lose heart, we were made for these times.
               </p>
               <p
-                className="font-sans text-xl md:text-2xl lg:text-[25px] text-right text-white"
-                style={{ color: '#FFFFFF' }}
+                className="font-normal text-[20px] md:text-[25px] leading-[1.5] md:leading-[1.7] text-right text-white"
+                style={{ color: '#FFFFFF', fontFamily: 'var(--font-lora), serif' }}
               >
                 — Clarissa Pinkola Estes
               </p>
