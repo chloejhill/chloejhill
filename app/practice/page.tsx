@@ -1,74 +1,201 @@
 'use client';
 
 import Image from 'next/image';
+import { useId, useMemo, useState } from 'react';
 import styles from './page.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import {
-  ServiceIcon,
   OrganizationIcon,
   QuoteIcon,
   TestimonialIcon,
   ArrowLeftIcon,
   ArrowRightIcon
 } from '../icons';
-import {
-  SensemakingIcon,
-  SystemsIcon,
-  StrategicIcon,
-  DeepAdaptationIcon,
-  RegenerativeLeadershipIcon,
-  NarrativeTransformationIcon
-} from '../serviceIcons';
 
 // const heroImage =
 //   'https://www.figma.com/api/mcp/asset/2e91af2f-fdd2-4bef-9f33-14a693c09484';
 const heroImage = '/images/hero.png';
 const profileImage = '/images/profile.png';
+const startTransImage = '/images/services/starttrans.png';
 const newsletterImage = '/images/footer.png';
-const testimonialAvatar =
-  'https://www.figma.com/api/mcp/asset/68e9d432-71ae-4e72-85f3-3c299beb96b3';
-const serviceIcon =
-  'https://www.figma.com/api/mcp/asset/c70a16bf-cf98-401d-8039-d8483340c995';
-const quoteIcon =
-  'https://www.figma.com/api/mcp/asset/d5ff8cb6-15b5-43ee-9a81-0a8d234c63ec';
+const dashImage = '/images/home/dash.png';
+const complexityImage =
+  'https://www.figma.com/api/mcp/asset/b7e55de9-f0c2-436b-b430-eb83df53e5e1';
+const workShowsUpImage =
+  'https://www.figma.com/api/mcp/asset/ebb34be6-7127-41d9-8135-f59f178c6dd2';
+const contextImage =
+  'https://www.figma.com/api/mcp/asset/08e42c8a-87a8-464b-957d-a78a4da16c97';
 
-const services = [
+const supportedOrganisationLogos = [
+  'CBD.png',
+  'Club or Rome.png',
+  'EC.jpg',
+  'FFB.png',
+  'GAIN.jpg',
+  'IUCN.png',
+  'Metabolic.png',
+  'NDC.jpg',
+  'PBL.png',
+  'SEEA.png',
+  'UNEP.jpg',
+  'WB.jpg',
+  'WWF.jpg',
+  'n4h.png',
+  'nesta.png'
+];
+
+const PatternIconOne = ({ className = '' }: { className?: string }) => (
+  <svg
+    viewBox="0 0 83 88"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M39.9418 54.4996L25.2518 50.7214C16.8818 46.9332 5.71181 39.7932 6.36181 29.6485L8.44183 28.7262L73.9918 28.1709C79.1918 31.6715 65.1318 47.429 60.6418 48.7479L45.9418 53.5079H79.4418C85.4118 53.5079 81.7318 63.96 80.1118 67.064C66.0318 94.2058 17.8718 95.1677 3.09179 68.72C1.64179 66.1219 -2.68818 54.4996 2.43182 54.4996H39.9318H39.9418ZM63.9418 35.658H17.9418C28.3918 48.986 53.6718 49.6008 63.9418 35.658ZM71.9318 62.4329L18.4418 61.4313L8.96178 62.9188C14.0818 70.6042 21.7618 76.6831 30.8918 78.835C45.4818 82.2761 65.5318 77.1194 71.9318 62.4329Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M37.7225 0.19594C41.0725 -0.210642 41.9925 -0.06188 45.0025 1.38595C58.0325 7.67309 52.2125 25.5032 37.5425 23.6686C24.2025 22.0026 23.5825 1.9016 37.7325 0.19594H37.7225ZM38.6425 8.02012C35.4725 8.79361 34.8525 13.8015 37.9325 15.3386C44.6925 18.7202 46.0825 6.20537 38.6425 8.02012Z"
+      fill="#C8BAAD"
+    />
+  </svg>
+);
+
+const PatternIconTwo = ({ className = '' }: { className?: string }) => (
+  <svg
+    viewBox="0 0 68 88"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M34.6895 52.2472L27.3695 44.6898C14.0595 54.0836 -1.32052 63.9678 15.6695 78.7172C18.3695 81.0632 25.9895 83.342 22.7095 87.3803C18.4095 90.1782 8.53951 82.7747 5.69951 79.6402C-8.59049 63.8428 6.71948 47.6801 21.6695 39.7381V38.3247C14.9095 34.9499 0.519459 11.1432 9.64946 6.56649C16.1795 3.28779 14.1795 11.7778 14.8995 15.0277C16.4795 22.1427 22.7795 28.3636 28.3095 32.9692C32.5195 33.6807 49.8795 3.96084 63.1695 16.691C75.4795 28.4886 56.2195 46.5936 45.7895 52.7183C51.8295 60.3622 53.1095 78.5153 40.9495 80.8805C15.0395 85.9284 15.7195 60.718 34.6795 52.2376L34.6895 52.2472ZM33.6895 39.7477C37.3195 39.4689 39.1595 45.9686 41.3195 46.3724C48.6795 44.4687 64.6095 28.8828 59.2495 21.4408C54.1695 14.3931 37.4295 35.8921 33.6995 38.3343V39.7477H33.6895ZM37.4195 58.1892C31.0695 60.1891 22.0795 72.9674 32.4095 75.1596C43.3595 77.4768 45.1995 65.1312 39.7095 58.4584L37.4095 58.1892H37.4195Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M36.3293 2.61492C46.5293 11.403 32.8592 25.9312 23.0292 16.3643C15.1092 8.65311 26.3693 -5.96163 36.3293 2.61492Z"
+      fill="#C8BAAD"
+    />
+  </svg>
+);
+
+const PatternIconThree = ({ className = '' }: { className?: string }) => (
+  <svg
+    viewBox="0 0 47 88"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M14.4157 12.4815C14.9064 23.9044 8.21459 38.5106 7.80745 50.696C7.67173 54.6715 8.23547 59.254 8.7992 63.222C9.63437 69.1148 13.9772 80.0862 13.8207 84.8241C13.7685 86.4306 12.9437 87.8816 10.9602 88C8.1102 87.7927 6.99315 83.9209 6.10579 81.8481C1.90908 72.0835 -0.700804 56.6185 0.165682 46.2616C1.2514 33.2767 8.07888 22.4534 6.98273 8.5431C6.80525 6.30738 3.23491 -0.00739654 8.26679 6.50361e-06C12.4531 6.50361e-06 14.3113 9.78682 14.4261 12.4815H14.4157Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M46.6537 10.2088C48.5954 22.7496 41.7784 34.017 40.9014 46.2617C39.9932 58.9727 43.1355 71.891 46.8103 84.0912L43.8976 86.6601C39.9619 86.6749 36.0053 72.1649 35.2432 69.0186C29.3344 44.6034 39.2938 36.275 40.0767 15.9166C40.2124 12.2965 36.4646 1.76197 40.6613 0.836587C44.2526 0.0444607 46.2883 7.90647 46.6432 10.2014L46.6537 10.2088Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M22.3815 1.61403L25.1062 0.90332C27.3403 1.26607 29.2925 7.58831 29.6892 9.45387C32.6018 23.2309 23.749 37.4003 23.0705 51.4439C22.5067 63.1111 27.476 74.1195 28.9271 85.4165L26.9018 86.6972C23.6029 86.9563 22.3815 81.9149 21.3793 79.6273C16.9633 69.537 15.2303 57.1591 16.41 46.3876C17.3496 37.8223 22.2144 28.7314 23.0809 20.3734C23.7282 14.1178 22.5067 7.83259 22.371 1.62144L22.3815 1.61403Z"
+      fill="#C8BAAD"
+    />
+  </svg>
+);
+
+const PatternIconFour = ({ className = '' }: { className?: string }) => (
+  <svg
+    viewBox="0 0 50 88"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M23.7058 21.7061C28.5858 20.7478 37.5858 31.9997 40.3758 36.0697C47.9558 47.1361 52.3258 60.8609 46.1358 73.782C33.4358 100.284 -4.31415 86.9814 0.405855 56.5436C1.76586 47.7853 15.2258 23.3753 23.6958 21.7061H23.7058ZM40.3758 72C47.1058 59.8105 33.27 37.3565 24.5 29C15.71 37.7995 -0.340001 62.695 11 73.782C20 86 33 82.5 40.3758 72Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M23.6957 0.0573878C31.2157 -1.04513 34.4157 14.0913 25.3257 15.1217C16.2357 16.1521 15.0557 1.32477 23.6957 0.0573878Z"
+      fill="#C8BAAD"
+    />
+    <path
+      d="M22.6956 54.7092C33.9256 52.3496 36.9656 70.8039 25.2056 71.8549C15.3056 72.741 13.8956 56.5639 22.6956 54.7092Z"
+      fill="#C8BAAD"
+    />
+  </svg>
+);
+
+const IllustrationPlusIcon = () => (
+  <svg
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="15" cy="15" r="14.5" stroke="#4F0E0E" />
+    <path d="M15 5.71436V24.2858" stroke="#4F0E0E" />
+    <path d="M24.2871 15H5.71568" stroke="#4F0E0E" />
+  </svg>
+);
+
+const patternCards = [
   {
-    title: 'Sensemaking',
+    title: 'Clarity in Complexity',
     description:
-      'Illuminating where you are by connecting patterns, perspectives, and signals in complexity to uncover meaning and guide wiser action.',
-    icon: SensemakingIcon
+      'Supporting shared understanding of what is unfolding so leaders can orient priorities and make grounded decisions under uncertainty.',
+    icon: PatternIconOne,
+    iconSize: 'w-[64px] h-[64px]'
   },
   {
-    title: 'Systems & Future Foresight',
+    title: 'Resilience in Motion',
     description:
-      "Understanding how change unfolds across interconnected systems — using horizon scanning, trend mapping, and scenario design to anticipate and prepare for what's next.",
-    icon: SystemsIcon
+      'Strengthening adaptive capacity across strategy, culture, and ways of working so organisations can respond without losing coherence or purpose.',
+    icon: PatternIconTwo,
+    iconSize: 'w-[64px] h-[64px]'
   },
   {
-    title: 'Strategic Resilience',
+    title: 'From Stuck to Movement',
     description:
-      'Building adaptive strategies and resilient structures that bend, not break, under pressure — enabling organisations to respond with clarity and evolve through change.',
-    icon: StrategicIcon
+      'Helping organisations move out of fragmentation and reactivity through clearer narratives, aligned priorities, and renewed focus.',
+    icon: PatternIconThree,
+    iconSize: 'w-[56px] h-[56px]'
   },
   {
-    title: 'Deep Adaptation',
+    title: 'Beyond Short-Term Fixes',
     description:
-      'Guiding organisations to face disruption with honesty and courage — letting go of what no longer serves and redesigning for renewal and regeneration.',
-    icon: DeepAdaptationIcon
+      'Contributing to transformation that is strategic, cultural, and human, rather than temporary or superficial.',
+    icon: PatternIconFour,
+    iconSize: 'w-[56px] h-[56px]'
+  }
+];
+
+const illustrations = [
+  {
+    title: 'Nature-positive programme positioning (2025)',
+    description:
+      'Supported the development of strategic framing and narrative coherence for a forthcoming programme operating at the intersection of finance, biodiversity, and global policy.'
   },
   {
-    title: 'Regenerative Leadership',
+    title: 'UN natural capital accounting communications (2020–2021)',
     description:
-      'Aligning inner development and organisational design with the principles of living systems — building cultures that regenerate people, purpose, and planet.',
-    icon: RegenerativeLeadershipIcon
+      'Contributed to analysis, synthesis, and editorial development across reports, briefs, and communication assets supporting the integration of ecosystem values into decision-making.'
   },
   {
-    title: 'Narrative transformation',
+    title: 'Futures and trends research for sustainability transitions (2021)',
     description:
-      'Rewriting the stories that shape our actions, cultures, and futures — facing collapse with honesty and imagination to seed the narratives of a new system.',
-    icon: NarrativeTransformationIcon
+      'Conducted medium- to long-term trends research to inform strategic repositioning and future-facing inquiry within an innovation and policy context.'
+  },
+  {
+    title: 'Systems change narrative for multilateral collaboration (2019–2020)',
+    description:
+      'Supported the development of shared language and strategic framing across a multi-stakeholder initiative, helping align diverse actors around systems-level change rather than fragmented interventions.'
+  },
+  {
+    title:
+      'Strategic synthesis for climate and biodiversity finance initiatives (2022–2023)',
+    description:
+      'Contributed analytical synthesis and narrative alignment to initiatives working across climate, biodiversity, and finance, supporting clearer decision-making and coherence under conditions of complexity and uncertainty.'
   }
 ];
 
@@ -87,14 +214,44 @@ const testimonials = [
     name: 'Anita de Horde',
     role: 'Executive Director, Finance for Biodiversity Foundation',
     text: 'Chloe transforms complexity into clarity, crafting strategies that inspire action and advance a nature-positive, sustainable future.'
+  },
+  {
+    name: 'Rebecca Clements',
+    role: 'Testimonial',
+    text: 'Replace this text with Rebecca’s testimonial.'
   }
 ];
 
+const testimonialHeadshots: Record<string, string> = {
+  'Annelies Seawell': 'Annelies.jpeg',
+  'Bruce Tonn': 'Bruce.jpg',
+  'Anita de Horde': 'Anita.jpeg',
+  'Rebecca Clements': 'rebecca-clements.jpg'
+};
+
 export default function Home() {
+  const accordionBaseId = useId();
+  const [openIllustrationIndex, setOpenIllustrationIndex] = useState<
+    number | null
+  >(null);
+  const [testimonialStartIndex, setTestimonialStartIndex] = useState(0);
+
+  const visibleTestimonials = useMemo(() => {
+    const perView = 3;
+    const total = testimonials.length;
+    if (total === 0) return [];
+    const safeStart = ((testimonialStartIndex % total) + total) % total;
+
+    return Array.from({ length: Math.min(perView, total) }).map((_, i) => {
+      const idx = (safeStart + i) % total;
+      return testimonials[idx];
+    });
+  }, [testimonialStartIndex]);
+
   return (
     <div className={styles.container}>
       <section
-        className="relative w-full h-[709px] overflow-hidden"
+        className="relative w-full h-[560px] md:h-[709px] overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)'
         }}
@@ -103,17 +260,21 @@ export default function Home() {
 
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full">
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] h-full items-start gap-0 relative">
-            <div className="relative z-10 pt-32 lg:pt-96">
+            <div className="relative z-10 pt-24 md:pt-32 lg:pt-96">
               <h1
-                className="font-sans font-bold text-[50px] leading-[60px] text-black whitespace-pre-wrap mb-6 max-w-[750px]"
+                className="font-normal text-[50px] leading-[1.2] text-[#4b3e43] whitespace-pre-wrap mb-6 max-w-[750px]"
                 style={{
+                  fontFamily: 'var(--font-lora), serif',
                   fontFeatureSettings: "'liga' off, 'clig' off"
                 }}
               >
                 Where thinking meets Reality
               </h1>
 
-              <p className="font-sans font-medium text-[15px] lg:text-[22px] leading-normal text-black w-full max-w-[600px]">
+              <p
+                className="font-medium text-[25px] leading-normal text-[#4b3e43] w-full max-w-[460px]"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 Where my thinking has been tested, applied, and refined in
                 practice.
               </p>
@@ -164,178 +325,369 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="mb-32">
-          <h2
-            className="font-sans font-bold text-[36px] leading-normal mb-6 text-black max-w-[800px]"
-            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
-          >
-            The ground is shifting beneath us
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-32 items-start">
-            <div>
-              <p className="font-sans text-lg text-black leading-relaxed max-w-[568px]">
-                It can feel as if civilisation&apos;s collapse is speeding
-                toward us — faster than our systems, leaders, or imaginations
-                can keep up. Climate disruption, technological acceleration,
-                social fragmentation, and economic fragility are not separate
-                crises, but interconnected forces shaping a single, turbulent
-                reality. The ground beneath us — our assumptions, institutions,
-                and even our sense of progress — is shifting. What once felt
-                solid now feels uncertain. So how do we prepare for what&apos;s
-                coming?
-              </p>
-            </div>
-            <div>
-              <p className="font-sans text-lg text-black leading-relaxed max-w-[554px]">
-                Perhaps by learning to see differently — to recognise that the
-                turbulence around us is not just an ending, but a turning. When
-                we look beneath the noise, coherence begins to emerge from
-                complexity, and possibility reveals itself in the cracks.
-                Uncertainty doesn&apos;t have to mean chaos; it can be a
-                catalyst for transformation. My work begins here — helping
-                people and organisations find steadier footing in shifting
-                terrain, strengthen their adaptive capacity, and move toward
-                futures that are not only resilient, but regenerative.
-              </p>
-            </div>
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-12 lg:px-24 py-14 md:py-24 space-y-10 md:space-y-16 [&_p]:leading-[140%]! [&_ul]:leading-[140%]! [&_li]:leading-[140%]!">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="w-full max-w-[460px] lg:justify-self-end">
+            <h2
+              className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Working inside Complexity
+            </h2>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px]"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              My work is not about delivery against fixed methods or predefined
+              solutions. It is about working inside complexity supporting
+              understanding, alignment, and responsible action in contexts
+              shaped by uncertainty, constraint, and long-term risk.
+            </p>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-4"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              I engage through applied research, collaboration, advisory work,
+              and strategic synthesis, often alongside organisations navigating
+              systemic change.
+            </p>
+          </div>
+          <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden lg:justify-self-start">
+            <Image
+              src={complexityImage}
+              alt="Complexity visual"
+              fill
+              className="object-contain p-8"
+              unoptimized
+            />
           </div>
         </div>
-      </section>
 
-      <div className="w-full py-16" style={{ backgroundColor: '#EFEBE7' }}>
-        <div className="w-full max-w-[1448px] mx-auto pl-6 md:pl-12 lg:pl-24 pr-0 flex flex-col md:flex-row gap-16 lg:gap-32 items-start">
-          <div className="relative w-full md:w-[400px] h-[520px] shrink-0 grayscale">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden order-2 lg:order-1 lg:justify-self-end">
             <Image
-              src={profileImage}
-              alt="Chloe Hill"
+              src={workShowsUpImage}
+              alt="Work in practice visual"
               fill
               className="object-cover"
               unoptimized
             />
           </div>
-          <div className="flex-1 max-w-[674px]">
-            <h2 className="font-sans font-bold text-4xl lg:text-5xl leading-tight mb-8 text-black whitespace-pre-wrap">
-              Learn from the chaos.{'\n'}Thrive in the change.
+          <div className="order-1 lg:order-2 w-full max-w-[460px] lg:justify-self-start">
+            <h2
+              className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              How My Work Shows Up
             </h2>
-            <div className="space-y-6 text-lg text-black leading-[2.5]">
-              <p>
-                Hi, I&apos;m Chloe — a sustainability transformations strategist
-                working at the intersection of systems change, futures thinking,
-                and conscious leadership. Over the past two decades, I&apos;ve
-                helped leaders and mission-driven organisations — from global
-                institutions to emerging innovators — make sense of complexity
-                and turn insight into action. My work blends strategic
-                communications, deep sustainability expertise, foresight, and
-                inner transformation practices to help teams anticipate
-                what&apos;s next, adapt with clarity, and transform how they
-                lead and create impact. I&apos;ve supported organisations
-                shaping the global sustainability movement to craft impact
-                narratives, design resilient strategies, and embed regenerative
-                principles — building adaptive cultures and futures grounded in
-                purpose and possibility
-              </p>
-            </div>
-
-            <div className="flex flex-row items-center align-center gap-8 mt-8">
-              <a href="#" className="text-lg text-black">
-                Ready to face the chaos with more clarity?
-              </a>
-              <button className="px-9 py-4 text-black rounded-[40px] bg-[#FFF] text-lg hover:bg-black hover:text-white transition-colors cursor-pointer">
-                Book A Discovery Call
-              </button>
-            </div>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Rather than offering a single methodology, my practice takes
+              different forms depending on context, timing, and need.
+            </p>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Typical contributions include:
+            </p>
+            <ul
+              className="list-disc pl-5 text-[16px] font-normal leading-[140%] text-black max-w-[460px] space-y-1"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              <li>
+                Analysis and synthesis of complex social, ecological, and
+                organisational dynamics
+              </li>
+              <li>
+                Futures-oriented research to explore emerging risks, signals,
+                and long-term implications
+              </li>
+              <li>
+                Narrative and strategic communications to support coherence,
+                legitimacy, and shared understanding
+              </li>
+              <li>
+                Resilience and adaptation framing for organisations operating
+                under pressure
+              </li>
+              <li>
+                Judgement and advisory support in moments of transition,
+                ambiguity, or decision-making
+              </li>
+            </ul>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-3"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              This work is shaped by inquiry rather than prescription, and by
+              discernment rather than speed.
+            </p>
           </div>
         </div>
-      </div>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 text-center">
-        <h2 className="font-sans font-bold text-4xl lg:text-[40px] leading-normal text-black mb-12 whitespace-pre-wrap">
-          Build the capacity to see clearly, adapt wisely,{'\n'}and lead
-          regeneratively.
-        </h2>
-        <p className="font-sans text-xl leading-relaxed text-black mb-16 max-w-[902px] mx-auto">
-          I do this through six interconnected disciplines that help leaders
-          navigate complexity and create meaningful, lasting change.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mb-10">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div
-                key={index}
-                className="p-6 flex flex-col items-center text-center gap-4 h-[340px]"
-              >
-                <div className="shrink-0">
-                  {IconComponent && <IconComponent />}
-                </div>
-                <h3 className="font-sans font-semibold text-xl text-black capitalize tracking-wide min-w-full">
-                  {service.title}
-                </h3>
-                <p className="font-sans text-base leading-relaxed text-black min-w-full">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="w-full max-w-[460px] lg:justify-self-end">
+            <h2
+              className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Context of practice
+            </h2>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              My applied work has taken place across a range of systems and
+              domains, including:
+            </p>
+            <ul
+              className="list-disc pl-5 text-[16px] font-normal leading-[140%] text-black max-w-[460px] space-y-1"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              <li>Multilateral and UN systems</li>
+              <li>International development and the impact sector</li>
+              <li>Biodiversity, climate, and nature-positive finance</li>
+              <li>Circular economy and producer responsibility</li>
+              <li>Nature-based solutions and ecosystem governance</li>
+              <li>Futures and trends research</li>
+              <li>Strategic communications and policy-facing narratives</li>
+            </ul>
+            <p
+              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-3"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              These contexts are where many of the questions explored on the
+              Thinking page first emerged.
+            </p>
+          </div>
+          <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden lg:justify-self-start">
+            <Image
+              src={contextImage}
+              alt="Context visual"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </div>
         </div>
-        <a
-          href="#"
-          className="inline-block text-lg border-b"
-          style={{ color: '#4F0E0E', borderColor: '#4F0E0E' }}
-        >
-          Learn More About My Services
-        </a>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 text-center">
-        <h2 className="font-sans font-bold text-4xl leading-normal text-black mb-12">
+      <section
+        className="w-full py-14 md:py-24 bg-[#EFEBE7] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/background.png')" }}
+      >
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16">
+          <h2
+            className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-black mb-10 md:mb-16"
+            style={{ fontFamily: 'var(--font-lora), serif' }}
+          >
+            Patterns I see Emerge from my Practice
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {patternCards.map((item) => (
+              <div key={item.title}>
+                <div
+                  className={`${item.iconSize} mb-8 flex items-center justify-center`}
+                >
+                  <item.icon className="w-full h-full" />
+                </div>
+                <h3
+                  className="font-medium text-[17.283px] tracking-[0.5185px] leading-normal text-black mb-3"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className="font-normal text-[13.827px] leading-[170%] text-black"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16 text-center">
+        <h2
+          className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-8 md:mb-12"
+          style={{ fontFamily: 'var(--font-lora), serif' }}
+        >
           Organisations I have Supported
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
-          {Array.from({ length: 10 }).map((_, i) => (
+          {supportedOrganisationLogos.map((fileName) => (
             <div
-              key={i}
-              className="bg-[#D5D5D5] h-[90px] rounded flex items-center justify-center"
+              key={fileName}
+              className="bg-[#D5D5D5] h-[90px] rounded flex items-center justify-center px-4"
             >
-              <div className="relative">
-                <OrganizationIcon />
-              </div>
+              <Image
+                src={`/images/Logos/${encodeURIComponent(fileName)}`}
+                alt={fileName.replace(/\.(png|jpg|jpeg|webp|svg)$/i, '')}
+                width={160}
+                height={60}
+                className="h-[46px] w-auto object-contain grayscale contrast-125 opacity-70 mix-blend-multiply"
+              />
             </div>
           ))}
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
+      <section className="w-full py-14 md:py-24 bg-[#EFEBE7]">
+        <div className="w-full max-w-[1448px] mx-auto pl-0 pr-4 md:pr-8 lg:pr-16 grid grid-cols-1 lg:grid-cols-[35%_65%] gap-10 items-start">
+          <div className="relative h-[420px] lg:h-[620px] -mt-20 lg:-mt-40">
+            <Image
+              src="/images/illustrations.png"
+              alt="Decorative pattern"
+              fill
+              className="object-contain object-left"
+              unoptimized
+            />
+          </div>
+          <div>
+            <h2
+              className="font-normal text-[30px] md:text-[40px] leading-tight md:leading-[35px] text-black mb-8 md:mb-10"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Illustrations of Practice
+            </h2>
+            <div className="border-b border-[#C8BAAD] mb-0" />
+            <div>
+              {illustrations.map((item, index) => {
+                const isOpen = openIllustrationIndex === index;
+                const panelId = `${accordionBaseId}-illustration-${index}`;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="py-6 border-b border-[#C8BAAD]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p
+                        className="font-medium text-[18px] leading-[35px] text-black pr-6"
+                        style={{ fontFamily: 'var(--font-lora), serif' }}
+                      >
+                        {item.title}
+                      </p>
+                      <button
+                        type="button"
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${item.title}`}
+                        className="shrink-0 transition-transform duration-200"
+                        onClick={() =>
+                          setOpenIllustrationIndex((current) =>
+                            current === index ? null : index
+                          )
+                        }
+                      >
+                        <span
+                          className={[
+                            'inline-block transition-transform duration-200',
+                            isOpen ? 'rotate-45' : 'rotate-0'
+                          ].join(' ')}
+                        >
+                          <IllustrationPlusIcon />
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      id={panelId}
+                      role="region"
+                      aria-label={item.title}
+                      className={[
+                        'grid transition-[grid-template-rows,opacity] duration-300 ease-out',
+                        isOpen
+                          ? 'grid-rows-[1fr] opacity-100 mt-2'
+                          : 'grid-rows-[0fr] opacity-0'
+                      ].join(' ')}
+                    >
+                      <div className="overflow-hidden">
+                        <p
+                          className="font-normal text-[16px] leading-[170%] text-black max-w-[760px]"
+                          style={{ fontFamily: 'var(--font-lora), serif' }}
+                        >
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16">
         <div className="flex flex-col gap-8 mb-12">
-          <h2 className="font-sans font-bold text-4xl leading-normal text-black max-w-[400px]">
+          <h2
+            className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
+            style={{ fontFamily: 'var(--font-lora), serif' }}
+          >
             Nice things people say
           </h2>
           <div className="flex gap-4 self-end">
-            <button className="hover:opacity-75 transition-opacity">
+            <button
+              type="button"
+              aria-label="Previous testimonials"
+              className="hover:opacity-75 transition-opacity"
+              onClick={() =>
+                setTestimonialStartIndex((current) => current - 1)
+              }
+            >
               <ArrowLeftIcon />
             </button>
-            <button className="hover:opacity-75 transition-opacity">
+            <button
+              type="button"
+              aria-label="Next testimonials"
+              className="hover:opacity-75 transition-opacity"
+              onClick={() =>
+                setTestimonialStartIndex((current) => current + 1)
+              }
+            >
               <ArrowRightIcon />
             </button>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="flex flex-col gap-6">
+          {visibleTestimonials.map((testimonial) => (
+            <div key={testimonial.name} className="flex flex-col gap-6">
               <div className="relative w-[102px] h-[112px]">
-                <div className="absolute inset-0">
-                  <TestimonialIcon />
-                </div>
+                {testimonialHeadshots[testimonial.name] ? (
+                  <Image
+                    src={`/images/Testimony%20Headshots/${encodeURIComponent(testimonialHeadshots[testimonial.name])}`}
+                    alt={testimonial.name}
+                    fill
+                    className="object-cover rounded-[18px] grayscale contrast-125 opacity-90 mix-blend-multiply"
+                  />
+                ) : (
+                  <div className="absolute inset-0">
+                    <TestimonialIcon />
+                  </div>
+                )}
               </div>
               <div>
-                <p className="font-sans font-bold text-xl text-black mb-1">
+                <p
+                  className="font-normal text-[20px] text-black mb-1"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   {testimonial.name}
                 </p>
-                <p className="font-sans text-sm text-gray-600 mb-4">
+                <p
+                  className="font-normal text-[14px] leading-normal text-black mb-4"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   {testimonial.role}
                 </p>
-                <p className="font-sans text-base leading-relaxed text-black">
+                <p
+                  className="font-normal text-[16px] leading-[20px] text-black"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
                   {testimonial.text}
                 </p>
               </div>
@@ -344,74 +696,158 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-        <div className="bg-[#343433] p-16">
-          <div className="flex flex-col gap-12">
-            <div style={{ filter: 'brightness(0) invert(1)' }}>
-              <QuoteIcon />
-            </div>
-            <div>
-              <p
-                className="font-sans text-4xl lg:text-5xl leading-tight mb-12"
-                style={{ color: 'white' }}
-              >
-                Do not lose heart, we were made for these times.
-              </p>
-              <p
-                className="font-sans text-3xl lg:text-4xl text-right"
-                style={{ color: 'white' }}
-              >
-                — Clarissa Pinkola Estes
-              </p>
+      <section className="relative w-full overflow-hidden lg:overflow-visible">
+        <div className="relative w-full h-[760px] md:h-[900px] lg:h-[1100px]">
+          <Image
+            src="/images/backround2.png"
+            alt=""
+            fill
+            className="object-fill object-top"
+            unoptimized
+          />
+          <div className="absolute inset-0 z-10">
+            <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-36 md:pt-56 lg:pt-84">
+              <div className="pl-4 md:pl-10 lg:pl-20 pr-2 md:pr-4 lg:pr-8">
+                <h2
+                  className="font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-6 md:mb-8"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
+                  Connecting back to Thinking
+                </h2>
+                <div
+                  className="font-normal text-[16px] md:text-[18px] leading-[30px] md:leading-[35px] text-black max-w-[920px] mb-6 md:mb-8"
+                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                >
+                  <p>
+                    Practice is not separate from inquiry. It is where questions
+                    are sharpened, assumptions tested, and frameworks revised.
+                  </p>
+                  <p className="mt-4">
+                    Much of the thinking described elsewhere on this site -
+                    including AATT, futures inquiry, and attention to the inner
+                    dimension - has been shaped through engagement with real
+                    systems under pressure.
+                  </p>
+                  <p className="mt-4">
+                    Practice, for me, is not about implementation for its own
+                    sake. It is about staying close to reality - learning from
+                    systems as they move, strain, adapt, and sometimes fail.
+                  </p>
+                </div>
+                <div
+                  className="space-y-2 font-normal text-[20px] md:text-[24px] leading-[30px] md:leading-[35px] text-[#979797]"
+                  style={{
+                    fontFamily: 'var(--font-lora), serif',
+                    fontFeatureSettings: "'liga' off, 'clig' off",
+                    fontStyle: 'normal'
+                  }}
+                >
+                  <a
+                    href="/thinking"
+                    className="flex items-start gap-3 text-[#979797]!"
+                    style={{ color: '#979797' }}
+                  >
+                    <span
+                      className="relative w-[29px] h-[8px] shrink-0 mt-[13px]"
+                      aria-hidden="true"
+                    >
+                      <Image
+                        src={dashImage}
+                        alt=""
+                        fill
+                        className="object-contain"
+                        unoptimized
+                      />
+                    </span>
+                    <span>
+                      <span className="underline" style={{ color: '#979797' }}>
+                        Thinking
+                      </span>
+                      {' — inquiry, frameworks, and research'}
+                    </span>
+                  </a>
+                  <a
+                    href="/about"
+                    className="flex items-start gap-3 text-[#979797]!"
+                    style={{ color: '#979797' }}
+                  >
+                    <span
+                      className="relative w-[29px] h-[8px] shrink-0 mt-[13px]"
+                      aria-hidden="true"
+                    >
+                      <Image
+                        src={dashImage}
+                        alt=""
+                        fill
+                        className="object-contain"
+                        unoptimized
+                      />
+                    </span>
+                    <span>
+                      <span className="underline" style={{ color: '#979797' }}>
+                        About
+                      </span>
+                      {' — background, philosophy, and learning stance'}
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div className="absolute right-0 bottom-[-72px] md:bottom-[-140px] lg:bottom-[-180px] w-[140px] md:w-[280px] lg:w-[360px] h-[220px] md:h-[360px] lg:h-[560px] z-20 pointer-events-none">
+          <Image
+            src="/images/leaf2.png"
+            alt="Decorative leaf"
+            fill
+            className="object-contain object-bottom-right"
+            unoptimized
+          />
+        </div>
       </section>
 
-      <section className="w-full  py-16 lg:py-24">
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex flex-col justify-center max-w-[600px]">
-            <h2
-              className="font-sans font-bold text-3xl lg:text-4xl mb-6"
-              style={{ color: '#C8B9AF' }}
-            >
-              Join me where change takes shape
-            </h2>
-            <p className="font-sans text-lg text-black mb-10 leading-relaxed">
-              Subscribe to my monthly newsletter, The Turning Point —
-              reflections, tools, and updates from my work and the world around
-              it, sent with intention, not noise.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="flex-1 px-8 py-4 text-black placeholder:text-black/60 focus:outline-none"
-                style={{
-                  borderRadius: '100px',
-                  border: '1px solid rgba(79, 14, 14, 0.40)',
-                  background: 'rgba(255, 255, 255, 0.60)'
-                }}
-              />
-              <button
-                className="px-10 py-4 bg-transparent text-black font-sans font-medium hover:bg-black hover:text-white transition-colors"
-                style={{
-                  borderRadius: '40px',
-                  border: '1.333px solid #4F0E0E'
-                }}
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-          <div className="relative w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] shrink-0 rounded-full overflow-hidden">
+      <section className="w-full px-0 py-6 md:py-8">
+        <div className="bg-[#343433] w-full md:w-[80%] mr-auto px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 min-h-[320px] md:min-h-[360px] lg:min-h-[420px] flex flex-col md:flex-row gap-8 lg:gap-14 items-center text-white!">
+          <div className="relative w-[168px] h-[168px] rounded-full overflow-hidden shrink-0">
             <Image
-              src={newsletterImage}
-              alt="Newsletter"
+              src={startTransImage}
+              alt="Chloe profile"
               fill
               className="object-cover grayscale"
               unoptimized
             />
+          </div>
+          <div
+            className="text-white! flex flex-col justify-center"
+            style={{ color: '#FFFFFF' }}
+          >
+            <p
+              className="font-normal text-[36px] leading-[36.476px] text-white!"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              Interested in working with me?{' '}
+              <a
+                href="/contact"
+                className="underline text-white!"
+                style={{ color: '#FFFFFF' }}
+              >
+                Get in touch.
+              </a>
+            </p>
+            <p
+              className="text-[18px] leading-[35px] mt-4 max-w-[640px] text-white!"
+              style={{ color: '#FFFFFF' }}
+            >
+              I also offer a Free Strategic Coherence Conversation for
+              impact-driven leaders navigating complexity.
+            </p>
+            <a
+              href="/contact"
+              className="inline-block mt-4 text-[18px] leading-[35px] underline text-white!"
+              style={{ color: '#FFFFFF' }}
+            >
+              Apply here →
+            </a>
           </div>
         </div>
       </section>

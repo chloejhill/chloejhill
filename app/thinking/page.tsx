@@ -314,7 +314,7 @@ export default function Thinking() {
 
   return (
     <div className={styles.container}>
-      <section className="relative w-full h-[600px] overflow-hidden">
+      <section className="relative w-full h-[520px] md:h-[600px] overflow-hidden">
         {/* MOBILE BACKGROUND - heroLeftImage */}
         <div className="absolute inset-0 w-full h-full md:hidden z-0">
           <Image
@@ -360,15 +360,18 @@ export default function Thinking() {
         {/* MOBILE: 'block pt-32' -> Pushes text down the page.
       DESKTOP: 'md:flex md:items-center md:pt-16' -> Restores your original vertical alignment.
   */}
-        <div className="relative z-10 w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full block pt-40 md:flex md:items-start md:pt-40">
+        <div className="relative z-10 w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full block pt-28 md:flex md:items-start md:pt-40">
           <div className="max-w-[800px]">
             <h1
-              className="font-sans font-bold text-[36px] leading-tight text-black mb-6"
-              style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
+              className="font-normal text-[34px] md:text-[50px] leading-[1.15] md:leading-[normal] text-[#4b3e43] mb-4 md:mb-6"
+              style={{ fontFamily: 'var(--font-lora), serif', fontFeatureSettings: "'liga' off, 'clig' off" }}
             >
               Thinking into the uncertainty
             </h1>
-            <p className="font-sans font-medium text-[18px] leading-normal text-black max-w-[520px]">
+            <p
+              className="font-normal text-[18px] md:text-[25px] leading-[1.35] md:leading-[normal] text-[#4b3e43] max-w-full md:max-w-[607.712px]"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
               Research and inquiry into how we understand, anticipate, and
               respond to profound change.
             </p>
