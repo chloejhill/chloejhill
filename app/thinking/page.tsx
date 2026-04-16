@@ -271,7 +271,7 @@ export default function Thinking() {
     const minCenterIdx = total; // left boundary of safe middle set
     const maxCenterIdx = total * 2 - 1; // right boundary of safe middle set
 
-    let settleTimer: ReturnType<typeof setTimeout> | undefined;
+    let settleTimer: number | undefined;
     const onScroll = () => {
       if (settleTimer) window.clearTimeout(settleTimer);
       settleTimer = window.setTimeout(() => {

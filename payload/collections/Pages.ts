@@ -21,14 +21,6 @@ export const Pages: CollectionConfig = {
         singular: 'Text Override',
         plural: 'Text Overrides'
       },
-      admin: {
-        components: {
-          RowLabel: ({ data }) => {
-            const key = typeof data?.key === 'string' ? data.key.trim() : '';
-            return key || 'Untitled text override';
-          }
-        }
-      },
       fields: [
         {
           name: 'key',
@@ -45,14 +37,6 @@ export const Pages: CollectionConfig = {
       labels: {
         singular: 'Image Override',
         plural: 'Image Overrides'
-      },
-      admin: {
-        components: {
-          RowLabel: ({ data }) => {
-            const key = typeof data?.key === 'string' ? data.key.trim() : '';
-            return key || 'Untitled image override';
-          }
-        }
       },
       fields: [
         {
