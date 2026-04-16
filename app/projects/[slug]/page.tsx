@@ -117,7 +117,7 @@ export default function ProjectDetail() {
               <h2 className="font-sans font-medium text-[25px] leading-[30px] text-black mb-5 capitalize">
                 {project.subtitle}
               </h2>
-              <p className="font-sans font-normal text-[18px] leading-[1.4] text-black mb-6">
+              <p className="font-sans font-normal text-[18px] leading-[110%] text-black mb-6">
                 {project.description}
               </p>
               <div className="flex flex-col items-start gap-[9px]">
@@ -179,7 +179,7 @@ export default function ProjectDetail() {
 
           <div className="max-w-[759px] mx-auto">
             <div
-              className="font-sans font-normal text-[17px] leading-[1.8] text-[#050315]"
+              className="font-sans font-normal text-[17px] leading-[110%] text-[#050315]"
               style={{ whiteSpace: 'pre-wrap' }}
             >
               {paragraphs.map((paragraph, index) => (

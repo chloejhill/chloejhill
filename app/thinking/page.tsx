@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 const heroLeftImage = '/images/services/heroleft.png';
 const heroRightImage = '/images/services/heroright.png';
@@ -222,20 +223,80 @@ function TransformationSpiralIcon() {
 }
 
 export default function Thinking() {
-  const writingsTrackRef = useRef<HTMLDivElement | null>(null);
+  const overrides = usePayloadOverrides('thinking');
+  const t = (key: string, fallback: string) =>
+    overrides?.strings?.[key] || fallback;
+  const img = (key: string, fallbackSrc: string) =>
+    overrides?.images?.[key]?.src || fallbackSrc;
+  const alt = (key: string, fallbackAlt: string) =>
+    overrides?.images?.[key]?.alt || fallbackAlt;
+
+  const writingsViewportRef = useRef<HTMLDivElement | null>(null);
   const evolutionInnerRef = useRef<HTMLDivElement | null>(null);
   const evolutionCopyRef = useRef<HTMLDivElement | null>(null);
   const WRITING_CARD_WIDTH = 314.121;
-  const WRITING_CARD_GAP = 40;
+  const WRITING_CARD_GAP = 68;
   const WRITING_PEEK = 72;
 
-  useEffect(() => {
-    const el = writingsTrackRef.current;
+  const selectedWritings = useMemo(
+    () =>
+      Array.from({ length: 8 }).map((_, i) => ({
+        id: String(i + 1),
+        title: `Publication ${i + 1}`
+      })),
+    []
+  );
+
+  const writingsLoop = useMemo(() => {
+    const items = selectedWritings;
+    if (items.length === 0) return { items: [], setSize: 0 };
+    // 3 full sets gives enough runway to wrap invisibly.
+    return { items: [...items, ...items, ...items], setSize: items.length };
+  }, [selectedWritings]);
+
+  useLayoutEffect(() => {
+    const el = writingsViewportRef.current;
     if (!el) return;
-    // Keep 3 cards fully visible and show neighbor peeks on both sides.
-    const initialOffset = WRITING_CARD_WIDTH + WRITING_CARD_GAP - WRITING_PEEK;
-    el.scrollLeft = initialOffset;
-  }, []);
+    const total = selectedWritings.length;
+    if (!total) return;
+
+    const amount = WRITING_CARD_WIDTH + WRITING_CARD_GAP;
+    const viewportCenter = el.clientWidth / 2;
+
+    // Start in the middle set, aligned so you see: peek + 3 full + peek.
+    const centerIdx = total + 1; // "2nd" card of the middle set
+    el.scrollLeft =
+      centerIdx * amount - viewportCenter + WRITING_CARD_WIDTH / 2;
+
+    const minCenterIdx = total; // left boundary of safe middle set
+    const maxCenterIdx = total * 2 - 1; // right boundary of safe middle set
+
+    let settleTimer: number | undefined;
+    const onScroll = () => {
+      if (settleTimer) window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(() => {
+        const currentCenterIdx = Math.round(
+          (el.scrollLeft + viewportCenter - WRITING_CARD_WIDTH / 2) / amount
+        );
+
+        if (currentCenterIdx < minCenterIdx) {
+          const newCenterIdx = currentCenterIdx + total;
+          el.scrollLeft =
+            newCenterIdx * amount - viewportCenter + WRITING_CARD_WIDTH / 2;
+        } else if (currentCenterIdx > maxCenterIdx) {
+          const newCenterIdx = currentCenterIdx - total;
+          el.scrollLeft =
+            newCenterIdx * amount - viewportCenter + WRITING_CARD_WIDTH / 2;
+        }
+      }, 180);
+    };
+
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      if (settleTimer) window.clearTimeout(settleTimer);
+      el.removeEventListener('scroll', onScroll);
+    };
+  }, [selectedWritings.length]);
 
   useEffect(() => {
     const inner = evolutionInnerRef.current;
@@ -247,7 +308,7 @@ export default function Thinking() {
       if (h > 0) {
         inner.style.setProperty(
           '--evolution-copy-h',
-          `${Math.round(h * 1.42)}px`
+          `${Math.round(h * 1.08)}px`
         );
       }
     };
@@ -263,7 +324,7 @@ export default function Thinking() {
   }, []);
 
   const scrollWritings = (direction: 'left' | 'right') => {
-    const el = writingsTrackRef.current;
+    const el = writingsViewportRef.current;
     if (!el) return;
     const amount = WRITING_CARD_WIDTH + WRITING_CARD_GAP;
     el.scrollBy({
@@ -271,11 +332,6 @@ export default function Thinking() {
       behavior: 'smooth'
     });
   };
-
-  const selectedWritings = Array.from({ length: 8 }).map((_, i) => ({
-    id: String(i + 1),
-    title: `Publication ${i + 1}`
-  }));
 
   const aattItems = [
     {
@@ -318,8 +374,8 @@ export default function Thinking() {
         {/* MOBILE BACKGROUND - heroLeftImage */}
         <div className="absolute inset-0 w-full h-full md:hidden z-0">
           <Image
-            src={heroLeftImage}
-            alt="Hero Left"
+            src={img('thinking.hero.leftImage', heroLeftImage)}
+            alt={alt('thinking.hero.leftImage', 'Hero Left')}
             fill
             className="object-cover"
             unoptimized
@@ -330,8 +386,8 @@ export default function Thinking() {
           {/* Left Image (20%) */}
           <div className="relative w-[20%] h-full">
             <Image
-              src={heroLeftImage}
-              alt="Hero Left"
+              src={img('thinking.hero.leftImage', heroLeftImage)}
+              alt={alt('thinking.hero.leftImage', 'Hero Left')}
               fill
               className="object-cover"
               unoptimized
@@ -345,8 +401,8 @@ export default function Thinking() {
     */}
           <div className="relative w-[80%] h-full -ml-px">
             <Image
-              src={heroRightImage}
-              alt="Hero Right"
+              src={img('thinking.hero.rightImage', heroRightImage)}
+              alt={alt('thinking.hero.rightImage', 'Hero Right')}
               fill
               className="object-cover"
               unoptimized
@@ -364,16 +420,21 @@ export default function Thinking() {
           <div className="max-w-[800px]">
             <h1
               className="font-normal text-[34px] md:text-[50px] leading-[1.15] md:leading-[normal] text-[#4b3e43] mb-4 md:mb-6"
-              style={{ fontFamily: 'var(--font-lora), serif', fontFeatureSettings: "'liga' off, 'clig' off" }}
+              style={{
+                fontFamily: 'var(--font-lora), serif',
+                fontFeatureSettings: "'liga' off, 'clig' off"
+              }}
             >
-              Thinking into the uncertainty
+              {t('thinking.hero.title', 'Thinking into the uncertainty')}
             </h1>
             <p
               className="font-normal text-[18px] md:text-[25px] leading-[1.35] md:leading-[normal] text-[#4b3e43] max-w-full md:max-w-[607.712px]"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Research and inquiry into how we understand, anticipate, and
-              respond to profound change.
+              {t(
+                'thinking.hero.subtitle',
+                'Research and inquiry into how we understand, anticipate, and respond to profound change.'
+              )}
             </p>
           </div>
         </div>
@@ -386,7 +447,10 @@ export default function Thinking() {
             Where my Inquiry Begins
           </h2>
         </div>
-        <div className={styles.inquiryIntro}>
+        <div
+          className={styles.inquiryIntro}
+          style={{ textAlign: 'left', margin: '0 0 34px' }}
+        >
           <p>
             Rather than offering fixed solutions or proprietary methods, my work
             is shaped by sustained inquiry into a small number of interrelated
@@ -403,7 +467,7 @@ export default function Thinking() {
           </p>
         </div>
 
-        <div className={styles.inquiryBanner}>
+        <div className={styles.inquiryBanner} style={{ marginTop: '70px' }}>
           <div className={styles.inquiryBannerIcon} aria-hidden="true">
             <Image
               src={syschangeImage}
@@ -418,10 +482,16 @@ export default function Thinking() {
         </div>
       </section>
 
-      <section className={styles.empiricalSection}>
-        <div className={styles.empiricalInner}>
+      <section
+        className={styles.empiricalSection}
+        style={{ paddingTop: '34px' }}
+      >
+        <div
+          className={styles.empiricalInner}
+          style={{ width: 'min(90vw, 1400px)' }}
+        >
           <h3 className={styles.empiricalTitle}>Empirical Grounding</h3>
-          <div className={styles.empiricalBody}>
+          <div className={styles.empiricalBody} style={{ lineHeight: '110%' }}>
             <p>
               Much of my thinking has been shaped through long-term work inside
               complex social, ecological, and institutional systems.
@@ -473,18 +543,20 @@ export default function Thinking() {
             </span>
           </button>
 
-          <div ref={writingsTrackRef} className={styles.writingsTrack}>
-            {selectedWritings.map((w) => (
-              <div
-                key={w.id}
-                className={styles.writingsCard}
-                aria-label={w.title}
-              >
-                <div className={styles.writingsCardIcon} aria-hidden="true">
-                  <PlaceholderImageIcon />
+          <div ref={writingsViewportRef} className={styles.writingsViewport}>
+            <div className={styles.writingsTrack}>
+              {writingsLoop.items.map((w, idx) => (
+                <div
+                  key={`${w.id}-${idx}`}
+                  className={styles.writingsCard}
+                  aria-label={w.title}
+                >
+                  <div className={styles.writingsCardIcon} aria-hidden="true">
+                    <PlaceholderImageIcon />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <button
@@ -517,18 +589,21 @@ export default function Thinking() {
       </section>
 
       <section className={styles.transcendentalSection}>
-        <div className={styles.transcendentalLeaf} aria-hidden="true">
-          <Image
-            src="/images/leaf.png"
-            alt=""
-            width={520}
-            height={760}
-            className={styles.transcendentalLeafImg}
-            unoptimized
-          />
-        </div>
-        <div className={styles.transcendentalContent}>
-          <h2 className={styles.transcendentalTitle}>Transcendental Futures</h2>
+        <div
+          className={styles.transcendentalContent}
+          style={{ textAlign: 'left' }}
+        >
+          <h2
+            className={styles.transcendentalTitle}
+            style={{
+              textAlign: 'left',
+              width: '100%',
+              maxWidth: '760px',
+              alignSelf: 'flex-start'
+            }}
+          >
+            Transcendental Futures
+          </h2>
           <p>
             Alongside AATT, my work includes sustained inquiry at the
             intersection of futures studies, philosophy, and systems thinking.
@@ -554,6 +629,16 @@ export default function Thinking() {
             responsibility, and consequence.
           </p>
         </div>
+        <div className={styles.transcendentalLeaf} aria-hidden="true">
+          <Image
+            src="/images/leaf.png"
+            alt=""
+            width={520}
+            height={760}
+            className={styles.transcendentalLeafImg}
+            unoptimized
+          />
+        </div>
       </section>
 
       <section className={styles.transformationSection}>
@@ -566,22 +651,31 @@ export default function Thinking() {
       </section>
 
       <section className={styles.aattSection}>
-        <div className={styles.aattIntro}>
-          <h2 className={styles.aattTitle}>
+        <div
+          className={styles.empiricalInner}
+          style={{
+            width: 'min(90vw, 1400px)',
+            background: '#EFEBE7',
+            marginBottom: '56px'
+          }}
+        >
+          <h2 className={styles.empiricalTitle}>
             Anticipate. Adapt. Transform. Transcend.
             <br />A Framework for Transformation
           </h2>
-          <p className={styles.aattLead}>
-            AATT is a structured yet fluid framework that has emerged from my
-            work across sustainability, futures research, and organisational
-            change. It reflects how transformation tends to unfold in real
-            conditions — not as a neat sequence, but as a set of interrelated
-            capacities that deepen over time. Rather than prescribing action,
-            AATT helps organise inquiry across four recurring dimensions. The
-            framework continues to evolve as a thinking framework. It informs my
-            research, writing, and collaborative work, but is not offered as a
-            fixed methodology or packaged approach.
-          </p>
+          <div className={styles.empiricalBody} style={{ lineHeight: '110%' }}>
+            <p>
+              AATT is a structured yet fluid framework that has emerged from my
+              work across sustainability, futures research, and organisational
+              change. It reflects how transformation tends to unfold in real
+              conditions — not as a neat sequence, but as a set of interrelated
+              capacities that deepen over time. Rather than prescribing action,
+              AATT helps organise inquiry across four recurring dimensions. The
+              framework continues to evolve as a thinking framework. It informs
+              my research, writing, and collaborative work, but is not offered
+              as a fixed methodology or packaged approach.
+            </p>
+          </div>
         </div>
 
         <div className={styles.aattList}>
@@ -641,23 +735,23 @@ export default function Thinking() {
         </div>
 
         <div className={styles.innerDimensionInner}>
-          <h2 className={styles.innerDimensionHeading}>
-            Cultivating The Capacities That Make Transformation Possible
-          </h2>
-          <div className={styles.innerDimensionBody}>
-            <p>
-              Transformation is not only systemic — it is also personal.
-              Organizations that thrive in complexity develop inner capacities
-              alongside strategic ones : adaptability, discernment, emotional
-              resilience, and the ability to stay grounded amid uncertainty.
-            </p>
-            <p>
-              This dimension reflects my long-standing interest in how inner
-              development shapes outer change. Alongside The Dots Directory, I
-              explore how individuals strengthen the awareness, empathy, and
-              purpose that make meaningful transformation possible — not as a
-              substitute for systems change, but as its human foundation.
-            </p>
+          <div className={styles.innerDimensionCopy}>
+            <h2 className={styles.innerDimensionHeading}>
+              Cultivating The Capacities That Make Transformation Possible
+            </h2>
+            <div className={styles.innerDimensionBody}>
+              <p>
+                Transformation is not only systemic — it is also personal.
+                Organizations that thrive in complexity develop inner capacities
+                alongside strategic ones : adaptability, discernment, emotional
+                resilience, and the ability to stay grounded amid uncertainty.
+                This dimension reflects my long-standing interest in how inner
+                development shapes outer change. Alongside The Dots Directory, I
+                explore how individuals strengthen the awareness, empathy, and
+                purpose that make meaningful transformation possible — not as a
+                substitute for systems change, but as its human foundation.
+              </p>
+            </div>
           </div>
           <div className={styles.innerDotsCard}>
             <Image
