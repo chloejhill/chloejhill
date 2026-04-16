@@ -536,6 +536,20 @@
   gap: 18px;
 }
 
+.footerFormTypography,
+.footerFormTypography input,
+.footerFormTypography button,
+.footerFormTypography::placeholder {
+  font-family: var(--font-serif), serif;
+}
+
+.footerNewsletterControl {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 33px;
+}
+
 .newsletterInput {
   height: 65px;
   flex: 1;
@@ -695,6 +709,10 @@
   margin: 0;
 }
 
+.heroTitleLine {
+  display: block;
+}
+
 .heroSubtitle {
   font-family: var(--font-serif), serif;
   font-weight: 400;
@@ -729,8 +747,8 @@
 }
 
 .sectionHeroPad {
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .sectionHeading {
@@ -749,6 +767,14 @@
   z-index: 0;
 }
 
+.sectionHeadingHighlightSub {
+  background: linear-gradient(180deg, transparent 54%, #efebe7 54%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 4px;
+  margin: 0 -4px;
+}
+
 .sectionTitle {
   position: relative;
   z-index: 1;
@@ -764,7 +790,7 @@
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 110%;
   color: #000000;
   margin: 0;
   max-width: 1228px;
@@ -774,7 +800,7 @@
   display: grid;
   grid-template-columns: 382px minmax(0, 640px);
   gap: 80px;
-  align-items: start;
+  align-items: center;
   max-width: 1102px;
   margin: 0 auto;
   justify-content: center;
@@ -853,14 +879,13 @@
   color: #000000;
   margin: 0;
   text-align: center;
-  white-space: nowrap;
 }
 
 .centerIntro {
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 110%;
   color: #000000;
   margin: 0 auto 48px;
   max-width: 1006px;
@@ -986,7 +1011,7 @@
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 110%;
   color: #000000;
   white-space: pre-wrap;
 }
@@ -1120,7 +1145,7 @@
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 140%;
+  line-height: 110%;
   color: #000;
 }
 
@@ -1129,11 +1154,13 @@
 }
 
 .inquiryBanner {
-  width: 60vw;
+  width: 1000px;
+  max-width: 100%;
   margin-left: calc(50% - 50vw);
   margin-right: auto;
+  margin-top: 24px;
   background: #d6dcdb;
-  height: 176px;
+  height: 300px;
   position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -1152,9 +1179,9 @@
 }
 
 .inquiryBannerImg {
-  width: 150px;
-  height: auto;
-  max-height: 150px;
+  width: 293.744px;
+  height: 228px;
+  max-height: none;
   display: block;
   object-fit: contain;
 }
@@ -1194,7 +1221,7 @@
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 110%;
   color: #000;
   max-width: 980px;
 }
@@ -1215,33 +1242,25 @@
   padding-right: 8px;
 }
 
-.writingsTrack {
-  display: flex;
-  gap: 40px;
-  overflow-x: auto;
-  padding: 20px 0;
-  width: calc((314.121px * 3) + (40px * 2) + (72px * 2));
-  max-width: calc(100vw - 72px);
+.writingsViewport {
+  width: 1258.363px;
+  max-width: 100%;
   margin: 0 auto;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
 
-.writingsTrack::-webkit-scrollbar {
+.writingsViewport::-webkit-scrollbar {
   display: none;
 }
 
-@media (min-width: 1600px) {
-  .writingsTrack {
-    width: calc((314.121px * 5) + (40px * 4) + (72px * 2));
-  }
-}
-
-@media (min-width: 1280px) and (max-width: 1599px) {
-  .writingsTrack {
-    width: calc((314.121px * 4) + (40px * 3) + (72px * 2));
-  }
+.writingsTrack {
+  display: flex;
+  gap: 68px;
+  padding: 20px 0;
+  width: max-content;
 }
 
 .writingsCard {
@@ -1249,7 +1268,7 @@
   width: 314.121px;
   height: 362.344px;
   background: #d9d9d9;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   position: relative;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
 }
@@ -1297,12 +1316,12 @@
 }
 
 .futureBanner {
-  width: 60vw;
-  max-width: 1120px;
+  width: 1000px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: 0;
   background: #d8c8be;
-  height: 176px;
+  height: 300px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1315,7 +1334,7 @@
 
 .futureSection {
   width: 100%;
-  padding: 32px 0 64px;
+  padding: 32px 0 120px;
 }
 
 .futureBannerLabel {
@@ -1336,53 +1355,58 @@
 }
 
 .futureBannerImg {
-  width: min(340px, 40vw);
-  height: auto;
-  max-height: 128px;
+  width: 677.991px;
+  height: 198.709px;
+  max-width: none;
+  max-height: none;
   display: block;
   object-fit: contain;
   object-position: right center;
 }
 
 .transcendentalSection {
-  width: 100%;
-  max-width: 1520px;
-  margin: 0 auto;
-  padding: 6px 0 0;
-  display: flex;
-  gap: 24px;
-  align-items: start;
+  width: min(90vw, 1400px);
+  margin-left: auto;
+  margin-right: 0;
+  padding: 56px 0 56px 64px;
+  margin-bottom: 72px;
+  background: #efebe7;
   position: relative;
   overflow: visible;
 }
 
 .transcendentalLeaf {
   color: #9ea5ab;
-  width: 520px;
+  position: absolute;
+  right: -96px;
+  bottom: -84px;
+  width: 420px;
   overflow: visible;
-  margin-bottom: -88px;
-  flex: 0 0 520px;
+  pointer-events: none;
 }
 
 .transcendentalLeafImg {
-  width: 100%;
-  height: auto;
+  width: auto;
+  max-width: 100%;
+  height: 620px;
   object-fit: contain;
   display: block;
+  margin-left: auto;
 }
 
 .transcendentalContent {
-  max-width: 780px;
+  max-width: 900px;
   width: 100%;
-  margin-left: auto;
-  margin-right: 96px;
-  text-align: right;
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 320px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   font-family: var(--font-serif), serif;
   font-size: 16px;
-  line-height: 23.442px;
+  line-height: 110%;
   color: #222;
 }
 
@@ -1397,7 +1421,7 @@
 
 .transcendentalContent p {
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 0 12px;
 }
 
@@ -1409,21 +1433,22 @@
 .transformationSection {
   width: 100%;
   padding: 0 0 62px;
-  margin-top: -6px;
+  margin-top: 20px;
 }
 
 .transformationBanner {
-  width: 60vw;
+  width: 1000px;
+  max-width: 100%;
   margin-left: calc(50% - 50vw);
   margin-right: auto;
   background: #d6dcdb;
-  height: 176px;
+  height: 300px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
-  --transformation-icon-slot: 272px;
+  --transformation-icon-slot: 300px;
   padding-left: var(--transformation-icon-slot);
 }
 
@@ -1441,8 +1466,8 @@
 }
 
 .transformationIcon svg {
-  width: 168px;
-  height: 158px;
+  width: 246.999px;
+  height: 230.607px;
   display: block;
 }
 
@@ -1478,7 +1503,7 @@
   font-family: var(--font-serif), serif;
   font-size: 40px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   margin: 0 0 34px;
 }
@@ -1492,7 +1517,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 35px;
+  line-height: 110%;
 }
 
 .aattList {
@@ -1612,22 +1637,23 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%;
+  line-height: 110%;
   margin: 0;
 }
 
 .innerDimensionSection {
   width: 100%;
   background: #fff;
-  padding: 48px 0 56px;
+  padding: 48px 0 120px;
 }
 
 .innerBanner {
-  width: 60vw;
+  width: 1000px;
+  max-width: 100%;
   margin-left: calc(50% - 50vw);
   margin-right: auto;
   background: #dac9be;
-  min-height: 176px;
+  height: 300px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1635,7 +1661,7 @@
   gap: 48px;
   padding: 24px 48px 24px 40px;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: 96px;
 }
 
 .innerBannerIcon {
@@ -1646,8 +1672,8 @@
 }
 
 .innerBannerImg {
-  width: auto;
-  height: 120px;
+  width: 222.801px;
+  height: 158px;
   object-fit: contain;
 }
 
@@ -1663,13 +1689,19 @@
 }
 
 .innerDimensionInner {
-  width: 100%;
-  max-width: 1520px;
-  margin: 0 auto;
-  padding: 0 40px 0 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: min(90vw, 1400px);
+  margin-left: auto;
+  margin-right: 0;
+  padding: 56px 52px 80px 64px;
+  background: #efebe7;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.innerDimensionCopy {
+  max-width: 720px;
 }
 
 .innerDimensionHeading {
@@ -1685,11 +1717,11 @@
 }
 
 .innerDimensionBody {
-  max-width: 600px;
+  max-width: 660px;
   width: 100%;
   font-family: var(--font-serif), serif;
-  font-size: 18px;
-  line-height: 35px;
+  font-size: 16px;
+  line-height: 110%;
   color: #000;
   text-align: left;
 }
@@ -1699,13 +1731,13 @@
 }
 
 .innerDotsCard {
-  margin-top: 28px;
-  max-width: 400px;
-  width: 100%;
-  padding: 20px 28px;
+  width: min(100%, 420px);
+  min-width: 320px;
+  padding: 24px 36px;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 24px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  justify-self: end;
 }
 
 .innerDotsImg {
@@ -1725,7 +1757,7 @@
   --evolution-copy-h: 26rem;
   max-width: 1520px;
   margin: 0 auto;
-  padding: 48px 36px 48px 44px;
+  padding: 48px 36px 24px 44px;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 42%);
@@ -1759,13 +1791,13 @@
   font-family: var(--font-serif), serif;
   font-weight: 400;
   font-size: 18px;
-  line-height: 35px;
+  line-height: 110%;
   color: #343433;
 }
 
 .evolutionBody p {
   margin: 0 0 12px;
-  line-height: 35px;
+  line-height: 110%;
 }
 
 .evolutionBody p:last-child {
@@ -1776,7 +1808,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 26px;
+  margin-top: 14px;
 }
 
 .evolutionLink {
@@ -1862,6 +1894,9 @@
 }
 
 .booksCard {
+  width: 100%;
+  max-width: 260px;
+  justify-self: center;
   aspect-ratio: 3 / 4.2;
   background: #d9d9d9;
   border-radius: 8px;
@@ -1895,6 +1930,10 @@
     justify-content: center;
   }
 
+  .innerDimensionSection {
+    padding: 48px 0 72px;
+  }
+
   .innerBannerIcon {
     position: static;
     transform: none;
@@ -1911,9 +1950,16 @@
   }
 
   .innerDimensionInner {
-    padding: 0 20px;
-    align-items: flex-start;
-    margin: 0 auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 28px 20px 40px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .innerDimensionCopy {
+    max-width: none;
   }
 
   .innerDimensionHeading {
@@ -1923,6 +1969,14 @@
 
   .innerDimensionBody {
     max-width: none;
+  }
+
+  .innerDotsCard {
+    min-width: 0;
+    width: 100%;
+    max-width: 360px;
+    justify-self: center;
+    padding: 20px 24px;
   }
 
   .evolutionInner {
@@ -2038,14 +2092,29 @@
   }
 
   .transcendentalSection {
-    display: block;
-    gap: 18px;
-    padding: 8px 16px 20px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 28px 20px;
   }
 
   .transcendentalLeaf {
-    width: 260px;
-    margin: 0 auto;
+    position: static;
+    width: min(100%, 260px);
+    margin: 24px auto 0;
+    pointer-events: auto;
+  }
+
+  .transcendentalLeafImg {
+    width: 100%;
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+
+  .transcendentalContent {
+    max-width: none;
+    padding-right: 0;
   }
 
   .transcendentalTitle {
@@ -2057,6 +2126,7 @@
     text-align: left;
     align-items: flex-start;
     margin-right: 0;
+    max-width: none;
   }
 
   .transformationBanner {
@@ -2223,7 +2293,7 @@
 .newsletterSection {
   width: 100%;
   background: #efebe7;
-  padding: 88px 0 72px;
+  padding: 40px 0 72px;
 }
 
 .newsletterInner {
@@ -2343,6 +2413,21 @@
   cursor: pointer;
 }
 
+.newsletterInput.footerNewsletterControl,
+.newsletterButton.footerNewsletterControl {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 33px;
+}
+
+.newsletterInput.footerNewsletterControl::placeholder {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 33px;
+}
+
 @media (max-width: 1024px) {
   .heroProfile {
     position: static;
@@ -2430,6 +2515,10 @@
     line-height: 42px;
   }
 
+  .heroTitleLine {
+    white-space: normal;
+  }
+
   .heroSubtitle {
     font-size: 18px;
     line-height: 26px;
@@ -2483,8 +2572,8 @@
   }
 
   .sectionHeroPad {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }
 
@@ -2495,7 +2584,11 @@
   }
 
   .heroContent {
-    max-width: 646px;
+    max-width: min(760px, calc(100% - 470px));
+  }
+
+  .heroTitleLine {
+    white-space: nowrap;
   }
 
   .heroProfile {
@@ -2515,7 +2608,7 @@
   }
 
   .sectionHeroPad {
-    padding-left: 64px;
-    padding-right: 64px;
+    padding-left: 128px;
+    padding-right: 128px;
   }
 }

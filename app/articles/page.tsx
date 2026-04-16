@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 const articles = [
   {
@@ -52,6 +53,9 @@ Nam mi risus, varius eu lobortis in, molestie tempus nulla. Vestibulum fringilla
 ];
 
 export default function Articles() {
+  const overrides = usePayloadOverrides('articles');
+  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
+
   return (
     <div className={styles.container}>
       <section
@@ -66,7 +70,7 @@ export default function Articles() {
             className="font-sans font-normal text-[40px] leading-[65.954px] text-black mb-16"
             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
           >
-            Latest Insights
+            {t('articles.hero.title', 'Latest Insights')}
           </h1>
 
           <div className="flex flex-col gap-16">
@@ -78,7 +82,7 @@ export default function Articles() {
                     <h2 className="font-sans font-medium text-[25px] leading-[29.979px] text-black mb-5 capitalize">
                       {article.title}
                     </h2>
-                    <p className="font-sans font-normal text-[18px] leading-[1.4] text-black mb-6">
+                    <p className="font-sans font-normal text-[18px] leading-[110%] text-black mb-6">
                       {article.description}
                     </p>
                     <a

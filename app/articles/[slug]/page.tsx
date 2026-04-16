@@ -216,7 +216,7 @@ export default function ArticleDetail() {
 
         {/* Article Content */}
         <div className="max-w-[770px] mx-auto">
-          <div className="font-sans font-normal text-[17px] leading-[1.8] text-black whitespace-pre-wrap mb-16">
+          <div className="font-sans font-normal text-[17px] leading-[110%] text-black whitespace-pre-wrap mb-16">
             {article.content.split('\n\n').map((paragraph, index) => (
               <p key={index} className="mb-6">
                 {paragraph}

@@ -12,6 +12,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon
 } from '../icons';
+import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 // const heroImage =
 //   'https://www.figma.com/api/mcp/asset/2e91af2f-fdd2-4bef-9f33-14a693c09484';
@@ -230,6 +231,11 @@ const testimonialHeadshots: Record<string, string> = {
 };
 
 export default function Home() {
+  const overrides = usePayloadOverrides('practice');
+  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
+  const img = (key: string, fallbackSrc: string) => overrides?.images?.[key]?.src || fallbackSrc;
+  const alt = (key: string, fallbackAlt: string) => overrides?.images?.[key]?.alt || fallbackAlt;
+
   const accordionBaseId = useId();
   const [openIllustrationIndex, setOpenIllustrationIndex] = useState<
     number | null
@@ -260,7 +266,7 @@ export default function Home() {
 
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full">
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] h-full items-start gap-0 relative">
-            <div className="relative z-10 pt-24 md:pt-32 lg:pt-96">
+            <div className="relative z-10 pt-28 md:pt-40">
               <h1
                 className="font-normal text-[50px] leading-[1.2] text-[#4b3e43] whitespace-pre-wrap mb-6 max-w-[750px]"
                 style={{
@@ -268,15 +274,17 @@ export default function Home() {
                   fontFeatureSettings: "'liga' off, 'clig' off"
                 }}
               >
-                Where thinking meets Reality
+                {t('practice.hero.title', 'Where thinking meets Reality')}
               </h1>
 
               <p
                 className="font-medium text-[25px] leading-normal text-[#4b3e43] w-full max-w-[460px]"
                 style={{ fontFamily: 'var(--font-lora), serif' }}
               >
-                Where my thinking has been tested, applied, and refined in
-                practice.
+                {t(
+                  'practice.hero.subtitle',
+                  'Where my thinking has been tested, applied, and refined in practice.'
+                )}
               </p>
             </div>
 
@@ -311,8 +319,8 @@ export default function Home() {
                   }}
                 />
                 <Image
-                  src={heroImage}
-                  alt="Hero"
+                  src={img('practice.hero.image', heroImage)}
+                  alt={alt('practice.hero.image', 'Hero')}
                   width={1204}
                   height={723}
                   className="object-contain w-full h-full relative z-0"
@@ -325,7 +333,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-12 lg:px-24 py-14 md:py-24 space-y-10 md:space-y-16 [&_p]:leading-[140%]! [&_ul]:leading-[140%]! [&_li]:leading-[140%]!">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-12 lg:px-24 py-14 md:py-24 space-y-10 md:space-y-16 [&_p]:leading-[110%]! [&_ul]:leading-[110%]! [&_li]:leading-[110%]!">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <div className="w-full max-w-[460px] lg:justify-self-end">
             <h2
@@ -335,7 +343,7 @@ export default function Home() {
               Working inside Complexity
             </h2>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px]"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               My work is not about delivery against fixed methods or predefined
@@ -344,7 +352,7 @@ export default function Home() {
               shaped by uncertainty, constraint, and long-term risk.
             </p>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-4"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-4"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               I engage through applied research, collaboration, advisory work,
@@ -381,20 +389,20 @@ export default function Home() {
               How My Work Shows Up
             </h2>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               Rather than offering a single methodology, my practice takes
               different forms depending on context, timing, and need.
             </p>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               Typical contributions include:
             </p>
             <ul
-              className="list-disc pl-5 text-[16px] font-normal leading-[140%] text-black max-w-[460px] space-y-1"
+              className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               <li>
@@ -419,7 +427,7 @@ export default function Home() {
               </li>
             </ul>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-3"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               This work is shaped by inquiry rather than prescription, and by
@@ -437,14 +445,14 @@ export default function Home() {
               Context of practice
             </h2>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mb-2"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               My applied work has taken place across a range of systems and
               domains, including:
             </p>
             <ul
-              className="list-disc pl-5 text-[16px] font-normal leading-[140%] text-black max-w-[460px] space-y-1"
+              className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               <li>Multilateral and UN systems</li>
@@ -456,7 +464,7 @@ export default function Home() {
               <li>Strategic communications and policy-facing narratives</li>
             </ul>
             <p
-              className="text-[16px] font-normal leading-[140%] text-black max-w-[460px] mt-3"
+              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               These contexts are where many of the questions explored on the
@@ -501,7 +509,7 @@ export default function Home() {
                   {item.title}
                 </h3>
                 <p
-                  className="font-normal text-[13.827px] leading-[170%] text-black"
+                  className="font-normal text-[13.827px] leading-[110%] text-black"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
                   {item.description}
@@ -523,7 +531,7 @@ export default function Home() {
           {supportedOrganisationLogos.map((fileName) => (
             <div
               key={fileName}
-              className="bg-[#D5D5D5] h-[90px] rounded flex items-center justify-center px-4"
+              className="bg-[#F8F6F4] h-[90px] rounded flex items-center justify-center px-4"
             >
               <Image
                 src={`/images/Logos/${encodeURIComponent(fileName)}`}
@@ -608,7 +616,7 @@ export default function Home() {
                     >
                       <div className="overflow-hidden">
                         <p
-                          className="font-normal text-[16px] leading-[170%] text-black max-w-[760px]"
+                          className="font-normal text-[16px] leading-[110%] text-black max-w-[760px]"
                           style={{ fontFamily: 'var(--font-lora), serif' }}
                         >
                           {item.description}
@@ -623,7 +631,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-0 -mb-24 md:pt-16 md:pb-2 md:-mb-28">
         <div className="flex flex-col gap-8 mb-12">
           <h2
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
@@ -685,7 +693,7 @@ export default function Home() {
                   {testimonial.role}
                 </p>
                 <p
-                  className="font-normal text-[16px] leading-[20px] text-black"
+                  className="font-normal text-[16px] leading-[110%] text-black"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
                   {testimonial.text}
@@ -715,7 +723,7 @@ export default function Home() {
                   Connecting back to Thinking
                 </h2>
                 <div
-                  className="font-normal text-[16px] md:text-[18px] leading-[30px] md:leading-[35px] text-black max-w-[920px] mb-6 md:mb-8"
+                  className="font-normal text-[16px] md:text-[18px] leading-[110%] text-black max-w-[920px] mb-6 md:mb-8"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
                   <p>
@@ -806,7 +814,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-0 py-6 md:py-8">
+      <section className="w-full px-0 pt-0 pb-6 md:pt-0 md:pb-8">
         <div className="bg-[#343433] w-full md:w-[80%] mr-auto px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 min-h-[320px] md:min-h-[360px] lg:min-h-[420px] flex flex-col md:flex-row gap-8 lg:gap-14 items-center text-white!">
           <div className="relative w-[168px] h-[168px] rounded-full overflow-hidden shrink-0">
             <Image
@@ -825,28 +833,24 @@ export default function Home() {
               className="font-normal text-[36px] leading-[36.476px] text-white!"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Interested in working with me?{' '}
-              <a
-                href="/contact"
-                className="underline text-white!"
-                style={{ color: '#FFFFFF' }}
-              >
-                Get in touch.
-              </a>
+              If this resonates
             </p>
             <p
-              className="text-[18px] leading-[35px] mt-4 max-w-[640px] text-white!"
+              className="text-[18px] leading-[110%] mt-4 max-w-[640px] text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              I also offer a Free Strategic Coherence Conversation for
-              impact-driven leaders navigating complexity.
+              If you&apos;re navigating complexity or transition and need a space
+              for clear thinking, honest advice, or simply a sounding board, as
+              well as support in putting your thinking into practice, I&apos;d
+              love to hear from you. I offer Strategic Coherence Conversations
+              for leaders working in impact-driven contexts.
             </p>
             <a
               href="/contact"
               className="inline-block mt-4 text-[18px] leading-[35px] underline text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              Apply here →
+              → Request a conversation
             </a>
           </div>
         </div>

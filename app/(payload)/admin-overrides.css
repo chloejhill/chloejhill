@@ -1,0 +1,22 @@
+.payload-admin-root {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.payload-admin-root .collections .card {
+  background: #111 !important;
+  border: 1px solid #1f2937 !important;
+}
+
+.payload-admin-root .collections .card__title,
+.payload-admin-root .collections .card__actions,
+.payload-admin-root .collections h2,
+.payload-admin-root .collections a,
+.payload-admin-root .collections button,
+.payload-admin-root .collections svg {
+  color: #fff !important;
+  fill: #fff !important;
+  stroke: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+

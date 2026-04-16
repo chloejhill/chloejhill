@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 const projects = [
   {
@@ -58,6 +59,9 @@ const projects = [
 ];
 
 export default function Projects() {
+  const overrides = usePayloadOverrides('projects');
+  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
+
   const [visibleProjects, setVisibleProjects] = useState(6);
 
   const handleLoadMore = () => {
@@ -74,7 +78,7 @@ export default function Projects() {
             className="font-sans font-normal text-[48px] leading-[normal] text-black text-center mb-16"
             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
           >
-            Impact Delivered
+            {t('projects.hero.title', 'Impact Delivered')}
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mb-12">
@@ -104,7 +108,7 @@ export default function Projects() {
                 <h2 className="font-sans font-medium text-[23.462px] leading-[31.993px] text-black mb-4 capitalize text-center">
                   {project.title}
                 </h2>
-                <p className="font-sans font-normal text-[17.063px] leading-[1.4] text-black mb-6 text-center">
+                <p className="font-sans font-normal text-[17.063px] leading-[110%] text-black mb-6 text-center">
                   {project.description}
                 </p>
                 <div className="flex flex-col items-center gap-[9px] mt-auto">

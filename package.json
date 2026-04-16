@@ -3,13 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:check": "psql \"${DATABASE_URI}\" -c \"SELECT current_user, current_database();\"",
+    "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.81.0",
+    "@payloadcms/next": "^3.81.0",
+    "@payloadcms/richtext-lexical": "^3.81.0",
+    "cli-color": "^2.0.4",
     "next": "^16.1.0",
+    "payload": "^3.81.0",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -22,5 +29,9 @@
     "eslint-config-next": "^16.1.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "file-type": "18.7.0",
+    "undici": "6.21.0"
   }
 }

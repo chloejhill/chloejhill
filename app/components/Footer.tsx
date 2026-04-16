@@ -8,25 +8,33 @@ export default function Footer() {
     <footer className={styles.newsletterSection}>
       <div className={styles.newsletterInner}>
         <div className={styles.footerTop}>
-          <div className={`${styles.newsletterCopy} ${styles.footerNewsletter}`}>
+          <div
+            className={`${styles.newsletterCopy} ${styles.footerNewsletter}`}
+          >
             <h2 className={styles.newsletterTitle}>
-              Sign up to my monthly newsletter
+              Sign up to my quarterly newsletter
             </h2>
             <p className={styles.newsletterText}>
               reflections, tools, and updates from my work and the world around
               it, sent with intention, not noise
             </p>
-            <form className={styles.newsletterForm}>
-              <label className={styles.srOnly} htmlFor="footer-newsletter-email">
+            <form className={`${styles.newsletterForm} ${styles.footerFormTypography}`}>
+              <label
+                className={`${styles.srOnly} ${styles.footerFormTypography}`}
+                htmlFor="footer-newsletter-email"
+              >
                 Email address
               </label>
               <input
                 id="footer-newsletter-email"
                 type="email"
                 placeholder="Email address"
-                className={styles.newsletterInput}
+                className={`${styles.newsletterInput} ${styles.footerNewsletterControl}`}
               />
-              <button className={styles.newsletterButton} type="submit">
+              <button
+                className={`${styles.newsletterButton} ${styles.footerNewsletterControl}`}
+                type="submit"
+              >
                 Subscribe
               </button>
             </form>
@@ -36,14 +44,14 @@ export default function Footer() {
             className={`${styles.footerRight} ${styles.footerNav}`}
             aria-label="Footer"
           >
-            <Link href="/about" className={styles.footerRightLink}>
-              About
-            </Link>
             <Link href="/thinking" className={styles.footerRightLink}>
               Thinking
             </Link>
             <Link href="/practice" className={styles.footerRightLink}>
               Practice
+            </Link>
+            <Link href="/about" className={styles.footerRightLink}>
+              About
             </Link>
             <Link href="/articles" className={styles.footerRightLink}>
               Insights
@@ -55,7 +63,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.footerBottomRow}>
-          <p className={styles.footerBottomText}>© Chloe J. Hill 2025</p>
+          <p className={styles.footerBottomText}>© Chloe J. Hill 2026</p>
           <Link href="/privacy" className={styles.footerBottomLink}>
             Privacy Policy
           </Link>
