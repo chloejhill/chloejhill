@@ -131,6 +131,17 @@ export default function HomeClient({
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
+  const heroTitleText = t(
+    'home.hero.title',
+    'Systems Change Researcher,\nWriter, Advisor. Publisher Futurist.'
+  );
+  const heroTitleLines = (
+    heroTitleText.includes('\n')
+      ? heroTitleText
+      : heroTitleText.replace(', ', ',\n')
+  )
+    .split('\n')
+    .filter((line) => line.trim().length > 0);
 
   return (
     <div className={styles.container}>
@@ -140,16 +151,11 @@ export default function HomeClient({
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              {t(
-                'home.hero.title',
-                'Systems Change Researcher,\nWriter, Advisor. Publisher Futurist.'
-              )
-                .split('\n')
-                .map((line, idx) => (
-                  <span key={idx} className={styles.heroTitleLine}>
-                    {line}
-                  </span>
-                ))}
+              {heroTitleLines.map((line, idx) => (
+                <span key={idx} className={styles.heroTitleLine}>
+                  {line}
+                </span>
+              ))}
             </h1>
             <p className={styles.heroSubtitle}>
               {t(
