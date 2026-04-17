@@ -21,12 +21,9 @@ const profileImage = '/images/profile.png';
 const startTransImage = '/images/services/starttrans.png';
 const newsletterImage = '/images/footer.png';
 const dashImage = '/images/home/dash.png';
-const complexityImage =
-  'https://www.figma.com/api/mcp/asset/b7e55de9-f0c2-436b-b430-eb83df53e5e1';
-const workShowsUpImage =
-  'https://www.figma.com/api/mcp/asset/ebb34be6-7127-41d9-8135-f59f178c6dd2';
-const contextImage =
-  'https://www.figma.com/api/mcp/asset/08e42c8a-87a8-464b-957d-a78a4da16c97';
+const complexityImage = '/images/practice/complexity.png';
+const workShowsUpImage = '/images/practice/showsup.png';
+const contextImage = '/images/practice/context.png';
 
 const supportedOrganisationLogos = [
   'CBD.png',
@@ -337,10 +334,10 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <div className="w-full max-w-[460px] lg:justify-self-end">
             <h2
-              className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
+              className="font-normal text-[30px] md:text-[36px] lg:text-[40px] leading-normal text-[#1f1f1f] mb-4 md:whitespace-nowrap"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Working inside Complexity
+              <span className={styles.brushHighlight}>Working inside Complexity</span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]"
@@ -386,7 +383,7 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              How My Work Shows Up
+              <span className={styles.brushHighlight}>How My Work Shows Up</span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
@@ -442,7 +439,7 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Context of practice
+              <span className={styles.brushHighlight}>Context of practice</span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
@@ -525,7 +522,7 @@ export default function Home() {
           className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-8 md:mb-12"
           style={{ fontFamily: 'var(--font-lora), serif' }}
         >
-          Organisations I have Supported
+          <span className={styles.brushHighlight}>Organisations I have Supported</span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
           {supportedOrganisationLogos.map((fileName) => (
@@ -637,7 +634,7 @@ export default function Home() {
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
             style={{ fontFamily: 'var(--font-lora), serif' }}
           >
-            Nice things people say
+            <span className={styles.brushHighlight}>Nice things people say</span>
           </h2>
           <div className="flex gap-4 self-end">
             <button
@@ -705,7 +702,7 @@ export default function Home() {
       </section>
 
       <section className="relative w-full overflow-hidden lg:overflow-visible">
-        <div className="relative w-full h-[760px] md:h-[900px] lg:h-[1100px]">
+        <div className="relative w-full h-[620px] md:h-[760px] lg:h-[900px]">
           <Image
             src="/images/backround2.png"
             alt=""
@@ -833,24 +830,28 @@ export default function Home() {
               className="font-normal text-[36px] leading-[36.476px] text-white!"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              If this resonates
+              Interested in working with me?{' '}
+              <a
+                href="/contact"
+                className="underline text-white!"
+                style={{ color: '#FFFFFF' }}
+              >
+                Get in touch.
+              </a>
             </p>
             <p
-              className="text-[18px] leading-[110%] mt-4 max-w-[640px] text-white!"
+              className="text-[18px] leading-[35px] mt-4 max-w-[640px] text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              If you&apos;re navigating complexity or transition and need a space
-              for clear thinking, honest advice, or simply a sounding board, as
-              well as support in putting your thinking into practice, I&apos;d
-              love to hear from you. I offer Strategic Coherence Conversations
-              for leaders working in impact-driven contexts.
+              I also offer a Free Strategic Coherence Conversation for
+              impact-driven leaders navigating complexity.
             </p>
             <a
               href="/contact"
               className="inline-block mt-4 text-[18px] leading-[35px] underline text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              → Request a conversation
+              Apply here →
             </a>
           </div>
         </div>
