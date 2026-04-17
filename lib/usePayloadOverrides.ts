@@ -30,6 +30,11 @@ export function usePayloadOverrides(slug: string) {
   const [overrides, setOverrides] = useState<PageOverrides | null>(null);
 
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setOverrides(null);
+      return;
+    }
+
     let cancelled = false;
 
     async function run() {

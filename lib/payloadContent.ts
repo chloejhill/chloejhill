@@ -33,6 +33,7 @@ function normalizeMediaToSrc(media: MediaDoc | string | null | undefined): strin
 }
 
 export async function fetchPageOverrides(slug: string): Promise<PageOverrides | null> {
+  if (process.env.NODE_ENV === 'development') return null;
   if (!isPayloadConfigured()) return null;
 
   try {
