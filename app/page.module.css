@@ -681,7 +681,7 @@
   width: 100%;
   max-width: 1448px;
   margin: 0 auto;
-  padding: 168px 16px 0;
+  padding: 168px 12px 0;
   position: relative;
   min-height: 540px;
 }
@@ -711,6 +711,7 @@
 
 .heroTitleLine {
   display: block;
+  white-space: nowrap;
 }
 
 .heroSubtitle {
@@ -2615,7 +2616,7 @@
   }
 
   .heroInner {
-    padding: 116px 20px 32px;
+    padding: 116px 14px 32px;
     min-height: auto;
   }
 
@@ -2670,8 +2671,8 @@
 
 @media (min-width: 768px) {
   .heroInner {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .heroContent {
@@ -2693,8 +2694,8 @@
 
 @media (min-width: 1024px) {
   .heroInner {
-    padding-left: 64px;
-    padding-right: 64px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .heroContent {
