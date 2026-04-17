@@ -34,7 +34,7 @@ export default function Navbar({
             <LogoIcon />
           </span>
           <span
-            className={`font-sans font-bold text-lg tracking-tight ${
+            className={`font-sans font-normal text-lg tracking-tight ${
               isLight ? 'text-white!' : 'text-black'
             }`}
           >

@@ -120,10 +120,17 @@ function AttentionInnerIcon() {
   );
 }
 
-export default function HomeClient({ overrides }: { overrides: PageOverrides | null }) {
-  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
-  const img = (key: string, fallbackSrc: string) => overrides?.images?.[key]?.src || fallbackSrc;
-  const alt = (key: string, fallbackAlt: string) => overrides?.images?.[key]?.alt || fallbackAlt;
+export default function HomeClient({
+  overrides
+}: {
+  overrides: PageOverrides | null;
+}) {
+  const t = (key: string, fallback: string) =>
+    overrides?.strings?.[key] || fallback;
+  const img = (key: string, fallbackSrc: string) =>
+    overrides?.images?.[key]?.src || fallbackSrc;
+  const alt = (key: string, fallbackAlt: string) =>
+    overrides?.images?.[key]?.alt || fallbackAlt;
 
   return (
     <div className={styles.container}>
@@ -178,46 +185,8 @@ export default function HomeClient({ overrides }: { overrides: PageOverrides | n
         </p>
       </section>
 
-      <section className={`${styles.section} ${styles.compassDrawerSection}`}>
-        <div className={styles.approachGrid}>
-          <div className={styles.approachCard}>
-            <Image
-              src={img('home.approach.image', approachImage)}
-              alt={alt('home.approach.image', '')}
-              fill
-              className={styles.approachImg}
-              priority
-            />
-          </div>
-          <div className={styles.approachText}>
-
-            <div className={styles.sectionHeading}>
-              <h2 className={styles.sectionTitle}>
-                <span className={styles.sectionHeadingHighlightSub}>
-                  {t('home.approach.title', 'How I’m approaching this moment of change')}
-                </span>
-              </h2>
-            </div>
-            <p className={styles.bodyLong} style={{ lineHeight: '110%' }}>
-              {t(
-                'home.approach.body',
-                'Hi, I’m Chloe — a sustainability transformations strategist working at the intersection of systems change, futures thinking, and conscious leadership.\n\nOver the past two decades, I’ve helped leaders and mission-driven organisations — from global institutions to emerging innovators — make sense of complexity and turn insight into action. My work blends strategic communications, deep sustainability expertise, foresight, and inner transformation practices to help teams anticipate what’s next, adapt with clarity, and transform how they lead and create impact. I’ve supported organisations shaping the global sustainability movement to craft impact narratives, design resilient strategies, and embed regenerative principles — building adaptive cultures and futures grounded in purpose and possibility.'
-              )
-                .split('\n')
-                .map((line, idx) =>
-                  line === '' ? <br key={idx} /> : <span key={idx}>{idx ? `\n${line}` : line}</span>
-                )}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className={styles.compassSection}
-        style={{ position: 'relative', zIndex: 0, height: '1100px', paddingTop: 0 }}
-        aria-hidden="true"
-      >
-        <div className={styles.compassWrap} style={{ position: 'sticky', top: 0 }}>
+      <div className={styles.parallaxContainer}>
+        <div className={styles.stickyBackground} aria-hidden="true">
           <Image
             src={img('home.compass.image', compassImage)}
             alt={alt('home.compass.image', '')}
@@ -226,99 +195,193 @@ export default function HomeClient({ overrides }: { overrides: PageOverrides | n
             priority
           />
         </div>
-      </section>
 
-      <section
-        className={styles.section}
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          marginTop: '-560px',
-          background: '#ffffff'
-        }}
-      >
-        <div className={styles.sectionHeadingCentered}>
-          <span className={styles.sectionHeadingHighlightCentered} />
-          <h2 className={styles.sectionTitleCentered}>
-            {t('home.attention.title', 'Where I am placing my attention')}
-          </h2>
+        <div className={styles.contentWrapper}>
+          <section
+            className={`${styles.section} ${styles.compassDrawerSection} ${styles.contentDrawer}`}
+          >
+            <div className={styles.approachGrid}>
+              <div className={styles.approachCard}>
+                <Image
+                  src={img('home.approach.image', approachImage)}
+                  alt={alt('home.approach.image', '')}
+                  fill
+                  className={styles.approachImg}
+                  priority
+                />
+              </div>
+              <div className={styles.approachText}>
+                <div className={styles.sectionHeading}>
+                  <h2 className={styles.sectionTitle}>
+                    <span className={styles.sectionHeadingHighlightSub}>
+                      {t(
+                        'home.approach.title',
+                        'How I’m approaching this moment of change'
+                      )}
+                    </span>
+                  </h2>
+                </div>
+                <p className={styles.bodyLong} style={{ lineHeight: '110%' }}>
+                  {t(
+                    'home.approach.body',
+                    'Hi, I’m Chloe — a sustainability transformations strategist working at the intersection of systems change, futures thinking, and conscious leadership.\n\nOver the past two decades, I’ve helped leaders and mission-driven organisations — from global institutions to emerging innovators — make sense of complexity and turn insight into action. My work blends strategic communications, deep sustainability expertise, foresight, and inner transformation practices to help teams anticipate what’s next, adapt with clarity, and transform how they lead and create impact. I’ve supported organisations shaping the global sustainability movement to craft impact narratives, design resilient strategies, and embed regenerative principles — building adaptive cultures and futures grounded in purpose and possibility.'
+                  )
+                    .split('\n')
+                    .map((line, idx) =>
+                      line === '' ? (
+                        <br key={idx} />
+                      ) : (
+                        <span key={idx}>{idx ? `\n${line}` : line}</span>
+                      )
+                    )}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <div className={styles.mobileCompassInline} aria-hidden="true">
+            <Image
+              src={img('home.compass.image', compassImage)}
+              alt={alt('home.compass.image', '')}
+              fill
+              className={styles.compassImg}
+              priority
+            />
+          </div>
+
+          <div className={styles.revealSpacer} aria-hidden="true" />
+
+          <section className={`${styles.section} ${styles.contentDrawer}`}>
+            <div className={styles.sectionHeadingCentered}>
+              <span className={styles.sectionHeadingHighlightCentered} />
+              <h2 className={styles.sectionTitleCentered}>
+                {t('home.attention.title', 'Where I am placing my attention')}
+              </h2>
+            </div>
+            <p className={styles.centerIntro} style={{ lineHeight: '110%' }}>
+              {t(
+                'home.attention.intro',
+                'My work is guided by sustained attention to a small number of interrelated areas. These are not services or stages, but enduring lines of inquiry that shape how I research, write, and engage with complexity in practice.'
+              )}
+            </p>
+            <div className={styles.attentionGrid}>
+              <div
+                className={`${styles.attentionFlipCard} ${styles.attentionCardMuted}`}
+                tabIndex={0}
+              >
+                <div className={styles.attentionCardInner}>
+                  <div className={styles.attentionCardFace}>
+                    <div
+                      className={styles.attentionIconCircle}
+                      aria-hidden="true"
+                    >
+                      <AttentionSystemsIcon />
+                    </div>
+                    <h3 className={styles.attentionTitle}>
+                      {t(
+                        'home.attention.systems.title',
+                        'Systems Change & Transformation'
+                      )}
+                    </h3>
+                  </div>
+                  <div
+                    className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+                  >
+                    <h3 className={styles.attentionTitle}>
+                      {t(
+                        'home.attention.systems.title',
+                        'Systems Change & Transformation'
+                      )}
+                    </h3>
+                    <p className={styles.attentionBackText}>
+                      {t(
+                        'home.attention.systems.body',
+                        'How complex, economic, and ecological systems can move from extractive patterns into conditions that support life.'
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`${styles.attentionFlipCard} ${styles.attentionCardWarm}`}
+                tabIndex={0}
+              >
+                <div className={styles.attentionCardInner}>
+                  <div className={styles.attentionCardFace}>
+                    <div
+                      className={styles.attentionIconCircle}
+                      aria-hidden="true"
+                    >
+                      <AttentionFuturesIcon />
+                    </div>
+                    <h3 className={styles.attentionTitle}>
+                      {t('home.attention.futures.title', 'Futures Inquiry')}
+                    </h3>
+                  </div>
+                  <div
+                    className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+                  >
+                    <h3 className={styles.attentionTitle}>
+                      {t('home.attention.futures.title', 'Futures Inquiry')}
+                    </h3>
+                    <p className={styles.attentionBackText}>
+                      {t(
+                        'home.attention.futures.body',
+                        'Researching diverse future possibilities and helping leaders orient with foresight, imagination, and decisive action.'
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`${styles.attentionFlipCard} ${styles.attentionCardBase}`}
+                tabIndex={0}
+              >
+                <div className={styles.attentionCardInner}>
+                  <div className={styles.attentionCardFace}>
+                    <div
+                      className={styles.attentionIconCircle}
+                      aria-hidden="true"
+                    >
+                      <AttentionInnerIcon />
+                    </div>
+                    <h3 className={styles.attentionTitle}>
+                      {t('home.attention.inner.title', 'The Inner Dimension')}
+                    </h3>
+                  </div>
+                  <div
+                    className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}
+                  >
+                    <h3 className={styles.attentionTitle}>
+                      {t('home.attention.inner.title', 'The Inner Dimension')}
+                    </h3>
+                    <p className={styles.attentionBackText}>
+                      {t(
+                        'home.attention.inner.body',
+                        'An inquiry into the inner capacities required to meet complexity with courage, coherence, and purpose.'
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <p className={styles.centerIntro} style={{ lineHeight: '110%' }}>
-          {t(
-            'home.attention.intro',
-            'My work is guided by sustained attention to a small number of interrelated areas. These are not services or stages, but enduring lines of inquiry that shape how I research, write, and engage with complexity in practice.'
-          )}
-        </p>
-
-        <div className={styles.attentionGrid}>
-          <div className={`${styles.attentionFlipCard} ${styles.attentionCardMuted}`} tabIndex={0}>
-            <div className={styles.attentionCardInner}>
-              <div className={styles.attentionCardFace}>
-                <div className={styles.attentionIconCircle} aria-hidden="true">
-                  <AttentionSystemsIcon />
-                </div>
-                <h3 className={styles.attentionTitle}>{t('home.attention.systems.title', 'Systems Change & Transformation')}</h3>
-              </div>
-              <div className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}>
-                <h3 className={styles.attentionTitle}>{t('home.attention.systems.title', 'Systems Change & Transformation')}</h3>
-                <p className={styles.attentionBackText}>
-                  {t(
-                    'home.attention.systems.body',
-                    'How complex, economic, and ecological systems can move from extractive patterns into conditions that support life.'
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className={`${styles.attentionFlipCard} ${styles.attentionCardWarm}`} tabIndex={0}>
-            <div className={styles.attentionCardInner}>
-              <div className={styles.attentionCardFace}>
-                <div className={styles.attentionIconCircle} aria-hidden="true">
-                  <AttentionFuturesIcon />
-                </div>
-                <h3 className={styles.attentionTitle}>{t('home.attention.futures.title', 'Futures Inquiry')}</h3>
-              </div>
-              <div className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}>
-                <h3 className={styles.attentionTitle}>{t('home.attention.futures.title', 'Futures Inquiry')}</h3>
-                <p className={styles.attentionBackText}>
-                  {t(
-                    'home.attention.futures.body',
-                    'Researching diverse future possibilities and helping leaders orient with foresight, imagination, and decisive action.'
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className={`${styles.attentionFlipCard} ${styles.attentionCardBase}`} tabIndex={0}>
-            <div className={styles.attentionCardInner}>
-              <div className={styles.attentionCardFace}>
-                <div className={styles.attentionIconCircle} aria-hidden="true">
-                  <AttentionInnerIcon />
-                </div>
-                <h3 className={styles.attentionTitle}>{t('home.attention.inner.title', 'The Inner Dimension')}</h3>
-              </div>
-              <div className={`${styles.attentionCardFace} ${styles.attentionCardBack}`}>
-                <h3 className={styles.attentionTitle}>{t('home.attention.inner.title', 'The Inner Dimension')}</h3>
-                <p className={styles.attentionBackText}>
-                  {t(
-                    'home.attention.inner.body',
-                    'An inquiry into the inner capacities required to meet complexity with courage, coherence, and purpose.'
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
 
       <section className={styles.section} style={{ background: '#ffffff' }}>
         <div className={styles.sectionHeadingCentered}>
           <span className={styles.sectionHeadingHighlightCentered} />
-          <h2 className={styles.sectionTitleCentered}>{t('home.why.title', 'Why this thinking matters')}</h2>
+          <h2 className={styles.sectionTitleCentered}>
+            {t('home.why.title', 'Why this thinking matters')}
+          </h2>
         </div>
-        <div className={styles.whyText} style={{ textAlign: 'left', lineHeight: '110%' }}>
+        <div
+          className={styles.whyText}
+          style={{ textAlign: 'left', lineHeight: '110%' }}
+        >
           <p style={{ margin: 0 }}>
             {t(
               'home.why.p1',
@@ -360,34 +423,70 @@ export default function HomeClient({ overrides }: { overrides: PageOverrides | n
             </div>
             <div className={styles.exploreContent}>
               <h2 className={styles.exploreTitle}>
-                {t('home.explore.title', 'If this way of seeing resonates, you can explore further:')}
+                {t(
+                  'home.explore.title',
+                  'If this way of seeing resonates, you can explore further:'
+                )}
               </h2>
               <div className={styles.exploreLinks}>
                 <a href="/thinking" className={styles.exploreLink}>
                   <span className={styles.exploreDash} aria-hidden="true">
-                    <Image src={img('home.explore.dash', dashImage)} alt="" fill className={styles.exploreDashImg} />
+                    <Image
+                      src={img('home.explore.dash', dashImage)}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
                   </span>
                   <span className={styles.exploreLinkLabel}>
-                    <span className={styles.exploreLinkUnderline}>{t('home.explore.linkThinking', 'Thinking')}</span>{' '}
-                    — {t('home.explore.linkThinkingSuffix', 'research and inquiry')}
+                    <span className={styles.exploreLinkUnderline}>
+                      {t('home.explore.linkThinking', 'Thinking')}
+                    </span>{' '}
+                    —{' '}
+                    {t(
+                      'home.explore.linkThinkingSuffix',
+                      'research and inquiry'
+                    )}
                   </span>
                 </a>
                 <a href="/practice" className={styles.exploreLink}>
                   <span className={styles.exploreDash} aria-hidden="true">
-                    <Image src={img('home.explore.dash', dashImage)} alt="" fill className={styles.exploreDashImg} />
+                    <Image
+                      src={img('home.explore.dash', dashImage)}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
                   </span>
                   <span className={styles.exploreLinkLabel}>
-                    <span className={styles.exploreLinkUnderline}>{t('home.explore.linkPractice', 'Practice')}</span>{' '}
-                    — {t('home.explore.linkPracticeSuffix', 'where this thinking meets reality')}
+                    <span className={styles.exploreLinkUnderline}>
+                      {t('home.explore.linkPractice', 'Practice')}
+                    </span>{' '}
+                    —{' '}
+                    {t(
+                      'home.explore.linkPracticeSuffix',
+                      'where this thinking meets reality'
+                    )}
                   </span>
                 </a>
                 <a href="/about" className={styles.exploreLink}>
                   <span className={styles.exploreDash} aria-hidden="true">
-                    <Image src={img('home.explore.dash', dashImage)} alt="" fill className={styles.exploreDashImg} />
+                    <Image
+                      src={img('home.explore.dash', dashImage)}
+                      alt=""
+                      fill
+                      className={styles.exploreDashImg}
+                    />
                   </span>
                   <span className={styles.exploreLinkLabel}>
-                    <span className={styles.exploreLinkUnderline}>{t('home.explore.linkAbout', 'About')}</span> —{' '}
-                    {t('home.explore.linkAboutSuffix', 'journey, philosophy, and stance')}
+                    <span className={styles.exploreLinkUnderline}>
+                      {t('home.explore.linkAbout', 'About')}
+                    </span>{' '}
+                    —{' '}
+                    {t(
+                      'home.explore.linkAboutSuffix',
+                      'journey, philosophy, and stance'
+                    )}
                   </span>
                 </a>
               </div>
@@ -400,4 +499,3 @@ export default function HomeClient({ overrides }: { overrides: PageOverrides | n
     </div>
   );
 }
-

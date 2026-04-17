@@ -833,22 +833,88 @@
   margin: 0 0 32px;
 }
 
-.compassSection {
-  width: 100%;
-  padding: 32px 0 0;
+.parallaxContainer {
+  position: relative;
 }
 
-.compassWrap {
-  position: relative;
+.stickyBackground {
+  position: sticky;
+  top: 0;
   width: 100%;
-  max-width: 1522px;
-  margin: 0 auto;
-  height: 667px;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
   opacity: 0.8;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: -100vh;
+}
+
+.contentDrawer {
+  position: relative;
+  background: #ffffff;
+}
+
+.contentDrawer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #ffffff;
+  z-index: -1;
+}
+
+.compassDrawerSection {
+  position: relative;
+}
+
+.revealSpacer {
+  position: relative;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@media (min-width: 1600px) {
+  .revealSpacer {
+    height: 120vh;
+  }
 }
 
 .compassImg {
   object-fit: cover;
+  object-position: center;
+}
+
+.mobileCompassInline {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .stickyBackground {
+    display: none;
+  }
+
+  .contentWrapper {
+    margin-top: 0;
+  }
+
+  .mobileCompassInline {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 52vh;
+    min-height: 320px;
+    overflow: hidden;
+  }
+
+  .revealSpacer {
+    display: none;
+  }
 }
 
 .sectionHeadingCentered {
@@ -1022,16 +1088,28 @@
 
 .exploreSection {
   width: 100%;
-  background: #343433;
-  padding: 56px 0;
+  background: #ffffff;
+  padding: 56px 0 32px;
+  margin-bottom: 88px;
   overflow: visible;
   position: relative;
   z-index: 1;
 }
 
+.exploreSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(1680px, calc(100% - 32px));
+  background: #343433;
+  z-index: 0;
+}
+
 .exploreInner {
   width: 100%;
-  max-width: 1448px;
+  max-width: 1680px;
   margin: 0 auto;
   padding: 0;
   position: relative;
@@ -1066,7 +1144,29 @@
 
 @media (min-width: 1448px) {
   .exploreMedia {
-    margin-left: calc((100vw - 1448px) / -2);
+    margin-left: calc((100vw - 1680px) / -2);
+  }
+}
+
+@media (min-width: 1700px) {
+  .exploreSection::before {
+    width: calc(100% - 48px);
+  }
+
+  .exploreGrid {
+    grid-template-columns: 620px minmax(0, 900px);
+    gap: 96px;
+  }
+
+  .exploreMedia {
+    width: 620px;
+    height: 720px;
+  }
+
+  .exploreContent {
+    max-width: 760px;
+    margin-left: -96px;
+    margin-top: -110px;
   }
 }
 
@@ -1912,6 +2012,10 @@
 }
 
 @media (max-width: 768px) {
+  .exploreSection::before {
+    width: 100%;
+  }
+
   .empiricalInner {
     width: 100%;
     margin-left: 0;
@@ -2239,6 +2343,10 @@
 }
 
 @media (max-width: 1024px) {
+  .exploreSection::before {
+    width: min(1400px, calc(100% - 32px));
+  }
+
   .exploreInner {
     padding: 0 24px;
   }
@@ -2271,6 +2379,12 @@
 
   .exploreLink {
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .exploreSection::before {
+    width: 100%;
   }
 }
 
@@ -2585,10 +2699,6 @@
 
   .heroContent {
     max-width: min(760px, calc(100% - 470px));
-  }
-
-  .heroTitleLine {
-    white-space: nowrap;
   }
 
   .heroProfile {

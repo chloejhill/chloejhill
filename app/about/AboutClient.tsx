@@ -295,9 +295,13 @@ export default function AboutClient({
           </div>
         </div>
       </section>
-
-      <section className="relative z-0 w-full h-[560px] md:h-[920px] lg:h-[1400px]">
-        <div className="sticky top-0 h-[280px] md:h-[460px] lg:h-[700px] w-full overflow-hidden">
+      {/* 1. The Parallax Window */}
+      <section
+        className="relative z-0 w-full h-[280px] md:h-[460px] lg:h-[700px]"
+        style={{ clipPath: 'inset(0 0 0 0)' }}
+      >
+        {/* 2. The Fixed Image Background */}
+        <div className="fixed top-0 left-0 w-full h-screen -z-10">
           <Image
             src={img('about.footsteps.image', aboutOceanImage)}
             alt={alt('about.footsteps.image', 'Footsteps')}
@@ -308,7 +312,8 @@ export default function AboutClient({
         </div>
       </section>
 
-      <section className="relative z-10 -mt-[280px] md:-mt-[460px] lg:-mt-[700px] w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-12 md:py-16 lg:py-24 bg-white">
+      {/* 3. The Content Below (Negative margins removed!) */}
+      <section className="relative z-10 w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-12 md:py-16 lg:py-24 bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-[143px]">
           <div>
             <div className="relative inline-block mb-4 md:mb-6">
@@ -395,12 +400,12 @@ export default function AboutClient({
         </div>
       </section>
 
-      <section className="relative w-full py-8 md:py-10 lg:py-14 overflow-hidden">
+      <section className="relative w-full pt-8 md:pt-10 lg:pt-14 pb-8 md:pb-10 lg:pb-14 overflow-hidden bg-white">
         <div
-          className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1354px] max-w-[1354px] bg-[#114D6F]"
+          className="absolute inset-y-0 right-0 w-[calc(100%-12px)] md:w-[calc(100%-32px)] lg:w-[calc(100%-72px)] bg-[#114D6F]"
           aria-hidden="true"
         />
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
+        <div className="w-full max-w-[1720px] mx-auto px-4 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
           <div className="relative grid grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)] gap-8 md:gap-12 lg:gap-16 items-center">
             <div className="relative w-full max-w-[280px] md:max-w-[340px] h-[340px] md:h-[420px] mx-auto lg:mx-0">
               <Image
@@ -519,9 +524,9 @@ export default function AboutClient({
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16">
-        <div className="bg-[#343433] p-6 md:p-10 lg:p-16 text-white">
-          <div className="flex flex-col gap-12">
+      <section className="w-full max-w-[1180px] mx-auto px-4 md:px-8 lg:px-12 py-8 md:py-10">
+        <div className="bg-[#343433] p-5 md:p-8 lg:p-10 text-white">
+          <div className="flex flex-col gap-8">
             <div style={{ filter: 'brightness(0) invert(1)' }}>
               <QuoteIcon />
             </div>

@@ -220,6 +220,14 @@
   margin-bottom: 16px;
 }
 
+.brushHighlight {
+  background: linear-gradient(180deg, transparent 54%, #efebe7 54%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 4px;
+  margin: 0 -4px;
+}
+
 .profileLink {
   font-family: var(--font-dm-sans), sans-serif;
   font-weight: 400;
