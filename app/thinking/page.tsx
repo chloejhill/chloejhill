@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../page.module.css';
+import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
@@ -449,7 +449,16 @@ export default function Thinking() {
         </div>
         <div
           className={styles.inquiryIntro}
-          style={{ textAlign: 'left', margin: '0 0 34px' }}
+          style={{
+            textAlign: 'left',
+            margin: '0 0 34px',
+            color: '#000',
+            fontFamily: 'Lora',
+            fontSize: '16px',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            lineHeight: '35px',
+          }}
         >
           <p>
             Rather than offering fixed solutions or proprietary methods, my work
@@ -491,7 +500,18 @@ export default function Thinking() {
           style={{ width: 'min(90vw, 1400px)' }}
         >
           <h3 className={styles.empiricalTitle}>Empirical Grounding</h3>
-          <div className={styles.empiricalBody} style={{ lineHeight: '110%' }}>
+          <div
+            className={styles.empiricalBody}
+            style={{
+              color: '#000',
+              fontFamily: 'Lora',
+              fontSize: '16px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: '35px',
+              maxWidth: '1120px',
+            }}
+          >
             <p>
               Much of my thinking has been shaped through long-term work inside
               complex social, ecological, and institutional systems.
@@ -591,7 +611,15 @@ export default function Thinking() {
       <section className={styles.transcendentalSection}>
         <div
           className={styles.transcendentalContent}
-          style={{ textAlign: 'left' }}
+          style={{
+            textAlign: 'left',
+            color: '#000',
+            fontFamily: 'Lora',
+            fontSize: '16px',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            lineHeight: '35px',
+          }}
         >
           <h2
             className={styles.transcendentalTitle}
@@ -659,11 +687,21 @@ export default function Thinking() {
             marginBottom: '56px'
           }}
         >
-          <h2 className={styles.empiricalTitle}>
+          <h2 className={styles.empiricalTitle} style={{ color: '#1F1F1F' }}>
             Anticipate. Adapt. Transform. Transcend.
             <br />A Framework for Transformation
           </h2>
-          <div className={styles.empiricalBody} style={{ lineHeight: '110%' }}>
+          <div
+            className={styles.empiricalBody}
+            style={{
+              color: '#000',
+              fontFamily: 'Lora',
+              fontSize: '16px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: '35px',
+            }}
+          >
             <p>
               AATT is a structured yet fluid framework that has emerged from my
               work across sustainability, futures research, and organisational
@@ -739,7 +777,17 @@ export default function Thinking() {
             <h2 className={styles.innerDimensionHeading}>
               Cultivating The Capacities That Make Transformation Possible
             </h2>
-            <div className={styles.innerDimensionBody}>
+            <div
+              className={styles.innerDimensionBody}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
+            >
               <p>
                 Transformation is not only systemic — it is also personal.
                 Organizations that thrive in complexity develop inner capacities
@@ -787,7 +835,17 @@ export default function Thinking() {
             <h2 id="evolution-heading" className={styles.evolutionTitle}>
               Evolution of my Thinking
             </h2>
-            <div className={styles.evolutionBody}>
+            <div
+              className={styles.evolutionBody}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
+            >
               <p>
                 The ideas on this page are not presented as conclusions, but as
                 working questions — shaped through research, reflection, and

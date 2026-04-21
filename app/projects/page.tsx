@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import styles from '../page.module.css';
+import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
