@@ -330,7 +330,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-12 lg:px-24 py-14 md:py-24 space-y-10 md:space-y-16 [&_p]:leading-[110%]! [&_ul]:leading-[110%]! [&_li]:leading-[110%]!">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-12 lg:px-24 py-14 md:py-24 space-y-10 md:space-y-16 [&_p]:leading-[35px]! [&_ul]:leading-[35px]! [&_li]:leading-[35px]!">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <div className="w-full max-w-[460px] lg:justify-self-end">
             <h2
@@ -341,7 +341,14 @@ export default function Home() {
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               My work is not about delivery against fixed methods or predefined
               solutions. It is about working inside complexity supporting
@@ -350,7 +357,14 @@ export default function Home() {
             </p>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-4"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               I engage through applied research, collaboration, advisory work,
               and strategic synthesis, often alongside organisations navigating
@@ -387,20 +401,41 @@ export default function Home() {
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               Rather than offering a single methodology, my practice takes
               different forms depending on context, timing, and need.
             </p>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               Typical contributions include:
             </p>
             <ul
               className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <li>
                 Analysis and synthesis of complex social, ecological, and
@@ -425,7 +460,14 @@ export default function Home() {
             </ul>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               This work is shaped by inquiry rather than prescription, and by
               discernment rather than speed.
@@ -443,14 +485,28 @@ export default function Home() {
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               My applied work has taken place across a range of systems and
               domains, including:
             </p>
             <ul
               className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <li>Multilateral and UN systems</li>
               <li>International development and the impact sector</li>
@@ -462,7 +518,14 @@ export default function Home() {
             </ul>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               These contexts are where many of the questions explored on the
               Thinking page first emerged.
@@ -507,7 +570,14 @@ export default function Home() {
                 </h3>
                 <p
                   className="font-normal text-[13.827px] leading-[110%] text-black"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  style={{
+                    color: '#000',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '35px',
+                  }}
                 >
                   {item.description}
                 </p>
@@ -614,7 +684,14 @@ export default function Home() {
                       <div className="overflow-hidden">
                         <p
                           className="font-normal text-[16px] leading-[110%] text-black max-w-[760px]"
-                          style={{ fontFamily: 'var(--font-lora), serif' }}
+                          style={{
+                            color: '#000',
+                            fontFamily: 'Lora',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '35px',
+                          }}
                         >
                           {item.description}
                         </p>
@@ -691,7 +768,14 @@ export default function Home() {
                 </p>
                 <p
                   className="font-normal text-[16px] leading-[110%] text-black"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  style={{
+                    color: '#000',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '35px',
+                  }}
                 >
                   {testimonial.text}
                 </p>
@@ -721,7 +805,14 @@ export default function Home() {
                 </h2>
                 <div
                   className="font-normal text-[16px] md:text-[18px] leading-[110%] text-black max-w-[920px] mb-6 md:mb-8"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  style={{
+                    color: '#000',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '35px',
+                  }}
                 >
                   <p>
                     Practice is not separate from inquiry. It is where questions

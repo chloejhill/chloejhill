@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import styles from '../page.module.css';
+import styles from './AboutClient.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { QuoteIcon } from '../icons';
@@ -135,8 +135,15 @@ export default function AboutClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-24">
             <div
-              className="font-normal text-[16px] leading-[110%] text-black space-y-4 md:space-y-6"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              className="space-y-4 md:space-y-6"
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <p>
                 {t(
@@ -152,8 +159,15 @@ export default function AboutClient({
               </p>
             </div>
             <div
-              className="font-normal text-[16px] leading-[110%] text-black space-y-4 md:space-y-6"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              className="space-y-4 md:space-y-6"
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <p>
                 {t(
@@ -183,8 +197,15 @@ export default function AboutClient({
                   2003-2007
                 </p>
                 <p
-                  className="font-normal text-[16px] leading-[110%] text-black/80 max-w-none md:max-w-[226px]"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  className="max-w-none md:max-w-[226px]"
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.80)',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '28.619px',
+                  }}
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
@@ -198,8 +219,15 @@ export default function AboutClient({
                   2008-2014
                 </p>
                 <p
-                  className="font-normal text-[20px] leading-[110%] text-black max-w-none md:max-w-[226px]"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  className="max-w-none md:max-w-[226px]"
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.80)',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '28.619px',
+                  }}
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
@@ -213,8 +241,15 @@ export default function AboutClient({
                   2015-2020
                 </p>
                 <p
-                  className="font-normal text-[16px] leading-[110%] text-black/80 max-w-none md:max-w-[226px]"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  className="max-w-none md:max-w-[226px]"
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.80)',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '28.619px',
+                  }}
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
@@ -228,8 +263,15 @@ export default function AboutClient({
                   2021-present
                 </p>
                 <p
-                  className="font-normal text-[16px] leading-[110%] text-black/80 max-w-none md:max-w-[226px]"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
+                  className="max-w-none md:max-w-[226px]"
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.80)',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '28.619px',
+                  }}
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                   commodo id enim id bibendum.
@@ -330,8 +372,15 @@ export default function AboutClient({
               </h2>
             </div>
             <div
-              className="font-normal text-[16px] leading-[110%] text-black space-y-4 md:space-y-6"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              className="space-y-4 md:space-y-6"
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <p>
                 {t(
@@ -368,8 +417,15 @@ export default function AboutClient({
               </h2>
             </div>
             <div
-              className="font-normal text-[16px] leading-[110%] text-black space-y-4 md:space-y-6"
-              style={{ fontFamily: 'var(--font-lora), serif' }}
+              className="space-y-4 md:space-y-6"
+              style={{
+                color: '#000',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '35px',
+              }}
             >
               <p>
                 {t(
@@ -425,10 +481,14 @@ export default function AboutClient({
                 {t('about.philosophy.title', 'My Philosophy & Stance')}
               </h2>
               <div
-                className="font-normal text-[16px] leading-[110%] space-y-3 md:space-y-4 max-w-[721px] whitespace-pre-wrap text-white"
+                className="space-y-3 md:space-y-4 max-w-[721px] whitespace-pre-wrap text-white"
                 style={{
-                  color: '#FFFFFF',
-                  fontFamily: 'var(--font-lora), serif'
+                  color: '#FFF',
+                  fontFamily: 'Lora',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: 400,
+                  lineHeight: '35px'
                 }}
               >
                 <p>
@@ -482,8 +542,16 @@ export default function AboutClient({
             </h2>
           </div>
           <p
-            className="font-normal text-[16px] leading-[110%] text-black max-w-[560px] mx-auto mb-10"
-            style={{ fontFamily: 'var(--font-lora), serif' }}
+            className="max-w-[560px] mx-auto mb-10"
+            style={{
+              color: '#000',
+              textAlign: 'center',
+              fontFamily: 'Lora',
+              fontSize: '16px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: '35px',
+            }}
           >
             {t(
               'about.affiliations.intro',
@@ -492,7 +560,10 @@ export default function AboutClient({
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-[535px_283px] gap-4 md:gap-6 justify-center items-stretch max-w-[860px] mx-auto">
-            <div className="bg-[#EFEBE7] rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8">
+            <div
+              className="rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8"
+              style={{ backgroundColor: '#EFEBE7', opacity: 1 }}
+            >
               <div className="relative w-full max-w-[481px] h-[90px]">
                 <Image
                   src={img(
@@ -509,7 +580,10 @@ export default function AboutClient({
                 />
               </div>
             </div>
-            <div className="bg-[#EFEBE7] rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8">
+            <div
+              className="rounded-[24px] md:rounded-[40px] h-[118px] md:h-[143px] flex items-center justify-center px-6 md:px-8"
+              style={{ backgroundColor: '#EFEBE7', opacity: 1 }}
+            >
               <div className="relative w-full max-w-[219px] h-[94px]">
                 <Image
                   src={img('about.affiliations.apf', affiliationApfImage)}

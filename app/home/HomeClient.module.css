@@ -1,0 +1,758 @@
+.container {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  background: #343433;
+  overflow: visible;
+}
+
+.heroInner {
+  width: 100%;
+  max-width: 1448px;
+  margin: 0 auto;
+  padding: 168px 12px 0;
+  position: relative;
+  min-height: 540px;
+}
+
+.heroContent {
+  max-width: 660px;
+  position: relative;
+  z-index: 5;
+  margin-left: 4px;
+  margin-top: 62px;
+  left: 0;
+  top: 0;
+  transform: none;
+  width: auto;
+  right: auto;
+  bottom: auto;
+}
+
+.heroTitle {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 56.917px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.heroTitleLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.heroSubtitle {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: normal;
+  color: #ffffff;
+  margin: 28px 0 0;
+  max-width: 658px;
+}
+
+.heroProfile {
+  position: absolute;
+  right: 16px;
+  top: 140px;
+  width: 402px;
+  height: 522px;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heroProfileImg {
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.section {
+  width: 100%;
+  max-width: 1448px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.sectionHeroPad {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.sectionHeading {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 34px;
+}
+
+.sectionHeadingHighlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 19px;
+  bottom: 2px;
+  background: #efebe7;
+  z-index: 0;
+}
+
+.sectionHeadingHighlightSub {
+  background: linear-gradient(180deg, transparent 54%, #efebe7 54%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 4px;
+  margin: 0 -4px;
+}
+
+.sectionTitle {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: normal;
+  color: #000000;
+  margin: 0;
+}
+
+.bodyLong {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 110%;
+  color: #000000;
+  margin: 0;
+  max-width: 1228px;
+}
+
+.approachGrid {
+  display: grid;
+  grid-template-columns: 382px minmax(0, 640px);
+  gap: 80px;
+  align-items: center;
+  max-width: 1102px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.approachCard {
+  position: relative;
+  width: 382px;
+  height: 507px;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.approachImg {
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.approachText {
+  max-width: 640px;
+}
+
+.parallaxContainer {
+  position: relative;
+}
+
+.stickyBackground {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: -100vh;
+}
+
+.contentDrawer {
+  position: relative;
+  background: #ffffff;
+}
+
+.contentDrawer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #ffffff;
+  z-index: -1;
+}
+
+.compassDrawerSection {
+  position: relative;
+}
+
+.revealSpacer {
+  position: relative;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.compassImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.mobileCompassInline {
+  display: none;
+}
+
+.sectionHeadingCentered {
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 32px;
+}
+
+.sectionHeadingHighlightCentered {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 19px;
+  bottom: 2px;
+  background: #efebe7;
+  z-index: 0;
+}
+
+.sectionTitleCentered {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: normal;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.centerIntro {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 110%;
+  color: #000000;
+  margin: 0 auto 48px;
+  max-width: 1006px;
+  text-align: center;
+}
+
+.attentionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+  align-items: stretch;
+  justify-items: center;
+  padding-top: 18px;
+}
+
+.attentionFlipCard {
+  width: 100%;
+  max-width: 365px;
+  height: 323px;
+  border-radius: 40px;
+  perspective: 1400px;
+  cursor: default;
+}
+
+.attentionCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.attentionFlipCard:hover .attentionCardInner,
+.attentionFlipCard:focus-visible .attentionCardInner,
+.attentionFlipCard:focus-within .attentionCardInner {
+  transform: rotateY(180deg);
+}
+
+.attentionCardFace {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  border: 1px solid rgba(214, 220, 219, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 10px 24px;
+  box-shadow: 0px 4px 4px rgba(214, 220, 219, 0.25);
+  backface-visibility: hidden;
+}
+
+.attentionCardBack {
+  transform: rotateY(180deg);
+  justify-content: center;
+  padding: 36px 24px;
+}
+
+.attentionBackText {
+  margin: 16px 0 0;
+  max-width: 286px;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: #111111;
+  text-align: center;
+}
+
+.attentionCardBase .attentionCardFace {
+  background: #efebe7;
+  border-color: rgba(214, 220, 219, 0.09);
+}
+
+.attentionCardWarm .attentionCardFace {
+  background: #dac9be;
+  border-color: #d6dcdb;
+}
+
+.attentionCardMuted .attentionCardFace {
+  background: #d6dcdb;
+  border-color: #d6dcdb;
+}
+
+.attentionIconCircle {
+  width: 98px;
+  height: 98px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attentionIconCircle svg {
+  display: block;
+  max-width: 72px;
+  max-height: 72px;
+}
+
+.attentionTitle {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: normal;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.72px;
+  text-transform: capitalize;
+  margin: 0;
+  max-width: 320px;
+}
+
+.whyText {
+  max-width: 997px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 110%;
+  color: #000000;
+  white-space: pre-wrap;
+}
+
+.whyText p {
+  margin: 0 0 28px;
+}
+
+.exploreSection {
+  width: 100%;
+  background: #ffffff;
+  padding: 56px 0 32px;
+  margin-bottom: 88px;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.exploreSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(1680px, calc(100% - 32px));
+  background: #343433;
+  z-index: 0;
+}
+
+.exploreInner {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: 520px minmax(0, 760px);
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  justify-content: start;
+  padding-right: 24px;
+}
+
+.exploreMedia {
+  position: relative;
+  width: 520px;
+  height: 620px;
+  pointer-events: none;
+  margin-top: -120px;
+  opacity: 0.9;
+  z-index: 2;
+  overflow: visible;
+  margin-left: 0;
+}
+
+.exploreImg {
+  object-fit: contain;
+  object-position: left center;
+}
+
+.exploreTitle {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 28px;
+  max-width: 640px;
+}
+
+.exploreContent {
+  max-width: 640px;
+  padding-right: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: -94px;
+  margin-left: -128px;
+  margin-right: auto;
+  justify-self: center;
+}
+
+.exploreLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 58px;
+  padding-left: 0;
+  max-width: 920px;
+}
+
+.exploreLink {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  width: fit-content;
+}
+
+.exploreLinkLabel {
+  color: #ffffff;
+  display: block;
+  white-space: normal;
+}
+
+.exploreLinkUnderline {
+  color: #ffffff;
+}
+
+.exploreDash {
+  position: relative;
+  width: 58px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-top: 10px;
+}
+
+.exploreDashImg {
+  object-fit: contain;
+}
+
+.exploreLink:hover .exploreLinkUnderline {
+  text-decoration-thickness: 2px;
+}
+
+@media (min-width: 1448px) {
+  .exploreMedia {
+    margin-left: calc((100vw - 1680px) / -2);
+  }
+}
+
+@media (min-width: 1600px) {
+  .revealSpacer {
+    height: 120vh;
+  }
+}
+
+@media (min-width: 1700px) {
+  .exploreSection::before {
+    width: calc(100% - 48px);
+  }
+
+  .exploreGrid {
+    grid-template-columns: 620px minmax(0, 900px);
+    gap: 96px;
+  }
+
+  .exploreMedia {
+    width: 620px;
+    height: 720px;
+  }
+
+  .exploreContent {
+    max-width: 760px;
+    margin-left: -96px;
+    margin-top: -110px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroProfile {
+    position: static;
+    width: 100%;
+    height: 380px;
+    margin-top: 40px;
+  }
+
+  .heroInner {
+    padding-top: 150px;
+    padding-bottom: 48px;
+  }
+
+  .approachGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    justify-items: center;
+  }
+
+  .approachCard {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .approachText {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .attentionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitleCentered {
+    white-space: normal;
+  }
+
+  .exploreLinks {
+    padding-left: 0;
+  }
+
+  .exploreSection::before {
+    width: min(1400px, calc(100% - 32px));
+  }
+
+  .exploreInner {
+    padding: 0 24px;
+  }
+
+  .exploreGrid {
+    padding-right: 0;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .exploreMedia {
+    width: 320px;
+    height: 360px;
+    margin-top: -54px;
+    overflow: visible;
+  }
+
+  .exploreContent {
+    padding-right: 0;
+    max-width: 640px;
+    margin-top: -16px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .exploreLink {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .stickyBackground {
+    display: none;
+  }
+
+  .contentWrapper {
+    margin-top: 0;
+  }
+
+  .mobileCompassInline {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 52vh;
+    min-height: 320px;
+    overflow: hidden;
+  }
+
+  .revealSpacer {
+    display: none;
+  }
+
+  .exploreSection::before {
+    width: 100%;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroInner {
+    padding: 116px 14px 32px;
+    min-height: auto;
+  }
+
+  .heroContent {
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .heroTitle {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .heroTitleLine {
+    white-space: normal;
+  }
+
+  .heroSubtitle {
+    font-size: 18px;
+    line-height: 26px;
+    margin-top: 18px;
+    max-width: 100%;
+  }
+
+  .heroProfile {
+    height: 300px;
+    margin-top: 24px;
+  }
+
+  .section {
+    padding: 48px 20px;
+  }
+
+  .bodyLong,
+  .centerIntro,
+  .whyText {
+    font-size: 15px;
+    line-height: 30px;
+  }
+
+  .sectionTitle,
+  .sectionTitleCentered,
+  .exploreTitle {
+    font-size: 32px;
+  }
+
+  .exploreSection {
+    padding: 40px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .heroInner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .heroContent {
+    margin-left: 0;
+    margin-top: 22px;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .sectionHeroPad {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroInner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .heroContent {
+    max-width: min(760px, calc(100% - 470px));
+  }
+
+  .heroProfile {
+    right: 64px;
+    top: 126px;
+  }
+
+  .heroContent {
+    margin-left: 0;
+    margin-top: 28px;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .sectionHeroPad {
+    padding-left: 128px;
+    padding-right: 128px;
+  }
+}

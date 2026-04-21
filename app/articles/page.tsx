@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import styles from '../page.module.css';
+import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
@@ -67,8 +67,11 @@ export default function Articles() {
         {/* Main Content */}
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16">
           <h1
-            className="font-sans font-normal text-[40px] leading-[65.954px] text-black mb-16"
-            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
+            className="font-normal text-[40px] leading-normal text-black mb-16"
+            style={{
+              fontFamily: 'Lora',
+              fontFeatureSettings: "'liga' off, 'clig' off",
+            }}
           >
             {t('articles.hero.title', 'Latest Insights')}
           </h1>
@@ -79,10 +82,23 @@ export default function Articles() {
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                   {/* Article Content */}
                   <div className="flex-1 max-w-[812px]">
-                    <h2 className="font-sans font-medium text-[25px] leading-[29.979px] text-black mb-5 capitalize">
+                    <h2
+                      className="font-normal text-[25px] leading-normal text-[#1f1f1f] mb-5 capitalize"
+                      style={{ fontFamily: 'Lora' }}
+                    >
                       {article.title}
                     </h2>
-                    <p className="font-sans font-normal text-[18px] leading-[110%] text-black mb-6">
+                    <p
+                      className="font-normal text-black mb-6"
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Lora',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '35px',
+                      }}
+                    >
                       {article.description}
                     </p>
                     <a
