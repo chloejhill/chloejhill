@@ -101,7 +101,7 @@ export default function ProjectDetail() {
 
   return (
     <div className={styles.container}>
-      <section className="relative w-full min-h-screen">
+      <section className="relative w-full min-h-screen mb-[55px]">
         <Navbar />
 
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16">

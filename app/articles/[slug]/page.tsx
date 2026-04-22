@@ -90,7 +90,7 @@ export default function ArticleDetail() {
       <Navbar />
 
       {/* Main Content */}
-      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16">
+      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16 mb-[55px]">
         {/* Breadcrumb */}
         <p className="font-sans font-normal text-[14px] leading-[1.7] text-black mb-8">
           <Link href="/articles" className="hover:underline">

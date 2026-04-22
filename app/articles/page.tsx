@@ -59,7 +59,7 @@ export default function Articles() {
   return (
     <div className={styles.container}>
       <section
-        className="relative w-full min-h-screen"
+        className="relative w-full min-h-screen mb-[55px]"
         // style={{ backgroundColor: '#EFEBE7' }}
       >
         <Navbar />

@@ -669,6 +669,7 @@
   width: 100%;
   background: #dde4e6;
   overflow: hidden;
+  margin-bottom: 55px;
 }
 
 .evolutionInner {
@@ -796,9 +797,14 @@
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% auto;
-  padding: clamp(100px, 14vw, 200px) 32px 56px;
+  padding: clamp(64px, 10vw, 120px) 32px 56px;
   margin: 0;
   overflow: hidden;
+}
+
+.booksHeading {
+  position: relative;
+  top: -56px;
 }
 
 .booksGrid {

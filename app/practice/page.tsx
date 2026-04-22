@@ -185,7 +185,8 @@ const illustrations = [
       'Conducted medium- to long-term trends research to inform strategic repositioning and future-facing inquiry within an innovation and policy context.'
   },
   {
-    title: 'Systems change narrative for multilateral collaboration (2019–2020)',
+    title:
+      'Systems change narrative for multilateral collaboration (2019–2020)',
     description:
       'Supported the development of shared language and strategic framing across a multi-stakeholder initiative, helping align diverse actors around systems-level change rather than fragmented interventions.'
   },
@@ -229,9 +230,12 @@ const testimonialHeadshots: Record<string, string> = {
 
 export default function Home() {
   const overrides = usePayloadOverrides('practice');
-  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
-  const img = (key: string, fallbackSrc: string) => overrides?.images?.[key]?.src || fallbackSrc;
-  const alt = (key: string, fallbackAlt: string) => overrides?.images?.[key]?.alt || fallbackAlt;
+  const t = (key: string, fallback: string) =>
+    overrides?.strings?.[key] || fallback;
+  const img = (key: string, fallbackSrc: string) =>
+    overrides?.images?.[key]?.src || fallbackSrc;
+  const alt = (key: string, fallbackAlt: string) =>
+    overrides?.images?.[key]?.alt || fallbackAlt;
 
   const accordionBaseId = useId();
   const [openIllustrationIndex, setOpenIllustrationIndex] = useState<
@@ -254,7 +258,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <section
-        className="relative w-full h-[560px] md:h-[709px] overflow-hidden"
+        className="relative w-full h-[520px] md:h-[600px] overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)'
         }}
@@ -337,7 +341,9 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[36px] lg:text-[40px] leading-normal text-[#1f1f1f] mb-4 md:whitespace-nowrap"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              <span className={styles.brushHighlight}>Working inside Complexity</span>
+              <span className={styles.brushHighlight}>
+                Working inside Complexity
+              </span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]"
@@ -347,7 +353,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               My work is not about delivery against fixed methods or predefined
@@ -363,7 +369,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               I engage through applied research, collaboration, advisory work,
@@ -397,7 +403,9 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              <span className={styles.brushHighlight}>How My Work Shows Up</span>
+              <span className={styles.brushHighlight}>
+                How My Work Shows Up
+              </span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
@@ -407,7 +415,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               Rather than offering a single methodology, my practice takes
@@ -421,7 +429,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               Typical contributions include:
@@ -434,7 +442,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               <li>
@@ -466,7 +474,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               This work is shaped by inquiry rather than prescription, and by
@@ -491,7 +499,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               My applied work has taken place across a range of systems and
@@ -505,7 +513,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               <li>Multilateral and UN systems</li>
@@ -524,7 +532,7 @@ export default function Home() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               These contexts are where many of the questions explored on the
@@ -576,7 +584,7 @@ export default function Home() {
                     fontSize: '16px',
                     fontStyle: 'normal',
                     fontWeight: 400,
-                    lineHeight: '35px',
+                    lineHeight: '35px'
                   }}
                 >
                   {item.description}
@@ -592,7 +600,9 @@ export default function Home() {
           className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-8 md:mb-12"
           style={{ fontFamily: 'var(--font-lora), serif' }}
         >
-          <span className={styles.brushHighlight}>Organisations I have Supported</span>
+          <span className={styles.brushHighlight}>
+            Organisations I have Supported
+          </span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
           {supportedOrganisationLogos.map((fileName) => (
@@ -690,7 +700,7 @@ export default function Home() {
                             fontSize: '16px',
                             fontStyle: 'normal',
                             fontWeight: 400,
-                            lineHeight: '35px',
+                            lineHeight: '35px'
                           }}
                         >
                           {item.description}
@@ -711,16 +721,16 @@ export default function Home() {
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
             style={{ fontFamily: 'var(--font-lora), serif' }}
           >
-            <span className={styles.brushHighlight}>Nice things people say</span>
+            <span className={styles.brushHighlight}>
+              Nice things people say
+            </span>
           </h2>
           <div className="flex gap-4 self-end">
             <button
               type="button"
               aria-label="Previous testimonials"
               className="hover:opacity-75 transition-opacity"
-              onClick={() =>
-                setTestimonialStartIndex((current) => current - 1)
-              }
+              onClick={() => setTestimonialStartIndex((current) => current - 1)}
             >
               <ArrowLeftIcon />
             </button>
@@ -728,9 +738,7 @@ export default function Home() {
               type="button"
               aria-label="Next testimonials"
               className="hover:opacity-75 transition-opacity"
-              onClick={() =>
-                setTestimonialStartIndex((current) => current + 1)
-              }
+              onClick={() => setTestimonialStartIndex((current) => current + 1)}
             >
               <ArrowRightIcon />
             </button>
@@ -774,7 +782,7 @@ export default function Home() {
                     fontSize: '16px',
                     fontStyle: 'normal',
                     fontWeight: 400,
-                    lineHeight: '35px',
+                    lineHeight: '35px'
                   }}
                 >
                   {testimonial.text}
@@ -811,7 +819,7 @@ export default function Home() {
                     fontSize: '16px',
                     fontStyle: 'normal',
                     fontWeight: 400,
-                    lineHeight: '35px',
+                    lineHeight: '35px'
                   }}
                 >
                   <p>
@@ -902,7 +910,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-0 pt-0 pb-6 md:pt-0 md:pb-8">
+      <section className="w-full px-0 pt-0 pb-0 md:pt-0 md:pb-0 mb-[55px]">
         <div className="bg-[#343433] w-full md:w-[80%] mr-auto px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 min-h-[320px] md:min-h-[360px] lg:min-h-[420px] flex flex-col md:flex-row gap-8 lg:gap-14 items-center text-white!">
           <div className="relative w-[168px] h-[168px] rounded-full overflow-hidden shrink-0">
             <Image
@@ -921,28 +929,25 @@ export default function Home() {
               className="font-normal text-[36px] leading-[36.476px] text-white!"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Interested in working with me?{' '}
-              <a
-                href="/contact"
-                className="underline text-white!"
-                style={{ color: '#FFFFFF' }}
-              >
-                Get in touch.
-              </a>
+              If this resonates{' '}
             </p>
             <p
               className="text-[18px] leading-[35px] mt-4 max-w-[640px] text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              I also offer a Free Strategic Coherence Conversation for
-              impact-driven leaders navigating complexity.
+              If you’re navigating complexity or transition and need a space for
+              clear thinking, honest advice, or simply a sounding board, as well
+              as support in putting your thinking into practice, I’d love to
+              hear from you. I offer{' '}
+              <strong>Strategic Coherence Conversations</strong> for leaders
+              working in impact-driven contexts.
             </p>
             <a
               href="/contact"
               className="inline-block mt-4 text-[18px] leading-[35px] underline text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              Apply here →
+              → Request a conversation
             </a>
           </div>
         </div>

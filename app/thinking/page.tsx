@@ -815,6 +815,12 @@ export default function Thinking() {
       </section>
 
       <section className={styles.booksSection} aria-label="Current books">
+        <div className={`${styles.sectionHeadingCentered} ${styles.booksHeading}`}>
+          <span className={styles.sectionHeadingHighlightCentered} />
+          <h2 className={styles.sectionTitleCentered}>
+            Current Books that are shaping my Ideas
+          </h2>
+        </div>
         <div className={styles.booksGrid}>
           {[1, 2, 3].map((i) => (
             <div key={i} className={styles.booksCard}>

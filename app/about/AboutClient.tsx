@@ -598,7 +598,7 @@ export default function AboutClient({
         </div>
       </section>
 
-      <section className="w-full max-w-[1180px] mx-auto px-4 md:px-8 lg:px-12 py-8 md:py-10">
+      <section className="w-full max-w-[1180px] mx-auto px-4 md:px-8 lg:px-12 pt-8 md:pt-10 pb-0 mb-[55px]">
         <div className="bg-[#343433] p-5 md:p-8 lg:p-10 text-white">
           <div className="flex flex-col gap-8">
             <div style={{ filter: 'brightness(0) invert(1)' }}>
