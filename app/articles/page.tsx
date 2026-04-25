@@ -54,7 +54,8 @@ Nam mi risus, varius eu lobortis in, molestie tempus nulla. Vestibulum fringilla
 
 export default function Articles() {
   const overrides = usePayloadOverrides('articles');
-  const t = (key: string, fallback: string) => overrides?.strings?.[key] || fallback;
+  const t = (key: string, fallback: string) =>
+    overrides?.strings?.[key] || fallback;
 
   return (
     <div className={styles.container}>
@@ -79,9 +80,7 @@ export default function Articles() {
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                   {/* Article Content */}
                   <div className="flex-1 max-w-[812px]">
-                    <h2
-                      className="font-sans font-medium text-[23.462px] leading-[31.993px] text-black mb-5 capitalize"
-                    >
+                    <h2 className="font-sans font-medium text-[23.462px] leading-[31.993px] text-black mb-5 capitalize">
                       {article.title}
                     </h2>
                     <p
