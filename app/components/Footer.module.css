@@ -18,3 +18,38 @@
 .footerBottomText { composes: footerBottomText from '../page.module.css'; }
 .footerBottomLink { composes: footerBottomLink from '../page.module.css'; }
 .footerBottomLinkUnderline { composes: footerBottomLinkUnderline from '../page.module.css'; }
+
+@media (max-width: 1024px) {
+  .newsletterCopy {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletterTitle,
+  .newsletterText {
+    text-align: center;
+  }
+
+  .newsletterText {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletterForm {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footerRight,
+  .footerNav {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footerBottomRow {
+    text-align: center;
+  }
+}
