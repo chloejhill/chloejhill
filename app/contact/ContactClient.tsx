@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import type { PageOverrides } from '@/lib/payloadContent';
 
 const heroImage = '/images/contact/hero.png';
+const heroMobileImage = '/images/contact/heromobile.png';
 
 export default function ContactClient({
   overrides
@@ -19,6 +20,8 @@ export default function ContactClient({
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
+  const heroSrc = img('contact.hero.image', heroImage);
+  const heroMobileSrc = img('contact.hero.mobileImage', heroMobileImage);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -51,7 +54,7 @@ export default function ContactClient({
           style={{ height: '100%' }}
         >
           <Image
-            src={img('contact.hero.image', heroImage)}
+            src={heroSrc}
             alt={alt('contact.hero.image', 'Contact Hero')}
             fill
             className="object-cover"
@@ -60,13 +63,22 @@ export default function ContactClient({
           />
         </div>
 
-        <div className="absolute top-0 left-0 right-0 z-20">
+        <div className="relative z-20 lg:absolute lg:top-0 lg:left-0 lg:right-0">
           <Navbar variant="light" />
         </div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row min-h-screen pt-20 lg:pt-0 w-full max-w-[1448px] mx-auto items-start">
-          <div className="w-full lg:w-1/2 flex flex-col justify-start px-4 md:px-8 lg:px-16 py-16 lg:py-0 lg:min-h-screen">
-            <div className="w-full max-w-[500px] mx-auto lg:mx-0 lg:ml-16 lg:mt-62">
+        <div className="relative z-10 flex flex-col lg:flex-row min-h-screen pt-0 lg:pt-0 w-full max-w-[1448px] mx-auto items-start">
+          <div className="relative w-full lg:w-1/2 flex flex-col justify-end lg:justify-start px-4 md:px-8 lg:px-16 pt-16 pb-32 lg:py-0 min-h-[60vh] lg:min-h-screen">
+            <div
+              className="absolute inset-0 z-0 lg:hidden"
+              style={{
+                backgroundImage: `url(${heroMobileSrc})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'top center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            />
+            <div className="relative z-10 w-full max-w-[500px] mx-auto lg:mx-0 lg:ml-16 lg:mt-62">
               <h1
                 className="font-sans font-normal text-[40px] md:text-[50px] lg:text-[60px] leading-[1.2] mb-8 whitespace-pre-wrap text-center lg:text-left"
                 style={{ color: 'white' }}
@@ -88,11 +100,11 @@ export default function ContactClient({
           </div>
 
           <div
-            className="w-full lg:w-1/2 flex items-start justify-center lg:justify-start px-4 md:px-8 lg:pl-0 lg:pr-16 py-16 lg:py-0 lg:min-h-screen"
+            className="relative w-full lg:w-1/2 flex items-start justify-center lg:justify-start px-4 md:px-8 lg:pl-0 lg:pr-16 py-16 lg:py-0 lg:min-h-screen"
             style={{ backgroundColor: 'transparent' }}
           >
             <div
-              className="w-full max-w-[627px] mx-auto lg:mx-0 lg:mt-32 lg:mb-15 lg:-ml-20"
+              className="relative z-10 w-full max-w-[627px] mx-auto lg:mx-0 lg:mt-32 lg:mb-15 lg:-ml-20"
               style={{ backgroundColor: 'transparent' }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">

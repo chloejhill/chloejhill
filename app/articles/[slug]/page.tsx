@@ -86,11 +86,11 @@ export default function ArticleDetail() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ backgroundColor: '#D6DCDB' }}>
       <Navbar />
 
       {/* Main Content */}
-      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16">
+      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16 mb-[55px]">
         {/* Breadcrumb */}
         <p className="font-sans font-normal text-[14px] leading-[1.7] text-black mb-8">
           <Link href="/articles" className="hover:underline">
@@ -218,7 +218,18 @@ export default function ArticleDetail() {
         <div className="max-w-[770px] mx-auto">
           <div className="font-sans font-normal text-[17px] leading-[110%] text-black whitespace-pre-wrap mb-16">
             {article.content.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-6">
+              <p
+                key={index}
+                className="mb-6"
+                style={{
+                  color: '#000',
+                  fontFamily: 'Lora',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: 400,
+                  lineHeight: '35px'
+                }}
+              >
                 {paragraph}
               </p>
             ))}
@@ -350,7 +361,17 @@ export default function ArticleDetail() {
                 >
                   {relatedArticle.title}
                 </h3>
-                <p className="font-sans font-normal text-[17px] leading-[1.4] text-black mb-4 line-clamp-3">
+                <p
+                  className="mb-4 line-clamp-3"
+                  style={{
+                    color: '#000',
+                    fontFamily: 'Lora',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '35px'
+                  }}
+                >
                   {relatedArticle.description}
                 </p>
                 <Link

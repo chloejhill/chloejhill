@@ -60,18 +60,15 @@ export default function Articles() {
     <div className={styles.container}>
       <section
         className="relative w-full min-h-screen"
-        // style={{ backgroundColor: '#EFEBE7' }}
+        style={{ backgroundColor: '#D6DCDB' }}
       >
         <Navbar />
 
         {/* Main Content */}
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16">
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-0">
           <h1
-            className="font-normal text-[40px] leading-normal text-black mb-16"
-            style={{
-              fontFamily: 'Lora',
-              fontFeatureSettings: "'liga' off, 'clig' off",
-            }}
+            className="font-sans font-normal text-[48px] leading-[normal] text-black mb-16"
+            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
           >
             {t('articles.hero.title', 'Latest Insights')}
           </h1>
@@ -83,20 +80,19 @@ export default function Articles() {
                   {/* Article Content */}
                   <div className="flex-1 max-w-[812px]">
                     <h2
-                      className="font-normal text-[25px] leading-normal text-[#1f1f1f] mb-5 capitalize"
-                      style={{ fontFamily: 'Lora' }}
+                      className="font-sans font-medium text-[23.462px] leading-[31.993px] text-black mb-5 capitalize"
                     >
                       {article.title}
                     </h2>
                     <p
-                      className="font-normal text-black mb-6"
+                      className="mb-6"
                       style={{
                         color: '#000',
                         fontFamily: 'Lora',
                         fontSize: '16px',
                         fontStyle: 'normal',
                         fontWeight: 400,
-                        lineHeight: '35px',
+                        lineHeight: '35px'
                       }}
                     >
                       {article.description}
