@@ -2667,6 +2667,21 @@
   .exploreSection {
     padding: 40px 0;
   }
+
+  .sectionHeadingHighlight,
+  .sectionHeadingHighlightCentered {
+    display: none;
+  }
+
+  .sectionTitle,
+  .sectionTitleCentered {
+    display: inline;
+    background: linear-gradient(180deg, transparent 54%, #efebe7 54%);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 4px;
+    margin: 0 -4px;
+  }
 }
 
 @media (min-width: 768px) {

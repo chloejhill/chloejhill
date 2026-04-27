@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { LinkedInFooterIcon } from '../icons';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -59,6 +60,15 @@ export default function Footer() {
             <Link href="/contact" className={styles.footerRightLink}>
               Get In Touch
             </Link>
+            <a
+              href="https://www.linkedin.com/in/chloejhill/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerLinkedin}
+              aria-label="LinkedIn"
+            >
+              <LinkedInFooterIcon />
+            </a>
           </nav>
         </div>
 

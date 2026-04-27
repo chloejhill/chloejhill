@@ -18,6 +18,14 @@
 .footerBottomText { composes: footerBottomText from '../page.module.css'; }
 .footerBottomLink { composes: footerBottomLink from '../page.module.css'; }
 .footerBottomLinkUnderline { composes: footerBottomLinkUnderline from '../page.module.css'; }
+.footerLinkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  align-self: flex-end;
+  margin-left: auto;
+}
 
 @media (max-width: 1024px) {
   .newsletterCopy {
@@ -51,5 +59,11 @@
 
   .footerBottomRow {
     text-align: center;
+  }
+
+  .footerLinkedin {
+    margin-top: 0;
+    align-self: center;
+    margin-left: 0;
   }
 }

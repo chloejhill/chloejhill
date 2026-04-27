@@ -120,7 +120,7 @@ export default function AboutClient({
           <div className="flex justify-center mb-12">
             <div className="relative inline-block">
               <div
-                className="absolute left-0 right-0 h-[15px] bottom-[6px]"
+                className="absolute left-0 right-0 h-[15px] bottom-[6px] hidden md:block"
                 style={{ backgroundColor: '#EFEBE7' }}
                 aria-hidden="true"
               />
@@ -128,7 +128,9 @@ export default function AboutClient({
                 className="relative font-normal text-[30px] md:text-[36.151px] leading-none text-black text-center"
                 style={{ fontFamily: 'var(--font-lora), serif' }}
               >
-                {t('about.whereComingFrom.title', "Where I'm coming from")}
+                <span className="px-1 -mx-1 bg-[linear-gradient(180deg,transparent_54%,#EFEBE7_54%)] md:bg-none [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+                  {t('about.whereComingFrom.title', "Where I'm coming from")}
+                </span>
               </h2>
             </div>
           </div>

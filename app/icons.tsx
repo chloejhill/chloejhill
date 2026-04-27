@@ -194,6 +194,56 @@ export function LinkedInIcon() {
   );
 }
 
+export function LinkedInFooterIcon() {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="14" cy="14" r="13.25" stroke="#1F1F1F" strokeWidth="1.5" />
+      <path
+        d="M10.2 11.2C10.9 11.2 11.45 10.65 11.45 9.95C11.45 9.25 10.9 8.7 10.2 8.7C9.5 8.7 8.95 9.25 8.95 9.95C8.95 10.65 9.5 11.2 10.2 11.2Z"
+        fill="#1F1F1F"
+      />
+      <path d="M9 12.4H11.4V19.2H9V12.4Z" fill="#1F1F1F" />
+      <path
+        d="M12.8 12.4H15.1V13.3H15.15C15.55 12.65 16.3 12.3 17.2 12.3C19.15 12.3 20 13.55 20 15.95V19.2H17.6V16.3C17.6 15.05 17.25 14.25 16.2 14.25C15.2 14.25 14.95 14.95 14.95 16.15V19.2H12.8V12.4Z"
+        fill="#1F1F1F"
+      />
+    </svg>
+  );
+}
+
+export function LinkedInPlainIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <path
+        d="M4.7 6.6C5.25 6.6 5.7 6.15 5.7 5.6C5.7 5.05 5.25 4.6 4.7 4.6C4.15 4.6 3.7 5.05 3.7 5.6C3.7 6.15 4.15 6.6 4.7 6.6Z"
+        fill="currentColor"
+      />
+      <path d="M3.8 7.6H5.7V15.3H3.8V7.6Z" fill="currentColor" />
+      <path
+        d="M7 7.6H8.8V8.65H8.85C9.15 8.05 9.9 7.5 10.95 7.5C13.25 7.5 13.7 9 13.7 11.35V15.3H11.8V11.8C11.8 10.35 11.25 9.95 10.65 9.95C9.95 9.95 8.9 10.45 8.9 11.95V15.3H7V7.6Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export const FacebookIcon = () => {
   return (
     <svg

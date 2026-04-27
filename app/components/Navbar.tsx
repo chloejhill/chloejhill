@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogoIcon } from '../icons';
+import { LinkedInPlainIcon, LogoIcon } from '../icons';
 
 type NavbarVariant = 'dark' | 'light';
 
@@ -43,14 +43,14 @@ export default function Navbar({
         </Link>
         {/* Desktop Navigation */}
         <div
-          className={`hidden md:flex items-center gap-[45px] text-[17px] ${
+          className={`hidden md:flex items-center gap-[36px] text-[17px] ${
             isLight ? 'text-white!' : 'text-black'
           }`}
         >
           <Link
             href="/about"
             className={`${desktopLinkClassName} ${
-              isActive('/about') ? 'font-semibold' : ''
+              isActive('/about') ? 'underline underline-offset-4' : ''
             }`}
           >
             About
@@ -58,7 +58,7 @@ export default function Navbar({
           <Link
             href="/thinking"
             className={`${desktopLinkClassName} ${
-              isActive('/thinking') ? 'font-semibold' : ''
+              isActive('/thinking') ? 'underline underline-offset-4' : ''
             }`}
           >
             Thinking
@@ -66,7 +66,7 @@ export default function Navbar({
           <Link
             href="/practice"
             className={`${desktopLinkClassName} ${
-              isActive('/practice') ? 'font-semibold' : ''
+              isActive('/practice') ? 'underline underline-offset-4' : ''
             }`}
           >
             Practice
@@ -74,7 +74,7 @@ export default function Navbar({
           <Link
             href="/articles"
             className={`${desktopLinkClassName} ${
-              isActive('/articles') ? 'font-semibold' : ''
+              isActive('/articles') ? 'underline underline-offset-4' : ''
             }`}
           >
             Insights
@@ -82,11 +82,22 @@ export default function Navbar({
           <Link
             href="/contact"
             className={`${desktopLinkClassName} ${
-              isActive('/contact') ? 'font-semibold' : ''
+              isActive('/contact') ? 'underline underline-offset-4' : ''
             }`}
           >
             Get in touch
           </Link>
+          <a
+            href="https://www.linkedin.com/in/chloejhill/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className={`inline-flex items-center justify-center m-0 p-0 text-[24px] leading-none hover:opacity-80 transition-opacity ${
+              isLight ? 'text-white!' : 'text-black'
+            }`}
+          >
+            <LinkedInPlainIcon />
+          </a>
         </div>
         {/* Mobile Hamburger Button */}
         <button
@@ -131,7 +142,7 @@ export default function Navbar({
           <Link
             href="/about"
             className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/about') ? 'font-semibold' : ''
+              isActive('/about') ? 'underline underline-offset-4' : ''
             }`}
             style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
@@ -141,7 +152,7 @@ export default function Navbar({
           <Link
             href="/thinking"
             className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/thinking') ? 'font-semibold' : ''
+              isActive('/thinking') ? 'underline underline-offset-4' : ''
             }`}
             style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
@@ -151,7 +162,7 @@ export default function Navbar({
           <Link
             href="/practice"
             className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/practice') ? 'font-semibold' : ''
+              isActive('/practice') ? 'underline underline-offset-4' : ''
             }`}
             style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
@@ -161,21 +172,33 @@ export default function Navbar({
           <Link
             href="/articles"
             className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/articles') ? 'font-semibold' : ''
+              isActive('/articles') ? 'underline underline-offset-4' : ''
             }`}
             style={{ color: '#FFFFFF' }}
             onClick={() => setIsMenuOpen(false)}
           >
             insights
           </Link>
-          <Link
-            href="/contact"
-            className="text-white! hover:opacity-80 transition-colors py-2"
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            get in touch
-          </Link>
+          <div className="flex items-center gap-3 py-2">
+            <Link
+              href="/contact"
+              className="text-white! hover:opacity-80 transition-colors"
+              style={{ color: '#FFFFFF' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              get in touch
+            </Link>
+            <a
+              href="https://www.linkedin.com/in/chloejhill/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="inline-flex items-center justify-center text-[24px] leading-none text-white! hover:opacity-80 transition-opacity"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <LinkedInPlainIcon />
+            </a>
+          </div>
         </div>
       </div>
     </div>
