@@ -133,7 +133,7 @@ export default function HomeClient({
     overrides?.images?.[key]?.alt || fallbackAlt;
   const heroTitleText = t(
     'home.hero.title',
-    'Systems Change Researcher,\nWriter, Advisor. Publisher Futurist.'
+    'Systems Change Researcher,\nWriter, Advisor. Published Futurist.'
   );
   const heroTitleLines = (
     heroTitleText.includes('\n')

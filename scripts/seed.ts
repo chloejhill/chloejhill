@@ -59,10 +59,14 @@ const pageSeeds: SeedPage[] = [
     slug: 'home',
     title: 'Home',
     strings: [
-      { key: 'home.hero.title', value: 'Systems Change Researcher, Writer, Advisor. Publisher Futurist.' },
+      {
+        key: 'home.hero.title',
+        value: 'Systems Change Researcher, Writer, Advisor. Published Futurist.'
+      },
       {
         key: 'home.hero.subtitle',
-        value: 'Thinking about uncertainty, transformation, and how we meet what is coming.'
+        value:
+          'Thinking about uncertainty, transformation, and how we meet what is coming.'
       }
     ]
   },
@@ -105,7 +109,8 @@ const pageSeeds: SeedPage[] = [
       { key: 'practice.hero.title', value: 'Where thinking meets Reality' },
       {
         key: 'practice.hero.subtitle',
-        value: 'Where my thinking has been tested, applied, and refined in practice.'
+        value:
+          'Where my thinking has been tested, applied, and refined in practice.'
       }
     ]
   },
@@ -154,23 +159,37 @@ async function upsertPages(serverURL: string, token: string) {
 async function main() {
   ensureEnvLoaded();
 
-  const serverURL = process.env.SEED_SERVER_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000';
+  const serverURL =
+    process.env.SEED_SERVER_URL ||
+    process.env.NEXT_PUBLIC_SERVER_URL ||
+    'http://localhost:3000';
   const email = process.env.SEED_ADMIN_EMAIL || 'admin@chloe.local';
   const password = process.env.SEED_ADMIN_PASSWORD || 'ChangeMe123!';
 
   const health = await fetch(`${serverURL}/api/users/me`).catch(() => null);
-  if (!health) throw new Error(`Cannot reach ${serverURL}. Start dev server first (npm run dev).`);
+  if (!health)
+    throw new Error(
+      `Cannot reach ${serverURL}. Start dev server first (npm run dev).`
+    );
 
-  const firstRegister = await postJSON(`${serverURL}/api/users/first-register`, { email, password });
+  const firstRegister = await postJSON(
+    `${serverURL}/api/users/first-register`,
+    { email, password }
+  );
   if (firstRegister.res.ok) {
     console.log(`Created first admin user: ${email}`);
   } else {
     console.log('First user likely already exists, continuing...');
   }
 
-  const login = await postJSON(`${serverURL}/api/users/login`, { email, password });
+  const login = await postJSON(`${serverURL}/api/users/login`, {
+    email,
+    password
+  });
   if (!login.res.ok || !login.body?.token) {
-    throw new Error('Failed login. Set SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD correctly and retry.');
+    throw new Error(
+      'Failed login. Set SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD correctly and retry.'
+    );
   }
 
   await upsertPages(serverURL, login.body.token);
@@ -181,4 +200,3 @@ main().catch((err) => {
   console.error('Seed failed:', err);
   process.exit(1);
 });
-
