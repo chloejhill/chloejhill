@@ -460,12 +460,12 @@ export default function AboutClient({
 
       <section className="relative w-full pt-8 md:pt-10 lg:pt-14 pb-8 md:pb-10 lg:pb-14 overflow-hidden bg-white">
         <div
-          className="absolute inset-y-0 right-0 w-[calc(100%-12px)] md:w-[calc(100%-32px)] lg:w-[calc(100%-72px)] bg-[#114D6F]"
+          className="absolute inset-y-0 right-0 w-full md:w-[calc(100%-32px)] lg:w-[calc(100%-72px)] bg-[#114D6F]"
           aria-hidden="true"
         />
-        <div className="w-full max-w-[1720px] mx-auto px-4 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
+        <div className="w-full max-w-[1720px] mx-auto px-0 md:pl-16 md:pr-8 lg:pl-32 lg:pr-16 relative z-10">
           <div className="relative grid grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)] gap-8 md:gap-12 lg:gap-16 items-center">
-            <div className="relative w-full max-w-[280px] md:max-w-[340px] h-[340px] md:h-[420px] mx-auto lg:mx-0">
+            <div className="relative w-full h-[380px] md:max-w-[340px] md:h-[420px] px-1 md:px-0 mx-auto lg:mx-0">
               <Image
                 src={img('about.philosophy.image', philosophyImage)}
                 alt={alt('about.philosophy.image', 'Chloe')}
@@ -475,7 +475,10 @@ export default function AboutClient({
               />
             </div>
 
-            <div className="relative text-white" style={{ color: '#FFFFFF' }}>
+            <div
+              className="relative text-white px-4 md:px-0"
+              style={{ color: '#FFFFFF' }}
+            >
               <h2
                 className="font-normal text-[30px] md:text-[40px] leading-normal text-white mb-4 md:mb-6"
                 style={{ fontFamily: 'var(--font-lora), serif' }}
@@ -533,14 +536,16 @@ export default function AboutClient({
         <div className="text-center">
           <div className="relative inline-block mb-6">
             <div
-              className="absolute left-0 right-0 h-[15px] bottom-[6px] bg-[#EFEBE7]"
+              className="absolute left-0 right-0 h-[15px] bottom-[6px] bg-[#EFEBE7] hidden md:block"
               aria-hidden="true"
             />
             <h2
               className="relative font-normal text-[30px] md:text-[40px] leading-normal text-black"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              {t('about.affiliations.title', 'Affiliations & Communities')}
+              <span className="px-1 -mx-1 bg-[linear-gradient(180deg,transparent_54%,#EFEBE7_54%)] md:bg-none [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+                {t('about.affiliations.title', 'Affiliations & Communities')}
+              </span>
             </h2>
           </div>
           <p
