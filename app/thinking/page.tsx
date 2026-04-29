@@ -371,15 +371,29 @@ export default function Thinking() {
   return (
     <div className={styles.container}>
       <section className="relative w-full h-[520px] md:h-[600px] overflow-hidden">
-        {/* MOBILE BACKGROUND - heroLeftImage */}
+        {/* MOBILE: full-bleed left + full-width right strip on top */}
         <div className="absolute inset-0 w-full h-full md:hidden z-0">
           <Image
             src={img('thinking.hero.leftImage', heroLeftImage)}
             alt={alt('thinking.hero.leftImage', 'Hero Left')}
             fill
-            className="object-cover"
+            className="object-cover object-bottom"
             unoptimized
           />
+        </div>
+        <div
+          className="absolute inset-0 md:hidden z-1 pointer-events-none overflow-hidden"
+          aria-hidden
+        >
+          <div className="absolute inset-x-0 bottom-0 h-[min(260px,46vh)] w-full [-webkit-mask-image:linear-gradient(to_left,black_0%,black_calc(100%-14px),transparent_100%)] mask-[linear-gradient(to_left,black_0%,black_calc(100%-14px),transparent_100%)]">
+            <Image
+              src={img('thinking.hero.rightImage', heroRightImage)}
+              alt=""
+              fill
+              className="object-cover object-bottom"
+              unoptimized
+            />
+          </div>
         </div>
         {/* DESKTOP BACKGROUND IMAGES */}
         <div className="absolute inset-0 w-full h-full hidden md:flex z-0">
@@ -419,7 +433,7 @@ export default function Thinking() {
         <div className="relative z-10 w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full block pt-28 md:flex md:items-start md:pt-40">
           <div className="max-w-[800px]">
             <h1
-              className="font-normal text-[34px] md:text-[50px] leading-[1.15] md:leading-[normal] text-[#4b3e43] mb-4 md:mb-6"
+              className="font-normal text-[32px] md:text-[50px] leading-[1.15] md:leading-[normal] text-[#4b3e43] mb-4 md:mb-6"
               style={{
                 fontFamily: 'var(--font-lora), serif',
                 fontFeatureSettings: "'liga' off, 'clig' off"
@@ -457,7 +471,7 @@ export default function Thinking() {
             fontSize: '16px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: '35px',
+            lineHeight: '35px'
           }}
         >
           <p>
@@ -476,7 +490,7 @@ export default function Thinking() {
           </p>
         </div>
 
-        <div className={styles.inquiryBanner} style={{ marginTop: '70px' }}>
+        <div className={styles.inquiryBanner}>
           <div className={styles.inquiryBannerIcon} aria-hidden="true">
             <Image
               src={syschangeImage}
@@ -496,8 +510,7 @@ export default function Thinking() {
         style={{ paddingTop: '34px' }}
       >
         <div
-          className={styles.empiricalInner}
-          style={{ width: 'min(90vw, 1400px)' }}
+          className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
         >
           <h3 className={styles.empiricalTitle}>Empirical Grounding</h3>
           <div
@@ -509,7 +522,7 @@ export default function Thinking() {
               fontStyle: 'normal',
               fontWeight: 400,
               lineHeight: '35px',
-              maxWidth: '1120px',
+              maxWidth: '1120px'
             }}
           >
             <p>
@@ -618,7 +631,7 @@ export default function Thinking() {
             fontSize: '16px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: '35px',
+            lineHeight: '35px'
           }}
         >
           <h2
@@ -680,9 +693,8 @@ export default function Thinking() {
 
       <section className={styles.aattSection}>
         <div
-          className={styles.empiricalInner}
+          className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
           style={{
-            width: 'min(90vw, 1400px)',
             background: '#EFEBE7',
             marginBottom: '56px'
           }}
@@ -699,7 +711,7 @@ export default function Thinking() {
               fontSize: '16px',
               fontStyle: 'normal',
               fontWeight: 400,
-              lineHeight: '35px',
+              lineHeight: '35px'
             }}
           >
             <p>
@@ -785,7 +797,7 @@ export default function Thinking() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               <p>
@@ -801,7 +813,12 @@ export default function Thinking() {
               </p>
             </div>
           </div>
-          <div className={styles.innerDotsCard}>
+          <Link
+            href="https://www.dotsdirectory.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.innerDotsCard}
+          >
             <Image
               src="/images/dots.png"
               alt="The Dots Directory"
@@ -810,12 +827,14 @@ export default function Thinking() {
               className={styles.innerDotsImg}
               unoptimized
             />
-          </div>
+          </Link>
         </div>
       </section>
 
       <section className={styles.booksSection} aria-label="Current books">
-        <div className={`${styles.sectionHeadingCentered} ${styles.booksHeading}`}>
+        <div
+          className={`${styles.sectionHeadingCentered} ${styles.booksHeading}`}
+        >
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
             Current Books that are shaping my Ideas
@@ -837,6 +856,16 @@ export default function Thinking() {
         aria-labelledby="evolution-heading"
       >
         <div ref={evolutionInnerRef} className={styles.evolutionInner}>
+          <div className={styles.evolutionMobileBg} aria-hidden>
+            <Image
+              src={evolutionImage}
+              alt=""
+              fill
+              className={styles.evolutionMobileBgImg}
+              sizes="100vw"
+              unoptimized
+            />
+          </div>
           <div ref={evolutionCopyRef} className={styles.evolutionCopy}>
             <h2 id="evolution-heading" className={styles.evolutionTitle}>
               Evolution of my Thinking
@@ -849,7 +878,7 @@ export default function Thinking() {
                 fontSize: '16px',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '35px',
+                lineHeight: '35px'
               }}
             >
               <p>

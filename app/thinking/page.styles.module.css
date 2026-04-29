@@ -159,6 +159,10 @@
   background: #efebe7;
 }
 
+.empiricalInnerWide {
+  width: min(90vw, 1400px);
+}
+
 .empiricalTitle {
   font-family: var(--font-serif), serif;
   font-weight: 400;
@@ -541,7 +545,7 @@
   font-family: var(--font-serif), serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 550;
   line-height: 35px;
   margin: 0 0 14px;
   color: #000;
@@ -649,6 +653,7 @@
 }
 
 .innerDotsCard {
+  display: block;
   width: min(100%, 420px);
   min-width: 320px;
   padding: 24px 36px;
@@ -656,6 +661,8 @@
   border-radius: 24px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   justify-self: end;
+  text-decoration: none;
+  color: inherit;
 }
 
 .innerDotsImg {
@@ -684,6 +691,10 @@
   align-items: start;
 }
 
+.evolutionMobileBg {
+  display: none;
+}
+
 .evolutionCopy {
   position: relative;
   z-index: 1;
@@ -693,6 +704,9 @@
   justify-self: end;
   padding-left: 8px;
   padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   /* Visual nudge toward the art without margin (margin shrinks grid item width). */
   transform: translateX(clamp(56px, 10vw, 140px));
 }
@@ -727,7 +741,9 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 14px;
+  margin-top: 0;
+  padding-top: 64px;
+  width: 100%;
 }
 
 .evolutionLink {
@@ -843,19 +859,25 @@
     padding: 28px 20px;
   }
 
+.empiricalInnerWide {
+    width: 100%;
+  }
+
 .innerBanner {
     width: 100vw;
     margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: none;
     height: auto;
-    padding: 24px 20px;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 24px;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
   }
 
 .innerDimensionSection {
-    padding: 48px 0 72px;
+    padding: 0;
   }
 
 .innerBannerIcon {
@@ -864,13 +886,17 @@
   }
 
 .innerBannerImg {
-    height: 88px;
+    height: auto;
+    max-height: 120px;
+    width: auto;
+    object-fit: contain;
   }
 
 .innerBannerLabel {
     font-size: 32px;
-    text-align: center;
-    flex: 1 1 100%;
+    text-align: left;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
 .innerDimensionInner {
@@ -887,7 +913,6 @@
   }
 
 .innerDimensionHeading {
-    font-size: 28px;
     max-width: none;
   }
 
@@ -910,6 +935,20 @@
     gap: 28px;
   }
 
+.evolutionMobileBg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+.evolutionMobileBgImg {
+    object-fit: cover;
+    object-position: center;
+  }
+
 .evolutionCopy {
     justify-self: stretch;
     width: 100%;
@@ -920,24 +959,16 @@
   }
 
 .evolutionTitle {
-    font-size: 24px;
     margin-bottom: 16px;
   }
 
 .evolutionFigure {
-    max-width: min(100%, 400px);
-    margin: 4px auto 0;
-    width: 100%;
-    justify-self: center;
-  }
-
-.evolutionFigureImg {
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
   }
 
 .evolutionLinks {
-    margin-top: 22px;
+    margin-top: 0;
+    padding-top: 72px;
     gap: 12px;
   }
 
@@ -958,7 +989,14 @@
 
 .booksGrid {
     grid-template-columns: 1fr;
-    max-width: 320px;
+    max-width: none;
+    width: 100%;
+  }
+
+.booksCard {
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
   }
 }
 
@@ -969,11 +1007,6 @@
     width: auto;
     max-width: none;
     margin: 0;
-  }
-
-.writingsArrowLeft,
-  .writingsArrowRight {
-    display: none;
   }
 
 .writingsCard {
@@ -997,7 +1030,6 @@
   }
 
 .futureBannerLabel {
-    font-size: 30px;
     padding-right: 0;
   }
 
@@ -1041,10 +1073,6 @@
     padding-right: 0;
   }
 
-.transcendentalTitle {
-    font-size: 32px;
-  }
-
 .transcendentalContent {
     font-size: 14px;
     text-align: left;
@@ -1059,10 +1087,6 @@
     height: 130px;
     --transformation-icon-slot: 154px;
     padding-left: var(--transformation-icon-slot);
-  }
-
-.transformationLabel {
-    font-size: 34px;
   }
 
 .transformationIcon {
@@ -1098,10 +1122,6 @@
     text-align: center;
   }
 
-.aattItemTitle {
-    font-size: 32px;
-  }
-
 .aattItemSubtitle {
     font-size: 20px;
     line-height: 1.4;
@@ -1118,7 +1138,9 @@
     height: auto;
     padding: 28px 18px;
     width: 100vw;
+    max-width: none;
     margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1136,7 +1158,6 @@
   }
 
 .inquiryBannerLabel {
-    font-size: 30px;
     text-align: left;
     flex: 1;
     min-width: 0;
@@ -1157,7 +1178,15 @@
 .approachTitle,
   .sectionTitle,
   .sectionTitleCentered,
-  .exploreTitle {
+  .exploreTitle,
+  .empiricalTitle,
+  .innerDimensionHeading,
+  .evolutionTitle,
+  .transcendentalTitle,
+  .aattItemTitle,
+  .inquiryBannerLabel,
+  .futureBannerLabel,
+  .transformationLabel {
     font-size: 32px;
   }
 
@@ -1174,6 +1203,58 @@
     -webkit-box-decoration-break: clone;
     padding: 0 4px;
     margin: 0 -4px;
+  }
+}
+
+/* Mobile ribbons: same height as Systems Change (28+120+28), equal vertical margin */
+@media (max-width: 768px) {
+  .inquiryBanner,
+  .futureBanner,
+  .transformationBanner,
+  .innerBanner {
+    min-height: 176px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    padding-left: 18px;
+    padding-right: 18px;
+    margin-block: 40px;
+    box-sizing: border-box;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .inquiryBanner {
+    margin-top: 76px;
+    margin-bottom: 12px;
+  }
+
+  .innerBanner {
+    margin-top: 80px;
+    margin-bottom: 92px;
+  }
+
+  .futureBanner {
+    padding-right: min(288px, 62vw);
+    max-width: none;
+    margin-right: calc(50% - 50vw);
+  }
+
+  .transformationBanner {
+    height: auto;
+    min-height: 176px;
+    max-width: none;
+    margin-right: calc(50% - 50vw);
+    padding-left: var(--transformation-icon-slot);
+  }
+
+  .futureSection {
+    padding: 0;
+    padding-bottom: 56px;
+  }
+
+  .transformationSection {
+    padding: 18px 0 40px;
+    margin: 0;
   }
 }
 
