@@ -226,6 +226,12 @@
   scroll-snap-align: center;
   position: relative;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.writingsCoverImg {
+  object-fit: cover;
 }
 
 .writingsCardIcon {
@@ -844,6 +850,11 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
+}
+
+.booksCoverImg {
+  object-fit: cover;
 }
 
 .booksPlaceholderIcon {

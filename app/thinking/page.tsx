@@ -20,6 +20,19 @@ const evolutionImage = '/images/evolution.png';
 const syschangeImage = '/images/syschange.png';
 const finqImage = '/images/finq.png';
 
+const currentBooks = [
+  { src: '/images/books/Futures.png', title: 'Futures' },
+  { src: '/images/books/Philanthropy.png', title: 'Philanthropy' },
+  { src: '/images/books/Regen Cultures.png', title: 'Regen Cultures' }
+] as const;
+
+const writingsCovers = [
+  { id: 'pbl', title: 'PBL', src: '/images/writings/PBL.png' },
+  { id: 'cbd', title: 'CBD', src: '/images/writings/CBD.png' },
+  { id: 'ffb', title: 'FFB', src: '/images/writings/FFB.png' },
+  { id: 'ncaves', title: 'NCAVES', src: '/images/writings/NCAVES.png' }
+] as const;
+
 function AttentionSystemsIcon() {
   return (
     <svg
@@ -240,10 +253,14 @@ export default function Thinking() {
 
   const selectedWritings = useMemo(
     () =>
-      Array.from({ length: 8 }).map((_, i) => ({
-        id: String(i + 1),
-        title: `Publication ${i + 1}`
-      })),
+      Array.from({ length: 8 }).map((_, i) => {
+        const w = writingsCovers[i % writingsCovers.length];
+        return {
+          id: `${w.id}-${i}`,
+          title: w.title,
+          src: w.src
+        };
+      }),
     []
   );
 
@@ -584,9 +601,14 @@ export default function Thinking() {
                   className={styles.writingsCard}
                   aria-label={w.title}
                 >
-                  <div className={styles.writingsCardIcon} aria-hidden="true">
-                    <PlaceholderImageIcon />
-                  </div>
+                  <Image
+                    src={w.src}
+                    alt={w.title}
+                    fill
+                    className={styles.writingsCoverImg}
+                    sizes="(max-width: 768px) 220px, 314px"
+                    unoptimized
+                  />
                 </div>
               ))}
             </div>
@@ -841,11 +863,16 @@ export default function Thinking() {
           </h2>
         </div>
         <div className={styles.booksGrid}>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className={styles.booksCard}>
-              <div className={styles.booksPlaceholderIcon} aria-hidden="true">
-                <PlaceholderImageIcon />
-              </div>
+          {currentBooks.map((book) => (
+            <div key={book.title} className={styles.booksCard}>
+              <Image
+                src={book.src}
+                alt={book.title}
+                fill
+                className={styles.booksCoverImg}
+                sizes="(max-width: 768px) 100vw, 260px"
+                unoptimized
+              />
             </div>
           ))}
         </div>
