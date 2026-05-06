@@ -80,8 +80,12 @@ export default function ContactClient({
             />
             <div className="relative z-10 w-full max-w-[500px] mx-auto lg:mx-0 lg:ml-16 lg:mt-62">
               <h1
-                className="font-sans font-normal text-[40px] md:text-[50px] lg:text-[60px] leading-[1.2] mb-8 whitespace-pre-wrap text-center lg:text-left"
-                style={{ color: 'white' }}
+                className="font-normal text-[40px] md:text-[50px] lg:text-[60px] leading-[1.2] mb-8 whitespace-pre-wrap text-center lg:text-left"
+                style={{
+                  color: 'white',
+                  fontFamily: 'var(--font-serif), serif',
+                  fontFeatureSettings: "'liga' off, 'clig' off"
+                }}
               >
                 {t('contact.hero.title', "Let's\nConnect")}
               </h1>
