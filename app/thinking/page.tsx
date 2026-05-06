@@ -30,7 +30,11 @@ const writingsCovers = [
   { id: 'pbl', title: 'PBL', src: '/images/writings/PBL.png' },
   { id: 'cbd', title: 'CBD', src: '/images/writings/CBD.png' },
   { id: 'ffb', title: 'FFB', src: '/images/writings/FFB.png' },
-  { id: 'ncaves', title: 'NCAVES', src: '/images/writings/NCAVES.png' }
+  { id: 'ncaves', title: 'NCAVES', src: '/images/writings/NCAVES.png' },
+  { id: 'ipes', title: 'IPES', src: '/images/writings/IPES.png' },
+  { id: 'iucn', title: 'IUCN', src: '/images/writings/IUCN.png' },
+  { id: 'iucn-nl', title: 'IUCN NL', src: '/images/writings/IUCN NL.png' },
+  { id: 'wwf', title: 'WWF', src: '/images/writings/WWF.png' }
 ] as const;
 
 function AttentionSystemsIcon() {
@@ -230,14 +234,11 @@ export default function Thinking() {
 
   const selectedWritings = useMemo(
     () =>
-      Array.from({ length: 8 }).map((_, i) => {
-        const w = writingsCovers[i % writingsCovers.length];
-        return {
-          id: `${w.id}-${i}`,
-          title: w.title,
-          src: w.src
-        };
-      }),
+      writingsCovers.map((w) => ({
+        id: w.id,
+        title: w.title,
+        src: w.src
+      })),
     []
   );
 
