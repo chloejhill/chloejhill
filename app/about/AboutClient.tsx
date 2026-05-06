@@ -321,11 +321,14 @@ export default function AboutClient({
                     <p
                       className="max-w-none md:max-w-[226px]"
                       style={{
-                        color: 'rgba(0, 0, 0, 0.80)',
+                        color:
+                          activeTimelineIndex === index
+                            ? '#000000'
+                            : 'rgba(0, 0, 0, 0.80)',
                         fontFamily: 'Lora',
                         fontSize: '16px',
                         fontStyle: 'normal',
-                        fontWeight: 400,
+                        fontWeight: activeTimelineIndex === index ? 500 : 400,
                         lineHeight: '28.619px'
                       }}
                     >
