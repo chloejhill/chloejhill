@@ -222,16 +222,18 @@
   flex: 0 0 auto;
   width: 314.121px;
   height: 362.344px;
-  background: #d9d9d9;
+  background: #ffffff;
+  border: 1px solid rgba(75, 62, 67, 0.14);
   scroll-snap-align: center;
   position: relative;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   border-radius: 8px;
 }
 
 .writingsCoverImg {
   object-fit: cover;
+  object-position: top center;
 }
 
 .writingsCardIcon {
@@ -844,8 +846,10 @@
   max-width: 260px;
   justify-self: center;
   aspect-ratio: 3 / 4.2;
-  background: #d9d9d9;
+  background: #ffffff;
+  border: 1px solid rgba(75, 62, 67, 0.14);
   border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -855,6 +859,7 @@
 
 .booksCoverImg {
   object-fit: cover;
+  object-position: top center;
 }
 
 .booksPlaceholderIcon {
@@ -1013,7 +1018,7 @@
 
 @media (max-width: 768px) {
 .writingsTrack {
-    gap: 22px;
+    gap: 16px;
     padding: 18px 20px;
     width: auto;
     max-width: none;
@@ -1021,8 +1026,9 @@
   }
 
 .writingsCard {
-    width: 220px;
-    height: 220px;
+    width: min(78vw, 290px);
+    height: auto;
+    aspect-ratio: 314.121 / 362.344;
   }
 
 .futureBanner {
