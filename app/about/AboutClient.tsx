@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
 import styles from './AboutClient.module.css';
 import Navbar from '../components/Navbar';
@@ -21,12 +22,77 @@ export default function AboutClient({
 }: {
   overrides: PageOverrides | null;
 }) {
+  const timelineViewportRef = useRef<HTMLDivElement | null>(null);
+
   const t = (key: string, fallback: string) =>
     overrides?.strings?.[key] || fallback;
   const img = (key: string, fallbackSrc: string) =>
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
+
+  const timelineItems = [
+    {
+      year: '1998-2002',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2003-2007',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2008-2014',
+      active: true,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2015-2020',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2021-present',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2025-2030',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2031-2035',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    },
+    {
+      year: '2036-2040',
+      active: false,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
+    }
+  ] as const;
+
+  const scrollTimeline = (direction: 'left' | 'right') => {
+    const viewport = timelineViewportRef.current;
+    if (!viewport) return;
+
+    const firstCard = viewport.querySelector<HTMLElement>(
+      '[data-timeline-card="true"]'
+    );
+    const track = viewport.firstElementChild as HTMLElement | null;
+    const trackStyles = track ? window.getComputedStyle(track) : null;
+    const gap = trackStyles
+      ? Number.parseFloat(trackStyles.columnGap || trackStyles.gap || '0')
+      : 0;
+    const amount = (firstCard?.getBoundingClientRect().width ?? 280) + gap;
+
+    viewport.scrollBy({
+      left: direction === 'left' ? -amount : amount,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -190,151 +256,117 @@ export default function AboutClient({
         <div className="w-full" style={{ backgroundColor: '#EFEBE7' }}>
           <div className="w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-10 md:py-14">
             {/* Timeline remains hardcoded for now (easy to extend later) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-              <div>
-                <p
-                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
-                >
-                  2003-2007
-                </p>
-                <p
-                  className="max-w-none md:max-w-[226px]"
-                  style={{
-                    color: 'rgba(0, 0, 0, 0.80)',
-                    fontFamily: 'Lora',
-                    fontSize: '16px',
-                    fontStyle: 'normal',
-                    fontWeight: 400,
-                    lineHeight: '28.619px',
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                  commodo id enim id bibendum.
-                </p>
-              </div>
-              <div>
-                <p
-                  className="font-semibold text-[36px] leading-normal text-black mb-4"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
-                >
-                  2008-2014
-                </p>
-                <p
-                  className="max-w-none md:max-w-[226px]"
-                  style={{
-                    color: 'rgba(0, 0, 0, 0.80)',
-                    fontFamily: 'Lora',
-                    fontSize: '16px',
-                    fontStyle: 'normal',
-                    fontWeight: 400,
-                    lineHeight: '28.619px',
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                  commodo id enim id bibendum.
-                </p>
-              </div>
-              <div>
-                <p
-                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
-                >
-                  2015-2020
-                </p>
-                <p
-                  className="max-w-none md:max-w-[226px]"
-                  style={{
-                    color: 'rgba(0, 0, 0, 0.80)',
-                    fontFamily: 'Lora',
-                    fontSize: '16px',
-                    fontStyle: 'normal',
-                    fontWeight: 400,
-                    lineHeight: '28.619px',
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                  commodo id enim id bibendum.
-                </p>
-              </div>
-              <div>
-                <p
-                  className="font-normal text-[30.126px] leading-normal text-black/80 mb-4"
-                  style={{ fontFamily: 'var(--font-lora), serif' }}
-                >
-                  2021-present
-                </p>
-                <p
-                  className="max-w-none md:max-w-[226px]"
-                  style={{
-                    color: 'rgba(0, 0, 0, 0.80)',
-                    fontFamily: 'Lora',
-                    fontSize: '16px',
-                    fontStyle: 'normal',
-                    fontWeight: 400,
-                    lineHeight: '28.619px',
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                  commodo id enim id bibendum.
-                </p>
+            <div
+              ref={timelineViewportRef}
+              className="overflow-x-auto scroll-smooth snap-x snap-mandatory"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <div className="grid grid-flow-col gap-6 min-w-full auto-cols-[100%] sm:auto-cols-[calc((100%-24px)/2)] lg:auto-cols-[calc((100%-72px)/4)]">
+                {timelineItems.map((item) => (
+                  <article
+                    key={item.year}
+                    data-timeline-card="true"
+                    className="snap-start"
+                  >
+                    <p
+                      className={
+                        item.active
+                          ? 'font-semibold text-[36px] leading-normal text-black mb-4'
+                          : 'font-normal text-[30.126px] leading-normal text-black/80 mb-4'
+                      }
+                      style={{ fontFamily: 'var(--font-lora), serif' }}
+                    >
+                      {item.year}
+                    </p>
+                    <p
+                      className="max-w-none md:max-w-[226px]"
+                      style={{
+                        color: 'rgba(0, 0, 0, 0.80)',
+                        fontFamily: 'Lora',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '28.619px'
+                      }}
+                    >
+                      {item.text}
+                    </p>
+                  </article>
+                ))}
               </div>
             </div>
 
             <div className="flex justify-center items-center gap-4 mt-10">
               {/* arrows unchanged */}
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <button
+                type="button"
+                onClick={() => scrollTimeline('left')}
+                aria-label="Scroll timeline left"
+                className="cursor-pointer"
               >
-                <g opacity="0.5">
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22.5938 17.6987H11.6732"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M16.9453 12.0503L11.2968 17.6988L16.9453 23.3474"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                   <circle
-                    cx="19.8561"
-                    cy="19.8561"
-                    r="19.8561"
-                    transform="matrix(-1 0 0 1 39.7124 0)"
-                    fill="#ECE8DF"
+                    cx="17.3222"
+                    cy="17.3222"
+                    r="16.3222"
+                    transform="matrix(-1 0 0 1 34.6445 0)"
+                    stroke="white"
+                    strokeWidth="2"
                   />
-                  <path
-                    d="M25.8999 20.2878H13.3819"
-                    stroke="#1F1F1F"
-                    strokeWidth="1.29496"
-                  />
-                  <path
-                    d="M19.4248 13.8132L12.95 20.2881L19.4248 26.7629"
-                    stroke="#1F1F1F"
-                    strokeWidth="1.29496"
-                  />
-                </g>
-              </svg>
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTimeline('right')}
+                aria-label="Scroll timeline right"
+                className="cursor-pointer"
               >
-                <circle
-                  cx="19.8561"
-                  cy="19.8561"
-                  r="19.4245"
-                  stroke="#343433"
-                  strokeWidth="0.863309"
-                />
-                <path
-                  d="M13.8125 20.2878H26.3305"
-                  stroke="#343433"
-                  strokeWidth="1.29496"
-                />
-                <path
-                  d="M20.2876 13.8132L26.7624 20.2881L20.2876 26.7629"
-                  stroke="#343433"
-                  strokeWidth="1.29496"
-                />
-              </svg>
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.0508 17.6987H22.9713"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M17.6992 12.0503L23.3478 17.6988L17.6992 23.3474"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <circle
+                    cx="17.3222"
+                    cy="17.3222"
+                    r="16.3222"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
