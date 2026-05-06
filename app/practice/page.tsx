@@ -242,25 +242,31 @@ export default function Home() {
     number | null
   >(null);
   const [testimonialStartIndex, setTestimonialStartIndex] = useState(0);
+  const totalTestimonials = testimonials.length;
+  const normalizedTestimonialIndex =
+    totalTestimonials > 0
+      ? ((testimonialStartIndex % totalTestimonials) + totalTestimonials) %
+        totalTestimonials
+      : 0;
 
   const visibleTestimonials = useMemo(() => {
     const perView = 3;
-    const total = testimonials.length;
+    const total = totalTestimonials;
     if (total === 0) return [];
-    const safeStart = ((testimonialStartIndex % total) + total) % total;
+    const safeStart = normalizedTestimonialIndex;
 
     return Array.from({ length: Math.min(perView, total) }).map((_, i) => {
       const idx = (safeStart + i) % total;
       return testimonials[idx];
     });
-  }, [testimonialStartIndex]);
+  }, [normalizedTestimonialIndex, totalTestimonials]);
 
   return (
     <div className={styles.container}>
       <section
         className="relative w-full h-[520px] md:h-[600px] overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)'
+          backgroundColor: '#E9E9E9'
         }}
       >
         <Navbar />
@@ -269,7 +275,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] h-full items-start gap-0 relative">
             <div className="relative z-10 pt-28 md:pt-40">
               <h1
-                className="font-normal text-[50px] leading-[1.2] text-[#4b3e43] whitespace-pre-wrap mb-6 max-w-[750px]"
+                className="font-normal text-[32px] md:text-[50px] leading-[1.15] md:leading-[1.2] text-[#4b3e43] whitespace-pre-wrap mb-6 max-w-[750px]"
                 style={{
                   fontFamily: 'var(--font-lora), serif',
                   fontFeatureSettings: "'liga' off, 'clig' off"
@@ -279,7 +285,7 @@ export default function Home() {
               </h1>
 
               <p
-                className="font-medium text-[25px] leading-normal text-[#4b3e43] w-full max-w-[460px]"
+                className="font-medium text-[18px] md:text-[25px] leading-[1.35] md:leading-normal text-[#4b3e43] w-full max-w-[460px]"
                 style={{ fontFamily: 'var(--font-lora), serif' }}
               >
                 {t(
@@ -287,6 +293,17 @@ export default function Home() {
                   'Where my thinking has been tested, applied, and refined in practice.'
                 )}
               </p>
+
+              <div className="relative lg:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none">
+                <Image
+                  src={img('practice.hero.image', heroImage)}
+                  alt={alt('practice.hero.image', 'Hero')}
+                  fill
+                  className="object-contain object-top"
+                  priority
+                  unoptimized
+                />
+              </div>
             </div>
 
             <div className="relative h-full hidden lg:block">
@@ -715,7 +732,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-0 -mb-24 md:pt-16 md:pb-2 md:-mb-28">
+      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-0 -mb-56 md:pt-16 md:pb-2 md:-mb-28">
         <div className="flex flex-col gap-8 mb-12">
           <h2
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
@@ -744,7 +761,64 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="md:hidden overflow-hidden">
+          <div
+            className="flex transition-transform duration-300 ease-out"
+            style={{
+              transform: `translateX(-${normalizedTestimonialIndex * 100}%)`
+            }}
+          >
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.name} className="w-full shrink-0">
+                <div className="flex flex-col gap-6">
+                  <div className="relative w-[102px] h-[112px]">
+                    {testimonialHeadshots[testimonial.name] ? (
+                      <Image
+                        src={`/images/Testimony%20Headshots/${encodeURIComponent(testimonialHeadshots[testimonial.name])}`}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover rounded-[18px] grayscale contrast-125 opacity-90 mix-blend-multiply"
+                      />
+                    ) : (
+                      <div className="absolute inset-0">
+                        <TestimonialIcon />
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <p
+                      className="font-normal text-[20px] text-black mb-1"
+                      style={{ fontFamily: 'var(--font-lora), serif' }}
+                    >
+                      {testimonial.name}
+                    </p>
+                    <p
+                      className="font-normal text-[14px] leading-normal text-black mb-4"
+                      style={{ fontFamily: 'var(--font-lora), serif' }}
+                    >
+                      {testimonial.role}
+                    </p>
+                    <p
+                      className="font-normal text-[16px] leading-[110%] text-black"
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Lora',
+                        fontSize: '16px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '35px'
+                      }}
+                    >
+                      {testimonial.text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid grid-cols-3 gap-8">
           {visibleTestimonials.map((testimonial) => (
             <div key={testimonial.name} className="flex flex-col gap-6">
               <div className="relative w-[102px] h-[112px]">
@@ -794,7 +868,7 @@ export default function Home() {
       </section>
 
       <section className="relative w-full overflow-hidden lg:overflow-visible">
-        <div className="relative w-full h-[620px] md:h-[760px] lg:h-[900px]">
+        <div className="relative w-full h-[1120px] md:h-[760px] lg:h-[900px]">
           <Image
             src="/images/backround2.png"
             alt=""
@@ -803,10 +877,10 @@ export default function Home() {
             unoptimized
           />
           <div className="absolute inset-0 z-10">
-            <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-36 md:pt-56 lg:pt-84">
+            <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-72 md:pt-56 lg:pt-84">
               <div className="pl-4 md:pl-10 lg:pl-20 pr-2 md:pr-4 lg:pr-8">
                 <h2
-                  className="font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-6 md:mb-8"
+                  className="pt-12 md:pt-0 font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-6 md:mb-8"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
                   Connecting back to Thinking
@@ -839,7 +913,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div
-                  className="space-y-2 font-normal text-[20px] md:text-[24px] leading-[30px] md:leading-[35px] text-[#979797]"
+                  className="space-y-2 font-normal text-[17px] md:text-[24px] leading-[26px] md:leading-[35px] text-[#979797]"
                   style={{
                     fontFamily: 'var(--font-lora), serif',
                     fontFeatureSettings: "'liga' off, 'clig' off",
