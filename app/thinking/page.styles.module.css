@@ -232,8 +232,8 @@
 }
 
 .writingsCoverImg {
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .writingsCardIcon {
@@ -858,8 +858,8 @@
 }
 
 .booksCoverImg {
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .booksPlaceholderIcon {
