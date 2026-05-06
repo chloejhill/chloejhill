@@ -68,8 +68,11 @@ export default function Articles() {
         {/* Main Content */}
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-0">
           <h1
-            className="font-sans font-normal text-[48px] leading-[normal] text-black mb-16"
-            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
+            className="font-normal text-[40px] leading-normal text-black mb-16"
+            style={{
+              fontFamily: 'var(--font-serif), serif',
+              fontFeatureSettings: "'liga' off, 'clig' off"
+            }}
           >
             {t('articles.hero.title', 'Latest Insights')}
           </h1>
@@ -80,7 +83,13 @@ export default function Articles() {
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                   {/* Article Content */}
                   <div className="flex-1 max-w-[812px]">
-                    <h2 className="font-sans font-medium text-[23.462px] leading-[31.993px] text-black mb-5 capitalize">
+                    <h2
+                      className="font-normal text-[24px] md:text-[30px] leading-tight text-black mb-5 capitalize"
+                      style={{
+                        fontFamily: 'var(--font-serif), serif',
+                        fontFeatureSettings: "'liga' off, 'clig' off"
+                      }}
+                    >
                       {article.title}
                     </h2>
                     <p
@@ -98,7 +107,8 @@ export default function Articles() {
                     </p>
                     <a
                       href={`/articles/${article.slug}`}
-                      className="inline-block font-sans font-normal text-[18px] text-[#4F0E0E] relative group"
+                      className="inline-block font-normal text-[18px] text-[#4F0E0E] relative group"
+                      style={{ fontFamily: 'var(--font-lora), serif' }}
                     >
                       Read More
                       <span className="absolute bottom-[-8px] left-0 w-full h-px bg-[#4F0E0E]"></span>

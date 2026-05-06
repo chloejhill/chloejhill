@@ -74,10 +74,17 @@ export default function ArticleDetail() {
     return (
       <div className={styles.container}>
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 py-16 text-center">
-          <h1 className="font-sans font-bold text-4xl mb-4">
+          <h1
+            className="font-normal text-[30px] md:text-[36.151px] leading-normal text-black mb-4"
+            style={{ fontFamily: 'var(--font-lora), serif' }}
+          >
             Article Not Found
           </h1>
-          <Link href="/articles" className="text-[#4F0E0E] underline">
+          <Link
+            href="/articles"
+            className="text-[#4F0E0E] underline"
+            style={{ fontFamily: 'var(--font-lora), serif' }}
+          >
             Back to Articles
           </Link>
         </div>
@@ -92,7 +99,10 @@ export default function ArticleDetail() {
       {/* Main Content */}
       <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16 mb-[55px]">
         {/* Breadcrumb */}
-        <p className="font-sans font-normal text-[14px] leading-[1.7] text-black mb-8">
+        <p
+          className="font-normal text-[14px] leading-[1.7] text-black mb-8"
+          style={{ fontFamily: 'var(--font-lora), serif' }}
+        >
           <Link href="/articles" className="hover:underline">
             Articles
           </Link>{' '}
@@ -102,10 +112,10 @@ export default function ArticleDetail() {
         {/* Article Header */}
         <div className="mb-8 max-w-[770px] mx-auto">
           <h1
-            className="font-sans text-[36px] leading-[1.2] text-black text-center mb-8"
+            className="font-normal text-[40px] leading-normal text-black mb-8"
             style={{
+              fontFamily: 'var(--font-serif), serif',
               fontFeatureSettings: "'liga' off, 'clig' off"
-              // fontWeight: 700
             }}
           >
             {article.title}
@@ -138,25 +148,33 @@ export default function ArticleDetail() {
               </div>
               <div>
                 <p
-                  className="font-sans font-medium text-[16px] text-black"
+                  className="font-normal text-[16px] text-black"
                   style={{
+                    fontFamily: 'var(--font-lora), serif',
                     lineHeight: '1.2',
                     marginBottom: '5px',
-                    fontWeight: '500'
+                    fontWeight: 500
                   }}
                 >
                   Chloe Hill
                 </p>
                 <p
-                  className="font-sans font-normal text-[13px] text-black/60"
-                  style={{ lineHeight: '1.2', marginTop: '0' }}
+                  className="font-normal text-[13px] text-black/60"
+                  style={{
+                    fontFamily: 'var(--font-lora), serif',
+                    lineHeight: '1.2',
+                    marginTop: '0'
+                  }}
                 >
                   {article.date}
                 </p>
               </div>
             </div>
             <div className="text-right">
-              <p className="font-sans font-medium text-[16px] leading-[1.7] text-black">
+              <p
+                className="font-normal text-[16px] leading-[1.7] text-black"
+                style={{ fontFamily: 'var(--font-lora), serif' }}
+              >
                 <span className="font-medium">Theme: </span>
                 <span className="font-normal">{article.theme}</span>
               </p>
@@ -216,7 +234,7 @@ export default function ArticleDetail() {
 
         {/* Article Content */}
         <div className="max-w-[770px] mx-auto">
-          <div className="font-sans font-normal text-[17px] leading-[110%] text-black whitespace-pre-wrap mb-16">
+          <div className="font-normal text-[17px] leading-[110%] text-black whitespace-pre-wrap mb-16">
             {article.content.split('\n\n').map((paragraph, index) => (
               <p
                 key={index}
@@ -238,8 +256,11 @@ export default function ArticleDetail() {
           {/* Share Section */}
           <div className="text-center mb-16">
             <p
-              className="font-sans font-medium text-[20px] leading-[1.8] mb-6"
-              style={{ color: '#4F0E0E' }}
+              className="font-medium text-[20px] leading-[1.8] mb-6"
+              style={{
+                fontFamily: 'var(--font-lora), serif',
+                color: '#4F0E0E'
+              }}
             >
               Share
             </p>
@@ -319,8 +340,11 @@ export default function ArticleDetail() {
         {/* Our Latest Insights Section */}
         <div className="mt-24">
           <h2
-            className="font-sans font-normal text-[35px] leading-[65.954px] text-black text-center mb-16"
-            style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
+            className="font-normal text-[40px] leading-normal text-black text-center mb-16"
+            style={{
+              fontFamily: 'var(--font-serif), serif',
+              fontFeatureSettings: "'liga' off, 'clig' off"
+            }}
           >
             Our Latest Insights
           </h2>
@@ -356,8 +380,11 @@ export default function ArticleDetail() {
                   </div>
                 </div>
                 <h3
-                  className="font-sans text-[20px] leading-[32px] text-black mb-4 capitalize"
-                  style={{ fontWeight: 700 }}
+                  className="font-normal text-[24px] leading-tight text-black mb-4 capitalize"
+                  style={{
+                    fontFamily: 'var(--font-serif), serif',
+                    fontFeatureSettings: "'liga' off, 'clig' off"
+                  }}
                 >
                   {relatedArticle.title}
                 </h3>
@@ -376,8 +403,11 @@ export default function ArticleDetail() {
                 </p>
                 <Link
                   href={`/articles/${relatedArticle.slug}`}
-                  className="inline-block font-sans font-normal text-[18px] relative group"
-                  style={{ color: '#4F0E0E' }}
+                  className="inline-block font-normal text-[18px] relative group"
+                  style={{
+                    fontFamily: 'var(--font-lora), serif',
+                    color: '#4F0E0E'
+                  }}
                 >
                   <span className="relative" style={{ color: '#4F0E0E' }}>
                     Learn More
