@@ -622,9 +622,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-14 md:py-24 bg-[#EFEBE7]">
-        <div className="w-full max-w-[1448px] mx-auto pl-0 pr-4 md:pr-8 lg:pr-16 grid grid-cols-1 lg:grid-cols-[35%_65%] gap-10 items-start">
-          <div className="relative h-[420px] lg:h-[620px] -mt-20 lg:-mt-40">
+      <section className="w-full py-6 md:py-24 bg-[#EFEBE7] px-4 md:px-0">
+        <div className="relative w-full max-w-[1448px] mx-auto min-h-[700px] sm:min-h-[760px] lg:min-h-0 pl-0 pr-4 md:pr-8 lg:pr-16 lg:grid lg:grid-cols-[35%_65%] gap-8 md:gap-10 items-start">
+          <div className="absolute z-0 -ml-4 w-[calc(100%+1rem)] max-w-[640px] h-[640px] sm:h-[700px] top-6 sm:top-8 md:-ml-10 md:w-[calc(100%+2.5rem)] lg:relative lg:max-w-none lg:-ml-16 lg:w-[calc(100%+4rem)] lg:h-[820px] lg:top-auto lg:-mt-48 xl:-ml-20 xl:w-[calc(100%+5rem)] 2xl:-ml-24 2xl:w-[calc(100%+6rem)]">
             <Image
               src="/images/illustrations.png"
               alt="Decorative pattern"
@@ -633,7 +633,7 @@ export default function Home() {
               unoptimized
             />
           </div>
-          <div>
+          <div className="relative z-10 pt-[16px] sm:pt-[32px] lg:pt-0 lg:col-start-2">
             <h2
               className="font-normal text-[30px] md:text-[40px] leading-tight md:leading-[35px] text-black mb-8 md:mb-10"
               style={{ fontFamily: 'var(--font-lora), serif' }}

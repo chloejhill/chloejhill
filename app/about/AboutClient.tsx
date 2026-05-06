@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './AboutClient.module.css';
 import Navbar from '../components/Navbar';
@@ -23,6 +23,7 @@ export default function AboutClient({
   overrides: PageOverrides | null;
 }) {
   const timelineViewportRef = useRef<HTMLDivElement | null>(null);
+  const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
 
   const t = (key: string, fallback: string) =>
     overrides?.strings?.[key] || fallback;
@@ -34,45 +35,84 @@ export default function AboutClient({
   const timelineItems = [
     {
       year: '1998-2002',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2003-2007',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2008-2014',
-      active: true,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2015-2020',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2021-present',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2025-2030',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2031-2035',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     },
     {
       year: '2036-2040',
-      active: false,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
     }
   ] as const;
+
+  useEffect(() => {
+    const viewport = timelineViewportRef.current;
+    if (!viewport) return;
+
+    let rafId: number | null = null;
+
+    const updateCenteredTimeline = () => {
+      const cards = Array.from(
+        viewport.querySelectorAll<HTMLElement>('[data-timeline-card="true"]')
+      );
+      if (!cards.length) return;
+
+      const viewportRect = viewport.getBoundingClientRect();
+      const viewportCenterX = viewportRect.left + viewportRect.width / 2;
+
+      let closestIdx = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenterX - viewportCenterX);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIdx = idx;
+        }
+      });
+
+      setActiveTimelineIndex(closestIdx);
+    };
+
+    const onScroll = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateCenteredTimeline);
+    };
+
+    updateCenteredTimeline();
+    viewport.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateCenteredTimeline);
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      viewport.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateCenteredTimeline);
+    };
+  }, []);
 
   const scrollTimeline = (direction: 'left' | 'right') => {
     const viewport = timelineViewportRef.current;
@@ -262,7 +302,7 @@ export default function AboutClient({
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               <div className="grid grid-flow-col gap-6 min-w-full auto-cols-[100%] sm:auto-cols-[calc((100%-24px)/2)] lg:auto-cols-[calc((100%-72px)/4)]">
-                {timelineItems.map((item) => (
+                {timelineItems.map((item, index) => (
                   <article
                     key={item.year}
                     data-timeline-card="true"
@@ -270,8 +310,8 @@ export default function AboutClient({
                   >
                     <p
                       className={
-                        item.active
-                          ? 'font-semibold text-[36px] leading-normal text-black mb-4'
+                        activeTimelineIndex === index
+                          ? 'font-semibold text-[30.126px] leading-normal text-black mb-4'
                           : 'font-normal text-[30.126px] leading-normal text-black/80 mb-4'
                       }
                       style={{ fontFamily: 'var(--font-lora), serif' }}
