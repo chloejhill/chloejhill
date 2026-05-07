@@ -449,7 +449,9 @@ export default function Thinking() {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.sectionHeroPad}`}>
+      <section
+        className={`${styles.section} ${styles.sectionHeroPad} ${styles.inquirySection}`}
+      >
         <div className={styles.sectionHeadingCentered}>
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
@@ -460,7 +462,6 @@ export default function Thinking() {
           className={styles.inquiryIntro}
           style={{
             textAlign: 'left',
-            margin: '0 0 34px',
             color: '#000',
             fontFamily: 'Lora',
             fontSize: '16px',
@@ -500,10 +501,7 @@ export default function Thinking() {
         </div>
       </section>
 
-      <section
-        className={styles.empiricalSection}
-        style={{ paddingTop: '34px' }}
-      >
+      <section className={styles.empiricalSection}>
         <div
           className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
         >
@@ -696,7 +694,7 @@ export default function Thinking() {
           className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
           style={{
             background: '#EFEBE7',
-            marginBottom: '56px'
+            marginBottom: 'var(--thinking-block-gap)'
           }}
         >
           <h2 className={styles.empiricalTitle} style={{ color: '#1F1F1F' }}>

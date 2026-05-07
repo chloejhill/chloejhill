@@ -1,6 +1,8 @@
 .container {
   background-color: #ffffff;
   min-height: 100vh;
+  /* Unified vertical rhythm: ribbons (Systems / Future / Transformation) + empirical / writings / AATT tail */
+  --thinking-block-gap: 110px;
 }
 
 .sectionTitle {
@@ -22,6 +24,11 @@
 .sectionHeroPad {
   padding-left: 32px;
   padding-right: 32px;
+}
+
+/* Avoid stacking section padding under Systems Change ribbon (margin handles gap) */
+.section.inquirySection {
+  padding-bottom: 0;
 }
 
 .sectionHeading {
@@ -91,7 +98,7 @@
 
 .inquiryIntro {
   max-width: 1040px;
-  margin: 0 auto 34px;
+  margin: 0 auto 0;
   text-align: center;
   font-family: var(--font-serif), serif;
   font-weight: 400;
@@ -104,12 +111,18 @@
   margin: 0 0 16px;
 }
 
+.inquiryIntro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Space above ribbon; space below comes from .empiricalSection padding-top */
 .inquiryBanner {
   width: 1000px;
   max-width: 100%;
   margin-left: calc(50% - 50vw);
   margin-right: auto;
-  margin-top: 24px;
+  margin-top: var(--thinking-block-gap);
+  margin-bottom: 0;
   background: #d6dcdb;
   height: 300px;
   position: relative;
@@ -148,7 +161,7 @@
 
 .empiricalSection {
   width: 100%;
-  padding: 64px 0;
+  padding: var(--thinking-block-gap) 0 var(--thinking-block-gap);
 }
 
 .empiricalInner {
@@ -187,7 +200,7 @@
 
 .writingsCarousel {
   position: relative;
-  padding: 22px 0 8px;
+  padding: 22px 0 0;
 }
 
 .writingsSection {
@@ -195,6 +208,12 @@
   width: 100%;
   padding-left: 8px;
   padding-right: 8px;
+}
+
+/* Vertical gap to Future Inquiry is on .futureSection only (avoids carousel/track padding stacking) */
+.section.writingsSection {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .writingsViewport {
@@ -214,7 +233,7 @@
 .writingsTrack {
   display: flex;
   gap: 68px;
-  padding: 20px 0;
+  padding: 20px 0 0;
   width: max-content;
 }
 
@@ -295,9 +314,10 @@
   padding-right: min(360px, 42vw);
 }
 
+/* Equal space above & below Future Inquiry ribbon (writings has no bottom padding) */
 .futureSection {
   width: 100%;
-  padding: 32px 0 120px;
+  padding: var(--thinking-block-gap) 0;
 }
 
 .futureBannerLabel {
@@ -332,7 +352,7 @@
   margin-left: auto;
   margin-right: 0;
   padding: 56px 0 56px 64px;
-  margin-bottom: 72px;
+  margin-bottom: 0;
   background: #efebe7;
   position: relative;
   overflow: visible;
@@ -395,8 +415,8 @@
 
 .transformationSection {
   width: 100%;
-  padding: 0 0 62px;
-  margin-top: 20px;
+  padding: var(--thinking-block-gap) 0;
+  margin-top: 0;
 }
 
 .transformationBanner {
@@ -446,7 +466,7 @@
 .aattSection {
   width: 100%;
   background: #fff;
-  padding: 24px 0 56px;
+  padding: 0 0 var(--thinking-block-gap);
 }
 
 .aattList {
@@ -868,18 +888,18 @@
 }
 
 @media (max-width: 768px) {
-.empiricalInner {
+  .empiricalInner {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     padding: 28px 20px;
   }
 
-.empiricalInnerWide {
+  .empiricalInnerWide {
     width: 100%;
   }
 
-.innerBanner {
+  .innerBanner {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
@@ -892,30 +912,30 @@
     align-items: center;
   }
 
-.innerDimensionSection {
+  .innerDimensionSection {
     padding: 0;
   }
 
-.innerBannerIcon {
+  .innerBannerIcon {
     position: static;
     transform: none;
   }
 
-.innerBannerImg {
+  .innerBannerImg {
     height: auto;
     max-height: 120px;
     width: auto;
     object-fit: contain;
   }
 
-.innerBannerLabel {
+  .innerBannerLabel {
     font-size: 32px;
     text-align: left;
     flex: 1 1 auto;
     min-width: 0;
   }
 
-.innerDimensionInner {
+  .innerDimensionInner {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -924,19 +944,19 @@
     gap: 28px;
   }
 
-.innerDimensionCopy {
+  .innerDimensionCopy {
     max-width: none;
   }
 
-.innerDimensionHeading {
+  .innerDimensionHeading {
     max-width: none;
   }
 
-.innerDimensionBody {
+  .innerDimensionBody {
     max-width: none;
   }
 
-.innerDotsCard {
+  .innerDotsCard {
     min-width: 0;
     width: 100%;
     max-width: 360px;
@@ -944,14 +964,14 @@
     padding: 20px 24px;
   }
 
-.evolutionInner {
+  .evolutionInner {
     grid-template-columns: 1fr;
     padding: 48px 24px 32px;
     min-height: 0;
     gap: 28px;
   }
 
-.evolutionMobileBg {
+  .evolutionMobileBg {
     display: block;
     position: absolute;
     inset: 0;
@@ -960,12 +980,12 @@
     overflow: hidden;
   }
 
-.evolutionMobileBgImg {
+  .evolutionMobileBgImg {
     object-fit: cover;
     object-position: center;
   }
 
-.evolutionCopy {
+  .evolutionCopy {
     justify-self: stretch;
     width: 100%;
     max-width: none;
@@ -974,42 +994,42 @@
     padding-right: 8px;
   }
 
-.evolutionTitle {
+  .evolutionTitle {
     margin-bottom: 16px;
   }
 
-.evolutionFigure {
+  .evolutionFigure {
     display: none;
   }
 
-.evolutionLinks {
+  .evolutionLinks {
     margin-top: 0;
     padding-top: 72px;
     gap: 12px;
   }
 
-.evolutionBody {
+  .evolutionBody {
     font-size: 16px;
     line-height: 35px;
   }
 
-.evolutionLink {
+  .evolutionLink {
     font-size: 14px;
   }
 
-.booksSection {
+  .booksSection {
     background-size: cover;
     background-position: top center;
     padding: clamp(72px, 26vw, 160px) 20px 40px;
   }
 
-.booksGrid {
+  .booksGrid {
     grid-template-columns: 1fr;
     max-width: none;
     width: 100%;
   }
 
-.booksCard {
+  .booksCard {
     max-width: none;
     width: 100%;
     justify-self: stretch;
@@ -1017,21 +1037,21 @@
 }
 
 @media (max-width: 768px) {
-.writingsTrack {
+  .writingsTrack {
     gap: 16px;
-    padding: 18px 20px;
+    padding: 18px 20px 0;
     width: auto;
     max-width: none;
     margin: 0;
   }
 
-.writingsCard {
+  .writingsCard {
     width: min(78vw, 290px);
     height: auto;
     aspect-ratio: 314.121 / 362.344;
   }
 
-.futureBanner {
+  .futureBanner {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: 0;
@@ -1046,11 +1066,11 @@
     justify-content: flex-start;
   }
 
-.futureBannerLabel {
+  .futureBannerLabel {
     padding-right: 0;
   }
 
-.futureBannerWaves {
+  .futureBannerWaves {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -1059,38 +1079,38 @@
     margin-top: 0;
   }
 
-.futureBannerImg {
+  .futureBannerImg {
     width: min(272px, 68vw);
     max-height: 104px;
   }
 
-.transcendentalSection {
+  .transcendentalSection {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     padding: 28px 20px;
   }
 
-.transcendentalLeaf {
+  .transcendentalLeaf {
     position: static;
     width: min(100%, 260px);
     margin: 24px auto 0;
     pointer-events: auto;
   }
 
-.transcendentalLeafImg {
+  .transcendentalLeafImg {
     width: 100%;
     width: 100%;
     height: auto;
     margin-left: 0;
   }
 
-.transcendentalContent {
+  .transcendentalContent {
     max-width: none;
     padding-right: 0;
   }
 
-.transcendentalContent {
+  .transcendentalContent {
     font-size: 14px;
     text-align: left;
     align-items: flex-start;
@@ -1098,7 +1118,7 @@
     max-width: none;
   }
 
-.transformationBanner {
+  .transformationBanner {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     height: 130px;
@@ -1106,52 +1126,52 @@
     padding-left: var(--transformation-icon-slot);
   }
 
-.transformationIcon {
+  .transformationIcon {
     left: 0;
     width: var(--transformation-icon-slot);
     height: 100%;
   }
 
-.transformationIcon svg {
+  .transformationIcon svg {
     width: 120px;
     height: 112px;
   }
 
-.aattSection {
-    padding: 18px 0 22px;
+  .aattSection {
+    padding: 0 0 22px;
   }
 
-.aattItem {
+  .aattItem {
     padding: 26px 0;
   }
 
-.aattItemInner {
+  .aattItemInner {
     grid-template-columns: 1fr;
     gap: 18px;
   }
 
-.aattIconWrap {
+  .aattIconWrap {
     order: 2;
   }
 
-.aattSection .aattItem .aattItemInner .aattCopy {
+  .aattSection .aattItem .aattItemInner .aattCopy {
     max-width: none;
     text-align: center;
   }
 
-.aattItemSubtitle {
+  .aattItemSubtitle {
     font-size: 20px;
     line-height: 1.4;
   }
 
-.aattItemBody {
+  .aattItemBody {
     font-size: 16px;
     line-height: 35px;
   }
 }
 
 @media (max-width: 768px) {
-.inquiryBanner {
+  .inquiryBanner {
     height: auto;
     padding: 28px 18px;
     width: 100vw;
@@ -1165,16 +1185,16 @@
     gap: 24px;
   }
 
-.inquiryBannerIcon {
+  .inquiryBannerIcon {
     color: rgba(255, 255, 255, 0.9);
   }
 
-.inquiryBannerImg {
+  .inquiryBannerImg {
     width: 120px;
     max-height: 120px;
   }
 
-.inquiryBannerLabel {
+  .inquiryBannerLabel {
     text-align: left;
     flex: 1;
     min-width: 0;
@@ -1182,17 +1202,17 @@
 }
 
 @media (max-width: 1024px) {
-.sectionTitleCentered {
+  .sectionTitleCentered {
     white-space: normal;
   }
 }
 
 @media (max-width: 768px) {
-.section {
+  .section {
     padding: 48px 20px;
   }
 
-.approachTitle,
+  .approachTitle,
   .sectionTitle,
   .sectionTitleCentered,
   .exploreTitle,
@@ -1223,7 +1243,7 @@
   }
 }
 
-/* Mobile ribbons: same height as Systems Change (28+120+28), equal vertical margin */
+/* Mobile ribbons: same min-height; vertical gap from section padding, not banner margins */
 @media (max-width: 768px) {
   .inquiryBanner,
   .futureBanner,
@@ -1234,15 +1254,20 @@
     padding-bottom: 28px;
     padding-left: 18px;
     padding-right: 18px;
-    margin-block: 40px;
     box-sizing: border-box;
     gap: 24px;
     align-items: center;
   }
 
   .inquiryBanner {
-    margin-top: 76px;
-    margin-bottom: 12px;
+    margin-top: var(--thinking-block-gap);
+    margin-bottom: 0;
+  }
+
+  .futureBanner,
+  .transformationBanner {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .innerBanner {
@@ -1265,25 +1290,24 @@
   }
 
   .futureSection {
-    padding: 0;
-    padding-bottom: 56px;
+    padding: var(--thinking-block-gap) 0;
   }
 
   .transformationSection {
-    padding: 18px 0 40px;
+    padding: var(--thinking-block-gap) 0;
     margin: 0;
   }
 }
 
 @media (min-width: 768px) {
-.sectionHeroPad {
+  .sectionHeroPad {
     padding-left: 64px;
     padding-right: 64px;
   }
 }
 
 @media (min-width: 1024px) {
-.sectionHeroPad {
+  .sectionHeroPad {
     padding-left: 128px;
     padding-right: 128px;
   }

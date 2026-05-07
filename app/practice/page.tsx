@@ -264,12 +264,12 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <section
-        className="relative w-full h-[520px] md:h-[600px] overflow-hidden bg-[#E9E9E9] lg:bg-[#E2E2E2]"
+        className="relative w-full h-[520px] md:h-[600px] overflow-hidden bg-[#E9E9E9] md:bg-[#E2E2E2]"
       >
         <Navbar />
 
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] h-full items-start gap-0 relative">
+          <div className="grid h-full grid-cols-1 grid-rows-[minmax(0,1fr)] gap-0 md:grid-cols-[60%_40%] relative">
             <div className="relative z-10 pt-28 md:pt-40">
               <h1
                 className="font-normal text-[32px] md:text-[50px] leading-[1.15] md:leading-[1.2] text-[#4b3e43] whitespace-pre-wrap mb-6 max-w-[750px]"
@@ -291,7 +291,7 @@ export default function Home() {
                 )}
               </p>
 
-              <div className="relative lg:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none isolate">
+              <div className="relative md:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none isolate">
                 <Image
                   src={img('practice.hero.image', heroImage)}
                   alt={alt('practice.hero.image', 'Hero')}
@@ -337,32 +337,24 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative z-0 h-full hidden lg:block overflow-visible">
-              {/* CHANGED: 
-            1. Removed 'pb-16' (This eliminates the gap at the bottom).
-            2. Increased width to 'w-[160%]' (Scales image up so it reaches higher).
-            3. Adjusted right to '-right-40' (Balances the increased width).
-            4. Kept 'items-end' so it stays anchored to the bottom.
-        */}
-              <div className="absolute -right-40 top-0 bottom-0 w-[160%] max-w-none flex items-end -translate-x-2">
+            <div className="relative z-0 hidden min-h-0 h-full md:block overflow-visible">
+              {/* Row fills hero height; image uses object-bottom so the bitmap sits on the hero baseline. */}
+              <div className="absolute -right-40 top-0 bottom-0 flex w-[160%] max-w-none items-stretch -translate-x-2">
                 <Image
                   src={img('practice.hero.image', heroImage)}
                   alt={alt('practice.hero.image', 'Hero')}
                   width={1204}
                   height={723}
-                  className="object-contain w-full h-full relative z-0"
+                  className="relative z-0 h-full w-full object-contain object-bottom"
                   priority
                   unoptimized
                 />
-                {/* Desktop only: soft left edge blend into hero bg. Stays inside image column (z-0); text column is z-10 so it never fades. */}
+                {/* Desktop: feather only the seam — solid hero bg at the true edge, then transparent (no dark mask over the photo). */}
                 <div
-                  className="pointer-events-none absolute left-0 top-0 bottom-0 z-1 w-[min(320px,38%)]"
+                  className="pointer-events-none absolute left-0 top-0 bottom-0 z-1 w-[clamp(72px,11vw,120px)]"
                   style={{
-                    backgroundColor: '#E2E2E2',
-                    maskImage:
-                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)'
+                    background:
+                      'linear-gradient(90deg, #E2E2E2 0%, rgba(226, 226, 226, 0.55) 38%, rgba(226, 226, 226, 0) 100%)'
                   }}
                   aria-hidden
                 />
