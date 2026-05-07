@@ -264,10 +264,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <section
-        className="relative w-full h-[520px] md:h-[600px] overflow-hidden"
-        style={{
-          backgroundColor: '#E9E9E9'
-        }}
+        className="relative w-full h-[520px] md:h-[600px] overflow-hidden bg-[#E9E9E9] lg:bg-[#E2E2E2]"
       >
         <Navbar />
 
@@ -294,48 +291,60 @@ export default function Home() {
                 )}
               </p>
 
-              <div className="relative lg:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none">
+              <div className="relative lg:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none isolate">
                 <Image
                   src={img('practice.hero.image', heroImage)}
                   alt={alt('practice.hero.image', 'Hero')}
                   fill
-                  className="object-contain object-top"
+                  className="z-0 object-contain object-top"
                   priority
                   unoptimized
+                />
+                {/* Mobile: match desktop-style edge blend into hero bg (#E9E9E9); contained to image box so subtitle text above is unaffected. */}
+                <div
+                  className="pointer-events-none absolute left-0 top-0 bottom-0 z-1 w-[min(140px,32%)]"
+                  style={{
+                    backgroundColor: '#E9E9E9',
+                    maskImage:
+                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)',
+                    WebkitMaskImage:
+                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)'
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute right-0 top-0 bottom-0 z-1 w-[min(140px,32%)]"
+                  style={{
+                    backgroundColor: '#E9E9E9',
+                    maskImage:
+                      'linear-gradient(to left, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)',
+                    WebkitMaskImage:
+                      'linear-gradient(to left, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)'
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute left-0 right-0 top-0 z-1 h-[min(72px,22%)]"
+                  style={{
+                    backgroundColor: '#E9E9E9',
+                    maskImage:
+                      'linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)',
+                    WebkitMaskImage:
+                      'linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)'
+                  }}
+                  aria-hidden
                 />
               </div>
             </div>
 
-            <div className="relative h-full hidden lg:block">
+            <div className="relative z-0 h-full hidden lg:block overflow-visible">
               {/* CHANGED: 
             1. Removed 'pb-16' (This eliminates the gap at the bottom).
             2. Increased width to 'w-[160%]' (Scales image up so it reaches higher).
             3. Adjusted right to '-right-40' (Balances the increased width).
             4. Kept 'items-end' so it stays anchored to the bottom.
         */}
-              <div className="absolute -right-40 top-0 bottom-0 w-[160%] max-w-none flex items-end">
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[400px] pointer-events-none z-10"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)',
-                    maskImage:
-                      'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%)'
-                  }}
-                />
-                <div
-                  className="absolute left-0 top-0 right-0 h-[100px] pointer-events-none z-10"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, #E7E7E7 41.09%, #DCDCDC 100%)',
-                    maskImage:
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.1) 80%, transparent 100%)',
-                    WebkitMaskImage:
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.1) 80%, transparent 100%)'
-                  }}
-                />
+              <div className="absolute -right-40 top-0 bottom-0 w-[160%] max-w-none flex items-end -translate-x-2">
                 <Image
                   src={img('practice.hero.image', heroImage)}
                   alt={alt('practice.hero.image', 'Hero')}
@@ -344,6 +353,18 @@ export default function Home() {
                   className="object-contain w-full h-full relative z-0"
                   priority
                   unoptimized
+                />
+                {/* Desktop only: soft left edge blend into hero bg. Stays inside image column (z-0); text column is z-10 so it never fades. */}
+                <div
+                  className="pointer-events-none absolute left-0 top-0 bottom-0 z-1 w-[min(320px,38%)]"
+                  style={{
+                    backgroundColor: '#E2E2E2',
+                    maskImage:
+                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)',
+                    WebkitMaskImage:
+                      'linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%)'
+                  }}
+                  aria-hidden
                 />
               </div>
             </div>
