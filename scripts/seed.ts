@@ -110,7 +110,7 @@ const pageSeeds: SeedPage[] = [
       {
         key: 'practice.hero.subtitle',
         value:
-          'Where my thinking has been  tested, applied, and refined in practice.'
+          'Where my thinking has been tested, applied, and refined in practice.'
       }
     ]
   },
