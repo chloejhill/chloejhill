@@ -29,6 +29,10 @@ export default function ContactClient({
     email: '',
     message: ''
   });
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,10 +41,41 @@ export default function ContactClient({
       ...formData,
       [e.target.name]: e.target.value
     });
+    if (submitStatus === 'success' || submitStatus === 'error') {
+      setSubmitStatus('idle');
+      setSubmitError(null);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitStatus('loading');
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+      };
+      if (!res.ok) {
+        setSubmitStatus('error');
+        setSubmitError(data.error || 'Something went wrong. Please try again.');
+        return;
+      }
+      setSubmitStatus('success');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+      });
+    } catch {
+      setSubmitStatus('error');
+      setSubmitError('Network error. Please try again.');
+    }
   };
 
   return (
@@ -185,13 +220,28 @@ export default function ContactClient({
                   />
                 </div>
 
+                {(submitStatus === 'success' || submitStatus === 'error') && (
+                  <p
+                    className="font-sans font-normal text-[16px] leading-[24px]"
+                    style={{
+                      color: submitStatus === 'success' ? '#b8e6b8' : '#ffb4b4'
+                    }}
+                    role={submitStatus === 'error' ? 'alert' : undefined}
+                  >
+                    {submitStatus === 'success'
+                      ? 'Thank you — your message was sent.'
+                      : submitError}
+                  </p>
+                )}
+
                 <div className="flex justify-start">
                   <button
                     type="submit"
-                    className="bg-white border-[1.333px] border-white px-[36px] rounded-[40px] font-sans font-normal text-[15px] leading-[18px] text-[#343433] hover:bg-transparent hover:text-white transition-colors"
+                    disabled={submitStatus === 'loading'}
+                    className="bg-white border-[1.333px] border-white px-[36px] rounded-[40px] font-sans font-normal text-[15px] leading-[18px] text-[#343433] hover:bg-transparent hover:text-white transition-colors disabled:opacity-50 disabled:pointer-events-none"
                     style={{ paddingTop: '7px', paddingBottom: '7px' }}
                   >
-                    Submit
+                    {submitStatus === 'loading' ? 'Sending…' : 'Submit'}
                   </button>
                 </div>
               </form>
