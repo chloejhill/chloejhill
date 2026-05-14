@@ -5,11 +5,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  TestimonialIcon
-} from '../icons';
+import { ArrowLeftIcon, ArrowRightIcon, TestimonialIcon } from '../icons';
 import type { PageOverrides } from '@/lib/payloadContent';
 import practiceStyles from '../practice/page.module.css';
 
@@ -42,9 +38,9 @@ const engagementCards = [
           leverage points.
         </p>
         <p className="mt-4">
-          <strong>Outcome:</strong> A clearer understanding of how a field works,
-          where meaningful change may be possible, and where capital or influence
-          could be most effectively directed.
+          <strong>Outcome:</strong> A clearer understanding of how a field
+          works, where meaningful change may be possible, and where capital or
+          influence could be most effectively directed.
         </p>
       </>
     )
@@ -109,9 +105,9 @@ const engagementCards = [
 
 const testimonials = [
   {
-    name: 'Rebecca Clements',
-    role: 'Sustainability Consultant',
-    text: 'Chloe is a true visionary who is consistently ahead of the curve, grounded in purpose and extraordinary at guiding organisations to places they could not reach on their own. She’s an absolute inspiration to work with.'
+    name: 'Annelies Seawell',
+    role: 'Sustainability Analyst, IKEA',
+    text: 'Chloe is a creative strategist with deep sustainability expertise and a gift for translating complex systems into compelling stories. A true partner in systems and behaviour change, she inspires better decisions and bold action for a more sustainable future.'
   },
   {
     name: 'Bruce Tonn',
@@ -122,6 +118,11 @@ const testimonials = [
     name: 'Anita de Horde',
     role: 'Executive Director, Finance for Biodiversity Foundation',
     text: 'Chloe brings rare clarity and depth to complex work, making difficult ideas accessible and meaningful. Working with her is seamless, energizing and always strategically powerful.'
+  },
+  {
+    name: 'Rebecca Clements',
+    role: 'Sustainability Consultant',
+    text: 'Chloe is a true visionary who is consistently ahead of the curve, grounded in purpose and extraordinary at guiding organisations to places they could not reach on their own. She’s an absolute inspiration to work with.'
   }
 ];
 
@@ -216,10 +217,7 @@ export default function WorkWithMeClient({
                 style={{ fontFamily: 'var(--font-lora), serif' }}
               >
                 <span className="px-1 -mx-1 bg-[linear-gradient(180deg,transparent_54%,#EFEBE7_54%)] md:bg-none [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
-                  {t(
-                    'workWithMe.ways.title',
-                    'Ways I Typically Support'
-                  )}
+                  {t('workWithMe.ways.title', 'Ways I Typically Support')}
                 </span>
               </h2>
             </div>
@@ -244,10 +242,7 @@ export default function WorkWithMeClient({
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               <span className={practiceStyles.brushHighlight}>
-                {t(
-                  'workWithMe.engagement.title',
-                  'Common Forms of Engagement'
-                )}
+                {t('workWithMe.engagement.title', 'Common Forms of Engagement')}
               </span>
             </h2>
           </div>
@@ -309,9 +304,7 @@ export default function WorkWithMeClient({
               type="button"
               aria-label="Previous testimonials"
               className="hover:opacity-75 transition-opacity"
-              onClick={() =>
-                setTestimonialStartIndex((current) => current - 1)
-              }
+              onClick={() => setTestimonialStartIndex((current) => current - 1)}
             >
               <ArrowLeftIcon />
             </button>
@@ -319,9 +312,7 @@ export default function WorkWithMeClient({
               type="button"
               aria-label="Next testimonials"
               className="hover:opacity-75 transition-opacity"
-              onClick={() =>
-                setTestimonialStartIndex((current) => current + 1)
-              }
+              onClick={() => setTestimonialStartIndex((current) => current + 1)}
             >
               <ArrowRightIcon />
             </button>
