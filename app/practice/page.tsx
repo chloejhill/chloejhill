@@ -24,6 +24,7 @@ const dashImage = '/images/home/dash.png';
 const complexityImage = '/images/practice/complexity.png';
 const workShowsUpImage = '/images/practice/showsup.png';
 const contextImage = '/images/practice/context.png';
+const connectingSectionImage = '/images/practice/connecting.png';
 
 const supportedOrganisationLogos = [
   'CBD.png',
@@ -263,9 +264,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <section
-        className="relative w-full h-[520px] md:h-[600px] overflow-hidden bg-[#E9E9E9] md:bg-[#E2E2E2]"
-      >
+      <section className="relative w-full h-[520px] md:h-[600px] overflow-hidden bg-[#E9E9E9] md:bg-[#E2E2E2]">
         <Navbar />
 
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 h-full">
@@ -652,7 +651,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-6 md:py-24 bg-[#EFEBE7] px-4 md:px-0">
+      <section className="w-full pt-6 pb-0 md:pt-24 md:pb-0 bg-[#EFEBE7] px-4 md:px-0">
         <div className="relative w-full max-w-[1448px] mx-auto min-h-[700px] sm:min-h-[760px] lg:min-h-0 pl-0 pr-4 md:pr-8 lg:pr-16 lg:grid lg:grid-cols-[35%_65%] gap-8 md:gap-10 items-start">
           <div className="absolute z-0 -ml-4 w-[calc(100%+1rem)] max-w-[640px] h-[640px] sm:h-[700px] top-6 sm:top-8 md:-ml-10 md:w-[calc(100%+2.5rem)] lg:relative lg:max-w-none lg:-ml-16 lg:w-[calc(100%+4rem)] lg:h-[820px] lg:top-auto lg:-mt-48 xl:-ml-20 xl:w-[calc(100%+5rem)] 2xl:-ml-24 2xl:w-[calc(100%+6rem)]">
             <Image
@@ -743,9 +742,25 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* Wavy edge into “Connecting back to Thinking” (#EFEBE7 shows in transparent dips) */}
+        <div
+          className="relative z-10 -mx-4 h-12 w-[calc(100%+2rem)] md:mx-0 md:h-16 md:w-full"
+          aria-hidden="true"
+        >
+          <svg
+            className="block h-full w-full text-[#DADFDF]"
+            viewBox="0 0 1440 64"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="currentColor"
+              d="M0,64 L0,34 C120,48 240,18 360,32 C480,46 600,20 720,34 C840,48 960,22 1080,36 C1200,50 1320,26 1440,30 L1440,64 Z"
+            />
+          </svg>
+        </div>
       </section>
 
-      <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-0 -mb-56 md:pt-16 md:pb-2 md:-mb-28">
+      {/* <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-0 -mb-56 md:pt-16 md:pb-2 md:-mb-28">
         <div className="flex flex-col gap-8 mb-12">
           <h2
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
@@ -878,28 +893,28 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      <section className="relative w-full overflow-hidden lg:overflow-visible">
-        <div className="relative w-full h-[1120px] md:h-[760px] lg:h-[900px]">
+      <section className="relative z-10 w-full overflow-hidden lg:overflow-visible -mt-12 md:-mt-16 pb-10 md:pb-14 lg:pb-20">
+        <div className="relative w-full h-[800px] md:h-[520px] lg:h-[560px]">
           <Image
-            src="/images/backround2.png"
+            src={connectingSectionImage}
             alt=""
             fill
-            className="object-fill object-top"
+            className="object-cover object-center z-0"
             unoptimized
           />
           <div className="absolute inset-0 z-10">
-            <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-72 md:pt-56 lg:pt-84">
-              <div className="pl-4 md:pl-10 lg:pl-20 pr-2 md:pr-4 lg:pr-8">
+            <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 md:pt-20 lg:pt-24">
+              <div className="pl-4 md:pl-10 lg:pl-20 pr-2 md:pr-4 lg:pr-8 pb-8 md:pb-6">
                 <h2
-                  className="pt-12 md:pt-0 font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-6 md:mb-8"
+                  className="pt-4 md:pt-0 font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-4 md:mb-8"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
                   Connecting back to Thinking
                 </h2>
                 <div
-                  className="font-normal text-[16px] md:text-[18px] leading-[110%] text-black max-w-[920px] mb-6 md:mb-8"
+                  className="font-normal text-[16px] md:text-[18px] leading-[110%] text-black max-w-[920px] mb-4 md:mb-8"
                   style={{
                     color: '#000',
                     fontFamily: 'Lora',

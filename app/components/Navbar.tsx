@@ -72,6 +72,14 @@ export default function Navbar({
             Practice
           </Link>
           <Link
+            href="/work-with-me"
+            className={`${desktopLinkClassName} ${
+              isActive('/work-with-me') ? 'underline underline-offset-4' : ''
+            }`}
+          >
+            Work with me
+          </Link>
+          <Link
             href="/articles"
             className={`${desktopLinkClassName} ${
               isActive('/articles') ? 'underline underline-offset-4' : ''
@@ -168,6 +176,16 @@ export default function Navbar({
             onClick={() => setIsMenuOpen(false)}
           >
             practice
+          </Link>
+          <Link
+            href="/work-with-me"
+            className={`text-white! hover:opacity-80 transition-colors py-2 ${
+              isActive('/work-with-me') ? 'underline underline-offset-4' : ''
+            }`}
+            style={{ color: '#FFFFFF' }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            work with me
           </Link>
           <Link
             href="/articles"

@@ -51,6 +51,9 @@ export default function Footer() {
             <Link href="/practice" className={styles.footerRightLink}>
               Practice
             </Link>
+            <Link href="/work-with-me" className={styles.footerRightLink}>
+              Work with me
+            </Link>
             <Link href="/about" className={styles.footerRightLink}>
               About
             </Link>
