@@ -127,6 +127,7 @@ const testimonials = [
 ];
 
 const testimonialHeadshots: Record<string, string> = {
+  'Annelies Seawell': 'Annelies.jpeg',
   'Rebecca Clements': 'rebecca-clements.jpg',
   'Bruce Tonn': 'Bruce.jpg',
   'Anita de Horde': 'Anita.jpeg'
