@@ -21,20 +21,6 @@ function loadEnvFile(filePath: string) {
 loadEnvFile(path.join(process.cwd(), '.env.local'));
 loadEnvFile(path.join(process.cwd(), '.env'));
 
-const cacheStub = {
-  match: async () => undefined,
-  put: async () => {},
-  delete: async () => true,
-  keys: async () => []
-};
-
-(globalThis as typeof globalThis & { caches: CacheStorage }).caches = {
-  open: async () => cacheStub as unknown as Cache,
-  has: async () => false,
-  delete: async () => false,
-  keys: async () => []
-} as unknown as CacheStorage;
-
 import { getDatabaseUri } from '../lib/payloadEnv';
 
 async function tableExists(): Promise<boolean> {
@@ -66,24 +52,23 @@ async function tableExists(): Promise<boolean> {
 }
 
 async function pushSchema() {
-  // development + NOT migrating — required for pushDevSchema (see @payloadcms/db-postgres connect)
-  process.env.NODE_ENV = 'development';
-  delete process.env.PAYLOAD_MIGRATING;
+  const { spawnSync } = await import('node:child_process');
+  const pathMod = await import('node:path');
+  const script = pathMod.join(process.cwd(), 'scripts/pushPayloadSchema.mjs');
 
-  const nextEnv = await import('@next/env');
-  const loadEnvConfig =
-    'loadEnvConfig' in nextEnv && typeof nextEnv.loadEnvConfig === 'function'
-      ? nextEnv.loadEnvConfig
-      : (nextEnv as { default: { loadEnvConfig: (dir: string, dev: boolean) => void } })
-          .default.loadEnvConfig;
-  loadEnvConfig(process.cwd(), true);
+  // NODE_ENV must not be "production" for pushDevSchema; set via child env (read-only in TS).
+  const env = { ...process.env, NODE_ENV: 'development' };
+  delete env.PAYLOAD_MIGRATING;
 
-  const { getPayload } = await import('payload');
-  const { default: config } = await import('../payload.config');
+  const result = spawnSync(
+    process.execPath,
+    ['-r', './scripts/payload-preload.cjs', '--import', 'tsx', script],
+    { stdio: 'inherit', env, cwd: process.cwd() }
+  );
 
-  const payload = await getPayload({ config });
-  console.log('[ensurePayloadSchema] Payload schema push complete.');
-  await payload.db.destroy();
+  if (result.status !== 0) {
+    throw new Error(`pushPayloadSchema exited with code ${result.status ?? 1}`);
+  }
 }
 
 async function main() {

@@ -1,5 +1,5 @@
 /**
- * Push Payload schema to Postgres (used by ensurePayloadSchema).
+ * Push Payload schema to Postgres. Run via ensurePayloadSchema (sets NODE_ENV=development).
  */
 import nextEnv from '@next/env';
 import { pathToFileURL } from 'node:url';
@@ -20,9 +20,6 @@ globalThis.caches = {
   delete: async () => false,
   keys: async () => []
 };
-
-process.env.NODE_ENV = 'development';
-process.env.PAYLOAD_MIGRATING = 'true';
 
 const configPath = path.resolve(process.cwd(), 'payload.config.ts');
 const configModule = await import(pathToFileURL(configPath).href);
