@@ -1,5 +1,20 @@
+/* Wrapper around Payload admin (see app/(payload)/layout.tsx) */
 .payload-admin-root {
-  background: #000 !important;
+  min-height: 100vh;
+}
+
+/*
+ * Payload sets html[data-theme=light|dark]. Light theme uses dark label text;
+ * we had forced a dark shell while RootProvider stayed on light, so labels looked unchanged.
+ * RootProvider now defaults to dark; these rules still help labels/descriptions on the document form.
+ */
+html[data-theme='dark'] .payload-admin-root .field-label,
+html[data-theme='dark'] .payload-admin-root .row-label,
+html[data-theme='dark'] .payload-admin-root .document-fields__label,
+html[data-theme='dark'] .payload-admin-root .collapsible-field__label,
+html[data-theme='dark'] .payload-admin-root .array-field__title,
+html[data-theme='dark'] .payload-admin-root .tabs-field__tab-button,
+html[data-theme='dark'] .payload-admin-root .field-description {
   color: #fff !important;
 }
 

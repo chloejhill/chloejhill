@@ -6,7 +6,8 @@ import { useMemo, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ArrowLeftIcon, ArrowRightIcon, TestimonialIcon } from '../icons';
-import type { PageOverrides } from '@/lib/payloadContent';
+import { defaultTestimonials } from '@/lib/defaultContent';
+import type { CmsTestimonial, PageOverrides } from '@/lib/payloadContent';
 import practiceStyles from '../practice/page.module.css';
 
 /** Same as testimonial quote body in "Nice things people say". */
@@ -24,6 +25,26 @@ const testimonialQuoteTextStyle = {
 const heroImage = '/images/workWithMe/hero.png';
 const heroOverlayImage = '/images/workWithMe/overlay.png';
 const ctaProfileImage = '/images/services/starttrans.png';
+
+function TestimonialPhoto({ testimonial }: { testimonial: CmsTestimonial }) {
+  if (!testimonial.photoSrc) {
+    return (
+      <div className="absolute inset-0">
+        <TestimonialIcon />
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={testimonial.photoSrc}
+      alt={testimonial.photoAlt || testimonial.name}
+      fill
+      className="object-cover rounded-[18px] grayscale contrast-125 opacity-90 mix-blend-multiply"
+      unoptimized
+    />
+  );
+}
 
 const engagementCards = [
   {
@@ -103,36 +124,6 @@ const engagementCards = [
   }
 ];
 
-const testimonials = [
-  {
-    name: 'Annelies Seawell',
-    role: 'Sustainability Analyst, IKEA',
-    text: 'Chloe is a creative strategist with deep sustainability expertise and a gift for translating complex systems into compelling stories. A true partner in systems and behaviour change, she inspires better decisions and bold action for a more sustainable future.'
-  },
-  {
-    name: 'Bruce Tonn',
-    role: 'President, Three3',
-    text: 'Chloe brings remarkable depth and originality to futures work — blending intellectual rigor with insight into the human and spiritual dimensions of transformation.'
-  },
-  {
-    name: 'Anita de Horde',
-    role: 'Executive Director, Finance for Biodiversity Foundation',
-    text: 'Chloe brings rare clarity and depth to complex work, making difficult ideas accessible and meaningful. Working with her is seamless, energizing and always strategically powerful.'
-  },
-  {
-    name: 'Rebecca Clements',
-    role: 'Sustainability Consultant',
-    text: 'Chloe is a true visionary who is consistently ahead of the curve, grounded in purpose and extraordinary at guiding organisations to places they could not reach on their own. She’s an absolute inspiration to work with.'
-  }
-];
-
-const testimonialHeadshots: Record<string, string> = {
-  'Annelies Seawell': 'Annelies.jpeg',
-  'Rebecca Clements': 'rebecca-clements.jpg',
-  'Bruce Tonn': 'Bruce.jpg',
-  'Anita de Horde': 'Anita.jpeg'
-};
-
 export default function WorkWithMeClient({
   overrides
 }: {
@@ -144,6 +135,11 @@ export default function WorkWithMeClient({
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
+
+  const testimonials: CmsTestimonial[] =
+    overrides?.blocks?.testimonials?.length
+      ? overrides.blocks.testimonials
+      : defaultTestimonials;
 
   const [testimonialStartIndex, setTestimonialStartIndex] = useState(0);
   const totalTestimonials = testimonials.length;
@@ -327,21 +323,10 @@ export default function WorkWithMeClient({
             }}
           >
             {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className="w-full shrink-0">
+              <div key={testimonial.id} className="w-full shrink-0">
                 <div className="flex flex-col gap-6">
                   <div className="relative w-[102px] h-[112px]">
-                    {testimonialHeadshots[testimonial.name] ? (
-                      <Image
-                        src={`/images/Testimony%20Headshots/${encodeURIComponent(testimonialHeadshots[testimonial.name])}`}
-                        alt={testimonial.name}
-                        fill
-                        className="object-cover rounded-[18px] grayscale contrast-125 opacity-90 mix-blend-multiply"
-                      />
-                    ) : (
-                      <div className="absolute inset-0">
-                        <TestimonialIcon />
-                      </div>
-                    )}
+                    <TestimonialPhoto testimonial={testimonial} />
                   </div>
                   <div>
                     <p
@@ -371,20 +356,9 @@ export default function WorkWithMeClient({
 
         <div className="hidden md:grid grid-cols-3 gap-8">
           {visibleTestimonials.map((testimonial) => (
-            <div key={testimonial.name} className="flex flex-col gap-6">
+            <div key={testimonial.id} className="flex flex-col gap-6">
               <div className="relative w-[102px] h-[112px]">
-                {testimonialHeadshots[testimonial.name] ? (
-                  <Image
-                    src={`/images/Testimony%20Headshots/${encodeURIComponent(testimonialHeadshots[testimonial.name])}`}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover rounded-[18px] grayscale contrast-125 opacity-90 mix-blend-multiply"
-                  />
-                ) : (
-                  <div className="absolute inset-0">
-                    <TestimonialIcon />
-                  </div>
-                )}
+                <TestimonialPhoto testimonial={testimonial} />
               </div>
               <div>
                 <p

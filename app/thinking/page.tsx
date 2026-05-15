@@ -6,6 +6,7 @@ import Link from 'next/link';
 import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { defaultBooks, defaultPublications } from '@/lib/defaultContent';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 const heroLeftImage = '/images/services/heroleft.png';
@@ -232,15 +233,25 @@ export default function Thinking() {
   const WRITING_CARD_GAP = 68;
   const WRITING_PEEK = 72;
 
-  const selectedWritings = useMemo(
-    () =>
-      writingsCovers.map((w) => ({
-        id: w.id,
-        title: w.title,
-        src: w.src
-      })),
-    []
-  );
+  const selectedWritings = useMemo(() => {
+    const fromCms = overrides?.blocks?.publications;
+    if (fromCms?.length) return fromCms;
+    return writingsCovers.map((w) => ({
+      id: w.id,
+      title: w.title,
+      src: w.src
+    }));
+  }, [overrides?.blocks?.publications]);
+
+  const books = useMemo(() => {
+    const fromCms = overrides?.blocks?.books;
+    if (fromCms?.length) return fromCms.slice(0, 3);
+    return currentBooks.map((book) => ({
+      id: book.title,
+      title: book.title,
+      src: book.src
+    }));
+  }, [overrides?.blocks?.books]);
 
   const writingsLoop = useMemo(() => {
     const items = selectedWritings;
@@ -839,8 +850,8 @@ export default function Thinking() {
           </h2>
         </div>
         <div className={styles.booksGrid}>
-          {currentBooks.map((book) => (
-            <div key={book.title} className={styles.booksCard}>
+          {books.map((book) => (
+            <div key={book.id} className={styles.booksCard}>
               <Image
                 src={book.src}
                 alt={book.title}

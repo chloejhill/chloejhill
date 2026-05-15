@@ -10,7 +10,10 @@ export const Media: CollectionConfig = {
     delete: ({ req }) => Boolean(req.user)
   },
   upload: {
-    staticDir: path.resolve(process.cwd(), 'public', 'media'),
+    // Local disk in dev; Vercel Blob plugin disables this when BLOB_READ_WRITE_TOKEN is set
+    ...(process.env.BLOB_READ_WRITE_TOKEN
+      ? {}
+      : { staticDir: path.resolve(process.cwd(), 'public', 'media') }),
     mimeTypes: ['image/*'],
     imageSizes: [
       { name: 'thumbnail', width: 300 },

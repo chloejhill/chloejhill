@@ -12,6 +12,57 @@ const compassImage = '/images/home/compass.png';
 const thinkingImage = '/images/home/thinking.png';
 const dashImage = '/images/home/dash.png';
 
+const HOME_HERO_TITLE_FALLBACK =
+  'Systems Change Researcher,\nWriter, Advisor. Published Futurist.';
+
+/** Always exactly two lines (extra Payload line breaks are merged into line 2). */
+function formatHomeHeroTitle(text: string): [string, string] {
+  const normalized = text
+    .replace(/\\n/g, '\n')
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .trim();
+
+  const parts = normalized
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  let line1: string;
+  let line2: string;
+
+  if (parts.length >= 2) {
+    line1 = parts[0];
+    line2 = parts.slice(1).join(' ');
+  } else if (parts.length === 1) {
+    const single = parts[0];
+    const commaSpace = single.indexOf(', ');
+    if (commaSpace !== -1) {
+      line1 = single.slice(0, commaSpace + 1).trimEnd();
+      line2 = single.slice(commaSpace + 2).trimStart();
+    } else {
+      line1 = single;
+      line2 = '';
+    }
+  } else {
+    const [fallback1, fallback2] = HOME_HERO_TITLE_FALLBACK.split('\n');
+    return [fallback1, fallback2 ?? ''];
+  }
+
+  return [line1, line2];
+}
+
+const bodyTextStyle = {
+  color: '#000',
+  fontFamily: 'Lora',
+  fontSize: '16px',
+  fontStyle: 'normal' as const,
+  fontWeight: 400,
+  lineHeight: '35px',
+  whiteSpace: 'pre-line' as const,
+  margin: 0
+};
+
 function AttentionSystemsIcon() {
   return (
     <svg
@@ -131,17 +182,9 @@ export default function HomeClient({
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
-  const heroTitleText = t(
-    'home.hero.title',
-    'Systems Change Researcher,\nWriter, Advisor. Published Futurist.'
+  const [heroTitleLine1, heroTitleLine2] = formatHomeHeroTitle(
+    t('home.hero.title', HOME_HERO_TITLE_FALLBACK)
   );
-  const heroTitleLines = (
-    heroTitleText.includes('\n')
-      ? heroTitleText
-      : heroTitleText.replace(', ', ',\n')
-  )
-    .split('\n')
-    .filter((line) => line.trim().length > 0);
 
   return (
     <div className={styles.container}>
@@ -151,11 +194,8 @@ export default function HomeClient({
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              {heroTitleLines.map((line, idx) => (
-                <span key={idx} className={styles.heroTitleLine}>
-                  {line}
-                </span>
-              ))}
+              <span className={styles.heroTitleLine}>{heroTitleLine1}</span>
+              <span className={styles.heroTitleLine}>{heroTitleLine2}</span>
             </h1>
             <p className={styles.heroSubtitle}>
               {t(
@@ -183,17 +223,7 @@ export default function HomeClient({
             {t('home.pickle.title', 'We’re in a bit of pickle')}
           </h2>
         </div>
-        <p
-          className={styles.bodyLong}
-          style={{
-            color: '#000',
-            fontFamily: 'Lora',
-            fontSize: '16px',
-            fontStyle: 'normal',
-            fontWeight: 400,
-            lineHeight: '35px'
-          }}
-        >
+        <p className={styles.bodyLong} style={bodyTextStyle}>
           {t(
             'home.pickle.body',
             'It can feel as if civilisation’s collapse is speeding toward us — faster than our systems, leaders, or imaginations can keep up. Climate disruption, technological acceleration, social fragmentation, and economic fragility are not separate crises, but interconnected forces shaping a single, turbulent reality. The ground beneath us — our assumptions, institutions, and even our sense of progress — is shifting. What once felt solid now feels uncertain. So how do we prepare for what’s coming? Perhaps by learning to see differently — to recognise that the turbulence around us is not just an ending, but a turning. When we look beneath the noise, coherence begins to emerge from complexity, and possibility reveals itself in the cracks. Uncertainty doesn’t have to mean chaos; it can be a catalyst for transformation. My work begins here — helping people and organisations find steadier footing in shifting terrain, strengthen their adaptive capacity, and move toward futures that are not only resilient, but regenerative.'
@@ -237,29 +267,11 @@ export default function HomeClient({
                     </span>
                   </h2>
                 </div>
-                <p
-                  className={styles.bodyLong}
-                  style={{
-                    color: '#000',
-                    fontFamily: 'Lora',
-                    fontSize: '16px',
-                    fontStyle: 'normal',
-                    fontWeight: 400,
-                    lineHeight: '35px'
-                  }}
-                >
+                <p className={styles.bodyLong} style={bodyTextStyle}>
                   {t(
                     'home.approach.body',
                     'Hi, I’m Chloe — a sustainability transformations strategist working at the intersection of systems change, futures thinking, and conscious leadership.\n\nOver the past two decades, I’ve helped leaders and mission-driven organisations — from global institutions to emerging innovators — make sense of complexity and turn insight into action. My work blends strategic communications, deep sustainability expertise, foresight, and inner transformation practices to help teams anticipate what’s next, adapt with clarity, and transform how they lead and create impact. I’ve supported organisations shaping the global sustainability movement to craft impact narratives, design resilient strategies, and embed regenerative principles — building adaptive cultures and futures grounded in purpose and possibility.'
-                  )
-                    .split('\n')
-                    .map((line, idx) =>
-                      line === '' ? (
-                        <br key={idx} />
-                      ) : (
-                        <span key={idx}>{idx ? `\n${line}` : line}</span>
-                      )
-                    )}
+                  )}
                 </p>
               </div>
             </div>
@@ -286,15 +298,7 @@ export default function HomeClient({
             </div>
             <p
               className={styles.centerIntro}
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '35px'
-              }}
+              style={{ ...bodyTextStyle, textAlign: 'center' }}
             >
               {t(
                 'home.attention.intro',

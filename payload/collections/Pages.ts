@@ -1,9 +1,13 @@
 import type { CollectionConfig } from 'payload';
 
+import { pageContentFields } from '../fields/pages';
+
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'title',
+    description:
+      'Edit site page copy and images. Open a page and use the labeled fields for that page (hero, sections, uploads).'
   },
   access: {
     read: () => true,
@@ -13,45 +17,20 @@ export const Pages: CollectionConfig = {
   },
   fields: [
     { name: 'title', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true, index: true },
     {
-      name: 'strings',
-      type: 'array',
-      labels: {
-        singular: 'Text Override',
-        plural: 'Text Overrides'
-      },
-      fields: [
-        {
-          name: 'key',
-          type: 'text',
-          required: true,
-          admin: { description: 'Stable identifier, e.g. home.hero.title' }
-        },
-        { name: 'value', type: 'textarea', required: true }
-      ]
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
+      admin: {
+        description:
+          'Page identifier: home, about, contact, work-with-me, thinking, practice, articles, projects'
+      }
     },
-    {
-      name: 'images',
-      type: 'array',
-      labels: {
-        singular: 'Image Override',
-        plural: 'Image Overrides'
-      },
-      fields: [
-        {
-          name: 'key',
-          type: 'text',
-          required: true,
-          admin: { description: 'Stable identifier, e.g. home.hero.profileImage' }
-        },
-        { name: 'alt', type: 'text' },
-        { name: 'image', type: 'upload', relationTo: 'media', required: true }
-      ]
-    }
+    ...pageContentFields
   ],
   versions: {
     drafts: true
   }
 };
-
