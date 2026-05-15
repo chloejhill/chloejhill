@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description: 'Chloe Site'
 };
 
+/** Re-fetch CMS content from Payload at most every 60s (no full redeploy needed). */
+export const revalidate = 60;
+
 export default function SiteLayout({
   children
 }: Readonly<{

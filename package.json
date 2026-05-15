@@ -4,12 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "build": "node -r ./scripts/payload-preload.cjs --import tsx scripts/ensurePayloadSchema.ts && next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "generate:importmap": "payload generate:importmap",
+    "ensure:schema": "node -r ./scripts/payload-preload.cjs --import tsx scripts/ensurePayloadSchema.ts",
+    "migrate": "PAYLOAD_MIGRATING=true payload migrate",
+    "migrate:create": "payload migrate:create",
+    "migrate:status": "PAYLOAD_MIGRATING=true payload migrate:status",
     "db:check": "psql \"${DATABASE_URI}\" -c \"SELECT current_user, current_database();\"",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "ci": "tsx scripts/ensurePayloadSchema.ts && payload generate:importmap && next build --webpack"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.81.0",
@@ -36,5 +41,8 @@
   "overrides": {
     "file-type": "18.7.0",
     "undici": "6.21.0"
+  },
+  "engines": {
+    "node": ">=20.18.0"
   }
 }

@@ -97,7 +97,7 @@ Nam mi risus, varius eu lobortis in, molestie tempus nulla. Vestibulum fringilla
     title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum. Morbi facilisis tortor odio. Suspendisse a lobortis arcu. Aliquam pellentesque, dui ut feugiat gravida, ligula felis luctus sem, in blandit ligula nisi id ipsum. Aliquam volutpat quis nisl at iaculis.',
-    image: '/images/about/philosophy.png',
+    image: '/images/about/philosophy.seed.png',
     featuredImage: '/images/profile.png',
     date: '01.02.2024',
     theme: 'Theme Name 1',

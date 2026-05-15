@@ -60,7 +60,7 @@ export const homeImageSeeds: Array<{
     alt: 'Chloe Hill'
   },
   {
-    path: 'public/images/home/compass.png',
+    path: 'public/images/home/compass.seed.png',
     fieldPath: 'compass.image',
     alt: 'Compass illustration'
   },

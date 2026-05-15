@@ -31,10 +31,19 @@ Payload uses:
 ## Vercel deployment
 
 Set these in your Vercel project environment variables:
-- `DATABASE_URI` = your hosted Postgres connection string
+- `DATABASE_URI` = your hosted Postgres connection string (or rely on `POSTGRES_URL` from Neon)
 - `PAYLOAD_SECRET` = strong random secret
-- `DATABASE_SSL` = `true` if required by your DB provider
-- `NEXT_PUBLIC_SERVER_URL` = your production URL
+- `DATABASE_SSL` = `true` if login/API still fail after deploy
+- `NEXT_PUBLIC_SERVER_URL` = `https://your-domain.vercel.app` (no trailing slash)
 
-No code changes are needed between local and Vercel; only env vars differ.
+The production build runs `tsx scripts/ensurePayloadSchema.ts` before `next build`. That creates Payload tables on an empty Neon database (required once; skipped on later deploys).
+
+After the first successful deploy, run seeds:
+
+```bash
+SEED_SERVER_URL=https://your-domain.vercel.app \
+SEED_ADMIN_EMAIL=... \
+SEED_ADMIN_PASSWORD=... \
+npm run seed
+```
 

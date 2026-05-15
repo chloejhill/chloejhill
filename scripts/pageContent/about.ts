@@ -69,7 +69,7 @@ export const aboutImageSeeds: Array<{
     alt: 'Footsteps'
   },
   {
-    path: 'public/images/about/philosophy.png',
+    path: 'public/images/about/philosophy.seed.png',
     fieldPath: 'philosophy.image',
     alt: 'Chloe'
   },
