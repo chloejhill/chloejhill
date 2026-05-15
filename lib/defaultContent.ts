@@ -1,4 +1,9 @@
-import type { CmsArticle, CmsCoverItem, CmsTestimonial } from '@/lib/cmsTypes';
+import type {
+  CmsArticle,
+  CmsCoverItem,
+  CmsEngagementCard,
+  CmsTestimonial
+} from '@/lib/cmsTypes';
 
 export const defaultTestimonials: CmsTestimonial[] = [
   {
@@ -53,6 +58,45 @@ export const defaultBooks: CmsCoverItem[] = [
     id: 'regen',
     title: 'Regen Cultures',
     src: '/images/books/Regen Cultures.png'
+  }
+];
+
+export const defaultEngagementCards: CmsEngagementCard[] = [
+  {
+    id: 'engagement-1',
+    title: '1. Systems Insight & Landscape Synthesis',
+    variant: 'cool',
+    description:
+      'For those seeking a clearer understanding of a complex issue area, emerging field, or systemic challenge. I synthesize fragmented landscapes into a clearer view of key actors, dynamics, patterns, and leverage points.',
+    outcome:
+      'A clearer understanding of how a field works, where meaningful change may be possible, and where capital or influence could be most effectively directed.'
+  },
+  {
+    id: 'engagement-2',
+    title: '2. Strategic Sensemaking',
+    variant: 'warm',
+    description:
+      'For philanthropists, foundations, or leaders deciding where to focus, how to act, or how to navigate competing priorities. Through focused strategic reflection, systems insight, and clear synthesis, I help turn complexity into more coherent direction.',
+    outcome:
+      'Greater clarity on priorities, stronger confidence in decision-making, and a more grounded approach to where and how to act.'
+  },
+  {
+    id: 'engagement-3',
+    title: '3. Research Advisory & Collaboration',
+    variant: 'warm',
+    description:
+      'For foundations, advisors, or research partners working in complex thematic areas who need deeper synthesis and strategic clarity. I connect science, policy, and practice into clearer strategic insight, stronger framing, and more usable understanding.',
+    outcome:
+      'Decision-relevant insight, clearer strategic framing, and work that connects detailed analysis to broader system-level understanding.'
+  },
+  {
+    id: 'engagement-4',
+    title: '4. Futures & Strategic Foresight',
+    variant: 'cool',
+    description:
+      'For those seeking to anticipate long-term shifts, emerging risks, and future strategic possibilities. Through futures inquiry, horizon scanning, and reflection, I help leaders think beyond immediate pressures toward longer-term stewardship.',
+    outcome:
+      'Stronger future orientation, greater preparedness, and clearer long-term thinking in uncertain conditions.'
   }
 ];
 

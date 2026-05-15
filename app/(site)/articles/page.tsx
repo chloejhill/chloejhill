@@ -26,7 +26,7 @@ export default function Articles() {
       >
         <Navbar />
 
-        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-0">
+        <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-32 md:pb-40">
           <h1
             className="font-normal text-[40px] leading-normal text-black mb-16"
             style={{
@@ -74,15 +74,18 @@ export default function Articles() {
                     </Link>
                   </div>
 
-                  <div className="relative w-full lg:w-[425px] h-[298px] shrink-0 bg-[#D9D9D9] overflow-hidden">
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  </div>
+                  {article.image ? (
+                    <div className="relative w-full max-w-[425px] lg:w-[425px] h-[298px] shrink-0">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 1024px) 100vw, 425px"
+                        unoptimized
+                      />
+                    </div>
+                  ) : null}
                 </div>
 
                 {index < articles.length - 1 && (

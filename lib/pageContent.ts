@@ -1,4 +1,9 @@
-import type { CmsCoverItem, CmsTestimonial, PageBlocks } from '@/lib/cmsTypes';
+import type {
+  CmsCoverItem,
+  CmsEngagementCard,
+  CmsTestimonial,
+  PageBlocks
+} from '@/lib/cmsTypes';
 import { resolveMediaAlt, resolveMediaSrc } from '@/lib/resolveMedia';
 
 export type PageOverrides = {
@@ -85,6 +90,41 @@ function flattenStructured(
   }
 }
 
+function mapEngagementCards(group: unknown): CmsEngagementCard[] | undefined {
+  if (!group || typeof group !== 'object') return undefined;
+  const items = (group as { items?: unknown[] }).items;
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsEngagementCard[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as {
+      id?: string;
+      title?: string;
+      variant?: string;
+      description?: string;
+      outcome?: string;
+    };
+    if (
+      !isNonEmptyString(item.title) ||
+      !isNonEmptyString(item.description) ||
+      !isNonEmptyString(item.outcome)
+    ) {
+      continue;
+    }
+    const variant = item.variant === 'warm' ? 'warm' : 'cool';
+    mapped.push({
+      id: item.id ?? `engagement-${index}`,
+      title: item.title,
+      variant,
+      description: item.description,
+      outcome: item.outcome
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
 function mapTestimonials(group: unknown): CmsTestimonial[] | undefined {
   if (!group || typeof group !== 'object') return undefined;
   const items = (group as { items?: unknown[] }).items;
@@ -162,6 +202,7 @@ function extractPageBlocks(
 
   if (slug === 'work-with-me') {
     return {
+      engagementCards: mapEngagementCards(data.engagement),
       testimonials: mapTestimonials(data.testimonials)
     };
   }

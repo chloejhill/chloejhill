@@ -11,6 +11,7 @@ import { Articles } from './payload/collections/Articles';
 import { Media } from './payload/collections/Media';
 import { Pages } from './payload/collections/Pages';
 import { Users } from './payload/collections/Users';
+import { SiteSettings } from './payload/globals/SiteSettings';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -36,6 +37,7 @@ export default buildConfig({
     }
   }),
   collections: [Users, Pages, Articles, Media],
+  globals: [SiteSettings],
   plugins: [
     vercelBlobStorage({
       enabled: Boolean(blobToken),

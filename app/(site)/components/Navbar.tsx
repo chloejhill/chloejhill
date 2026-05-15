@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import { NavLinkItem } from '@/lib/navLink';
+import { useSiteSettings } from '@/lib/SiteSettingsProvider';
 import { LinkedInPlainIcon, LogoIcon } from '../icons';
 
 type NavbarVariant = 'dark' | 'light';
@@ -12,6 +15,7 @@ export default function Navbar({
 }: {
   variant?: NavbarVariant;
 }) {
+  const { navLinks, linkedInUrl } = useSiteSettings();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const isLight = variant === 'light';
@@ -19,11 +23,11 @@ export default function Navbar({
     ? 'transition-colors text-white! hover:opacity-80'
     : 'transition-colors text-black hover:opacity-80';
 
-  const isActive = (path: string) => {
-    if (path === '/') {
+  const isActive = (href: string) => {
+    if (href === '/') {
       return pathname === '/';
     }
-    return pathname.startsWith(path);
+    return pathname.startsWith(href);
   };
 
   return (
@@ -41,62 +45,22 @@ export default function Navbar({
             Chloe J. Hill
           </span>
         </Link>
-        {/* Desktop Navigation */}
         <div
           className={`hidden md:flex items-center gap-[36px] text-[17px] ${
             isLight ? 'text-white!' : 'text-black'
           }`}
         >
-          <Link
-            href="/about"
-            className={`${desktopLinkClassName} ${
-              isActive('/about') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            About
-          </Link>
-          <Link
-            href="/thinking"
-            className={`${desktopLinkClassName} ${
-              isActive('/thinking') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            Thinking
-          </Link>
-          <Link
-            href="/practice"
-            className={`${desktopLinkClassName} ${
-              isActive('/practice') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            Practice
-          </Link>
-          <Link
-            href="/work-with-me"
-            className={`${desktopLinkClassName} ${
-              isActive('/work-with-me') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            Work with me
-          </Link>
-          <Link
-            href="/articles"
-            className={`${desktopLinkClassName} ${
-              isActive('/articles') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            Insights
-          </Link>
-          <Link
-            href="/contact"
-            className={`${desktopLinkClassName} ${
-              isActive('/contact') ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            Get in touch
-          </Link>
+          {navLinks.map((link) => (
+            <NavLinkItem
+              key={link.id}
+              link={link}
+              className={`${desktopLinkClassName} ${
+                isActive(link.href) ? 'underline underline-offset-4' : ''
+              }`}
+            />
+          ))}
           <a
-            href="https://www.linkedin.com/in/chloejhill/"
+            href={linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -107,7 +71,6 @@ export default function Navbar({
             <LinkedInPlainIcon />
           </a>
         </div>
-        {/* Mobile Hamburger Button */}
         <button
           className="md:hidden flex flex-col gap-1.5 z-[80]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -134,7 +97,6 @@ export default function Navbar({
           />
         </button>
       </nav>
-      {/* Mobile Menu */}
       <div
         className={`md:hidden fixed inset-0 top-0 z-[60] transition-all duration-300 ${
           isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -147,66 +109,18 @@ export default function Navbar({
           className="flex flex-col px-4 pt-[96px] pb-6 gap-4 text-[17px] text-white! min-h-screen overflow-y-auto"
           style={{ color: '#FFFFFF' }}
         >
-          <Link
-            href="/about"
-            className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/about') ? 'underline underline-offset-4' : ''
-            }`}
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            about
-          </Link>
-          <Link
-            href="/thinking"
-            className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/thinking') ? 'underline underline-offset-4' : ''
-            }`}
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            thinking
-          </Link>
-          <Link
-            href="/practice"
-            className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/practice') ? 'underline underline-offset-4' : ''
-            }`}
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            practice
-          </Link>
-          <Link
-            href="/work-with-me"
-            className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/work-with-me') ? 'underline underline-offset-4' : ''
-            }`}
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            work with me
-          </Link>
-          <Link
-            href="/articles"
-            className={`text-white! hover:opacity-80 transition-colors py-2 ${
-              isActive('/articles') ? 'underline underline-offset-4' : ''
-            }`}
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            insights
-          </Link>
-          <Link
-            href="/contact"
-            className="text-white! hover:opacity-80 transition-colors py-2"
-            style={{ color: '#FFFFFF' }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            get in touch
-          </Link>
+          {navLinks.map((link) => (
+            <NavLinkItem
+              key={link.id}
+              link={{ ...link, label: link.label.toLowerCase() }}
+              className={`text-white! hover:opacity-80 transition-colors py-2 ${
+                isActive(link.href) ? 'underline underline-offset-4' : ''
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            />
+          ))}
           <a
-            href="https://www.linkedin.com/in/chloejhill/"
+            href={linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"

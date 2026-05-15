@@ -25,8 +25,24 @@ export type CmsArticle = {
   content: string;
 };
 
+export type CmsEngagementCard = {
+  id: string;
+  title: string;
+  variant: 'cool' | 'warm';
+  description: string;
+  outcome: string;
+};
+
+export type CmsNavLink = {
+  id: string;
+  label: string;
+  href: string;
+  openInNewTab?: boolean;
+};
+
 export type PageBlocks = {
   testimonials?: CmsTestimonial[];
+  engagementCards?: CmsEngagementCard[];
   publications?: CmsCoverItem[];
   books?: CmsCoverItem[];
 };

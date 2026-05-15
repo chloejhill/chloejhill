@@ -63,7 +63,7 @@ export default function ArticleDetail() {
       <Navbar />
 
       {/* Main Content */}
-      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-16 mb-[55px]">
+      <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-32 pb-24 mb-16">
         {/* Breadcrumb */}
         <p
           className="font-normal text-[14px] leading-[1.7] text-black mb-8"
@@ -87,65 +87,14 @@ export default function ArticleDetail() {
             {article.title}
           </h1>
 
-          {/* Author and Date Section */}
-          <div className="w-full">
-            <svg
-              width="100%"
-              height="1"
-              viewBox="0 0 1000 1"
-              preserveAspectRatio="none"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          {article.date ? (
+            <p
+              className="font-normal text-[13px] text-black/60 mb-6"
+              style={{ fontFamily: 'var(--font-lora), serif', lineHeight: '1.2' }}
             >
-              <line
-                x1="0"
-                y1="0.5"
-                x2="1000"
-                y2="0.5"
-                stroke="#4F0E0E"
-                strokeWidth="0.999"
-              />
-            </svg>
-          </div>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex items-center gap-3 py-2">
-              <div className="relative w-[50px] h-[50px] rounded-full bg-gray-300 shrink-0">
-                {/* Avatar placeholder */}
-              </div>
-              <div>
-                <p
-                  className="font-normal text-[16px] text-black"
-                  style={{
-                    fontFamily: 'var(--font-lora), serif',
-                    lineHeight: '1.2',
-                    marginBottom: '5px',
-                    fontWeight: 500
-                  }}
-                >
-                  Chloe Hill
-                </p>
-                <p
-                  className="font-normal text-[13px] text-black/60"
-                  style={{
-                    fontFamily: 'var(--font-lora), serif',
-                    lineHeight: '1.2',
-                    marginTop: '0'
-                  }}
-                >
-                  {article.date}
-                </p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p
-                className="font-normal text-[16px] leading-[1.7] text-black"
-                style={{ fontFamily: 'var(--font-lora), serif' }}
-              >
-                <span className="font-medium">Theme: </span>
-                <span className="font-normal">{article.theme}</span>
-              </p>
-            </div>
-          </div>
+              {article.date}
+            </p>
+          ) : null}
 
           <div className="w-full mb-8">
             <svg
@@ -285,7 +234,7 @@ export default function ArticleDetail() {
         </div>
 
         {/* Our Latest Insights Section */}
-        <div className="mt-24">
+        <div className="mt-24 mb-24 pb-8">
           <h2
             className="font-normal text-[40px] leading-normal text-black text-center mb-16"
             style={{

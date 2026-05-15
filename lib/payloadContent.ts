@@ -7,6 +7,8 @@ export type { PageOverrides } from '@/lib/pageContent';
 export type {
   CmsArticle,
   CmsCoverItem,
+  CmsEngagementCard,
+  CmsNavLink,
   CmsTestimonial,
   PageBlocks
 } from '@/lib/cmsTypes';

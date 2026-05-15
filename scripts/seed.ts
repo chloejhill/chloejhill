@@ -16,6 +16,7 @@ import {
   thinkingContent,
   thinkingImageSeeds
 } from './pageContent/thinking';
+import { siteSettingsContent } from './pageContent/siteSettings';
 import {
   workWithMeArraySeeds,
   workWithMeContent,
@@ -306,6 +307,21 @@ async function upsertArticles(serverURL: string, token: string) {
   }
 }
 
+async function upsertSiteSettings(serverURL: string, token: string) {
+  // Payload 3 globals are updated via POST, not PATCH.
+  const { res, body } = await postJSON(
+    `${serverURL}/api/globals/site-settings`,
+    siteSettingsContent,
+    token
+  );
+  if (!res.ok) {
+    throw new Error(
+      `Failed updating site settings: ${JSON.stringify(body?.errors ?? body)}`
+    );
+  }
+  console.log('Updated site settings seed');
+}
+
 async function upsertPages(serverURL: string, token: string) {
   for (const page of pageSeeds) {
     const groupName = SLUG_TO_CONTENT_GROUP[page.slug];
@@ -402,6 +418,7 @@ async function main() {
   }
 
   await upsertPages(serverURL, login.body.token);
+  await upsertSiteSettings(serverURL, login.body.token);
   await upsertArticles(serverURL, login.body.token);
   console.log('Seed complete.');
 }

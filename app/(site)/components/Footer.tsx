@@ -1,10 +1,13 @@
 'use client';
 
-import Link from 'next/link';
+import { NavLinkItem } from '@/lib/navLink';
+import { useSiteSettings } from '@/lib/SiteSettingsProvider';
 import { LinkedInFooterIcon } from '../icons';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const { navLinks, linkedInUrl, footer } = useSiteSettings();
+
   return (
     <footer className={styles.newsletterSection}>
       <div className={styles.newsletterInner}>
@@ -12,13 +15,8 @@ export default function Footer() {
           <div
             className={`${styles.newsletterCopy} ${styles.footerNewsletter}`}
           >
-            <h2 className={styles.newsletterTitle}>
-              Sign up to my quarterly newsletter
-            </h2>
-            <p className={styles.newsletterText}>
-              reflections, tools, and updates from my work and the world around
-              it, sent with intention, not noise
-            </p>
+            <h2 className={styles.newsletterTitle}>{footer.newsletterTitle}</h2>
+            <p className={styles.newsletterText}>{footer.newsletterText}</p>
             <form className={`${styles.newsletterForm} ${styles.footerFormTypography}`}>
               <label
                 className={`${styles.srOnly} ${styles.footerFormTypography}`}
@@ -45,26 +43,15 @@ export default function Footer() {
             className={`${styles.footerRight} ${styles.footerNav}`}
             aria-label="Footer"
           >
-            <Link href="/thinking" className={styles.footerRightLink}>
-              Thinking
-            </Link>
-            <Link href="/practice" className={styles.footerRightLink}>
-              Practice
-            </Link>
-            <Link href="/work-with-me" className={styles.footerRightLink}>
-              Work with me
-            </Link>
-            <Link href="/about" className={styles.footerRightLink}>
-              About
-            </Link>
-            <Link href="/articles" className={styles.footerRightLink}>
-              Insights
-            </Link>
-            <Link href="/contact" className={styles.footerRightLink}>
-              Get In Touch
-            </Link>
+            {navLinks.map((link) => (
+              <NavLinkItem
+                key={link.id}
+                link={link}
+                className={styles.footerRightLink}
+              />
+            ))}
             <a
-              href="https://www.linkedin.com/in/chloejhill/"
+              href={linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.footerLinkedin}
@@ -76,17 +63,22 @@ export default function Footer() {
         </div>
 
         <div className={styles.footerBottomRow}>
-          <p className={styles.footerBottomText}>© Chloe J. Hill 2026</p>
-          <Link href="/privacy" className={styles.footerBottomLink}>
-            Privacy Policy
-          </Link>
+          <p className={styles.footerBottomText}>{footer.copyrightText}</p>
+          <NavLinkItem
+            link={{
+              id: 'privacy',
+              label: footer.privacyLabel,
+              href: footer.privacyHref
+            }}
+            className={styles.footerBottomLink}
+          />
           <a
             className={styles.footerBottomLinkUnderline}
-            href="https://www.moderndaystrategy.com/"
+            href={footer.creditHref}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Website by Modern Day Strategy
+            {footer.creditLabel}
           </a>
         </div>
       </div>

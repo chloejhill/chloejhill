@@ -45,7 +45,43 @@ export const workWithMePageFields: Field[] = [
               label: 'Common forms of engagement',
               fields: [
                 textField('title', 'Section title'),
-                textareaField('intro', 'Intro paragraph')
+                textareaField('intro', 'Intro paragraph'),
+                {
+                  name: 'items',
+                  type: 'array',
+                  label: 'Engagement cards',
+                  labels: {
+                    singular: 'Card',
+                    plural: 'Cards'
+                  },
+                  admin: {
+                    description:
+                      'Service cards shown in a two-column grid. New cards appear at the bottom in the same format.'
+                  },
+                  fields: [
+                    textField('title', 'Card title'),
+                    {
+                      name: 'variant',
+                      type: 'select',
+                      label: 'Card style',
+                      defaultValue: 'cool',
+                      options: [
+                        { label: 'Cool (gray)', value: 'cool' },
+                        { label: 'Warm (tan)', value: 'warm' }
+                      ]
+                    },
+                    textareaField(
+                      'description',
+                      'Description',
+                      'Main paragraph shown on the card.'
+                    ),
+                    textareaField(
+                      'outcome',
+                      'Outcome',
+                      'Shown below the description with an “Outcome:” label.'
+                    )
+                  ]
+                }
               ]
             },
             {

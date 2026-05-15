@@ -1,3 +1,4 @@
+import { defaultEngagementCards } from '../../lib/defaultContent';
 import type { ArraySeedDef } from './arraySeeds';
 
 export const workWithMeContent = {
@@ -47,6 +48,17 @@ export const workWithMeImageSeeds = [
 ];
 
 export const workWithMeArraySeeds: ArraySeedDef[] = [
+  {
+    arrayPath: 'engagement.items',
+    items: defaultEngagementCards.map((card) => ({
+      data: {
+        title: card.title,
+        variant: card.variant,
+        description: card.description,
+        outcome: card.outcome
+      }
+    }))
+  },
   {
     arrayPath: 'testimonials.items',
     items: [

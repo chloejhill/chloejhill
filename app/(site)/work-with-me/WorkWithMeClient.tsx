@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ArrowLeftIcon, ArrowRightIcon, TestimonialIcon } from '../icons';
-import { defaultTestimonials } from '@/lib/defaultContent';
+import { defaultEngagementCards, defaultTestimonials } from '@/lib/defaultContent';
 import type { CmsTestimonial, PageOverrides } from '@/lib/payloadContent';
 import practiceStyles from '../practice/page.module.css';
 
@@ -46,84 +46,6 @@ function TestimonialPhoto({ testimonial }: { testimonial: CmsTestimonial }) {
   );
 }
 
-const engagementCards = [
-  {
-    title: '1. Systems Insight & Landscape Synthesis',
-    variant: 'cool' as const,
-    body: (
-      <>
-        <p>
-          For those seeking a clearer understanding of a complex issue area,
-          emerging field, or systemic challenge. I synthesize fragmented
-          landscapes into a clearer view of key actors, dynamics, patterns, and
-          leverage points.
-        </p>
-        <p className="mt-4">
-          <strong>Outcome:</strong> A clearer understanding of how a field
-          works, where meaningful change may be possible, and where capital or
-          influence could be most effectively directed.
-        </p>
-      </>
-    )
-  },
-  {
-    title: '2. Strategic Sensemaking',
-    variant: 'warm' as const,
-    body: (
-      <>
-        <p>
-          For philanthropists, foundations, or leaders deciding where to focus,
-          how to act, or how to navigate competing priorities. Through focused
-          strategic reflection, systems insight, and clear synthesis, I help
-          turn complexity into more coherent direction.
-        </p>
-        <p className="mt-4">
-          <strong>Outcome:</strong> Greater clarity on priorities, stronger
-          confidence in decision-making, and a more grounded approach to where
-          and how to act.
-        </p>
-      </>
-    )
-  },
-  {
-    title: '3. Research Advisory & Collaboration',
-    variant: 'warm' as const,
-    body: (
-      <>
-        <p>
-          For foundations, advisors, or research partners working in complex
-          thematic areas who need deeper synthesis and strategic clarity. I
-          connect science, policy, and practice into clearer strategic insight,
-          stronger framing, and more usable understanding.
-        </p>
-        <p className="mt-4">
-          <strong>Outcome:</strong> Decision-relevant insight, clearer strategic
-          framing, and work that connects detailed analysis to broader
-          system-level understanding.
-        </p>
-      </>
-    )
-  },
-  {
-    title: '4. Futures & Strategic Foresight',
-    variant: 'cool' as const,
-    body: (
-      <>
-        <p>
-          For those seeking to anticipate long-term shifts, emerging risks, and
-          future strategic possibilities. Through futures inquiry, horizon
-          scanning, and reflection, I help leaders think beyond immediate
-          pressures toward longer-term stewardship.
-        </p>
-        <p className="mt-4">
-          <strong>Outcome:</strong> Stronger future orientation, greater
-          preparedness, and clearer long-term thinking in uncertain conditions.
-        </p>
-      </>
-    )
-  }
-];
-
 export default function WorkWithMeClient({
   overrides
 }: {
@@ -135,6 +57,11 @@ export default function WorkWithMeClient({
     overrides?.images?.[key]?.src || fallbackSrc;
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
+
+  const engagementCards =
+    overrides?.blocks?.engagementCards?.length
+      ? overrides.blocks.engagementCards
+      : defaultEngagementCards;
 
   const testimonials: CmsTestimonial[] =
     overrides?.blocks?.testimonials?.length
@@ -258,7 +185,7 @@ export default function WorkWithMeClient({
               const isCool = card.variant === 'cool';
               return (
                 <article
-                  key={card.title}
+                  key={card.id}
                   className={[
                     'rounded-[32px] md:rounded-[40px] p-6 md:p-8 min-h-[280px] md:min-h-[320px]',
                     'border shadow-[0px_4px_2px_rgba(214,220,219,0.25)]',
@@ -274,10 +201,13 @@ export default function WorkWithMeClient({
                     {card.title}
                   </h3>
                   <div
-                    className={`${testimonialQuoteTextClassName} [&_strong]:font-normal [&_p+p]:mt-4`}
+                    className={`${testimonialQuoteTextClassName} [&_strong]:font-normal`}
                     style={testimonialQuoteTextStyle}
                   >
-                    {card.body}
+                    <p>{card.description}</p>
+                    <p className="mt-4">
+                      <strong>Outcome:</strong> {card.outcome}
+                    </p>
                   </div>
                 </article>
               );
