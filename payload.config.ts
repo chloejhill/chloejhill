@@ -6,6 +6,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 
+import { getDatabaseSsl, getDatabaseUri } from './lib/payloadEnv';
 import { Articles } from './payload/collections/Articles';
 import { Media } from './payload/collections/Media';
 import { Pages } from './payload/collections/Pages';
@@ -17,6 +18,7 @@ const dirname = path.dirname(filename);
 const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
 
 export default buildConfig({
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     meta: {
       titleSuffix: ' - Admin'
@@ -29,8 +31,8 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || 'dev-only-secret-change-me',
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
-      ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false
+      connectionString: getDatabaseUri(),
+      ssl: getDatabaseSsl()
     }
   }),
   collections: [Users, Pages, Articles, Media],

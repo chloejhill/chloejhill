@@ -1,3 +1,4 @@
+import { isDatabaseConfigured } from './lib/payloadEnv';
 import config from './payload.config';
 import { getPayload } from 'payload';
 
@@ -22,5 +23,5 @@ export async function getPayloadClient() {
 }
 
 export function isPayloadConfigured() {
-  return Boolean(process.env.PAYLOAD_SECRET && process.env.DATABASE_URI);
+  return Boolean(process.env.PAYLOAD_SECRET && isDatabaseConfigured());
 }

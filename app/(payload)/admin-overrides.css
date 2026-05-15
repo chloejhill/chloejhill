@@ -1,37 +1,26 @@
-/* Wrapper around Payload admin (see app/(payload)/layout.tsx) */
-.payload-admin-root {
-  min-height: 100vh;
-}
-
-/*
- * Payload sets html[data-theme=light|dark]. Light theme uses dark label text;
- * we had forced a dark shell while RootProvider stayed on light, so labels looked unchanged.
- * RootProvider now defaults to dark; these rules still help labels/descriptions on the document form.
- */
-html[data-theme='dark'] .payload-admin-root .field-label,
-html[data-theme='dark'] .payload-admin-root .row-label,
-html[data-theme='dark'] .payload-admin-root .document-fields__label,
-html[data-theme='dark'] .payload-admin-root .collapsible-field__label,
-html[data-theme='dark'] .payload-admin-root .array-field__title,
-html[data-theme='dark'] .payload-admin-root .tabs-field__tab-button,
-html[data-theme='dark'] .payload-admin-root .field-description {
+html[data-theme='dark'] .field-label,
+html[data-theme='dark'] .row-label,
+html[data-theme='dark'] .document-fields__label,
+html[data-theme='dark'] .collapsible-field__label,
+html[data-theme='dark'] .array-field__title,
+html[data-theme='dark'] .tabs-field__tab-button,
+html[data-theme='dark'] .field-description {
   color: #fff !important;
 }
 
-.payload-admin-root .collections .card {
+html[data-theme='dark'] .collections .card {
   background: #111 !important;
   border: 1px solid #1f2937 !important;
 }
 
-.payload-admin-root .collections .card__title,
-.payload-admin-root .collections .card__actions,
-.payload-admin-root .collections h2,
-.payload-admin-root .collections a,
-.payload-admin-root .collections button,
-.payload-admin-root .collections svg {
+html[data-theme='dark'] .collections .card__title,
+html[data-theme='dark'] .collections .card__actions,
+html[data-theme='dark'] .collections h2,
+html[data-theme='dark'] .collections a,
+html[data-theme='dark'] .collections button,
+html[data-theme='dark'] .collections svg {
   color: #fff !important;
   fill: #fff !important;
   stroke: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
-

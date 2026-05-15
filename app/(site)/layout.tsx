@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Lora } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 
 const lora = Lora({
   variable: '--font-lora',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: 'Chloe Site'
 };
 
-export default function RootLayout({
+export default function SiteLayout({
   children
 }: Readonly<{
   children: React.ReactNode;

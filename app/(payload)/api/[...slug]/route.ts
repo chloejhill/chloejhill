@@ -1,3 +1,4 @@
+import '@payloadcms/next/css';
 import config from '../../../../payload.config';
 import {
   REST_GET,
