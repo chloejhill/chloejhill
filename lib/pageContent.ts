@@ -1,7 +1,12 @@
 import type {
+  CmsAattItem,
   CmsCoverItem,
   CmsEngagementCard,
+  CmsIllustrationItem,
+  CmsOrgLogo,
+  CmsPatternCard,
   CmsTestimonial,
+  CmsTimelineItem,
   PageBlocks
 } from '@/lib/cmsTypes';
 import { resolveMediaAlt, resolveMediaSrc } from '@/lib/resolveMedia';
@@ -27,7 +32,6 @@ export const SLUG_TO_CONTENT_GROUP: Record<string, string> = {
   'work-with-me': 'workWithMe',
   thinking: 'thinking',
   practice: 'practice',
-  articles: 'articles',
   projects: 'projects'
 };
 
@@ -51,7 +55,13 @@ function isMediaDoc(value: unknown): value is MediaDoc {
   return Boolean(normalizeMediaToSrc(value as MediaDoc));
 }
 
-const BLOCK_ARRAY_KEYS = new Set(['items', 'publications', 'books']);
+const BLOCK_ARRAY_KEYS = new Set([
+  'items',
+  'publications',
+  'books',
+  'bullets',
+  'logos'
+]);
 
 function flattenStructured(
   prefix: string,
@@ -189,6 +199,143 @@ function mapCoverItems(
   return mapped.length > 0 ? mapped : undefined;
 }
 
+function mapAattItems(group: unknown): CmsAattItem[] | undefined {
+  if (!group || typeof group !== 'object') return undefined;
+  const items = (group as { items?: unknown[] }).items;
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsAattItem[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as {
+      id?: string;
+      title?: string;
+      subtitle?: string;
+      description?: string;
+      iconLeft?: boolean;
+      icon?: MediaDoc | string | number | null;
+    };
+    const iconSrc = resolveMediaSrc(item.icon);
+    if (
+      !isNonEmptyString(item.title) ||
+      !isNonEmptyString(item.subtitle) ||
+      !isNonEmptyString(item.description) ||
+      !iconSrc
+    ) {
+      continue;
+    }
+    mapped.push({
+      id: item.id ?? `aatt-${index}`,
+      title: item.title,
+      subtitle: item.subtitle,
+      description: item.description,
+      iconLeft: Boolean(item.iconLeft),
+      iconSrc
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
+function mapPatternCards(group: unknown): CmsPatternCard[] | undefined {
+  if (!group || typeof group !== 'object') return undefined;
+  const items = (group as { items?: unknown[] }).items;
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsPatternCard[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as { id?: string; title?: string; description?: string };
+    if (!isNonEmptyString(item.title) || !isNonEmptyString(item.description)) {
+      continue;
+    }
+    mapped.push({
+      id: item.id ?? `pattern-${index}`,
+      title: item.title,
+      description: item.description
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
+function mapIllustrationItems(group: unknown): CmsIllustrationItem[] | undefined {
+  if (!group || typeof group !== 'object') return undefined;
+  const items = (group as { items?: unknown[] }).items;
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsIllustrationItem[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as { id?: string; title?: string; description?: string };
+    if (!isNonEmptyString(item.title) || !isNonEmptyString(item.description)) {
+      continue;
+    }
+    mapped.push({
+      id: item.id ?? `illustration-${index}`,
+      title: item.title,
+      description: item.description
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
+function mapOrganisationLogos(group: unknown): CmsOrgLogo[] | undefined {
+  if (!group || typeof group !== 'object') return undefined;
+  const items = (group as { logos?: unknown[] }).logos;
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsOrgLogo[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as {
+      id?: string;
+      alt?: string;
+      logo?: MediaDoc | string | number | null;
+    };
+    const src = resolveMediaSrc(item.logo);
+    if (!src) continue;
+    mapped.push({
+      id: item.id ?? `org-${index}`,
+      alt: item.alt ?? `Organisation ${index + 1}`,
+      src
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
+function mapBulletTexts(items: unknown[] | undefined): string[] | undefined {
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+  const mapped = items
+    .map((row) => {
+      if (!row || typeof row !== 'object') return null;
+      const text = (row as { text?: string }).text;
+      return isNonEmptyString(text) ? text : null;
+    })
+    .filter((row): row is string => row != null);
+  return mapped.length > 0 ? mapped : undefined;
+}
+
+function mapTimeline(items: unknown[] | undefined): CmsTimelineItem[] | undefined {
+  if (!Array.isArray(items) || items.length === 0) return undefined;
+
+  const mapped: CmsTimelineItem[] = [];
+  for (const [index, row] of items.entries()) {
+    if (!row || typeof row !== 'object') continue;
+    const item = row as { id?: string; year?: string; text?: string };
+    if (!isNonEmptyString(item.year) || !isNonEmptyString(item.text)) continue;
+    mapped.push({
+      id: item.id ?? `timeline-${index}`,
+      year: item.year,
+      text: item.text
+    });
+  }
+
+  return mapped.length > 0 ? mapped : undefined;
+}
+
 function extractPageBlocks(
   slug: string,
   page: Record<string, unknown>
@@ -213,10 +360,34 @@ function extractPageBlocks(
         data.publications as unknown[] | undefined,
         'cover'
       ),
-      books: mapCoverItems(data.books as unknown[] | undefined, 'cover')?.slice(
-        0,
-        3
-      )
+      books: mapCoverItems(data.books as unknown[] | undefined, 'cover'),
+      aattItems: mapAattItems(data.aatt)
+    };
+  }
+
+  if (slug === 'practice') {
+    const workShowsUp =
+      data.workShowsUp && typeof data.workShowsUp === 'object'
+        ? (data.workShowsUp as Record<string, unknown>)
+        : undefined;
+    const context =
+      data.context && typeof data.context === 'object'
+        ? (data.context as Record<string, unknown>)
+        : undefined;
+    return {
+      patternCards: mapPatternCards(data.patterns),
+      illustrationItems: mapIllustrationItems(data.illustrations),
+      organisationLogos: mapOrganisationLogos(data.organisations),
+      workShowsUpBullets: mapBulletTexts(
+        workShowsUp?.bullets as unknown[] | undefined
+      ),
+      contextBullets: mapBulletTexts(context?.bullets as unknown[] | undefined)
+    };
+  }
+
+  if (slug === 'about') {
+    return {
+      timeline: mapTimeline(data.timeline as unknown[] | undefined)
     };
   }
 

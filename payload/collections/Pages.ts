@@ -25,7 +25,7 @@ export const Pages: CollectionConfig = {
       index: true,
       admin: {
         description:
-          'Page identifier: home, about, contact, work-with-me, thinking, practice, articles, projects'
+          'Page identifier: home, about, contact, work-with-me, thinking, practice, projects'
       }
     },
     ...pageContentFields

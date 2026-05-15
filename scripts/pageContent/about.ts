@@ -40,7 +40,17 @@ export const aboutContent = {
   quote: {
     text: 'Do not lose heart, we were made for these times.',
     author: '— Clarissa Pinkola Estes'
-  }
+  },
+  timeline: [
+    { year: '1998-2002', text: 'Environmental science and sustainable development studies; early fieldwork in East Africa.' },
+    { year: '2003-2007', text: 'Applied sustainability and communications roles across international NGOs and multilateral programmes.' },
+    { year: '2008-2014', text: 'Strategic communications and systems-oriented work with global institutions on climate and nature.' },
+    { year: '2015-2020', text: 'Advisory and research leadership on futures, biodiversity finance, and organisational transition.' },
+    { year: '2021-present', text: 'Independent practice integrating systems insight, futures inquiry, and conscious leadership.' },
+    { year: '2025-2030', text: 'Continued research and publication on transcendental futures and long-term stewardship.' },
+    { year: '2031-2035', text: 'Expanding collaborative inquiry with foundations and mission-driven leaders.' },
+    { year: '2036-2040', text: 'Deepening integrative work at the intersection of inner development and systems change.' }
+  ]
 };
 
 export const aboutImageSeeds: Array<{

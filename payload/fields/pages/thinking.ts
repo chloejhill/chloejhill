@@ -7,6 +7,21 @@ import {
   uploadField
 } from './shared';
 
+function paragraphGroup(
+  name: string,
+  label: string,
+  count: number
+): Field {
+  return {
+    name,
+    type: 'group',
+    label,
+    fields: Array.from({ length: count }, (_, i) =>
+      textareaField(`p${i + 1}`, `Paragraph ${i + 1}`)
+    )
+  };
+}
+
 export const thinkingPageFields: Field[] = [
   pageContentGroup('thinking', 'thinking', 'Thinking', [
     {
@@ -28,6 +43,136 @@ export const thinkingPageFields: Field[] = [
           ]
         },
         {
+          label: 'Inquiry & empirical',
+          fields: [
+            {
+              name: 'inquiry',
+              type: 'group',
+              label: 'Where my inquiry begins',
+              fields: [
+                textField('title', 'Section title'),
+                textareaField('p1', 'Paragraph 1'),
+                textareaField('p2', 'Paragraph 2'),
+                textField('bannerLabel', 'Banner label'),
+                uploadField('bannerImage', 'Banner image')
+              ]
+            },
+            {
+              name: 'empirical',
+              type: 'group',
+              label: 'Empirical grounding',
+              fields: [
+                textField('title', 'Section title'),
+                textareaField('p1', 'Paragraph 1'),
+                textareaField('p2', 'Paragraph 2'),
+                textareaField('p3', 'Paragraph 3')
+              ]
+            },
+            {
+              name: 'writings',
+              type: 'group',
+              label: 'Selected writings',
+              fields: [textField('sectionTitle', 'Section title')]
+            }
+          ]
+        },
+        {
+          label: 'Futures & AATT',
+          fields: [
+            {
+              name: 'futureInquiry',
+              type: 'group',
+              fields: [
+                textField('label', 'Banner label'),
+                uploadField('bannerImage', 'Banner image')
+              ]
+            },
+            {
+              name: 'transcendental',
+              type: 'group',
+              fields: [
+                textField('title', 'Section title'),
+                textareaField('p1', 'Paragraph 1'),
+                textareaField('p2', 'Paragraph 2'),
+                textareaField('p3', 'Paragraph 3'),
+                textField('linkText', 'Publication link text'),
+                textareaField('p4', 'Paragraph 4'),
+                uploadField('leafImage', 'Decorative leaf image')
+              ]
+            },
+            {
+              name: 'transformation',
+              type: 'group',
+              fields: [textField('label', 'Banner label')]
+            },
+            {
+              name: 'aatt',
+              type: 'group',
+              label: 'AATT framework',
+              fields: [
+                textField('title', 'Section title (line 1)'),
+                textField('titleLine2', 'Section title (line 2)'),
+                textareaField('intro', 'Intro paragraph'),
+                {
+                  name: 'items',
+                  type: 'array',
+                  label: 'AATT dimensions',
+                  labels: { singular: 'Dimension', plural: 'Dimensions' },
+                  fields: [
+                    textField('title', 'Title'),
+                    textField('subtitle', 'Subtitle'),
+                    textareaField('description', 'Description'),
+                    {
+                      name: 'iconLeft',
+                      type: 'checkbox',
+                      label: 'Icon on left',
+                      defaultValue: false
+                    },
+                    uploadField('icon', 'Icon image')
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: 'Inner dimension & evolution',
+          fields: [
+            {
+              name: 'innerDimension',
+              type: 'group',
+              fields: [
+                textField('bannerLabel', 'Banner label'),
+                uploadField('bannerImage', 'Banner image'),
+                textField('heading', 'Heading'),
+                textareaField('body', 'Body'),
+                textField('dotsUrl', 'Dots Directory URL'),
+                uploadField('dotsImage', 'Dots logo')
+              ]
+            },
+            {
+              name: 'books',
+              type: 'group',
+              fields: [textField('sectionTitle', 'Section title')]
+            },
+            {
+              name: 'evolution',
+              type: 'group',
+              fields: [
+                textField('title', 'Section title'),
+                textareaField('p1', 'Paragraph 1'),
+                textareaField('p2', 'Paragraph 2'),
+                textField('practiceLinkLabel', 'Practice link label'),
+                textField('practiceLinkSuffix', 'Practice link suffix'),
+                textField('aboutLinkLabel', 'About link label'),
+                textField('aboutLinkSuffix', 'About link suffix'),
+                uploadField('backgroundImage', 'Background image'),
+                uploadField('dashImage', 'Link dash image')
+              ]
+            }
+          ]
+        },
+        {
           label: 'Publications',
           fields: [
             {
@@ -38,16 +183,8 @@ export const thinkingPageFields: Field[] = [
                 singular: 'Publication cover',
                 plural: 'Publication covers'
               },
-              admin: {
-                description:
-                  'Cover images for the “Selected Writings & Publications” carousel. Image only — add a short label for accessibility.'
-              },
               fields: [
-                textField(
-                  'label',
-                  'Label',
-                  'Short name shown to screen readers, e.g. WWF or PBL.'
-                ),
+                textField('label', 'Label'),
                 uploadField('cover', 'Cover image')
               ]
             }
@@ -60,21 +197,10 @@ export const thinkingPageFields: Field[] = [
               name: 'books',
               type: 'array',
               label: 'Current Books',
-              labels: {
-                singular: 'Book',
-                plural: 'Books'
-              },
-              maxRows: 3,
-              admin: {
-                description:
-                  'Exactly three book covers for “Current Books that are shaping my Ideas”.'
-              },
+              labels: { singular: 'Book', plural: 'Books' },
+              maxRows: 6,
               fields: [
-                textField(
-                  'title',
-                  'Book title',
-                  'For accessibility, e.g. Futures or Regen Cultures.'
-                ),
+                textField('title', 'Book title'),
                 uploadField('cover', 'Book cover image')
               ]
             }

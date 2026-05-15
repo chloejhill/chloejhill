@@ -7,16 +7,10 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { defaultArticles } from '@/lib/defaultContent';
 import { useArticles } from '@/lib/useArticles';
-import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
-
 export default function Articles() {
-  const overrides = usePayloadOverrides('articles');
   const cmsArticles = useArticles();
   const articles =
     cmsArticles && cmsArticles.length > 0 ? cmsArticles : defaultArticles;
-
-  const t = (key: string, fallback: string) =>
-    overrides?.strings?.[key] || fallback;
 
   return (
     <div className={styles.container}>
@@ -34,7 +28,7 @@ export default function Articles() {
               fontFeatureSettings: "'liga' off, 'clig' off"
             }}
           >
-            {t('articles.hero.title', 'Latest Insights')}
+            Latest Insights
           </h1>
 
           <div className="flex flex-col gap-16">

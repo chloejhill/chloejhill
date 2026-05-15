@@ -12,6 +12,12 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon
 } from '../icons';
+import {
+  practiceImageDefaults,
+  practicePageContent,
+  practiceStringDefaults
+} from '@/lib/pageDefaults';
+import { usePageContent } from '@/lib/usePageContent';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 // const heroImage =
@@ -231,12 +237,53 @@ const testimonialHeadshots: Record<string, string> = {
 
 export default function Home() {
   const overrides = usePayloadOverrides('practice');
-  const t = (key: string, fallback: string) =>
-    overrides?.strings?.[key] || fallback;
-  const img = (key: string, fallbackSrc: string) =>
-    overrides?.images?.[key]?.src || fallbackSrc;
-  const alt = (key: string, fallbackAlt: string) =>
-    overrides?.images?.[key]?.alt || fallbackAlt;
+  const { t, img, alt } = usePageContent(
+    overrides,
+    practiceStringDefaults,
+    practiceImageDefaults
+  );
+
+  const patternCardsFromCms = useMemo(() => {
+    const fromCms = overrides?.blocks?.patternCards;
+    if (fromCms?.length) {
+      const icons = [PatternIconOne, PatternIconTwo, PatternIconThree, PatternIconFour];
+      const sizes = ['w-[64px] h-[64px]', 'w-[64px] h-[64px]', 'w-[56px] h-[56px]', 'w-[56px] h-[56px]'];
+      return fromCms.map((card, index) => ({
+        ...card,
+        icon: icons[index % icons.length],
+        iconSize: sizes[index % sizes.length]
+      }));
+    }
+    return patternCards;
+  }, [overrides?.blocks?.patternCards]);
+
+  const illustrationsFromCms = useMemo(() => {
+    const fromCms = overrides?.blocks?.illustrationItems;
+    if (fromCms?.length) return fromCms;
+    return illustrations;
+  }, [overrides?.blocks?.illustrationItems]);
+
+  const organisationLogos = useMemo(() => {
+    const fromCms = overrides?.blocks?.organisationLogos;
+    if (fromCms?.length) return fromCms;
+    return supportedOrganisationLogos.map((fileName, index) => ({
+      id: `org-${index}`,
+      alt: fileName.replace(/\.(png|jpg|jpeg|webp|svg)$/i, ''),
+      src: `/images/Logos/${encodeURIComponent(fileName)}`
+    }));
+  }, [overrides?.blocks?.organisationLogos]);
+
+  const workShowsUpBullets = useMemo(() => {
+    const fromCms = overrides?.blocks?.workShowsUpBullets;
+    if (fromCms?.length) return fromCms;
+    return practicePageContent.workShowsUp.bullets;
+  }, [overrides?.blocks?.workShowsUpBullets]);
+
+  const contextBullets = useMemo(() => {
+    const fromCms = overrides?.blocks?.contextBullets;
+    if (fromCms?.length) return fromCms;
+    return practicePageContent.context.bullets;
+  }, [overrides?.blocks?.contextBullets]);
 
   const accordionBaseId = useId();
   const [openIllustrationIndex, setOpenIllustrationIndex] = useState<
@@ -277,17 +324,14 @@ export default function Home() {
                   fontFeatureSettings: "'liga' off, 'clig' off"
                 }}
               >
-                {t('practice.hero.title', 'Where thinking meets Reality')}
+                {t('practice.hero.title')}
               </h1>
 
               <p
                 className="font-medium text-[18px] md:text-[25px] leading-[1.35] md:leading-normal text-[#4b3e43] w-full max-w-[460px]"
                 style={{ fontFamily: 'var(--font-lora), serif' }}
               >
-                {t(
-                  'practice.hero.subtitle',
-                  'Where my thinking has been tested, applied, and refined in practice.'
-                )}
+                {t('practice.hero.subtitle')}
               </p>
 
               <div className="relative md:hidden mt-2 -mb-8 translate-y-0 -mx-4 h-[270px] w-[calc(100%+2rem)] max-w-none isolate">
@@ -371,44 +415,19 @@ export default function Home() {
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               <span className={styles.brushHighlight}>
-                Working inside Complexity
+                {t('practice.complexity.title')}
               </span>
             </h2>
-            <p
-              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]"
-              style={{
-                color: '#000',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '35px'
-              }}
-            >
-              My work is not about delivery against fixed methods or predefined
-              solutions. It is about working inside complexity supporting
-              understanding, alignment, and responsible action in contexts
-              shaped by uncertainty, constraint, and long-term risk.
+            <p className="text-[16px] font-normal leading-[110%] text-black max-w-[460px]" style={{ color: '#000', fontFamily: 'Lora', fontSize: '16px', fontStyle: 'normal', fontWeight: 400, lineHeight: '35px' }}>
+              {t('practice.complexity.p1')}
             </p>
-            <p
-              className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-4"
-              style={{
-                color: '#000',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '35px'
-              }}
-            >
-              I engage through applied research, collaboration, advisory work,
-              and strategic synthesis, often alongside organisations navigating
-              systemic change.
+            <p className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-4" style={{ color: '#000', fontFamily: 'Lora', fontSize: '16px', fontStyle: 'normal', fontWeight: 400, lineHeight: '35px' }}>
+              {t('practice.complexity.p2')}
             </p>
           </div>
           <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden lg:justify-self-start">
             <Image
-              src={complexityImage}
+              src={img('practice.complexity.image', complexityImage)}
               alt="Complexity visual"
               fill
               className="object-contain p-8"
@@ -420,7 +439,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden order-2 lg:order-1 lg:justify-self-end">
             <Image
-              src={workShowsUpImage}
+              src={img('practice.workShowsUp.image', workShowsUpImage)}
               alt="Work in practice visual"
               fill
               className="object-cover"
@@ -433,7 +452,7 @@ export default function Home() {
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
               <span className={styles.brushHighlight}>
-                How My Work Shows Up
+                {t('practice.workShowsUp.title')}
               </span>
             </h2>
             <p
@@ -447,8 +466,7 @@ export default function Home() {
                 lineHeight: '35px'
               }}
             >
-              Rather than offering a single methodology, my practice takes
-              different forms depending on context, timing, and need.
+              {t('practice.workShowsUp.intro')}
             </p>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
@@ -461,39 +479,12 @@ export default function Home() {
                 lineHeight: '35px'
               }}
             >
-              Typical contributions include:
+              {t('practice.workShowsUp.bulletsLabel')}
             </p>
-            <ul
-              className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
-              style={{
-                color: '#000',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '35px'
-              }}
-            >
-              <li>
-                Analysis and synthesis of complex social, ecological, and
-                organisational dynamics
-              </li>
-              <li>
-                Futures-oriented research to explore emerging risks, signals,
-                and long-term implications
-              </li>
-              <li>
-                Narrative and strategic communications to support coherence,
-                legitimacy, and shared understanding
-              </li>
-              <li>
-                Resilience and adaptation framing for organisations operating
-                under pressure
-              </li>
-              <li>
-                Judgement and advisory support in moments of transition,
-                ambiguity, or decision-making
-              </li>
+            <ul className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1" style={{ color: '#000', fontFamily: 'Lora', fontSize: '16px', fontStyle: 'normal', fontWeight: 400, lineHeight: '35px' }}>
+              {workShowsUpBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
             </ul>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
@@ -506,8 +497,7 @@ export default function Home() {
                 lineHeight: '35px'
               }}
             >
-              This work is shaped by inquiry rather than prescription, and by
-              discernment rather than speed.
+              {t('practice.workShowsUp.closing')}
             </p>
           </div>
         </div>
@@ -518,7 +508,7 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[40px] leading-normal text-[#1f1f1f] mb-4"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              <span className={styles.brushHighlight}>Context of practice</span>
+              <span className={styles.brushHighlight}>{t('practice.context.title')}</span>
             </h2>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mb-2"
@@ -531,27 +521,12 @@ export default function Home() {
                 lineHeight: '35px'
               }}
             >
-              My applied work has taken place across a range of systems and
-              domains, including:
+              {t('practice.context.intro')}
             </p>
-            <ul
-              className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1"
-              style={{
-                color: '#000',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '35px'
-              }}
-            >
-              <li>Multilateral and UN systems</li>
-              <li>International development and the impact sector</li>
-              <li>Biodiversity, climate, and nature-positive finance</li>
-              <li>Circular economy and producer responsibility</li>
-              <li>Nature-based solutions and ecosystem governance</li>
-              <li>Futures and trends research</li>
-              <li>Strategic communications and policy-facing narratives</li>
+            <ul className="list-disc pl-5 text-[16px] font-normal leading-[110%] text-black max-w-[460px] space-y-1" style={{ color: '#000', fontFamily: 'Lora', fontSize: '16px', fontStyle: 'normal', fontWeight: 400, lineHeight: '35px' }}>
+              {contextBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
             </ul>
             <p
               className="text-[16px] font-normal leading-[110%] text-black max-w-[460px] mt-3"
@@ -564,13 +539,12 @@ export default function Home() {
                 lineHeight: '35px'
               }}
             >
-              These contexts are where many of the questions explored on the
-              Thinking page first emerged.
+              {t('practice.context.closing')}
             </p>
           </div>
           <div className="relative bg-[#EFEBE7] h-[300px] md:h-[360px] lg:h-[420px] max-w-[460px] w-full overflow-hidden lg:justify-self-start">
             <Image
-              src={contextImage}
+              src={img('practice.context.image', contextImage)}
               alt="Context visual"
               fill
               className="object-cover"
@@ -582,17 +556,17 @@ export default function Home() {
 
       <section
         className="w-full py-14 md:py-24 bg-[#EFEBE7] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/background.png')" }}
+        style={{ backgroundImage: "url(img('practice.patterns.backgroundImage', '/images/background.png'))" }}
       >
         <div className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16">
           <h2
             className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-black mb-10 md:mb-16"
             style={{ fontFamily: 'var(--font-lora), serif' }}
           >
-            Patterns I see Emerge from my Practice
+            {t('practice.patterns.title')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {patternCards.map((item) => (
+            {patternCardsFromCms.map((item) => (
               <div key={item.title}>
                 <div
                   className={`${item.iconSize} mb-8 flex items-center justify-center`}
@@ -630,18 +604,18 @@ export default function Home() {
           style={{ fontFamily: 'var(--font-lora), serif' }}
         >
           <span className={styles.brushHighlight}>
-            Organisations I have Supported
+            {t('practice.organisations.title')}
           </span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
-          {supportedOrganisationLogos.map((fileName) => (
+          {organisationLogos.map((logo) => (
             <div
-              key={fileName}
+              key={logo.id}
               className="bg-[#F8F6F4] h-[90px] rounded flex items-center justify-center px-4"
             >
               <Image
-                src={`/images/Logos/${encodeURIComponent(fileName)}`}
-                alt={fileName.replace(/\.(png|jpg|jpeg|webp|svg)$/i, '')}
+                src={logo.src}
+                alt={logo.alt}
                 width={160}
                 height={60}
                 className="h-[46px] w-auto object-contain grayscale contrast-125 opacity-70 mix-blend-multiply"
@@ -655,7 +629,7 @@ export default function Home() {
         <div className="relative w-full max-w-[1448px] mx-auto min-h-[700px] sm:min-h-[760px] lg:min-h-0 pl-0 pr-4 md:pr-8 lg:pr-16 lg:grid lg:grid-cols-[35%_65%] gap-8 md:gap-10 items-start">
           <div className="absolute z-0 -ml-4 w-[calc(100%+1rem)] max-w-[640px] h-[640px] sm:h-[700px] top-6 sm:top-8 md:-ml-10 md:w-[calc(100%+2.5rem)] lg:relative lg:max-w-none lg:-ml-16 lg:w-[calc(100%+4rem)] lg:h-[820px] lg:top-auto lg:-mt-48 xl:-ml-20 xl:w-[calc(100%+5rem)] 2xl:-ml-24 2xl:w-[calc(100%+6rem)]">
             <Image
-              src="/images/illustrations.png"
+              src={img('practice.illustrations.decorativeImage', '/images/illustrations.png')}
               alt="Decorative pattern"
               fill
               className="object-contain object-left"
@@ -667,11 +641,11 @@ export default function Home() {
               className="font-normal text-[30px] md:text-[40px] leading-tight md:leading-[35px] text-black mb-8 md:mb-10"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              Illustrations of Practice
+              {t('practice.illustrations.title')}
             </h2>
             <div className="border-b border-[#C8BAAD] mb-0" />
             <div>
-              {illustrations.map((item, index) => {
+              {illustrationsFromCms.map((item, index) => {
                 const isOpen = openIllustrationIndex === index;
                 const panelId = `${accordionBaseId}-illustration-${index}`;
 
@@ -742,7 +716,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* Wavy edge into “Connecting back to Thinking” (#EFEBE7 shows in transparent dips) */}
+        {/* Wavy edge into Connecting section (#EFEBE7 shows in transparent dips) */}
         <div
           className="relative z-10 -mx-4 h-12 w-[calc(100%+2rem)] md:mx-0 md:h-16 md:w-full"
           aria-hidden="true"
@@ -898,7 +872,7 @@ export default function Home() {
       <section className="relative z-10 w-full overflow-hidden lg:overflow-visible -mt-12 md:-mt-16 pb-10 md:pb-14 lg:pb-20">
         <div className="relative w-full h-[800px] md:h-[520px] lg:h-[560px]">
           <Image
-            src={connectingSectionImage}
+            src={img('practice.connecting.backgroundImage', connectingSectionImage)}
             alt=""
             fill
             className="object-cover object-center z-0"
@@ -911,7 +885,7 @@ export default function Home() {
                   className="pt-4 md:pt-0 font-normal text-[30px] md:text-[40px] lg:text-[45px] leading-[1.2] md:leading-[46px] text-black mb-4 md:mb-8"
                   style={{ fontFamily: 'var(--font-lora), serif' }}
                 >
-                  Connecting back to Thinking
+                  {t('practice.connecting.title')}
                 </h2>
                 <div
                   className="font-normal text-[16px] md:text-[18px] leading-[110%] text-black max-w-[920px] mb-4 md:mb-8"
@@ -924,21 +898,9 @@ export default function Home() {
                     lineHeight: '35px'
                   }}
                 >
-                  <p>
-                    Practice is not separate from inquiry. It is where questions
-                    are sharpened, assumptions tested, and frameworks revised.
-                  </p>
-                  <p className="mt-4">
-                    Much of the thinking described elsewhere on this site -
-                    including AATT, futures inquiry, and attention to the inner
-                    dimension - has been shaped through engagement with real
-                    systems under pressure.
-                  </p>
-                  <p className="mt-4">
-                    Practice, for me, is not about implementation for its own
-                    sake. It is about staying close to reality - learning from
-                    systems as they move, strain, adapt, and sometimes fail.
-                  </p>
+                  <p>{t('practice.connecting.p1')}</p>
+                  <p className="mt-4">{t('practice.connecting.p2')}</p>
+                  <p className="mt-4">{t('practice.connecting.p3')}</p>
                 </div>
                 <div
                   className="space-y-2 font-normal text-[17px] md:text-[24px] leading-[26px] md:leading-[35px] text-[#979797]"
@@ -958,7 +920,7 @@ export default function Home() {
                       aria-hidden="true"
                     >
                       <Image
-                        src={dashImage}
+                        src={img('practice.connecting.dashImage', dashImage)}
                         alt=""
                         fill
                         className="object-contain"
@@ -966,10 +928,7 @@ export default function Home() {
                       />
                     </span>
                     <span>
-                      <span className="underline" style={{ color: '#979797' }}>
-                        Thinking
-                      </span>
-                      {' — inquiry, frameworks, and research'}
+                      <span className="underline" style={{ color: '#979797' }}>{t('practice.connecting.thinkingLinkLabel')}</span>{t('practice.connecting.thinkingLinkSuffix')}
                     </span>
                   </a>
                   <a
@@ -982,7 +941,7 @@ export default function Home() {
                       aria-hidden="true"
                     >
                       <Image
-                        src={dashImage}
+                        src={img('practice.connecting.dashImage', dashImage)}
                         alt=""
                         fill
                         className="object-contain"
@@ -990,10 +949,7 @@ export default function Home() {
                       />
                     </span>
                     <span>
-                      <span className="underline" style={{ color: '#979797' }}>
-                        About
-                      </span>
-                      {' — background, philosophy, and learning stance'}
+                      <span className="underline" style={{ color: '#979797' }}>{t('practice.connecting.aboutLinkLabel')}</span>{t('practice.connecting.aboutLinkSuffix')}
                     </span>
                   </a>
                 </div>
@@ -1003,7 +959,7 @@ export default function Home() {
         </div>
         <div className="absolute right-0 bottom-[-72px] md:bottom-[-140px] lg:bottom-[-180px] w-[140px] md:w-[280px] lg:w-[360px] h-[220px] md:h-[360px] lg:h-[560px] z-20 pointer-events-none">
           <Image
-            src="/images/leaf2.png"
+            src={img('practice.connecting.leafImage', '/images/leaf2.png')}
             alt="Decorative leaf"
             fill
             className="object-contain object-bottom-right"
@@ -1016,7 +972,7 @@ export default function Home() {
         <div className="bg-[#343433] w-full md:w-[80%] mr-auto px-6 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 min-h-[320px] md:min-h-[360px] lg:min-h-[420px] flex flex-col md:flex-row gap-8 lg:gap-14 items-center text-white!">
           <div className="relative w-[168px] h-[168px] rounded-full overflow-hidden shrink-0">
             <Image
-              src={startTransImage}
+              src={img('practice.cta.profileImage', startTransImage)}
               alt="Chloe profile"
               fill
               className="object-cover grayscale"
@@ -1031,25 +987,20 @@ export default function Home() {
               className="font-normal text-[36px] leading-[36.476px] text-white!"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              If this resonates{' '}
+              {t('practice.cta.title')}{' '}
             </p>
             <p
               className="text-[18px] leading-[35px] mt-4 max-w-[640px] text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              If you’re navigating complexity or transition and need a space for
-              clear thinking, honest advice, or simply a sounding board, as well
-              as support in putting your thinking into practice, I’d love to
-              hear from you. I offer{' '}
-              <strong>Strategic Coherence Conversations</strong> for leaders
-              working in impact-driven contexts.
+              {t('practice.cta.body')}
             </p>
             <a
-              href="/contact"
+              href={t('practice.cta.linkHref')}
               className="inline-block mt-4 text-[18px] leading-[35px] underline text-white!"
               style={{ color: '#FFFFFF' }}
             >
-              → Request a conversation
+              {t('practice.cta.linkText')}
             </a>
           </div>
         </div>

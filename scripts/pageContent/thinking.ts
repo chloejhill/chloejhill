@@ -1,11 +1,8 @@
+import { thinkingPageContent } from '../../lib/pageDefaults/thinking';
 import type { ArraySeedDef } from './arraySeeds';
 
 export const thinkingContent = {
-  hero: {
-    title: 'Thinking into the uncertainty',
-    subtitle:
-      'Research and inquiry into how we understand, anticipate, and respond to profound change.'
-  },
+  ...thinkingPageContent,
   publications: [],
   books: []
 };
@@ -20,7 +17,14 @@ export const thinkingImageSeeds = [
     path: 'public/images/services/heroright.png',
     fieldPath: 'hero.rightImage',
     alt: 'Hero right'
-  }
+  },
+  { path: 'public/images/syschange.png', fieldPath: 'inquiry.bannerImage', alt: 'Systems change' },
+  { path: 'public/images/finq.png', fieldPath: 'futureInquiry.bannerImage', alt: 'Future inquiry' },
+  { path: 'public/images/leaf.png', fieldPath: 'transcendental.leafImage', alt: '' },
+  { path: 'public/images/innerd.png', fieldPath: 'innerDimension.bannerImage', alt: 'Inner dimension' },
+  { path: 'public/images/dots.png', fieldPath: 'innerDimension.dotsImage', alt: 'The Dots Directory' },
+  { path: 'public/images/evolution.png', fieldPath: 'evolution.backgroundImage', alt: '' },
+  { path: 'public/images/home/dash.png', fieldPath: 'evolution.dashImage', alt: '' }
 ];
 
 export const thinkingArraySeeds: ArraySeedDef[] = [
@@ -44,5 +48,17 @@ export const thinkingArraySeeds: ArraySeedDef[] = [
       { data: { title: 'Philanthropy' }, images: [{ field: 'cover', path: 'public/images/books/Philanthropy.png', alt: 'Philanthropy', storageFilename: 'book-philanthropy.png' }] },
       { data: { title: 'Regen Cultures' }, images: [{ field: 'cover', path: 'public/images/books/Regen Cultures.png', alt: 'Regen Cultures', storageFilename: 'book-regen-cultures.png' }] }
     ]
+  },
+  {
+    arrayPath: 'aatt.items',
+    items: thinkingPageContent.aatt.items.map((item) => ({
+      data: {
+        title: item.title,
+        subtitle: item.subtitle,
+        description: item.description,
+        iconLeft: item.iconLeft
+      },
+      images: [{ field: 'icon', path: `public${item.iconImage}`, alt: item.title }]
+    }))
   }
 ];

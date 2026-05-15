@@ -1,7 +1,6 @@
 import type { Field } from 'payload';
 
 import { aboutPageFields } from './about';
-import { articlesPageFields } from './articles';
 import { contactPageFields } from './contact';
 import { homePageFields } from './home';
 import { practicePageFields } from './practice';
@@ -16,6 +15,5 @@ export const pageContentFields: Field[] = [
   ...workWithMePageFields,
   ...thinkingPageFields,
   ...practicePageFields,
-  ...articlesPageFields,
   ...projectsPageFields
 ];

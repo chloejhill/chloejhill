@@ -96,6 +96,21 @@ export const aboutPageFields: Field[] = [
           ]
         },
         {
+          label: 'Timeline',
+          fields: [
+            {
+              name: 'timeline',
+              type: 'array',
+              label: 'Timeline',
+              labels: { singular: 'Entry', plural: 'Entries' },
+              fields: [
+                textField('year', 'Year'),
+                textareaField('text', 'Description')
+              ]
+            }
+          ]
+        },
+        {
           label: 'Affiliations & quote',
           fields: [
             {

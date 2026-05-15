@@ -6,7 +6,13 @@ import Link from 'next/link';
 import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { defaultBooks, defaultPublications } from '@/lib/defaultContent';
+import { defaultPublications } from '@/lib/defaultContent';
+import {
+  thinkingImageDefaults,
+  thinkingPageContent,
+  thinkingStringDefaults
+} from '@/lib/pageDefaults';
+import { usePageContent } from '@/lib/usePageContent';
 import { usePayloadOverrides } from '@/lib/usePayloadOverrides';
 
 const heroLeftImage = '/images/services/heroleft.png';
@@ -219,12 +225,11 @@ function TransformationSpiralIcon() {
 
 export default function Thinking() {
   const overrides = usePayloadOverrides('thinking');
-  const t = (key: string, fallback: string) =>
-    overrides?.strings?.[key] || fallback;
-  const img = (key: string, fallbackSrc: string) =>
-    overrides?.images?.[key]?.src || fallbackSrc;
-  const alt = (key: string, fallbackAlt: string) =>
-    overrides?.images?.[key]?.alt || fallbackAlt;
+  const { t, img, alt } = usePageContent(
+    overrides,
+    thinkingStringDefaults,
+    thinkingImageDefaults
+  );
 
   const writingsViewportRef = useRef<HTMLDivElement | null>(null);
   const evolutionInnerRef = useRef<HTMLDivElement | null>(null);
@@ -245,13 +250,26 @@ export default function Thinking() {
 
   const books = useMemo(() => {
     const fromCms = overrides?.blocks?.books;
-    if (fromCms?.length) return fromCms.slice(0, 3);
+    if (fromCms?.length) return fromCms;
     return currentBooks.map((book) => ({
       id: book.title,
       title: book.title,
       src: book.src
     }));
   }, [overrides?.blocks?.books]);
+
+  const aattItems = useMemo(() => {
+    const fromCms = overrides?.blocks?.aattItems;
+    if (fromCms?.length) return fromCms;
+    return thinkingPageContent.aatt.items.map((item, index) => ({
+      id: `aatt-${index}`,
+      title: item.title,
+      subtitle: item.subtitle,
+      description: item.description,
+      iconLeft: item.iconLeft,
+      iconSrc: item.iconImage
+    }));
+  }, [overrides?.blocks?.aattItems]);
 
   const writingsLoop = useMemo(() => {
     const items = selectedWritings;
@@ -339,41 +357,6 @@ export default function Thinking() {
     });
   };
 
-  const aattItems = [
-    {
-      title: 'Anticipate',
-      subtitle: 'Sensing the Horizon',
-      description:
-        'Transformation begins with awareness. This dimension explores how organisations and leaders learn to see beyond the immediate - noticing emerging signals, trends, and disruptions across social, ecological, technological, and economic systems.',
-      iconSrc: '/images/anticipate.png',
-      iconLeft: false
-    },
-    {
-      title: 'Adapt',
-      subtitle: 'Building Strategic Resilience',
-      description:
-        'Resilience is more than survival; it is the capacity to evolve without losing coherence. This dimension examines how organisations adapt under pressure - across strategy, structure, stories and culture - and what enables them to respond with discernment rather than reactivity.',
-      iconSrc: '/images/adapt.png',
-      iconLeft: true
-    },
-    {
-      title: 'Transform',
-      subtitle: 'Aligning Purpose, Culture & Action',
-      description:
-        'Transformation is both systemic and human. This dimension explores how deeper shifts take place - in narratives, ways of working, leadership culture, and collective identity. It asks how purpose moves from aspiration into practice, and how fragmentation gives way to alignment.',
-      iconSrc: '/images/transform.png',
-      iconLeft: false
-    },
-    {
-      title: 'Transcend',
-      subtitle: 'Meaning, Renewal and Stewardship',
-      description:
-        'Beyond transformation lies renewal. This dimension engages with longer-term questions of meaning, ethics, and stewardship. Here, the inquiry moves beyond adaptation toward renewal - asking what kinds of futures are worth sustaining, and what it means to lead in service of systemic flourishing.',
-      iconSrc: '/images/transcend.png',
-      iconLeft: true
-    }
-  ];
-
   return (
     <div className={styles.container}>
       <section className="relative w-full h-[520px] md:h-[600px] overflow-hidden">
@@ -445,16 +428,13 @@ export default function Thinking() {
                 fontFeatureSettings: "'liga' off, 'clig' off"
               }}
             >
-              {t('thinking.hero.title', 'Thinking into the uncertainty')}
+              {t('thinking.hero.title')}
             </h1>
             <p
               className="font-normal text-[18px] md:text-[25px] leading-[1.35] md:leading-[normal] text-[#4b3e43] max-w-full md:max-w-[607.712px]"
               style={{ fontFamily: 'var(--font-lora), serif' }}
             >
-              {t(
-                'thinking.hero.subtitle',
-                'Research and inquiry into how we understand, anticipate, and respond to profound change.'
-              )}
+              {t('thinking.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -466,7 +446,7 @@ export default function Thinking() {
         <div className={styles.sectionHeadingCentered}>
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
-            Where my Inquiry Begins
+            {t('thinking.inquiry.title')}
           </h2>
         </div>
         <div
@@ -481,26 +461,14 @@ export default function Thinking() {
             lineHeight: '35px'
           }}
         >
-          <p>
-            Rather than offering fixed solutions or proprietary methods, my work
-            is shaped by sustained inquiry into a small number of interrelated
-            questions. I am interested in how we learn to see what is emerging,
-            how we respond under pressure, how transformation actually unfolds
-            in practice, and how deeper questions of meaning and responsibility
-            shape the futures we create.
-          </p>
-          <p>
-            These questions show up repeatedly across my research, writing, and
-            applied work. They are not services, and they are not linear stages.
-            They are lenses through which I explore how individuals,
-            organisations, and systems respond to profound change.
-          </p>
+          <p>{t('thinking.inquiry.p1')}</p>
+          <p>{t('thinking.inquiry.p2')}</p>
         </div>
 
         <div className={styles.inquiryBanner}>
           <div className={styles.inquiryBannerIcon} aria-hidden="true">
             <Image
-              src={syschangeImage}
+              src={img('thinking.inquiry.bannerImage', syschangeImage)}
               alt=""
               width={300}
               height={300}
@@ -508,7 +476,9 @@ export default function Thinking() {
               unoptimized
             />
           </div>
-          <div className={styles.inquiryBannerLabel}>Systems Change</div>
+          <div className={styles.inquiryBannerLabel}>
+            {t('thinking.inquiry.bannerLabel')}
+          </div>
         </div>
       </section>
 
@@ -516,7 +486,7 @@ export default function Thinking() {
         <div
           className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
         >
-          <h3 className={styles.empiricalTitle}>Empirical Grounding</h3>
+          <h3 className={styles.empiricalTitle}>{t('thinking.empirical.title')}</h3>
           <div
             className={styles.empiricalBody}
             style={{
@@ -529,33 +499,9 @@ export default function Thinking() {
               maxWidth: '1120px'
             }}
           >
-            <p>
-              Much of my thinking has been shaped through long-term work inside
-              complex social, ecological, and institutional systems.
-            </p>
-            <p>
-              Over more than two decades, I’ve worked across sustainability,
-              international development, and the impact sector, collaborating
-              with multilateral institutions, governments, NGOs, and
-              mission-driven organisations across regions including Latin
-              America, Europe, and Southeast Asia.
-            </p>
-            <p>
-              These contexts exposed me to systems under pressure — grappling
-              with climate risk, biodiversity loss, economic transition, and
-              institutional constraint — and to the limits of linear planning,
-              technical fixes, and fragmented responses. Across this work, I
-              became increasingly interested not only in what organisations were
-              trying to change, but how change actually unfolded: how strategy,
-              narrative, culture, and leadership interacted; how uncertainty was
-              handled; and how meaning, power, and values shaped decisions —
-              making over time. This lived engagement with systems change is
-              what gave rise to the questions, frameworks, and research threads
-              that follow. Below are some selected technical and strategic
-              publications which showcase some of work on some of my empirical
-              grounding in systems change where nature has been my source of
-              inspiration and enabling a better stewardship, my vocation.
-            </p>
+            <p>{t('thinking.empirical.p1')}</p>
+            <p>{t('thinking.empirical.p2')}</p>
+            <p>{t('thinking.empirical.p3')}</p>
           </div>
         </div>
       </section>
@@ -564,7 +510,7 @@ export default function Thinking() {
         <div className={styles.sectionHeadingCentered}>
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
-            Selected Writings &amp; Publications
+            {t('thinking.writings.sectionTitle')}
           </h2>
         </div>
 
@@ -616,10 +562,10 @@ export default function Thinking() {
 
       <section className={styles.futureSection}>
         <div className={styles.futureBanner}>
-          <div className={styles.futureBannerLabel}>Future Inquiry</div>
+          <div className={styles.futureBannerLabel}>{t('thinking.futureInquiry.label')}</div>
           <div className={styles.futureBannerWaves} aria-hidden="true">
             <Image
-              src={finqImage}
+              src={img('thinking.futureInquiry.bannerImage', finqImage)}
               alt=""
               width={360}
               height={120}
@@ -652,36 +598,17 @@ export default function Thinking() {
               alignSelf: 'flex-start'
             }}
           >
-            Transcendental Futures
+            {t('thinking.transcendental.title')}
           </h2>
-          <p>
-            Alongside AATT, my work includes sustained inquiry at the
-            intersection of futures studies, philosophy, and systems thinking.
-          </p>
-          <p>
-            This research explores long-term responsibility, ethics, and
-            uncertainty — including how societies imagine the future, how values
-            and power shape foresight, and how leads make decisions when
-            outcomes cannot be fully known.
-          </p>
-          <p>
-            A central contribution to this inquiry is my co-authored paper
-            Transcendental Futures, published in Futures (Elsevier, 2025), which
-            examines how consciousness, ethics, and metaphysical assumptions
-            influence futures thinking, leadership, and long-term stewardship.
-          </p>
-          <p className={styles.transcendentalLink}>
-            — View publication (Futures, Elsevier)
-          </p>
-          <p>
-            This work informs both my academic writing and applied practice,
-            grounding anticipation and judgement in deeper reflection on meaning
-            responsibility, and consequence.
-          </p>
+          <p>{t('thinking.transcendental.p1')}</p>
+          <p>{t('thinking.transcendental.p2')}</p>
+          <p>{t('thinking.transcendental.p3')}</p>
+          <p className={styles.transcendentalLink}>{t('thinking.transcendental.linkText')}</p>
+          <p>{t('thinking.transcendental.p4')}</p>
         </div>
         <div className={styles.transcendentalLeaf} aria-hidden="true">
           <Image
-            src="/images/leaf.png"
+            src={img('thinking.transcendental.leafImage', '/images/leaf.png')}
             alt=""
             width={520}
             height={760}
@@ -696,7 +623,7 @@ export default function Thinking() {
           <div className={styles.transformationIcon} aria-hidden="true">
             <TransformationSpiralIcon />
           </div>
-          <div className={styles.transformationLabel}>Transformation</div>
+          <div className={styles.transformationLabel}>{t('thinking.transformation.label')}</div>
         </div>
       </section>
 
@@ -709,8 +636,8 @@ export default function Thinking() {
           }}
         >
           <h2 className={styles.empiricalTitle} style={{ color: '#1F1F1F' }}>
-            Anticipate. Adapt. Transform. Transcend.
-            <br />A Framework for Transformation
+            {t('thinking.aatt.title')}
+            <br />{t('thinking.aatt.titleLine2')}
           </h2>
           <div
             className={styles.empiricalBody}
@@ -723,17 +650,7 @@ export default function Thinking() {
               lineHeight: '35px'
             }}
           >
-            <p>
-              AATT is a structured yet fluid framework that has emerged from my
-              work across sustainability, futures research, and organisational
-              change. It reflects how transformation tends to unfold in real
-              conditions — not as a neat sequence, but as a set of interrelated
-              capacities that deepen over time. Rather than prescribing action,
-              AATT helps organise inquiry across four recurring dimensions. The
-              framework continues to evolve as a thinking framework. It informs
-              my research, writing, and collaborative work, but is not offered
-              as a fixed methodology or packaged approach.
-            </p>
+            <p>{t('thinking.aatt.intro')}</p>
           </div>
         </div>
 
@@ -782,7 +699,7 @@ export default function Thinking() {
         <div className={styles.innerBanner}>
           <div className={styles.innerBannerIcon} aria-hidden="true">
             <Image
-              src="/images/innerd.png"
+              src={img('thinking.innerDimension.bannerImage', '/images/innerd.png')}
               alt=""
               width={220}
               height={160}
@@ -790,13 +707,13 @@ export default function Thinking() {
               unoptimized
             />
           </div>
-          <div className={styles.innerBannerLabel}>The Inner Dimension</div>
+          <div className={styles.innerBannerLabel}>{t('thinking.innerDimension.bannerLabel')}</div>
         </div>
 
         <div className={styles.innerDimensionInner}>
           <div className={styles.innerDimensionCopy}>
             <h2 className={styles.innerDimensionHeading}>
-              Cultivating The Capacities That Make Transformation Possible
+              {t('thinking.innerDimension.heading')}
             </h2>
             <div
               className={styles.innerDimensionBody}
@@ -809,27 +726,17 @@ export default function Thinking() {
                 lineHeight: '35px'
               }}
             >
-              <p>
-                Transformation is not only systemic — it is also personal.
-                Organizations that thrive in complexity develop inner capacities
-                alongside strategic ones : adaptability, discernment, emotional
-                resilience, and the ability to stay grounded amid uncertainty.
-                This dimension reflects my long-standing interest in how inner
-                development shapes outer change. Alongside The Dots Directory, I
-                explore how individuals strengthen the awareness, empathy, and
-                purpose that make meaningful transformation possible — not as a
-                substitute for systems change, but as its human foundation.
-              </p>
+              <p>{t('thinking.innerDimension.body')}</p>
             </div>
           </div>
           <Link
-            href="https://www.dotsdirectory.com"
+            href={t('thinking.innerDimension.dotsUrl')}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.innerDotsCard}
           >
             <Image
-              src="/images/dots.png"
+              src={img('thinking.innerDimension.dotsImage', '/images/dots.png')}
               alt="The Dots Directory"
               width={320}
               height={120}
@@ -846,7 +753,7 @@ export default function Thinking() {
         >
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
-            Current Books that are shaping my Ideas
+            {t('thinking.books.sectionTitle')}
           </h2>
         </div>
         <div className={styles.booksGrid}>
@@ -872,7 +779,7 @@ export default function Thinking() {
         <div ref={evolutionInnerRef} className={styles.evolutionInner}>
           <div className={styles.evolutionMobileBg} aria-hidden>
             <Image
-              src={evolutionImage}
+              src={img('thinking.evolution.backgroundImage', evolutionImage)}
               alt=""
               fill
               className={styles.evolutionMobileBgImg}
@@ -882,7 +789,7 @@ export default function Thinking() {
           </div>
           <div ref={evolutionCopyRef} className={styles.evolutionCopy}>
             <h2 id="evolution-heading" className={styles.evolutionTitle}>
-              Evolution of my Thinking
+              {t('thinking.evolution.title')}
             </h2>
             <div
               className={styles.evolutionBody}
@@ -895,56 +802,43 @@ export default function Thinking() {
                 lineHeight: '35px'
               }}
             >
-              <p>
-                The ideas on this page are not presented as conclusions, but as
-                working questions — shaped through research, reflection, and
-                engagement with real-world complexity.
-              </p>
-              <p>
-                They continue to evolve as conditions change, new perspectives
-                emerge, and deeper layers of uncertainty come into view. What
-                matters most is not having definitive answers, but developing
-                the capacity to stay in inquiry — to see clearly, judge wisely,
-                and act with responsibility over time. If this orientation
-                resonates, you may wish to explore how these questions show up
-                in practice, or the personal journey and stance that inform how
-                I work.
-              </p>
+              <p>{t('thinking.evolution.p1')}</p>
+              <p>{t('thinking.evolution.p2')}</p>
             </div>
             <div className={styles.evolutionLinks}>
               <Link href="/practice" className={styles.evolutionLink}>
                 <span className={styles.evolutionDash} aria-hidden="true">
                   <Image
-                    src={dashImage}
+                    src={img('thinking.evolution.dashImage', dashImage)}
                     alt=""
                     fill
                     className={styles.evolutionDashImg}
                   />
                 </span>
                 <span className={styles.evolutionLinkLabel}>
-                  <span className={styles.evolutionLinkWord}>Practice</span>
-                  {' — where this thinking is tested in real conditions'}
+                  <span className={styles.evolutionLinkWord}>{t('thinking.evolution.practiceLinkLabel')}</span>
+                  {t('thinking.evolution.practiceLinkSuffix')}
                 </span>
               </Link>
               <Link href="/about" className={styles.evolutionLink}>
                 <span className={styles.evolutionDash} aria-hidden="true">
                   <Image
-                    src={dashImage}
+                    src={img('thinking.evolution.dashImage', dashImage)}
                     alt=""
                     fill
                     className={styles.evolutionDashImg}
                   />
                 </span>
                 <span className={styles.evolutionLinkLabel}>
-                  <span className={styles.evolutionLinkWord}>About</span>
-                  {' — background, philosophy, and learning stance'}
+                  <span className={styles.evolutionLinkWord}>{t('thinking.evolution.aboutLinkLabel')}</span>
+                  {t('thinking.evolution.aboutLinkSuffix')}
                 </span>
               </Link>
             </div>
           </div>
           <div className={styles.evolutionFigure} aria-hidden="true">
             <Image
-              src={evolutionImage}
+              src={img('thinking.evolution.backgroundImage', evolutionImage)}
               alt=""
               width={720}
               height={720}

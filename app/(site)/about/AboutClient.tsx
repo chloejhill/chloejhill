@@ -32,40 +32,19 @@ export default function AboutClient({
   const alt = (key: string, fallbackAlt: string) =>
     overrides?.images?.[key]?.alt || fallbackAlt;
 
-  const timelineItems = [
-    {
-      year: '1998-2002',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2003-2007',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2008-2014',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2015-2020',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2021-present',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2025-2030',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2031-2035',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    },
-    {
-      year: '2036-2040',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo id enim id bibendum.'
-    }
-  ] as const;
+  const defaultTimeline = [
+    { id: 'tl-1', year: '1998-2002', text: 'Environmental science and sustainable development studies; early fieldwork in East Africa.' },
+    { id: 'tl-2', year: '2003-2007', text: 'Applied sustainability and communications roles across international NGOs and multilateral programmes.' },
+    { id: 'tl-3', year: '2008-2014', text: 'Strategic communications and systems-oriented work with global institutions on climate and nature.' },
+    { id: 'tl-4', year: '2015-2020', text: 'Advisory and research leadership on futures, biodiversity finance, and organisational transition.' },
+    { id: 'tl-5', year: '2021-present', text: 'Independent practice integrating systems insight, futures inquiry, and conscious leadership.' },
+    { id: 'tl-6', year: '2025-2030', text: 'Continued research and publication on transcendental futures and long-term stewardship.' },
+    { id: 'tl-7', year: '2031-2035', text: 'Expanding collaborative inquiry with foundations and mission-driven leaders.' },
+    { id: 'tl-8', year: '2036-2040', text: 'Deepening integrative work at the intersection of inner development and systems change.' }
+  ];
+
+  const timelineItems =
+    overrides?.blocks?.timeline?.length ? overrides.blocks.timeline : defaultTimeline;
 
   useEffect(() => {
     const viewport = timelineViewportRef.current;
@@ -295,7 +274,6 @@ export default function AboutClient({
 
         <div className="w-full" style={{ backgroundColor: '#EFEBE7' }}>
           <div className="w-full max-w-[1448px] mx-auto px-4 md:px-16 lg:px-32 py-10 md:py-14">
-            {/* Timeline remains hardcoded for now (easy to extend later) */}
             <div
               ref={timelineViewportRef}
               className="overflow-x-auto scroll-smooth snap-x snap-mandatory"

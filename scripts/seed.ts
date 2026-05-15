@@ -5,10 +5,13 @@ import { SLUG_TO_CONTENT_GROUP } from '../lib/pageContent';
 import { applyArraySeeds, type ArraySeedDef } from './pageContent/arraySeeds';
 import { articleSeeds } from './pageContent/articlesSeed';
 import { aboutContent, aboutImageSeeds } from './pageContent/about';
-import { articlesContent } from './pageContent/articles';
 import { contactContent, contactImageSeeds } from './pageContent/contact';
 import { homeContent, homeImageSeeds } from './pageContent/home';
-import { practiceContent, practiceImageSeeds } from './pageContent/practice';
+import {
+  practiceArraySeeds,
+  practiceContent,
+  practiceImageSeeds
+} from './pageContent/practice';
 import { projectsContent } from './pageContent/projects';
 import { setNested } from './pageContent/setNested';
 import {
@@ -40,6 +43,7 @@ function loadEnvFile(filePath: string) {
 
 function ensureEnvLoaded() {
   const cwd = process.cwd();
+  loadEnvFile(path.join(cwd, '.env.production.local'));
   loadEnvFile(path.join(cwd, '.env.local'));
   loadEnvFile(path.join(cwd, '.env'));
 }
@@ -118,9 +122,9 @@ const pageSeeds: PageSeed[] = [
     slug: 'practice',
     title: 'Practice',
     content: practiceContent,
-    imageSeeds: practiceImageSeeds
+    imageSeeds: practiceImageSeeds,
+    arraySeeds: practiceArraySeeds
   },
-  { slug: 'articles', title: 'Articles', content: articlesContent },
   { slug: 'projects', title: 'Projects', content: projectsContent }
 ];
 
