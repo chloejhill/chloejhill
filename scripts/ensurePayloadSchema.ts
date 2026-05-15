@@ -57,8 +57,8 @@ async function pushSchema() {
   const script = pathMod.join(process.cwd(), 'scripts/pushPayloadSchema.mjs');
 
   // NODE_ENV must not be "production" for pushDevSchema; set via child env (read-only in TS).
-  const env = { ...process.env, NODE_ENV: 'development' };
-  delete env.PAYLOAD_MIGRATING;
+  const { PAYLOAD_MIGRATING: _omitMigrating, ...baseEnv } = process.env;
+  const env: NodeJS.ProcessEnv = { ...baseEnv, NODE_ENV: 'development' };
 
   const result = spawnSync(
     process.execPath,
