@@ -2,6 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { buildConfig } from 'payload';
+import sharp from 'sharp';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
@@ -19,6 +20,7 @@ const dirname = path.dirname(filename);
 const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
 
 export default buildConfig({
+  sharp,
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     meta: {

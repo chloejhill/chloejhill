@@ -24,7 +24,9 @@ export default function AppleIcon() {
           width: size.width,
           height: size.height,
           position: 'relative',
-          background: '#ffffff'
+          background: '#ffffff',
+          /** Satori: multi-child div needs explicit display (see next/og / ImageResponse). */
+          display: 'flex'
         }}
       >
         {DOTS.map((d, i) => {
