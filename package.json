@@ -16,7 +16,7 @@
     "db:check": "psql \"${DATABASE_URI}\" -c \"SELECT current_user, current_database();\"",
     "db:fix-pages-rename": "tsx scripts/fixPagesSchemaDrift.ts",
     "seed": "tsx scripts/seed.ts",
-    "seed:prod": "SEED_SERVER_URL=${SEED_SERVER_URL:-https://chloejhill.vercel.app} tsx scripts/seed.ts",
+    "seed:prod": "SEED_SERVER_URL=${SEED_SERVER_URL:-https://www.chloejhill.com} tsx scripts/seed.ts",
     "ci": "tsx scripts/ensurePayloadSchema.ts && payload generate:importmap && next build --webpack"
   },
   "dependencies": {

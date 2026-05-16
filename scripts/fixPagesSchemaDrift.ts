@@ -74,6 +74,29 @@ async function main() {
     console.log(
       '[fixPagesSchemaDrift] Renamed pages.articles_hero_title → thinking_inquiry_title.'
     );
+
+    const v = await pool.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.columns
+        WHERE table_schema = 'public' AND table_name = '_pages_v'
+          AND column_name = 'version_articles_hero_title'
+      ) AS has_old,
+      EXISTS (
+        SELECT FROM information_schema.columns
+        WHERE table_schema = 'public' AND table_name = '_pages_v'
+          AND column_name = 'version_thinking_inquiry_title'
+      ) AS has_new
+    `);
+    const vrow = v.rows[0] as { has_old?: boolean; has_new?: boolean };
+    if (vrow?.has_old && !vrow?.has_new) {
+      await pool.query(
+        `ALTER TABLE _pages_v RENAME COLUMN version_articles_hero_title TO version_thinking_inquiry_title`
+      );
+      console.log(
+        '[fixPagesSchemaDrift] Renamed _pages_v.version_articles_hero_title → version_thinking_inquiry_title.'
+      );
+    }
+
     console.log(
       'Next: from this repo run `DATABASE_URI=... PAYLOAD_SECRET=... npm run push:schema` if the admin/API still errors, then `npm run seed` against prod.'
     );
