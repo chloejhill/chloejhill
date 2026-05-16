@@ -9,6 +9,7 @@
     "lint": "eslint",
     "generate:importmap": "payload generate:importmap",
     "ensure:schema": "node -r ./scripts/payload-preload.cjs --import tsx scripts/ensurePayloadSchema.ts",
+    "push:schema": "PAYLOAD_PUSH_SCHEMA=true PAYLOAD_FORCE_DRIZZLE_PUSH=true node -r ./scripts/payload-preload.cjs --import tsx scripts/pushPayloadSchema.mjs",
     "migrate": "PAYLOAD_MIGRATING=true payload migrate",
     "migrate:create": "payload migrate:create",
     "migrate:status": "PAYLOAD_MIGRATING=true payload migrate:status",

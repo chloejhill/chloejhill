@@ -753,7 +753,7 @@ export default function Thinking() {
         >
           <span className={styles.sectionHeadingHighlightCentered} />
           <h2 className={styles.sectionTitleCentered}>
-            {t('thinking.books.sectionTitle')}
+            {t('thinking.booksSection.sectionTitle')}
           </h2>
         </div>
         <div className={styles.booksGrid}>

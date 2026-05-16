@@ -85,7 +85,7 @@ export const thinkingPageContent = {
     dotsUrl: 'https://www.dotsdirectory.com',
     dotsImage: '/images/dots.png'
   },
-  books: {
+  booksSection: {
     sectionTitle: 'Current Books that are shaping my Ideas'
   },
   evolution: {

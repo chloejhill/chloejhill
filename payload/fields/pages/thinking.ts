@@ -151,8 +151,9 @@ export const thinkingPageFields: Field[] = [
               ]
             },
             {
-              name: 'books',
+              name: 'booksSection',
               type: 'group',
+              label: 'Current books',
               fields: [textField('sectionTitle', 'Section title')]
             },
             {

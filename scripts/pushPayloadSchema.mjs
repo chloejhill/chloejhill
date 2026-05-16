@@ -26,5 +26,12 @@ const configModule = await import(pathToFileURL(configPath).href);
 const { getPayload } = await import('payload');
 
 const payload = await getPayload({ config: configModule.default });
+
+if (process.env.PAYLOAD_PUSH_SCHEMA === 'true') {
+  const { pushDevSchema } = await import('@payloadcms/drizzle');
+  console.log('[pushPayloadSchema] Pushing schema to database...');
+  await pushDevSchema(payload.db);
+}
+
 console.log('[pushPayloadSchema] Schema push complete.');
 await payload.db.destroy();

@@ -1,10 +1,13 @@
 import { thinkingPageContent } from '../../lib/pageDefaults/thinking';
 import type { ArraySeedDef } from './arraySeeds';
 
+const { booksSection, ...thinkingPageFields } = thinkingPageContent;
+
 export const thinkingContent = {
-  ...thinkingPageContent,
+  ...thinkingPageFields,
+  booksSection,
   publications: [],
-  books: []
+  books: [] as { title: string; cover?: unknown }[]
 };
 
 export const thinkingImageSeeds = [

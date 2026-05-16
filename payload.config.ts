@@ -34,7 +34,9 @@ export default buildConfig({
     pool: {
       connectionString: getDatabaseUri(),
       ssl: getDatabaseSsl()
-    }
+    },
+    // Avoid interactive drizzle prompts blocking `next dev` and API routes.
+    push: process.env.PAYLOAD_PUSH_SCHEMA === 'true'
   }),
   collections: [Users, Pages, Articles, Media],
   globals: [SiteSettings],

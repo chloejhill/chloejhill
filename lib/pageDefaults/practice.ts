@@ -84,7 +84,7 @@ export const practicePageContent = {
       'SEEA.png',
       'UNEP.jpg',
       'WB.jpg',
-      'WWF.png',
+      'WWF.jpg',
       'n4h.png',
       'nesta.png'
     ]
