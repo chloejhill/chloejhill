@@ -38,10 +38,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing email.' }, { status: 400 });
   }
 
-  const email =
-    typeof (body as Record<string, unknown>).email === 'string'
-      ? (body as Record<string, unknown>).email.trim()
-      : '';
+  const emailRaw = (body as Record<string, unknown>).email;
+  const email = typeof emailRaw === 'string' ? emailRaw.trim() : '';
 
   if (!email) {
     return NextResponse.json({ error: 'Email is required.' }, { status: 400 });
