@@ -11,6 +11,21 @@
 .newsletterInput { composes: newsletterInput from '../page.module.css'; }
 .footerNewsletterControl { composes: footerNewsletterControl from '../page.module.css'; }
 .newsletterButton { composes: newsletterButton from '../page.module.css'; }
+
+.newsletterStatus {
+  margin-top: 16px;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.newsletterStatus[data-status='success'] {
+  color: #1a5c1a;
+}
+
+.newsletterStatus[data-status='error'] {
+  color: #9b2c2c;
+}
 .footerRight { composes: footerRight from '../page.module.css'; }
 .footerNav { composes: footerNav from '../page.module.css'; }
 .footerRightLink { composes: footerRightLink from '../page.module.css'; }

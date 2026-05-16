@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import type { CmsArticle } from '@/lib/cmsTypes';
-import { resolveMediaSrc } from '@/lib/resolveMedia';
+import { resolveMediaDimensions, resolveMediaSrc } from '@/lib/resolveMedia';
 
 function formatArticleDate(value: string | null | undefined): string {
   if (!value) return '';
@@ -25,6 +25,9 @@ function mapArticleDoc(doc: Record<string, unknown>): CmsArticle | null {
   if (!id || !slug || !title || !image) return null;
 
   const featured = resolveMediaSrc(doc.featuredImage as never);
+  const { width: imageWidth, height: imageHeight } = resolveMediaDimensions(
+    doc.image as never
+  );
 
   return {
     id,
@@ -32,6 +35,8 @@ function mapArticleDoc(doc: Record<string, unknown>): CmsArticle | null {
     title,
     description,
     image,
+    imageWidth,
+    imageHeight,
     featuredImage: featured ?? undefined,
     date: formatArticleDate(doc.publishedAt as string | null | undefined),
     theme: typeof doc.theme === 'string' ? doc.theme : '',

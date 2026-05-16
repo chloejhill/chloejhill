@@ -3,6 +3,8 @@ type MediaDoc = {
   filename?: string | null;
   alt?: string | null;
   id?: string | number;
+  width?: number | null;
+  height?: number | null;
 };
 
 const API_MEDIA_PREFIX = '/api/media/file/';
@@ -40,4 +42,16 @@ export function resolveMediaAlt(
   if (!media || typeof media === 'string' || typeof media === 'number') return fallback;
   if (typeof media.alt === 'string' && media.alt.trim()) return media.alt;
   return fallback;
+}
+
+export function resolveMediaDimensions(
+  media: MediaDoc | string | number | null | undefined
+): { width?: number; height?: number } {
+  if (!media || typeof media === 'string' || typeof media === 'number') {
+    return {};
+  }
+  const width = typeof media.width === 'number' && media.width > 0 ? media.width : undefined;
+  const height =
+    typeof media.height === 'number' && media.height > 0 ? media.height : undefined;
+  return { width, height };
 }

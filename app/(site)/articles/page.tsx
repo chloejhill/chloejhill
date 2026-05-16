@@ -68,18 +68,18 @@ export default function Articles() {
                     </Link>
                   </div>
 
-                  {article.image ? (
-                    <div className="relative w-full max-w-[425px] lg:w-[425px] h-[298px] shrink-0">
+                  <div className={styles.listImageFrame}>
+                    {article.image ? (
                       <Image
                         src={article.image}
                         alt={article.title}
                         fill
-                        className="object-contain"
-                        sizes="(max-width: 1024px) 100vw, 425px"
+                        className={styles.listImage}
+                        sizes="(max-width: 1024px) 100vw, 360px"
                         unoptimized
                       />
-                    </div>
-                  ) : null}
+                    ) : null}
+                  </div>
                 </div>
 
                 {index < articles.length - 1 && (

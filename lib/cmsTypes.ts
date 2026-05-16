@@ -19,6 +19,8 @@ export type CmsArticle = {
   title: string;
   description: string;
   image: string;
+  imageWidth?: number;
+  imageHeight?: number;
   featuredImage?: string;
   date: string;
   theme: string;

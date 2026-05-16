@@ -1,6 +1,7 @@
 import 'server-only';
 
 import type { CmsArticle } from '@/lib/cmsTypes';
+import { defaultArticles } from '@/lib/defaultContent';
 import { resolveMediaSrc } from '@/lib/resolveMedia';
 import { getPayloadClient, isPayloadConfigured } from '@/payload';
 
@@ -80,4 +81,26 @@ export async function fetchArticleBySlug(slug: string): Promise<CmsArticle | nul
   } catch {
     return null;
   }
+}
+
+export async function getArticlesWithFallback(): Promise<CmsArticle[]> {
+  const cms = await fetchArticles();
+  return cms.length > 0 ? cms : defaultArticles;
+}
+
+export async function getArticleWithFallback(
+  slug: string
+): Promise<CmsArticle | null> {
+  const cms = await fetchArticleBySlug(slug);
+  if (cms) return cms;
+  return defaultArticles.find((a) => a.slug === slug) ?? null;
+}
+
+export function getRelatedArticles(
+  articles: CmsArticle[],
+  article: CmsArticle
+): CmsArticle[] {
+  const others = articles.filter((a) => a.id !== article.id);
+  if (others.length < 3) return articles.slice(0, 3);
+  return others.slice(0, 3);
 }

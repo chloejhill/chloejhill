@@ -19,7 +19,7 @@ const defaultDescription =
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: 'Chloe J. Hill — systems change, futures thinking & leadership',
+    default: 'Chloe J. Hill',
     template: '%s | Chloe J. Hill'
   },
   description: defaultDescription,

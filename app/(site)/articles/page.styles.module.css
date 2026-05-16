@@ -1,1 +1,24 @@
-.container { composes: container from '../page.module.css'; }
+.container {
+  composes: container from '../page.module.css';
+}
+
+.listImageFrame {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  background-color: #d6dcdb;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .listImageFrame {
+    width: 360px;
+  }
+}
+
+.listImage {
+  object-fit: contain;
+  object-position: center;
+}
