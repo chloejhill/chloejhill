@@ -3,7 +3,7 @@ import WorkWithMeClient from './WorkWithMeClient';
 import { fetchPageOverrides } from '@/lib/payloadContent';
 
 export const metadata: Metadata = {
-  title: 'Work with me | Chloe J. Hill',
+  title: 'Work with me',
   description:
     'Systems insight, strategic sensemaking, research advisory, and futures work for philanthropists, foundations, and mission-driven leaders.'
 };
