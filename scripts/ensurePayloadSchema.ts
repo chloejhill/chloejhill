@@ -23,6 +23,53 @@ loadEnvFile(path.join(process.cwd(), '.env'));
 
 import { getDatabaseUri } from '../lib/payloadEnv';
 
+/** True when DB predates the Thinking `booksSection` group + About `timeline` array (schema drift). */
+async function schemaNeedsSync(): Promise<boolean> {
+  const uri = getDatabaseUri();
+  if (!uri) {
+    console.error('[ensurePayloadSchema] No DATABASE_URI / POSTGRES_URL / DATABASE_URL set.');
+    process.exit(1);
+  }
+
+  const { default: pg } = await import('pg');
+  const pool = new pg.Pool({
+    connectionString: uri,
+    ssl: uri.includes('neon.tech') || process.env.DATABASE_SSL === 'true'
+      ? { rejectUnauthorized: false }
+      : false
+  });
+
+  try {
+    const result = await pool.query(
+      `SELECT
+        EXISTS (
+          SELECT FROM information_schema.columns
+          WHERE table_schema = 'public'
+            AND table_name = 'pages'
+            AND column_name = 'thinking_books_section_section_title'
+        ) AS has_books_section_title,
+        EXISTS (
+          SELECT FROM information_schema.tables
+          WHERE table_schema = 'public' AND table_name = 'pages_about_timeline'
+        ) AS has_about_timeline`
+    );
+    const row = result.rows[0] as
+      | { has_books_section_title?: boolean; has_about_timeline?: boolean }
+      | undefined;
+    if (!row) return false;
+    const stale =
+      !row.has_books_section_title || !row.has_about_timeline;
+    if (stale) {
+      console.log(
+        '[ensurePayloadSchema] Payload pages schema is behind code (missing columns/tables) — will sync.'
+      );
+    }
+    return stale;
+  } finally {
+    await pool.end();
+  }
+}
+
 async function tableExists(): Promise<boolean> {
   const uri = getDatabaseUri();
   if (!uri) {
@@ -58,7 +105,12 @@ async function pushSchema() {
 
   // NODE_ENV must not be "production" for pushDevSchema; set via child env (read-only in TS).
   const { PAYLOAD_MIGRATING: _omitMigrating, ...baseEnv } = process.env;
-  const env: NodeJS.ProcessEnv = { ...baseEnv, NODE_ENV: 'development' };
+  const env: NodeJS.ProcessEnv = {
+    ...baseEnv,
+    NODE_ENV: 'development',
+    PAYLOAD_PUSH_SCHEMA: 'true',
+    PAYLOAD_FORCE_DRIZZLE_PUSH: 'true'
+  };
 
   const result = spawnSync(
     process.execPath,
@@ -72,13 +124,20 @@ async function pushSchema() {
 }
 
 async function main() {
-  if (await tableExists()) {
-    console.log('[ensurePayloadSchema] Schema already present — skipping.');
+  const hasUsers = await tableExists();
+  if (!hasUsers) {
+    console.log('[ensurePayloadSchema] No Payload tables found — creating schema...');
+    await pushSchema();
     return;
   }
 
-  console.log('[ensurePayloadSchema] No Payload tables found — creating schema...');
-  await pushSchema();
+  if (await schemaNeedsSync()) {
+    console.log('[ensurePayloadSchema] Syncing schema to match current Payload config...');
+    await pushSchema();
+    return;
+  }
+
+  console.log('[ensurePayloadSchema] Schema already present — skipping.');
 }
 
 main().catch((err) => {
