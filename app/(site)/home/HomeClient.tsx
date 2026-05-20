@@ -298,7 +298,7 @@ export default function HomeClient({
             </div>
             <p
               className={styles.centerIntro}
-              style={{ ...bodyTextStyle, textAlign: 'center' }}
+              style={{ ...bodyTextStyle, textAlign: 'center', margin: '0 auto 48px' }}
             >
               {t(
                 'home.attention.intro',
