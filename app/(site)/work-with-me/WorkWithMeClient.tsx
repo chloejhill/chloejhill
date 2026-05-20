@@ -218,14 +218,16 @@ export default function WorkWithMeClient({
 
       <section className="w-full max-w-[1448px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-12 md:pt-16 md:pb-20">
         <div className="flex flex-col gap-8 mb-12">
-          <h2
-            className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px]"
-            style={{ fontFamily: 'var(--font-lora), serif' }}
-          >
-            <span className={practiceStyles.brushHighlight}>
-              {t('workWithMe.testimonials.title', 'Nice things people say')}
-            </span>
-          </h2>
+          <div className="flex justify-center">
+            <h2
+              className="font-normal text-[30px] md:text-[40px] leading-[1.2] text-[#1f1f1f] max-w-[520px] text-center"
+              style={{ fontFamily: 'var(--font-lora), serif' }}
+            >
+              <span className={practiceStyles.brushHighlight}>
+                {t('workWithMe.testimonials.title', 'Nice things people say')}
+              </span>
+            </h2>
+          </div>
           <div className="flex gap-4 self-end">
             <button
               type="button"
