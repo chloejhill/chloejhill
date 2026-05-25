@@ -47,6 +47,8 @@ export default buildConfig({
       enabled: Boolean(blobToken),
       collections: { media: true },
       token: blobToken,
+      // Unique blob paths so re-uploads / same filenames don't hit Vercel's "already exists" error
+      addRandomSuffix: true,
       // Bypass Vercel's 4.5MB serverless body limit for admin uploads
       clientUploads: true
     })

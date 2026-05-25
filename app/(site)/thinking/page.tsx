@@ -156,8 +156,8 @@ function TransformationSpiralIcon() {
   return (
     <svg
       width="250"
-      height="150"
-      viewBox="0 0 250 150"
+      height="252"
+      viewBox="-20 -14 272 252"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
@@ -486,7 +486,9 @@ export default function Thinking() {
         <div
           className={`${styles.empiricalInner} ${styles.empiricalInnerWide}`}
         >
-          <h3 className={styles.empiricalTitle}>{t('thinking.empirical.title')}</h3>
+          <h3 className={styles.empiricalTitle}>
+            {t('thinking.empirical.title')}
+          </h3>
           <div
             className={styles.empiricalBody}
             style={{
@@ -562,7 +564,9 @@ export default function Thinking() {
 
       <section className={styles.futureSection}>
         <div className={styles.futureBanner}>
-          <div className={styles.futureBannerLabel}>{t('thinking.futureInquiry.label')}</div>
+          <div className={styles.futureBannerLabel}>
+            {t('thinking.futureInquiry.label')}
+          </div>
           <div className={styles.futureBannerWaves} aria-hidden="true">
             <Image
               src={img('thinking.futureInquiry.bannerImage', finqImage)}
@@ -603,7 +607,9 @@ export default function Thinking() {
           <p>{t('thinking.transcendental.p1')}</p>
           <p>{t('thinking.transcendental.p2')}</p>
           <p>{t('thinking.transcendental.p3')}</p>
-          <p className={styles.transcendentalLink}>{t('thinking.transcendental.linkText')}</p>
+          <p className={styles.transcendentalLink}>
+            {t('thinking.transcendental.linkText')}
+          </p>
           <p>{t('thinking.transcendental.p4')}</p>
         </div>
         <div className={styles.transcendentalLeaf} aria-hidden="true">
@@ -623,7 +629,9 @@ export default function Thinking() {
           <div className={styles.transformationIcon} aria-hidden="true">
             <TransformationSpiralIcon />
           </div>
-          <div className={styles.transformationLabel}>{t('thinking.transformation.label')}</div>
+          <div className={styles.transformationLabel}>
+            {t('thinking.transformation.label')}
+          </div>
         </div>
       </section>
 
@@ -637,7 +645,7 @@ export default function Thinking() {
         >
           <h2 className={styles.empiricalTitle} style={{ color: '#1F1F1F' }}>
             {t('thinking.aatt.title')}
-            <br />{t('thinking.aatt.titleLine2')}
+            {/* <br />{t('thinking.aatt.titleLine2')} */}
           </h2>
           <div
             className={styles.empiricalBody}
@@ -699,7 +707,10 @@ export default function Thinking() {
         <div className={styles.innerBanner}>
           <div className={styles.innerBannerIcon} aria-hidden="true">
             <Image
-              src={img('thinking.innerDimension.bannerImage', '/images/innerd.png')}
+              src={img(
+                'thinking.innerDimension.bannerImage',
+                '/images/innerd.png'
+              )}
               alt=""
               width={220}
               height={160}
@@ -707,7 +718,9 @@ export default function Thinking() {
               unoptimized
             />
           </div>
-          <div className={styles.innerBannerLabel}>{t('thinking.innerDimension.bannerLabel')}</div>
+          <div className={styles.innerBannerLabel}>
+            {t('thinking.innerDimension.bannerLabel')}
+          </div>
         </div>
 
         <div className={styles.innerDimensionInner}>
@@ -816,7 +829,9 @@ export default function Thinking() {
                   />
                 </span>
                 <span className={styles.evolutionLinkLabel}>
-                  <span className={styles.evolutionLinkWord}>{t('thinking.evolution.practiceLinkLabel')}</span>
+                  <span className={styles.evolutionLinkWord}>
+                    {t('thinking.evolution.practiceLinkLabel')}
+                  </span>
                   {t('thinking.evolution.practiceLinkSuffix')}
                 </span>
               </Link>
@@ -830,7 +845,9 @@ export default function Thinking() {
                   />
                 </span>
                 <span className={styles.evolutionLinkLabel}>
-                  <span className={styles.evolutionLinkWord}>{t('thinking.evolution.aboutLinkLabel')}</span>
+                  <span className={styles.evolutionLinkWord}>
+                    {t('thinking.evolution.aboutLinkLabel')}
+                  </span>
                   {t('thinking.evolution.aboutLinkSuffix')}
                 </span>
               </Link>
