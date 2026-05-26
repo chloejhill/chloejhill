@@ -608,7 +608,13 @@ export default function Thinking() {
           <p>{t('thinking.transcendental.p2')}</p>
           <p>{t('thinking.transcendental.p3')}</p>
           <p className={styles.transcendentalLink}>
-            {t('thinking.transcendental.linkText')}
+            <a
+              href="https://www.sciencedirect.com/science/article/abs/pii/S0016328725001545?dgcid=author"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('thinking.transcendental.linkText')}
+            </a>
           </p>
           <p>{t('thinking.transcendental.p4')}</p>
         </div>
