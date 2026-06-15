@@ -21,7 +21,7 @@ export const defaultNavLinks: CmsNavLink[] = [
   { id: 'thinking', label: 'Thinking', href: '/thinking' },
   { id: 'practice', label: 'Practice', href: '/practice' },
   { id: 'work-with-me', label: 'Work with me', href: '/work-with-me' },
-  { id: 'articles', label: 'Insights', href: '/articles' },
+  { id: 'articles', label: 'Insights', href: '/insights' },
   { id: 'contact', label: 'Get in touch', href: '/contact' }
 ];
 

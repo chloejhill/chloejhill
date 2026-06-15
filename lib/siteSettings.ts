@@ -14,6 +14,12 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+function normalizePublicHref(href: string): string {
+  if (href === '/articles') return '/insights';
+  if (href.startsWith('/articles/')) return href.replace('/articles/', '/insights/');
+  return href;
+}
+
 function mapNavLinks(items: unknown[] | undefined): CmsNavLink[] | undefined {
   if (!Array.isArray(items) || items.length === 0) return undefined;
 
@@ -30,7 +36,7 @@ function mapNavLinks(items: unknown[] | undefined): CmsNavLink[] | undefined {
     mapped.push({
       id: item.id ?? `nav-${index}`,
       label: item.label,
-      href: item.href,
+      href: normalizePublicHref(item.href),
       openInNewTab: Boolean(item.openInNewTab)
     });
   }

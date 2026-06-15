@@ -1,16 +1,14 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { getArticlesWithFallback } from '@/lib/fetchArticles';
+
 import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { defaultArticles } from '@/lib/defaultContent';
-import { useArticles } from '@/lib/useArticles';
-export default function Articles() {
-  const cmsArticles = useArticles();
-  const articles =
-    cmsArticles && cmsArticles.length > 0 ? cmsArticles : defaultArticles;
+
+export default async function Insights() {
+  const articles = await getArticlesWithFallback();
 
   return (
     <div className={styles.container}>
@@ -59,7 +57,7 @@ export default function Articles() {
                       {article.description}
                     </p>
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={`/insights/${article.slug}`}
                       className="inline-block font-normal text-[18px] text-[#4F0E0E] relative group"
                       style={{ fontFamily: 'var(--font-lora), serif' }}
                     >

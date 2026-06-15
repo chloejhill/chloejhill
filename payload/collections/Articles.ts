@@ -6,7 +6,7 @@ export const Articles: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedAt', 'updatedAt'],
     description:
-      'Articles shown on /articles and individual article pages. Each article requires a list image.'
+      'Articles shown on /insights and individual insight pages. Each article requires a list image.'
   },
   access: {
     read: () => true,
@@ -33,7 +33,7 @@ export const Articles: CollectionConfig = {
       required: true,
       label: 'Short description',
       admin: {
-        description: 'Shown on the articles listing page.'
+        description: 'Shown on the insights listing page.'
       }
     },
     {
@@ -43,7 +43,7 @@ export const Articles: CollectionConfig = {
       required: true,
       label: 'List image',
       admin: {
-        description: 'Required thumbnail for the articles listing.'
+        description: 'Required thumbnail for the insights listing.'
       }
     },
     {
@@ -73,7 +73,8 @@ export const Articles: CollectionConfig = {
       required: true,
       label: 'Article body',
       admin: {
-        description: 'Separate paragraphs with a blank line.'
+        description:
+          'Separate paragraphs with a blank line. Add links as https://example.com or [link text](https://example.com).'
       }
     }
   ],

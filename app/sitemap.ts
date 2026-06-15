@@ -8,7 +8,7 @@ const PATHS = [
   '/thinking',
   '/practice',
   '/work-with-me',
-  '/articles',
+  '/insights',
   '/projects',
   '/contact'
 ] as const;

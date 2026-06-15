@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 import type { CmsArticle } from '@/lib/cmsTypes';
 
@@ -11,6 +12,99 @@ type ArticleDetailViewProps = {
   article: CmsArticle;
   relatedArticles: CmsArticle[];
 };
+
+const markdownLinkPattern = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const bareLinkPattern = /(https?:\/\/[^\s<]+|mailto:[^\s<]+|tel:[^\s<]+)/g;
+const allowedHrefPattern = /^(https?:\/\/|mailto:|tel:|\/|#)/i;
+
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}
+
+function renderLink(label: string, href: string, key: string): ReactNode {
+  const external = isExternalHref(href);
+
+  return (
+    <a
+      key={key}
+      href={href}
+      className="underline underline-offset-4 decoration-[#4F0E0E] hover:text-[#4F0E0E]"
+      rel={external ? 'noopener noreferrer' : undefined}
+      target={external ? '_blank' : undefined}
+    >
+      {label}
+    </a>
+  );
+}
+
+function splitTrailingPunctuation(href: string): [string, string] {
+  const match = href.match(/^(.+?)([.,!?;:)]*)$/);
+  return match ? [match[1], match[2]] : [href, ''];
+}
+
+function renderBareLinks(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(bareLinkPattern)) {
+    const rawHref = match[0];
+    const matchIndex = match.index ?? 0;
+    const [href, trailing] = splitTrailingPunctuation(rawHref);
+
+    if (matchIndex > lastIndex) {
+      nodes.push(text.slice(lastIndex, matchIndex));
+    }
+
+    nodes.push(renderLink(href, href, `${href}-${matchIndex}`));
+    if (trailing) nodes.push(trailing);
+
+    lastIndex = matchIndex + rawHref.length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes;
+}
+
+function renderInlineContent(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(markdownLinkPattern)) {
+    const [raw, label, rawHref] = match;
+    const matchIndex = match.index ?? 0;
+    const href = rawHref.trim();
+
+    if (matchIndex > lastIndex) {
+      nodes.push(...renderBareLinks(text.slice(lastIndex, matchIndex)));
+    }
+
+    if (allowedHrefPattern.test(href)) {
+      nodes.push(renderLink(label, href, `${href}-${matchIndex}`));
+    } else {
+      nodes.push(raw);
+    }
+
+    lastIndex = matchIndex + raw.length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(...renderBareLinks(text.slice(lastIndex)));
+  }
+
+  return nodes;
+}
+
+function renderParagraph(paragraph: string): ReactNode[] {
+  return paragraph.split('\n').flatMap((line, index) => {
+    const lineContent = renderInlineContent(line);
+    return index === 0
+      ? lineContent
+      : [<br key={`br-${index}`} />, ...lineContent];
+  });
+}
 
 export default function ArticleDetailView({
   article,
@@ -27,8 +121,8 @@ export default function ArticleDetailView({
           className="font-normal text-[14px] leading-[1.7] text-black mb-8"
           style={{ fontFamily: 'var(--font-lora), serif' }}
         >
-          <Link href="/articles" className="hover:underline">
-            Articles
+          <Link href="/insights" className="hover:underline">
+            Insights
           </Link>{' '}
           | <span className="font-semibold">{article.title}</span>
         </p>
@@ -48,7 +142,10 @@ export default function ArticleDetailView({
           {article.date ? (
             <p
               className="font-normal text-[13px] text-black/60 mb-6"
-              style={{ fontFamily: 'var(--font-lora), serif', lineHeight: '1.2' }}
+              style={{
+                fontFamily: 'var(--font-lora), serif',
+                lineHeight: '1.2'
+              }}
             >
               {article.date}
             </p>
@@ -103,7 +200,7 @@ export default function ArticleDetailView({
                   lineHeight: '35px'
                 }}
               >
-                {paragraph}
+                {renderParagraph(paragraph)}
               </p>
             ))}
           </div>
@@ -201,7 +298,7 @@ export default function ArticleDetailView({
               fontFeatureSettings: "'liga' off, 'clig' off"
             }}
           >
-            Our Latest Insights
+            Latest Insights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {relatedArticles.map((relatedArticle) => (
@@ -238,7 +335,7 @@ export default function ArticleDetailView({
                   {relatedArticle.description}
                 </p>
                 <Link
-                  href={`/articles/${relatedArticle.slug}`}
+                  href={`/insights/${relatedArticle.slug}`}
                   className="inline-block font-normal text-[18px] relative group"
                   style={{
                     fontFamily: 'var(--font-lora), serif',

@@ -2,7 +2,7 @@
 
 import { useLayoutEffect } from 'react';
 
-export default function ArticleSlugTemplate({
+export default function InsightSlugTemplate({
   children
 }: {
   children: React.ReactNode;
