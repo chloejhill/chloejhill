@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import type { CmsArticle } from '@/lib/cmsTypes';
+import { renderWithBold } from '@/lib/renderWithBold';
 
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -35,21 +36,6 @@ function renderLink(label: string, href: string, key: string): ReactNode {
       {label}
     </a>
   );
-}
-
-const boldPattern = /(\*\*[^*]+\*\*)/g;
-
-function renderWithBold(text: string, keyPrefix = ''): ReactNode[] {
-  return text.split(boldPattern).map((segment, index) => {
-    if (segment.startsWith('**') && segment.endsWith('**')) {
-      return (
-        <strong key={`bold-${keyPrefix}${index}`} style={{ fontWeight: 700 }}>
-          {segment.slice(2, -2)}
-        </strong>
-      );
-    }
-    return segment;
-  });
 }
 
 function splitTrailingPunctuation(href: string): [string, string] {
@@ -349,7 +335,7 @@ export default function ArticleDetailView({
                     lineHeight: '35px'
                   }}
                 >
-                  {relatedArticle.description}
+                  {renderWithBold(relatedArticle.description)}
                 </p>
                 <Link
                   href={`/insights/${relatedArticle.slug}`}

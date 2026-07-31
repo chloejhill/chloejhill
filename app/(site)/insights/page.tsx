@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getArticlesWithFallback } from '@/lib/fetchArticles';
+import { renderWithBold } from '@/lib/renderWithBold';
 
 import styles from './page.styles.module.css';
 import Navbar from '../components/Navbar';
@@ -54,7 +55,7 @@ export default async function Insights() {
                         lineHeight: '35px'
                       }}
                     >
-                      {article.description}
+                      {renderWithBold(article.description)}
                     </p>
                     <Link
                       href={`/insights/${article.slug}`}

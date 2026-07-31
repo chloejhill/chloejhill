@@ -33,7 +33,8 @@ export const Articles: CollectionConfig = {
       required: true,
       label: 'Short description',
       admin: {
-        description: 'Shown on the insights listing page.'
+        description:
+          'Shown on the insights listing page. Wrap text in ** to make it bold, e.g. **important**.'
       }
     },
     {
