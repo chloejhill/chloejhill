@@ -34,7 +34,7 @@ export const Articles: CollectionConfig = {
       label: 'Short description',
       admin: {
         description:
-          'Shown on the insights listing page. Wrap text in ** to make it bold, e.g. **important**.'
+          'Shown on the insights listing page. Wrap text in ** to make it bold, e.g. **important**, or in * to italicize, e.g. *emphasis*.'
       }
     },
     {
@@ -75,7 +75,7 @@ export const Articles: CollectionConfig = {
       label: 'Article body',
       admin: {
         description:
-          'Separate paragraphs with a blank line. Wrap text in ** to make it bold, e.g. **important**. Add links as https://example.com or [link text](https://example.com).'
+          'Separate paragraphs with a blank line. Wrap text in ** to make it bold, e.g. **important**, or in * to italicize, e.g. *emphasis*. Add links as https://example.com or [link text](https://example.com).'
       }
     }
   ],

@@ -1,20 +1,47 @@
 import type { ReactNode } from 'react';
 
-const boldPattern = /(\*\*[^*]+\*\*)/g;
+const emphasisPattern = /(\*{3}[^*]+\*{3}|\*{2}[^*]+\*{2}|\*[^*]+\*)/g;
+
+function markerLength(segment: string): number {
+  if (segment.startsWith('***') && segment.endsWith('***')) return 3;
+  if (segment.startsWith('**') && segment.endsWith('**')) return 2;
+  if (segment.startsWith('*') && segment.endsWith('*')) return 1;
+  return 0;
+}
 
 export function stripBoldMarkers(text: string): string {
-  return text.replace(boldPattern, (segment) => segment.slice(2, -2));
+  return text.replace(emphasisPattern, (segment) => {
+    const length = markerLength(segment);
+    return length > 0 ? segment.slice(length, -length) : segment;
+  });
 }
 
 export function renderWithBold(text: string, keyPrefix = ''): ReactNode[] {
-  return text.split(boldPattern).map((segment, index) => {
-    if (segment.startsWith('**') && segment.endsWith('**')) {
+  return text.split(emphasisPattern).map((segment, index) => {
+    const length = markerLength(segment);
+    if (length === 0) return segment;
+
+    const inner = segment.slice(length, -length);
+    const key = `emphasis-${keyPrefix}${index}`;
+
+    if (length === 3) {
       return (
-        <strong key={`bold-${keyPrefix}${index}`} style={{ fontWeight: 700 }}>
-          {segment.slice(2, -2)}
+        <strong key={key} style={{ fontWeight: 700, fontStyle: 'italic' }}>
+          {inner}
         </strong>
       );
     }
-    return segment;
+    if (length === 2) {
+      return (
+        <strong key={key} style={{ fontWeight: 700 }}>
+          {inner}
+        </strong>
+      );
+    }
+    return (
+      <em key={key} style={{ fontStyle: 'italic' }}>
+        {inner}
+      </em>
+    );
   });
 }
