@@ -74,7 +74,7 @@ export const Articles: CollectionConfig = {
       label: 'Article body',
       admin: {
         description:
-          'Separate paragraphs with a blank line. Add links as https://example.com or [link text](https://example.com).'
+          'Separate paragraphs with a blank line. Wrap text in ** to make it bold, e.g. **important**. Add links as https://example.com or [link text](https://example.com).'
       }
     }
   ],

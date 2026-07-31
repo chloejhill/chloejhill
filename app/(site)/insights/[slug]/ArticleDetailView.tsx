@@ -37,6 +37,21 @@ function renderLink(label: string, href: string, key: string): ReactNode {
   );
 }
 
+const boldPattern = /(\*\*[^*]+\*\*)/g;
+
+function renderWithBold(text: string, keyPrefix = ''): ReactNode[] {
+  return text.split(boldPattern).map((segment, index) => {
+    if (segment.startsWith('**') && segment.endsWith('**')) {
+      return (
+        <strong key={`bold-${keyPrefix}${index}`} style={{ fontWeight: 700 }}>
+          {segment.slice(2, -2)}
+        </strong>
+      );
+    }
+    return segment;
+  });
+}
+
 function splitTrailingPunctuation(href: string): [string, string] {
   const match = href.match(/^(.+?)([.,!?;:)]*)$/);
   return match ? [match[1], match[2]] : [href, ''];
@@ -52,7 +67,9 @@ function renderBareLinks(text: string): ReactNode[] {
     const [href, trailing] = splitTrailingPunctuation(rawHref);
 
     if (matchIndex > lastIndex) {
-      nodes.push(text.slice(lastIndex, matchIndex));
+      nodes.push(
+        ...renderWithBold(text.slice(lastIndex, matchIndex), `${lastIndex}-`)
+      );
     }
 
     nodes.push(renderLink(href, href, `${href}-${matchIndex}`));
@@ -62,7 +79,7 @@ function renderBareLinks(text: string): ReactNode[] {
   }
 
   if (lastIndex < text.length) {
-    nodes.push(text.slice(lastIndex));
+    nodes.push(...renderWithBold(text.slice(lastIndex), `${lastIndex}-`));
   }
 
   return nodes;
