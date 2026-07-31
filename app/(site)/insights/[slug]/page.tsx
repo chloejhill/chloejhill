@@ -7,6 +7,8 @@ import {
   getRelatedArticles
 } from '@/lib/fetchArticles';
 
+import { stripBoldMarkers } from '@/lib/renderWithBold';
+
 import ArticleDetailView from './ArticleDetailView';
 
 type PageProps = {
@@ -23,7 +25,7 @@ export async function generateMetadata({
   }
   return {
     title: article.title,
-    description: article.description
+    description: stripBoldMarkers(article.description)
   };
 }
 

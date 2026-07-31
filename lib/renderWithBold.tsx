@@ -2,6 +2,10 @@ import type { ReactNode } from 'react';
 
 const boldPattern = /(\*\*[^*]+\*\*)/g;
 
+export function stripBoldMarkers(text: string): string {
+  return text.replace(boldPattern, (segment) => segment.slice(2, -2));
+}
+
 export function renderWithBold(text: string, keyPrefix = ''): ReactNode[] {
   return text.split(boldPattern).map((segment, index) => {
     if (segment.startsWith('**') && segment.endsWith('**')) {
